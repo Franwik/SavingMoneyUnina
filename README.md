@@ -1,1 +1,18 @@
 # SavingMoneyUnina
+
+# +BEGIN_HTML
+
+<h1 align="center"> Contributori </h1>
+
+<p align="center" width="100%">
+    <a href="https://github.com/Franwik">
+        <img width="10%" src="./.res/contributors/franwik.png">
+    </a>
+</p>
+<p align="center" width="100%">
+    <a href="https://github.com/thankyousomaz">
+        <img width="10%" src="./.res/contributors/tysm.png">
+    </a>
+</p>
+
+# +END_HTML
