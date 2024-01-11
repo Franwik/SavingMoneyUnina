@@ -1,0 +1,49 @@
+\documentclass[12pt]{report}
+\usepackage[italian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[L]{Saving Money Unina}
+\fancyfoot{}
+\fancyfoot[L]{pag. \thepage}
+\fancyfoot[R]{\nouppercase{\leftmark}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyfoot[L]{pag. \thepage}
+    \fancyfoot[R]{\nouppercase{\leftmark}}
+    \renewcommand{\headrulewidth}{0mm}
+}
+
+\title{
+    {Saving Money Unina}\\
+    {\large Università degli studi Federico II}\\
+    {\includegraphics{FedericoII_logo.png}}
+}
+\author{Donnarumma Francesco\\ Arturo Donnarumma}
+\date{Gennaio 2023}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+\input{chapters/chapter_1.tex}
+
+\input{chapters/chapter_2.tex}
+
+\input{chapters/chapter_3.tex}
+
+\input{chapters/chapter_4.tex}
+
+\input{chapters/chapter_5.tex}
+
+\end{document}

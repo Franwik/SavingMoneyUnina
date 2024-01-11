@@ -1,0 +1,14 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "Saving Money Unina",
+            "username": "postgres",
+            "password": "postgres",
+            "database": "saving_money_unina"
+        }
+    ]
+}
