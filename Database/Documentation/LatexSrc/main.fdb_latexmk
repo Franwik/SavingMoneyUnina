@@ -1,7 +1,7 @@
 # Fdb version 4
-["pdflatex"] 1705059093 "/home/franwik/Documenti/REPO/SavingMoneyUnina/Database/Documentation/LatexSrc/main.tex" "main.pdf" "main" 1705059094 0
+["pdflatex"] 1705072664 "/home/franwik/Documenti/REPO/SavingMoneyUnina/Database/Documentation/LatexSrc/main.tex" "main.pdf" "main" 1705072667 0
   "/etc/texmf/web2c/texmf.cnf" 1698951729 475 c0e671620eb5563b2130f56340a5fde8 ""
-  "/home/franwik/Documenti/REPO/SavingMoneyUnina/Database/Documentation/LatexSrc/main.tex" 1705059091 1112 96203ed27511ba6cceb163859b964584 ""
+  "/home/franwik/Documenti/REPO/SavingMoneyUnina/Database/Documentation/LatexSrc/main.tex" 1705072663 940 cd43bfb6dde3bce6f58cd40ea685267b ""
   "/usr/share/texlive/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm" 1136768653 1324 c910af8c371558dc20f2d7822f66fe64 ""
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm" 1136768653 1524 4414a8315f39513458b80dfc63bff03a ""
@@ -16,7 +16,6 @@
   "/usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm" 1136768653 1120 8b7d695260f3cff42e636090a8002094 ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb" 1248133631 32080 340ef9bf63678554ee606688e7b5339d ""
   "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb" 1248133631 32722 d7379af29a190c3f453aba36302ff5a9 ""
-  "/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb" 1248133631 32362 179c33bbf43f19adbb3825bb4e36e57a ""
   "/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii" 1461363279 71627 94eb9990bed73c364d7f53f960cc8c5b ""
   "/usr/share/texlive/texmf-dist/tex/generic/babel-italian/italian.ldf" 1649019283 11863 da7e32d14d6f13904da303e3e47824fa ""
   "/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty" 1683835899 146936 df7499eefac590ca39eafa78f2819a4b ""
@@ -58,10 +57,11 @@
   "chapters/chapter_1.tex" 1705058728 1097 af3cfa5acd6c716b9d3f845122966c04 ""
   "chapters/chapter_2.tex" 1705058973 411 da53757fc356f14671afb6b468449fca ""
   "chapters/chapter_3.tex" 1705059087 28 2f55b8f607869b30de23a07f43a26beb ""
-  "images/FedericoII_logo.png" 1704980994 99515 85b1893018b091805eb1501a48be43ab ""
-  "main.aux" 1705059094 1212 f8dab67b745003c226a882c95c452781 "pdflatex"
-  "main.tex" 1705059091 1112 96203ed27511ba6cceb163859b964584 ""
-  "main.toc" 1705059094 409 3d3cbdc75407a3c68e588011414ce4b5 "pdflatex"
+  "chapters/titlepage.tex" 1705072607 1049 33c2f218130882496c2b2402f793c92a ""
+  "images/FII_logo.png" 1705072498 267347 7d6d869467c42c6a8b851dba6ef8ea1c ""
+  "main.aux" 1705072667 1212 f8dab67b745003c226a882c95c452781 "pdflatex"
+  "main.tex" 1705072663 940 cd43bfb6dde3bce6f58cd40ea685267b ""
+  "main.toc" 1705072667 409 3d3cbdc75407a3c68e588011414ce4b5 "pdflatex"
   "pdfs/ERdiagram.drawio.pdf" 1702637484 63123 cf2d0a8b38ec11ec449c534cdc57ac97 ""
   "pdfs/UMLdiagram.drawio.pdf" 1702638367 39049 65dbab109af80b49cce4aeb995c2a0b0 ""
   (generated)
