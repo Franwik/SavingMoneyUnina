@@ -1,9 +1,10 @@
 \documentclass[12pt]{report}
+\usepackage{pdfpages}
 \usepackage[italian]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
 \graphicspath{{images/}}
-\usepackage[a4paper,width=150mm,top=25mm,bottom=25mm]{geometry}
+\usepackage[a4paper,width=150mm,top=15mm,bottom=15mm]{geometry}
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhead{}
@@ -36,14 +37,13 @@
 
 \tableofcontents
 
+%Chapter 1: Introduzione
 \input{chapters/chapter_1.tex}
 
+%Chapter 2: Progettazione Concettuale
 \input{chapters/chapter_2.tex}
 
+%Chapter 3: Ristrutturazione
 \input{chapters/chapter_3.tex}
-
-\input{chapters/chapter_4.tex}
-
-\input{chapters/chapter_5.tex}
 
 \end{document}

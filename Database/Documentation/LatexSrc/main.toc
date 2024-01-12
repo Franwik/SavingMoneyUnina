@@ -1,0 +1,7 @@
+\babel@toc {italian}{}\relax 
+\babel@toc {italian}{}\relax 
+\contentsline {chapter}{\numberline {1}Introduzione}{2}{}%
+\contentsline {chapter}{\numberline {2}Progettazione Concettuale}{3}{}%
+\contentsline {section}{\numberline {2.1}Diagramma Delle Classi UML}{3}{}%
+\contentsline {section}{\numberline {2.2}Diagramma ER(Entità Relazione)}{4}{}%
+\contentsline {chapter}{\numberline {3}Ristrutturazione}{5}{}%
