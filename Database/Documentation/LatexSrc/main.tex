@@ -1,5 +1,6 @@
 \documentclass[12pt]{report}
 \usepackage{pdfpages}
+\usepackage{hyperref}
 \usepackage[italian]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage{graphicx}
@@ -8,7 +9,7 @@
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhead{}
-\fancyhead[L]{Saving Money Unina}
+\fancyhead[L]{SavingMoneyUnina}
 \fancyfoot{}
 \fancyfoot[L]{pag. \thepage}
 \fancyfoot[R]{\nouppercase{\leftmark}}
@@ -33,10 +34,13 @@
 %Chapter 1: Introduzione
 \input{chapters/chapter_1.tex}
 
-%Chapter 2: Progettazione Concettuale
+%Chapter 2: Progettazione Concettuale e Ristrutturazione
 \input{chapters/chapter_2.tex}
 
-%Chapter 3: Ristrutturazione
+%Chapter 3: Progettazione Logica
 \input{chapters/chapter_3.tex}
+
+%Chapter 4: Schema Fisico
+\input{chapters/chapter_4.tex}
 
 \end{document}

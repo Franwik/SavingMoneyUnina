@@ -8,10 +8,59 @@
     \caption{Diagramma UML}\label{UML}
 \end{figure}
 
-\section{Diagramma ER(Entità Relazione)}
+\section{Diagramma ER (Entità Relazione)}
 
 \begin{figure}[ht!]
     \centering
-    \includegraphics[scale=0.55]{pdfs/ERdiagram.drawio.pdf}
+    \includegraphics[scale=0.7]{pdfs/ERdiagram.drawio.pdf}
     \caption{Diagramma ER}\label{ER}
 \end{figure}
+
+\newpage
+
+\section{Ristrutturazione}
+
+\subsection{Attributi multipli}
+
+Per quanto riguarda la gestione di attributi multipli,
+abbiamo deciso di gestire l'attributo \textit{category} della tabella
+\textbf{Transaction}, originariamente definito come enumerazione,
+trasformandolo in una stringa, poiché non abbiamo bisogno di valori
+specifici, trattandosi di una categoria personalizzabile.
+
+Invece, per l'attributo \textit{cardType} della tabella \textbf{Card},
+è stato deciso di non applicare lo stesso metodo, poiché le tipologie
+di carte sono ben definite e non possono essere modificate.
+
+\subsection{Generalizzazioni}
+
+Per la generalizzazione, essendo di tipologia totale e disgiunta,
+abbiamo optato per il metodo di eliminare la classe generale.
+Abbiamo trasferito tutti gli attributi di essa nelle
+classi specializzate, conservando le relative relazioni.
+
+\subsection{Analisi degli identificativi}
+
+Per la maggior parte delle classi, saranno utilizzati come identificativi
+attributi già presenti di natura nelle classi stesse, poiché risultano
+sufficienti e non richiedono l'uso di una chiave surrogata.
+Tuttavia, in alcune classi, sono presenti chiavi surrogate,
+identificate con il prefisso \textbf{ID\_}.
+
+\newpage
+\subsection{Diagramma UML ristrutturato}
+
+\begin{figure}[ht!]
+    \centering
+    \includegraphics[scale=0.7]{pdfs/RestructuredUMLdiagram.drawio.pdf}
+    \caption{Diagramma UML Ristrutturato}\label{ResUML}
+\end{figure}
+
+\newpage
+\section{Dizionari}
+
+\subsection{Dizionario delle classi}
+
+\subsection{Dizionario delle associazione}
+
+\subsection{Dizionario dei vincoli}
