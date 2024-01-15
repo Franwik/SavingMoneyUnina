@@ -66,9 +66,9 @@ ALTER TABLE Familiar ADD CONSTRAINT fk_familiar FOREIGN KEY (familiarUsername) R
 CREATE TABLE IF NOT EXISTS Transaction(
     ID_Transaction SERIAL,
     amount FLOAT NOT NULL,
-    Date DATE NOT NULL,
+    date DATE NOT NULL,
     category VARCHAR(35),
-    CardIBAN VARCHAR(27) NOT NULL,
+    cardIBAN VARCHAR(27) NOT NULL,
     ID_Wallet SERIAL
 );
 
@@ -83,7 +83,7 @@ CREATE TABLE IF NOT EXISTS Wallet(
     ID_Wallet SERIAL,
     name VARCHAR(35) NOT NULL,
     walletCategory VARCHAR(35) NOT NULL,
-    totalAmount INTEGER NOT NULL
+    totalAmount FLOAT NOT NULL
 );
 
 --primary key
