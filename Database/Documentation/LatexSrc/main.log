@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2023.11.2)  16 JAN 2024 12:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2023.11.2)  16 JAN 2024 12:55
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -494,12 +494,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [6 <./pdfs/RestructuredUMLdiagram.drawio.pdf>]
-Overfull \hbox (8.47229pt too wide) in paragraph at lines 90--90
+Overfull \hbox (2.78183pt too wide) in paragraph at lines 90--90
 []|\OT1/cmr/bx/n/12 BankAccount| 
  []
 
 
-Underfull \hbox (badness 6559) in paragraph at lines 111--111
+Underfull \hbox (badness 4108) in paragraph at lines 111--111
 \OT1/cmr/m/n/12 sa-zio-ne. Ser-ve per l'as-so-cia-zio-ne
  []
 
@@ -511,10 +511,6 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [7]
-Overfull \hbox (3.3098pt too wide) in paragraph at lines 128--128
-[]|\OT1/cmr/bx/n/12 Associazione| 
- []
-
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -555,7 +551,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  75i,11n,79p,346b,550s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on main.pdf (12 pages, 445241 bytes).
+Output written on main.pdf (12 pages, 445267 bytes).
 PDF statistics:
  234 PDF objects out of 1000 (max. 8388607)
  197 compressed objects within 2 object streams

@@ -61,14 +61,14 @@ identificate con il prefisso \textbf{ID\_}.
 
 \subsection{Dizionario delle classi}
 
-\begin{longtable}{m{2.5cm}|m{4cm}|m{7.2cm}}
+\begin{longtable}{m{2.7cm}|m{4cm}|m{7cm}}
 
     \rowcolor{black!10}
     \textbf{Classe} & \textbf{Descrizione} & \textbf{Attributi} \\ \hline
     \endhead
 
     \textbf{User} & \raggedright Classe utilizzata per identificare gli utenti registrati alla piattaforma. &
-    \parbox{7.2cm}{
+    \parbox{7cm}{
         \textbf{email} (\textit{String}): email con la quale l'utente si è registrato. \\ 
         \textbf{username} (\textit{String}): chiave primaria, identificativa dell'utente. È anche il nome che viene mostrato per riconoscere lo stesso. \\
         \textbf{password} (\textit{String}): stringa atta alla convalidazione durante l'accesso all'account. \\
@@ -80,7 +80,7 @@ identificate con il prefisso \textbf{ID\_}.
     } \\ \hline
 
     \textbf{Familiar} & \raggedright Classe utilizzata per identificare i familiari degli utenti presenti nel database. &
-    \parbox{7.2cm}{
+    \parbox{7cm}{
         \textbf{name} (\textit{String}): nome. \\
         \textbf{surname} (\textit{String}): cognome. \\
         \textbf{CF} (\textit{String}): codice fiscale, chiave primaria nel caso del familiare. \\
@@ -88,14 +88,14 @@ identificate con il prefisso \textbf{ID\_}.
     } \\ \hline
 
     \textbf{BankAccount} & \raggedright Classe utilizzata per identificare i conti correnti appartenenti a utenti o familiari. &
-    \parbox{7.2cm}{
+    \parbox{7cm}{
         \textbf{balance} (\textit{Integer}): indica il saldo disponibile sul conto corrente. \\
         \textbf{accountNumber} (\textit{String}): chiave primaria, identificativa del conto corrente. \\
         \textbf{bank} (\textit{String}): nome della banca alla quale è associato il conto corrente.
     } \\ \hline
 
     \textbf{Card} & \raggedright Classe utilizzata per identificare le carte appartenenti a utenti o familiari. &
-    \parbox{7.2cm}{
+    \parbox{7cm}{
         \textbf{IBAN} (\textit{String}): codice identificativo della carta. \\
         \textbf{CVV} (\textit{String}): codice di sicurezza per le transazioni delle carte. \\
         \textbf{expireDate} (\textit{Date}): data che indica la scadenza della carta. \\
@@ -103,7 +103,7 @@ identificate con il prefisso \textbf{ID\_}.
     } \\ \hline
 
     \textbf{Transaction} & \raggedright Classe utilizzata per tenere traccia di tutte le transazioni effettuate. &
-    \parbox{7.2cm}{
+    \parbox{7cm}{
         \textbf{ID\_Transaction} (\textit{Serial}): chiave surrogata, identificativo della singola transazione. \\
         \textbf{amount} (\textit{Float}): indica l'ammontare della transazione. \\
         \textbf{date} (\textit{Date}): data in cui è avvenuta la transazione. \\
@@ -111,7 +111,7 @@ identificate con il prefisso \textbf{ID\_}.
     } \\ \hline
 
     \textbf{Wallet} & \raggedright Classe utilizzata per raggruppare transazioni. &
-    \parbox{7.2cm}{
+    \parbox{7cm}{
         \textbf{ID\_Wallet} (\textit{Serial}): chiave surrogata, identificativo del singolo protafoglio. \\
         \textbf{name} (\textit{String}): nome del portafoglio. \\
         \textbf{walletCategory} (\textit{String}): categoria del portafoglio. \\
@@ -122,56 +122,56 @@ identificate con il prefisso \textbf{ID\_}.
 
 \subsection{Dizionario delle associazioni}
 
-\begin{longtable}{m{2.5cm}|m{4cm}|m{7.2cm}}
+\begin{longtable}{m{2.7cm}|m{4cm}|m{7cm}}
     
     \rowcolor{black!10}
     \textbf{Associazione} & \textbf{Descrizione} & \textbf{Classi coinvolte} \\ \hline
     \endhead
 
     \raggedright \textbf{To Be Related} & \raggedright Esprime la parentela tra gli utenti e i familiari &
-    \parbox{7.2cm}{
+    \parbox{7cm}{
         \textbf{Familiar [1]} (\textbf{is related to}): indica, per ogni familiare, con quale utente è imparentato. \\
         \textbf{User [0..*]} (\textbf{relates to}): indica quali sono i familiari che sono imparentati con esso.
     } \\ \hline
 
     \raggedright \textbf{To Be Related} & \raggedright Esprime la parentela tra gli utenti e i familiari &
-    \parbox{7.2cm}{
+    \parbox{7cm}{
         \textbf{Familiar [1]} (\textbf{is related to}): indica, per ogni familiare, con quale utente è imparentato. \\
         \textbf{User [0..*]} (\textbf{relates to}): indica quali sono i familiari che sono imparentati con esso.
     } \\ \hline
 
     \raggedright \textbf{To Be Related} & \raggedright Esprime la parentela tra gli utenti e i familiari &
-    \parbox{7.2cm}{
+    \parbox{7cm}{
         \textbf{Familiar [1]} (\textbf{is related to}): indica, per ogni familiare, con quale utente è imparentato. \\
         \textbf{User [0..*]} (\textbf{relates to}): indica quali sono i familiari che sono imparentati con esso.
     } \\ \hline
 
     \raggedright \textbf{To Be Related} & \raggedright Esprime la parentela tra gli utenti e i familiari &
-    \parbox{7.2cm}{
+    \parbox{7cm}{
         \textbf{Familiar [1]} (\textbf{is related to}): indica, per ogni familiare, con quale utente è imparentato. \\
         \textbf{User [0..*]} (\textbf{relates to}): indica quali sono i familiari che sono imparentati con esso.
     } \\ \hline
 
     \raggedright \textbf{To Be Related} & \raggedright Esprime la parentela tra gli utenti e i familiari &
-    \parbox{7.2cm}{
+    \parbox{7cm}{
         \textbf{Familiar [1]} (\textbf{is related to}): indica, per ogni familiare, con quale utente è imparentato. \\
         \textbf{User [0..*]} (\textbf{relates to}): indica quali sono i familiari che sono imparentati con esso.
     } \\ \hline
 
     \raggedright \textbf{To Be Related} & \raggedright Esprime la parentela tra gli utenti e i familiari &
-    \parbox{7.2cm}{
+    \parbox{7cm}{
         \textbf{Familiar [1]} (\textbf{is related to}): indica, per ogni familiare, con quale utente è imparentato. \\
         \textbf{User [0..*]} (\textbf{relates to}): indica quali sono i familiari che sono imparentati con esso.
     } \\ \hline
 
     \raggedright \textbf{To Be Related} & \raggedright Esprime la parentela tra gli utenti e i familiari &
-    \parbox{7.2cm}{
+    \parbox{7cm}{
         \textbf{Familiar [1]} (\textbf{is related to}): indica, per ogni familiare, con quale utente è imparentato. \\
         \textbf{User [0..*]} (\textbf{relates to}): indica quali sono i familiari che sono imparentati con esso.
     } \\ \hline
 
     \raggedright \textbf{To Be Related} & \raggedright Esprime la parentela tra gli utenti e i familiari &
-    \parbox{7.2cm}{
+    \parbox{7cm}{
         \textbf{Familiar [1]} (\textbf{is related to}): indica, per ogni familiare, con quale utente è imparentato. \\
         \textbf{User [0..*]} (\textbf{relates to}): indica quali sono i familiari che sono imparentati con esso.
     } \\ \hline
@@ -180,7 +180,7 @@ identificate con il prefisso \textbf{ID\_}.
 
 \subsection{Dizionario dei vincoli}
 
-\begin{longtable}{m{2.5cm}|m{4cm}|m{7.2cm}}
+\begin{longtable}{m{2.7cm}|m{4cm}|m{7cm}}
     
     \rowcolor{black!10}
     \textbf{Vincolo} & \textbf{Tipo} & \textbf{Descrizione} \\ \hline
