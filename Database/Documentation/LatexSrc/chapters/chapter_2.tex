@@ -134,46 +134,46 @@ identificate con il prefisso \textbf{ID\_}.
         \textbf{User [0..*]} (\textbf{relates to}): indica quali sono i familiari che sono imparentati con esso.
     } \\ \hline
 
-    \raggedright \textbf{To Be Related} & \raggedright Esprime la parentela tra gli utenti e i familiari &
+    \raggedright \textbf{To Own} & \raggedright Esprime il possesso degli utenti sui conti correnti &
     \parbox{7cm}{
-        \textbf{Familiar [1]} (\textbf{is related to}): indica, per ogni familiare, con quale utente è imparentato. \\
-        \textbf{User [0..*]} (\textbf{relates to}): indica quali sono i familiari che sono imparentati con esso.
+        \textbf{User [0..*]} (\textbf{owns}): indica, per ogni utente, quali sono i conti correnti che possiede. \\
+        \textbf{BankAccount [1]} (\textbf{is owned by}): indica l'utente che possiede il conto corrente in questione.
     } \\ \hline
 
-    \raggedright \textbf{To Be Related} & \raggedright Esprime la parentela tra gli utenti e i familiari &
+    \raggedright \textbf{To Own} & \raggedright Esprime il possesso dei familiari sui conti correnti &
     \parbox{7cm}{
-        \textbf{Familiar [1]} (\textbf{is related to}): indica, per ogni familiare, con quale utente è imparentato. \\
-        \textbf{User [0..*]} (\textbf{relates to}): indica quali sono i familiari che sono imparentati con esso.
+        \textbf{Familiar [0..*]} (\textbf{owns}): indica, per ogni familiare, quali sono i conti correnti che possiede. \\
+        \textbf{BankAccount [1]} (\textbf{is owned by}): indica il familiare che possiede il conto corrente in questione.
     } \\ \hline
 
-    \raggedright \textbf{To Be Related} & \raggedright Esprime la parentela tra gli utenti e i familiari &
+    \raggedright \textbf{To Be In} & \raggedright Esprime la correlazione tra le carte e i conti correnti &
     \parbox{7cm}{
-        \textbf{Familiar [1]} (\textbf{is related to}): indica, per ogni familiare, con quale utente è imparentato. \\
-        \textbf{User [0..*]} (\textbf{relates to}): indica quali sono i familiari che sono imparentati con esso.
+        \textbf{Card [1]} (\textbf{is in}): indica, per ogni carta, qual è il conto corrente a cui sono associate. \\
+        \textbf{BankAccount [1..*]} (\textbf{has}): indica quali sono le carte che sono associate al conto corrente in questione.
     } \\ \hline
 
-    \raggedright \textbf{To Be Related} & \raggedright Esprime la parentela tra gli utenti e i familiari &
+    \raggedright \textbf{To Own} & \raggedright Esprime il possesso degli utenti sulle carte &
     \parbox{7cm}{
-        \textbf{Familiar [1]} (\textbf{is related to}): indica, per ogni familiare, con quale utente è imparentato. \\
-        \textbf{User [0..*]} (\textbf{relates to}): indica quali sono i familiari che sono imparentati con esso.
+        \textbf{User [0..*]} (\textbf{owns}): indica, per ogni utente, quali sono le carte che possiede. \\
+        \textbf{Card [1]} (\textbf{is owned by}): indica l'utente che possiede la carta in questione.
     } \\ \hline
 
-    \raggedright \textbf{To Be Related} & \raggedright Esprime la parentela tra gli utenti e i familiari &
+    \raggedright \textbf{To Own} & \raggedright Esprime il possesso dei familiari sulle carte &
     \parbox{7cm}{
-        \textbf{Familiar [1]} (\textbf{is related to}): indica, per ogni familiare, con quale utente è imparentato. \\
-        \textbf{User [0..*]} (\textbf{relates to}): indica quali sono i familiari che sono imparentati con esso.
+        \textbf{Familiar [0..*]} (\textbf{owns}): indica, per ogni utente, quali sono le carte che possiede. \\
+        \textbf{Card [1]} (\textbf{is owned by}): indica l'utente che possiede la carta in questione.
     } \\ \hline
 
-    \raggedright \textbf{To Be Related} & \raggedright Esprime la parentela tra gli utenti e i familiari &
+    \raggedright \textbf{To Make} & \raggedright Esprime il collegamento una la transazione e la carta con la quale è stata effettuata &
     \parbox{7cm}{
-        \textbf{Familiar [1]} (\textbf{is related to}): indica, per ogni familiare, con quale utente è imparentato. \\
-        \textbf{User [0..*]} (\textbf{relates to}): indica quali sono i familiari che sono imparentati con esso.
+        \textbf{Card [0..*]} (\textbf{makes}): indica, per ogni carta, tutte le transazioni effettuate. \\
+        \textbf{Transaction [1]} (\textbf{is made by}): indica con quale carta è stata effettuata la transazione in questione.
     } \\ \hline
 
-    \raggedright \textbf{To Be Related} & \raggedright Esprime la parentela tra gli utenti e i familiari &
+    \raggedright \textbf{To Be In} & \raggedright Esprime la correlazione tra le transazioni e i portafogli &
     \parbox{7cm}{
-        \textbf{Familiar [1]} (\textbf{is related to}): indica, per ogni familiare, con quale utente è imparentato. \\
-        \textbf{User [0..*]} (\textbf{relates to}): indica quali sono i familiari che sono imparentati con esso.
+        \textbf{Wallet [0..*]} (\textbf{has}): indica, per ogni portafoglio, quali sono le transazioni che lo compongono. \\
+        \textbf{Transaction [0..1]} (\textbf{is in}): indica qual è il portafoglio a cui fa riferimento la transazione in questione.
     } \\ \hline
 
 \end{longtable}
