@@ -30,7 +30,11 @@
 
     \\ \rowcolor{black!10}
     \textbf{Transaction} (\uline{ID\_Transaction}, amount, date, category, \uuline{CardIBAN}, \uuline{ID\_Wallet}) \\
-    \textit{Chiavi esterne}: cardIBAN $ \rightarrow $ Card.IBAN \\
+    \textit{Chiavi esterne}: cardIBAN $ \rightarrow $ Card.IBAN \\ \\ \hline
+
+    \\ \rowcolor{black!10}
+    \textbf{TransactionInWallet} (\uuline{ID\_Transaction}, \uuline{ID\_Wallet}, \uuline{ID\_Wallet}) \\
+    \textit{Chiavi esterne}: ID\_Transaction $ \rightarrow $ Transaction.ID\_Transaction \\
     \hspace{2.79cm} ID\_Wallet $ \rightarrow $ Wallet.ID\_Wallet \\ \\ \hline
 
 \end{longtable}

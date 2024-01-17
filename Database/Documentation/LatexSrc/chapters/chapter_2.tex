@@ -130,8 +130,8 @@ identificate con il prefisso \textbf{ID\_}.
 
     \raggedright \textbf{To Be Related} & \raggedright Esprime la parentela tra gli utenti e i familiari &
     \parbox{7cm}{
-        \textbf{Familiar [1]} (\textbf{is related to}): indica, per ogni familiare, con quale utente è imparentato. \\
-        \textbf{User [0..*]} (\textbf{relates to}): indica quali sono i familiari che sono imparentati con esso.
+        \textbf{Familiar [1]} (\textbf{relates to}): indica, per ogni familiare, con quale utente è imparentato. \\
+        \textbf{User [0..*]} (\textbf{is related to}): indica quali sono i familiari che sono imparentati con esso.
     } \\ \hline
 
     \raggedright \textbf{To Own} & \raggedright Esprime il possesso degli utenti sui conti correnti &
@@ -173,7 +173,7 @@ identificate con il prefisso \textbf{ID\_}.
     \raggedright \textbf{To Be In} & \raggedright Esprime la correlazione tra le transazioni e i portafogli &
     \parbox{7cm}{
         \textbf{Wallet [0..*]} (\textbf{has}): indica, per ogni portafoglio, quali sono le transazioni che lo compongono. \\
-        \textbf{Transaction [0..1]} (\textbf{is in}): indica qual è il portafoglio a cui fa riferimento la transazione in questione.
+        \textbf{Transaction [0..*]} (\textbf{is in}): indica qual è il portafoglio a cui fa riferimento la transazione in questione.
     } \\ \hline
 
 \end{longtable}
