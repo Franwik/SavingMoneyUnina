@@ -28,9 +28,9 @@ abbiamo deciso di gestire l'attributo \textit{category} della tabella
 trasformandolo in una stringa, poiché non abbiamo bisogno di valori
 specifici, trattandosi di una categoria personalizzabile.
 
-Invece, per l'attributo \textit{cardType} della tabella \textbf{Card},
-è stato deciso di non applicare lo stesso metodo, poiché le tipologie
-di carte sono ben definite e non possono essere modificate.
+Anche per l'attributo \textit{cardType} è stata applicata la stessa
+procedura. Il controllo dell'attributo verrà gestito tramite i vincoli
+approfonditi nel dizionario dei vincoli.
 
 \subsection{Generalizzazioni}
 
@@ -99,7 +99,7 @@ identificate con il prefisso \textbf{ID\_}.
         \textbf{IBAN} (\textit{String}): codice identificativo della carta. \\
         \textbf{CVV} (\textit{String}): codice di sicurezza per le transazioni delle carte. \\
         \textbf{expireDate} (\textit{Date}): data che indica la scadenza della carta. \\
-        \textbf{cardType} (\textit{cardCategory}): campo che indica la tipologia della carta.
+        \textbf{cardType} (\textit{String}): campo che indica la tipologia della carta.
     } \\ \hline
 
     \textbf{Transaction} & \raggedright Classe utilizzata per tenere traccia di tutte le transazioni effettuate. &
