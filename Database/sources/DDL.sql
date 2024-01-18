@@ -83,3 +83,6 @@ CREATE TABLE IF NOT EXISTS smu.TransactionWallet(
     CONSTRAINT fk_transactionWallet FOREIGN KEY (ID_Transaction) REFERENCES smu.Transaction(ID_Transaction),
     CONSTRAINT fk_transactionWallet2 FOREIGN KEY (ID_Wallet) REFERENCES smu.Wallet(ID_Wallet)
 );
+
+--dichiarazione dei vincoli
+
