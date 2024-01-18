@@ -180,13 +180,34 @@ identificate con il prefisso \textbf{ID\_}.
 
 \subsection{Dizionario dei vincoli}
 
-\begin{longtable}{m{2.7cm}|m{4cm}|m{7cm}}
+\begin{longtable}{m{5.2cm}|m{2.8cm}|m{5.3cm}}
     
     \rowcolor{black!10}
     \textbf{Vincolo} & \textbf{Tipo} & \textbf{Descrizione} \\ \hline
     \endhead
 
-    \raggedright \textbf{name} & \raggedright type &
-    description\\ \hline
+    \raggedright \textbf{unique\_email} & \raggedright Intrarelazionale &
+    Nella tabella User non ci possono essere t-uple diverse con la stessa email. \\ \hline
+
+    \raggedright \textbf{unique\_CF} & \raggedright Intrarelazionale &
+    Nella tabella User non ci possono essere t-uple diverse con lo stesso CF. \\ \hline
+
+    \raggedright \textbf{check\_BirthDate\_User} & \raggedright Dominio &
+    Nella tabella User la data deve essere necessariamente antecedente alla data odierna. \\ \hline
+
+    \raggedright \textbf{check\_BirthDate\_Familiar} & \raggedright Dominio &
+    Nella tabella Familiar la data deve essere necessariamente antecedente alla data odierna. \\ \hline
+
+    \raggedright \textbf{ownership\_check\_BA} & \raggedright N-upla &
+    Per ogni t-upla della tabella BankAccount, essa deve essere associata necessariamente o ad un Utente o ad un Familiare, ma non ad entrambi. \\ \hline
+
+    \raggedright \textbf{ownership\_check\_Card} & \raggedright N-upla &
+    Per ogni t-upla della tabella Card, essa deve essere associata necessariamente o ad un Utente o ad un Familiare, ma non ad entrambi. \\ \hline
+
+    \raggedright \textbf{cardCategory\_Check} & \raggedright Dominio &
+    Nella tabella Card, per ogni t-upla, il campo cardCategory deve essere necessariamente “prepaid”, “debit” o “credit”. \\ \hline
+
+    \raggedright \textbf{check\_Transaction\_Date} & \raggedright Dominio &
+    Nella tabella Transaction, per ogni t-upla, la data deve essere necessariamente antecedente o coincidente alla data odierna. \\ \hline
 
 \end{longtable}

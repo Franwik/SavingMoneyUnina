@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2023.11.2)  18 JAN 2024 09:34
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2023.11.2)  18 JAN 2024 12:25
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -568,7 +568,42 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[8]) (./chapters/chapter_3.tex
+[8]
+Underfull \hbox (badness 1325) in paragraph at lines 196--196
+[]|\OT1/cmr/m/n/12 Nella ta-bel-la User la da-ta
+ []
+
+
+Underfull \hbox (badness 1043) in paragraph at lines 196--196
+\OT1/cmr/m/n/12 de-ve es-se-re ne-ces-sa-ria-men-te
+ []
+
+
+Overfull \hbox (2.23106pt too wide) in paragraph at lines 198--198
+[]|\OT1/cmr/bx/n/12 check[]BirthDate[]Familiar|  
+ []
+
+
+Underfull \hbox (badness 1043) in paragraph at lines 199--199
+\OT1/cmr/m/n/12 de-ve es-se-re ne-ces-sa-ria-men-te
+ []
+
+
+Underfull \hbox (badness 2269) in paragraph at lines 202--202
+\OT1/cmr/m/n/12 te o ad un Uten-te o ad
+ []
+
+
+Underfull \hbox (badness 2393) in paragraph at lines 202--202
+\OT1/cmr/m/n/12 un Fa-mi-lia-re, ma non ad
+ []
+
+
+Underfull \hbox (badness 1043) in paragraph at lines 208--208
+\OT1/cmr/m/n/12 de-ve es-se-re ne-ces-sa-ria-men-te
+ []
+
+) (./chapters/chapter_3.tex
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -619,7 +654,7 @@ Here is how much of TeX's memory you used:
  1141 hyphenation exceptions out of 8191
  75i,11n,79p,346b,550s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on main.pdf (13 pages, 463623 bytes).
+Output written on main.pdf (13 pages, 465247 bytes).
 PDF statistics:
  247 PDF objects out of 1000 (max. 8388607)
  206 compressed objects within 3 object streams
