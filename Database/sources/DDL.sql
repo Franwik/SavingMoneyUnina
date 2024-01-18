@@ -89,8 +89,7 @@ CREATE TABLE IF NOT EXISTS Transaction(
     amount FLOAT NOT NULL,
     date DATE NOT NULL,
     category VARCHAR(35),
-    cardIBAN VARCHAR(27) NOT NULL,
-    ID_Wallet SERIAL
+    cardIBAN VARCHAR(27) NOT NULL
 );
 
 ALTER TABLE Transaction DROP CONSTRAINT IF EXISTS pk_transaction;
@@ -101,14 +100,18 @@ ALTER TABLE Transaction DROP CONSTRAINT IF EXISTS fk_transaction;
 ALTER TABLE Transaction DROP CONSTRAINT IF EXISTS fk_transaction2;
 --foreign key
 ALTER TABLE Transaction ADD CONSTRAINT fk_transaction FOREIGN KEY (CardIBAN) REFERENCES Card(IBAN);
-ALTER TABLE Transaction ADD CONSTRAINT fk_transaction2 FOREIGN KEY (ID_Wallet) REFERENCES Wallet(ID_Wallet);
 
+CREATE TABLE IF NOT EXISTS TransactionWallet(
+    ID_Transaction SERIAL,
+    ID_Wallet SERIAL
+)
 
+ALTER TABLE TransactionInWallet DROP CONSTRAINT IF EXISTS fk_transactionWallet;
+ALTER TABLE TransactionInWallet DROP CONSTRAINT IF EXISTS fk_transactionWallet2;
+--foreign key
+ALTER TABLE TransactionInWallet ADD CONSTRAINT fk_transactionWallet FOREIGN KEY (ID_Transaction) REFERENCES Transaction(ID_Transaction);
+ALTER TABLE TransactionInWallet ADD CONSTRAINT fk_transactionWallet2 FOREIGN KEY (ID_Wallet) REFERENCES Wallet(ID_Wallet);
 
-
-
-
-
-
+--ALTER TABLE TransactionWallet RENAME TO TransactionInWallet;
 
 
