@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 16.1 (Ubuntu 16.1-1.pgdg23.10+1)
--- Dumped by pg_dump version 16.1 (Ubuntu 16.1-1.pgdg23.10+1)
+-- Dumped from database version 16.1
+-- Dumped by pg_dump version 16.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -354,6 +354,7 @@ COPY smu.transactionwallet (id_transaction, id_wallet) FROM stdin;
 --
 
 COPY smu."user" (email, username, password, address, name, surname, cf, dateofbirth) FROM stdin;
+arturodonnarumma01@gmail.com	thankyousomaz	maradona	via stazione 23	Arturo	Donnarumma	DNNRTR01R30L245F	2001-10-30
 \.
 
 
