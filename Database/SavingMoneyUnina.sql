@@ -354,7 +354,6 @@ COPY smu.transactionwallet (id_transaction, id_wallet) FROM stdin;
 --
 
 COPY smu."user" (email, username, password, address, name, surname, cf, dateofbirth) FROM stdin;
-arturodonnarumma01@gmail.com	thankyousomaz	maradona	via stazione 23	Arturo	Donnarumma	DNNRTR01R30L245F	2001-10-30
 \.
 
 
