@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2023.11.2)  18 JAN 2024 15:23
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2023.11.2)  25 JAN 2024 12:42
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -436,7 +436,7 @@ italian.ldf    on input line 35.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 (./chapters/titlepage.tex
-<images/FII_logo.png, id=84, 556.0775pt x 556.0775pt>
+<images/FII_logo.png, id=80, 556.0775pt x 556.0775pt>
 File: images/FII_logo.png Graphic file (type png)
 <use images/FII_logo.png>
 Package pdftex.def Info: images/FII_logo.png  used on input line 3.
@@ -485,7 +485,7 @@ Capitolo 2.
 
 
 pdfTeX warning: pdflatex (file ./pdfs/UMLdiagram.drawio.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<pdfs/UMLdiagram.drawio.pdf, id=122, 598.15468pt x 846.0408pt>
+<pdfs/UMLdiagram.drawio.pdf, id=117, 598.15468pt x 846.0408pt>
 File: pdfs/UMLdiagram.drawio.pdf Graphic file (type pdf)
 <use pdfs/UMLdiagram.drawio.pdf>
 Package pdftex.def Info: pdfs/UMLdiagram.drawio.pdf  used on input line 7.
@@ -493,7 +493,7 @@ Package pdftex.def Info: pdfs/UMLdiagram.drawio.pdf  used on input line 7.
 
 
 pdfTeX warning: pdflatex (file ./pdfs/ERdiagram.drawio.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<pdfs/ERdiagram.drawio.pdf, id=123, 597.19106pt x 846.0408pt>
+<pdfs/ERdiagram.drawio.pdf, id=118, 597.19106pt x 846.0408pt>
 File: pdfs/ERdiagram.drawio.pdf Graphic file (type pdf)
 <use pdfs/ERdiagram.drawio.pdf>
 Package pdftex.def Info: pdfs/ERdiagram.drawio.pdf  used on input line 15.
@@ -519,7 +519,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [5]
 
 pdfTeX warning: pdflatex (file ./pdfs/RestructuredUMLdiagram.drawio.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<pdfs/RestructuredUMLdiagram.drawio.pdf, id=163, 598.15468pt x 846.0408pt>
+<pdfs/RestructuredUMLdiagram.drawio.pdf, id=158, 598.15468pt x 846.0408pt>
 File: pdfs/RestructuredUMLdiagram.drawio.pdf Graphic file (type pdf)
 <use pdfs/RestructuredUMLdiagram.drawio.pdf>
 Package pdftex.def Info: pdfs/RestructuredUMLdiagram.drawio.pdf  used on input line 55.
@@ -627,7 +627,22 @@ Underfull \hbox (badness 10000) in paragraph at lines 18--19
 
 [10
 
-]) (./chapters/chapter_4.tex
+]
+Underfull \hbox (badness 5147) in paragraph at lines 60--60
+[]|\OT1/cmr/m/n/12 Relazione 1..* a 1, ^^Re sta-ta mi-
+ []
+
+
+Underfull \hbox (badness 4096) in paragraph at lines 60--60
+\OT1/cmr/m/n/12 gra-ta la chia-ve pri-ma-ria di \OT1/cmr/m/it/12 Ban-
+ []
+
+
+Underfull \hbox (badness 1917) in paragraph at lines 60--60
+\OT1/cmr/m/it/12 kAc-count \OT1/cmr/m/n/12 (ac-count-Num-ber) in \OT1/cmr/m/it/12 Card
+ []
+
+) (./chapters/chapter_4.tex
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -645,21 +660,21 @@ LaTeX2e <2023-06-01>
 L3 programming layer <2023-06-05>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 377BBF45A61DD5D385C39C95CE76C69D;3376.
+(rerunfilecheck)             Checksum: 98846BB597A30152F91C4BD21BC735A1;3371.
  ) 
 Here is how much of TeX's memory you used:
- 12254 strings out of 475735
- 192654 string characters out of 5784786
- 1872759 words of memory out of 5000000
- 32770 multiletter control sequences out of 15000+600000
+ 12252 strings out of 475735
+ 192620 string characters out of 5784786
+ 1873759 words of memory out of 5000000
+ 32769 multiletter control sequences out of 15000+600000
  519013 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,11n,79p,346b,550s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,11n,79p,421b,550s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on main.pdf (13 pages, 464046 bytes).
+Output written on main.pdf (13 pages, 466801 bytes).
 PDF statistics:
- 246 PDF objects out of 1000 (max. 8388607)
- 205 compressed objects within 3 object streams
- 42 named destinations out of 1000 (max. 500000)
- 181 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 240 PDF objects out of 1000 (max. 8388607)
+ 200 compressed objects within 2 object streams
+ 41 named destinations out of 1000 (max. 500000)
+ 173 words of extra memory for PDF output out of 10000 (max. 10000000)
 

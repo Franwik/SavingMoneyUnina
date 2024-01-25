@@ -2,7 +2,7 @@
 
 \section{Schema Logico}
 
-\subsection{Traduzione delle classi}
+\subsection{Traduzione delle classi e delle associazioni}
 
 \begin{longtable}{p{0.9\linewidth}}
     
@@ -40,7 +40,7 @@
 \end{longtable}
 
 \newpage
-\subsection{Traduzione delle associazioni}
+\subsection{Modalità di traduzione delle associazioni}
 
 \begin{longtable}{m{6.7cm}|m{7cm}}
 
@@ -49,10 +49,20 @@
     \endhead
 
     \textbf{To Be Related} &
-    Relazione 0..* a 1, abbiamo migrato la chiave primaria di User (username) in Familiar (familiarUsername) \\ \hline
+    Relazione 0..* a 1, è stata migrata la chiave primaria di \textit{User} (username) in \textit{Familiar} (familiarUsername) \\ \hline
 
+    \textbf{To Own} &
+    Tutte le relazioni di questo genere, tra \textit{Familiar}, \textit{User}, \textit{BankAccount} e \textit{Card}, sono di tipologia 0..* a 1,
+    di conseguenza sono state gestite tutte allo stesso modo. Ovvero migrando la chiave primaria dell'entità debole, nell'entità forte.
+    Per controllare nel dettaglio le chiavi esterne in ognuna delle tabelle indicate vedere la tabella Traduzione delle classi. \\ \hline
 
+    \textbf{To Be In (Card/BankAccount)} &
+    Relazione 1..* a 1, è stata migrata la chiave primaria di \textit{BankAccount} (accountNumber) in \textit{Card} (BA\_Number) \\ \hline
+
+    \textbf{To Make} &
+    Relazione 0..* a 1, è stata migrata la chiave primaria di \textit{Card} (IBAN) in \textit{Transaction} (CardIBAN) \\ \hline
+
+    \textbf{To Be In (Transaction/Wallet)} &
+    Relazione 0..* a 0..*, è stata creata la tabella ponte \textit{TransactionInWallet} che contiene le chiavi primarie di \textit{Transaction} (ID\_Transaction) e di \textit{Wallet} (ID\_Wallet) \\ \hline
 
 \end{longtable}
-
-\subsection{Schema logico definitivo}
