@@ -8,22 +8,22 @@
     
     \hline \\
     \rowcolor{black!10}
-    \textbf{User} (email, \uline{username}, password, address, name, surname, CF, dateOfBirth) \\ \\ \hline
+    \textbf{User} (\uline{email}, username, password, address, name, surname, CF, dateOfBirth) \\ \\ \hline
 
     \\ \rowcolor{black!10}
-    \textbf{Familiar} (name, surname, \uline{CF}, dateOfBirth, \uuline{familiarUsername}) \\
-    \textit{Chiavi esterne}: familiarUsername $ \rightarrow $ User.username \\ \\ \hline
+    \textbf{Familiar} (name, surname, \uline{CF}, dateOfBirth, \uuline{familiarEmail}) \\
+    \textit{Chiavi esterne}: familiarEmail $ \rightarrow $ User.email \\ \\ \hline
 
     \\ \rowcolor{black!10}
-    \textbf{BankAccount} (balance, \uline{accountNumber}, bank, \uuline{ownerCF}, \uuline{ownerUsername}) \\
+    \textbf{BankAccount} (balance, \uline{accountNumber}, bank, \uuline{ownerCF}, \uuline{ownerEmail}) \\
     \textit{Chiavi esterne}: ownerCF $ \rightarrow $ Familiar.CF \\ 
-    \hspace{2.79cm} ownerUsername $ \rightarrow $ User.username \\ \\ \hline
+    \hspace{2.79cm} ownerEmail $ \rightarrow $ User.email \\ \\ \hline
 
     \\ \rowcolor{black!10}
-    \textbf{Card} (\uline{IBAN}, CVV, expireDate, cardCategory, \uuline{BA\_Number}, \uuline{ownerCF}, \uuline{ownerUsername}) \\
+    \textbf{Card} (\uline{IBAN}, CVV, expireDate, cardCategory, \uuline{BA\_Number}, \uuline{ownerCF}, \uuline{ownerEmail}) \\
     \textit{Chiavi esterne}: BA\_Number $ \rightarrow $ BankAccount.accountNumber \\
     \hspace{2.79cm} ownerCF $ \rightarrow $ Familiar.CF \\
-    \hspace{2.79cm} ownerUsername $ \rightarrow $ User.username \\ \\ \hline
+    \hspace{2.79cm} ownerEmail $ \rightarrow $ User.email \\ \\ \hline
 
     \\ \rowcolor{black!10}
     \textbf{Wallet} (\uline{ID\_Wallet}, name, WalletCategory, totalAmount) \\ \\ \hline

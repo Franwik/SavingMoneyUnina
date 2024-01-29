@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 16.1
--- Dumped by pg_dump version 16.1
+-- Dumped from database version 16.1 (Ubuntu 16.1-1.pgdg23.10+1)
+-- Dumped by pg_dump version 16.1 (Ubuntu 16.1-1.pgdg23.10+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -38,9 +38,7 @@ CREATE TABLE smu.bankaccount (
     accountnumber integer NOT NULL,
     bank character varying(40),
     ownercf character varying(16),
-    ownerusername character varying(20),
-    CONSTRAINT ownership_check_ba CHECK (((ownercf IS NULL) <> (ownerusername IS NULL))),
-    CONSTRAINT ownership_check_card CHECK (((ownercf IS NULL) <> (ownerusername IS NULL)))
+    owneremail character varying(100) NOT NULL
 );
 
 
@@ -79,8 +77,7 @@ CREATE TABLE smu.card (
     cardtype character varying(11),
     ba_number integer NOT NULL,
     ownercf character varying(16) NOT NULL,
-    ownerusername character varying(20) NOT NULL,
-    CONSTRAINT cardtype_check CHECK (((cardtype)::text = ANY ((ARRAY['prepaid'::character varying, 'debit'::character varying, 'credit'::character varying])::text[])))
+    owneremail character varying(100) NOT NULL
 );
 
 
@@ -117,8 +114,7 @@ CREATE TABLE smu.familiar (
     surname character varying(30) NOT NULL,
     cf character varying(16) NOT NULL,
     dateofbirth date NOT NULL,
-    familiarusername character varying(20) NOT NULL,
-    CONSTRAINT check_birthdate_familiar CHECK ((dateofbirth < CURRENT_DATE))
+    familiaremail character varying(100) NOT NULL
 );
 
 
@@ -133,8 +129,7 @@ CREATE TABLE smu.transaction (
     amount double precision NOT NULL,
     date date NOT NULL,
     category character varying(35),
-    cardiban character varying(27) NOT NULL,
-    CONSTRAINT check_transaction_date CHECK ((date <= CURRENT_DATE))
+    cardiban character varying(27) NOT NULL
 );
 
 
@@ -163,16 +158,16 @@ ALTER SEQUENCE smu.transaction_id_transaction_seq OWNED BY smu.transaction.id_tr
 
 
 --
--- Name: transactionwallet; Type: TABLE; Schema: smu; Owner: postgres
+-- Name: transactioninwallet; Type: TABLE; Schema: smu; Owner: postgres
 --
 
-CREATE TABLE smu.transactionwallet (
+CREATE TABLE smu.transactioninwallet (
     id_transaction integer NOT NULL,
     id_wallet integer NOT NULL
 );
 
 
-ALTER TABLE smu.transactionwallet OWNER TO postgres;
+ALTER TABLE smu.transactioninwallet OWNER TO postgres;
 
 --
 -- Name: transactionwallet_id_transaction_seq; Type: SEQUENCE; Schema: smu; Owner: postgres
@@ -193,7 +188,7 @@ ALTER SEQUENCE smu.transactionwallet_id_transaction_seq OWNER TO postgres;
 -- Name: transactionwallet_id_transaction_seq; Type: SEQUENCE OWNED BY; Schema: smu; Owner: postgres
 --
 
-ALTER SEQUENCE smu.transactionwallet_id_transaction_seq OWNED BY smu.transactionwallet.id_transaction;
+ALTER SEQUENCE smu.transactionwallet_id_transaction_seq OWNED BY smu.transactioninwallet.id_transaction;
 
 
 --
@@ -215,7 +210,7 @@ ALTER SEQUENCE smu.transactionwallet_id_wallet_seq OWNER TO postgres;
 -- Name: transactionwallet_id_wallet_seq; Type: SEQUENCE OWNED BY; Schema: smu; Owner: postgres
 --
 
-ALTER SEQUENCE smu.transactionwallet_id_wallet_seq OWNED BY smu.transactionwallet.id_wallet;
+ALTER SEQUENCE smu.transactionwallet_id_wallet_seq OWNED BY smu.transactioninwallet.id_wallet;
 
 
 --
@@ -230,8 +225,7 @@ CREATE TABLE smu."user" (
     name character varying(20) NOT NULL,
     surname character varying(30) NOT NULL,
     cf character varying(16) NOT NULL,
-    dateofbirth date NOT NULL,
-    CONSTRAINT check_birthdate_user CHECK ((dateofbirth < CURRENT_DATE))
+    dateofbirth date NOT NULL
 );
 
 
@@ -295,17 +289,17 @@ ALTER TABLE ONLY smu.transaction ALTER COLUMN id_transaction SET DEFAULT nextval
 
 
 --
--- Name: transactionwallet id_transaction; Type: DEFAULT; Schema: smu; Owner: postgres
+-- Name: transactioninwallet id_transaction; Type: DEFAULT; Schema: smu; Owner: postgres
 --
 
-ALTER TABLE ONLY smu.transactionwallet ALTER COLUMN id_transaction SET DEFAULT nextval('smu.transactionwallet_id_transaction_seq'::regclass);
+ALTER TABLE ONLY smu.transactioninwallet ALTER COLUMN id_transaction SET DEFAULT nextval('smu.transactionwallet_id_transaction_seq'::regclass);
 
 
 --
--- Name: transactionwallet id_wallet; Type: DEFAULT; Schema: smu; Owner: postgres
+-- Name: transactioninwallet id_wallet; Type: DEFAULT; Schema: smu; Owner: postgres
 --
 
-ALTER TABLE ONLY smu.transactionwallet ALTER COLUMN id_wallet SET DEFAULT nextval('smu.transactionwallet_id_wallet_seq'::regclass);
+ALTER TABLE ONLY smu.transactioninwallet ALTER COLUMN id_wallet SET DEFAULT nextval('smu.transactionwallet_id_wallet_seq'::regclass);
 
 
 --
@@ -319,7 +313,7 @@ ALTER TABLE ONLY smu.wallet ALTER COLUMN id_wallet SET DEFAULT nextval('smu.wall
 -- Data for Name: bankaccount; Type: TABLE DATA; Schema: smu; Owner: postgres
 --
 
-COPY smu.bankaccount (balance, accountnumber, bank, ownercf, ownerusername) FROM stdin;
+COPY smu.bankaccount (balance, accountnumber, bank, ownercf, owneremail) FROM stdin;
 \.
 
 
@@ -327,7 +321,7 @@ COPY smu.bankaccount (balance, accountnumber, bank, ownercf, ownerusername) FROM
 -- Data for Name: card; Type: TABLE DATA; Schema: smu; Owner: postgres
 --
 
-COPY smu.card (iban, cvv, expiredata, cardtype, ba_number, ownercf, ownerusername) FROM stdin;
+COPY smu.card (iban, cvv, expiredata, cardtype, ba_number, ownercf, owneremail) FROM stdin;
 \.
 
 
@@ -335,7 +329,7 @@ COPY smu.card (iban, cvv, expiredata, cardtype, ba_number, ownercf, ownerusernam
 -- Data for Name: familiar; Type: TABLE DATA; Schema: smu; Owner: postgres
 --
 
-COPY smu.familiar (name, surname, cf, dateofbirth, familiarusername) FROM stdin;
+COPY smu.familiar (name, surname, cf, dateofbirth, familiaremail) FROM stdin;
 \.
 
 
@@ -348,10 +342,10 @@ COPY smu.transaction (id_transaction, amount, date, category, cardiban) FROM std
 
 
 --
--- Data for Name: transactionwallet; Type: TABLE DATA; Schema: smu; Owner: postgres
+-- Data for Name: transactioninwallet; Type: TABLE DATA; Schema: smu; Owner: postgres
 --
 
-COPY smu.transactionwallet (id_transaction, id_wallet) FROM stdin;
+COPY smu.transactioninwallet (id_transaction, id_wallet) FROM stdin;
 \.
 
 
@@ -430,6 +424,14 @@ ALTER TABLE ONLY smu.card
 
 
 --
+-- Name: user pk_email; Type: CONSTRAINT; Schema: smu; Owner: postgres
+--
+
+ALTER TABLE ONLY smu."user"
+    ADD CONSTRAINT pk_email PRIMARY KEY (email);
+
+
+--
 -- Name: familiar pk_familiar; Type: CONSTRAINT; Schema: smu; Owner: postgres
 --
 
@@ -446,35 +448,11 @@ ALTER TABLE ONLY smu.transaction
 
 
 --
--- Name: user pk_user; Type: CONSTRAINT; Schema: smu; Owner: postgres
---
-
-ALTER TABLE ONLY smu."user"
-    ADD CONSTRAINT pk_user PRIMARY KEY (username);
-
-
---
 -- Name: wallet pk_wallet; Type: CONSTRAINT; Schema: smu; Owner: postgres
 --
 
 ALTER TABLE ONLY smu.wallet
     ADD CONSTRAINT pk_wallet PRIMARY KEY (id_wallet);
-
-
---
--- Name: user unique_cf; Type: CONSTRAINT; Schema: smu; Owner: postgres
---
-
-ALTER TABLE ONLY smu."user"
-    ADD CONSTRAINT unique_cf UNIQUE (cf);
-
-
---
--- Name: user unique_email; Type: CONSTRAINT; Schema: smu; Owner: postgres
---
-
-ALTER TABLE ONLY smu."user"
-    ADD CONSTRAINT unique_email UNIQUE (email);
 
 
 --
@@ -490,7 +468,7 @@ ALTER TABLE ONLY smu.bankaccount
 --
 
 ALTER TABLE ONLY smu.bankaccount
-    ADD CONSTRAINT fk_bankaccount2 FOREIGN KEY (ownerusername) REFERENCES smu."user"(username);
+    ADD CONSTRAINT fk_bankaccount2 FOREIGN KEY (owneremail) REFERENCES smu."user"(email);
 
 
 --
@@ -514,7 +492,7 @@ ALTER TABLE ONLY smu.card
 --
 
 ALTER TABLE ONLY smu.card
-    ADD CONSTRAINT fk_card3 FOREIGN KEY (ownerusername) REFERENCES smu."user"(username);
+    ADD CONSTRAINT fk_card3 FOREIGN KEY (owneremail) REFERENCES smu."user"(email);
 
 
 --
@@ -522,7 +500,7 @@ ALTER TABLE ONLY smu.card
 --
 
 ALTER TABLE ONLY smu.familiar
-    ADD CONSTRAINT fk_familiar FOREIGN KEY (familiarusername) REFERENCES smu."user"(username);
+    ADD CONSTRAINT fk_familiar FOREIGN KEY (familiaremail) REFERENCES smu."user"(email);
 
 
 --
@@ -534,18 +512,18 @@ ALTER TABLE ONLY smu.transaction
 
 
 --
--- Name: transactionwallet fk_transactionwallet; Type: FK CONSTRAINT; Schema: smu; Owner: postgres
+-- Name: transactioninwallet fk_transactionwallet; Type: FK CONSTRAINT; Schema: smu; Owner: postgres
 --
 
-ALTER TABLE ONLY smu.transactionwallet
+ALTER TABLE ONLY smu.transactioninwallet
     ADD CONSTRAINT fk_transactionwallet FOREIGN KEY (id_transaction) REFERENCES smu.transaction(id_transaction);
 
 
 --
--- Name: transactionwallet fk_transactionwallet2; Type: FK CONSTRAINT; Schema: smu; Owner: postgres
+-- Name: transactioninwallet fk_transactionwallet2; Type: FK CONSTRAINT; Schema: smu; Owner: postgres
 --
 
-ALTER TABLE ONLY smu.transactionwallet
+ALTER TABLE ONLY smu.transactioninwallet
     ADD CONSTRAINT fk_transactionwallet2 FOREIGN KEY (id_wallet) REFERENCES smu.wallet(id_wallet);
 
 
