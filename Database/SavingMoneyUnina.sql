@@ -38,7 +38,8 @@ CREATE TABLE smu.bankaccount (
     accountnumber integer NOT NULL,
     bank character varying(40),
     ownercf character varying(16),
-    owneremail character varying(100) NOT NULL
+    owneremail character varying(100) NOT NULL,
+    CONSTRAINT ownership_check_ba CHECK (((ownercf IS NULL) <> (owneremail IS NULL)))
 );
 
 
@@ -77,7 +78,9 @@ CREATE TABLE smu.card (
     cardtype character varying(11),
     ba_number integer NOT NULL,
     ownercf character varying(16) NOT NULL,
-    owneremail character varying(100) NOT NULL
+    owneremail character varying(100) NOT NULL,
+    CONSTRAINT cardtype_check CHECK (((cardtype)::text = ANY ((ARRAY['prepaid'::character varying, 'debit'::character varying, 'credit'::character varying])::text[]))),
+    CONSTRAINT ownership_check_card CHECK (((ownercf IS NULL) <> (owneremail IS NULL)))
 );
 
 
@@ -114,7 +117,8 @@ CREATE TABLE smu.familiar (
     surname character varying(30) NOT NULL,
     cf character varying(16) NOT NULL,
     dateofbirth date NOT NULL,
-    familiaremail character varying(100) NOT NULL
+    familiaremail character varying(100) NOT NULL,
+    CONSTRAINT check_birthdate_familiar CHECK ((dateofbirth < CURRENT_DATE))
 );
 
 
@@ -129,7 +133,8 @@ CREATE TABLE smu.transaction (
     amount double precision NOT NULL,
     date date NOT NULL,
     category character varying(35),
-    cardiban character varying(27) NOT NULL
+    cardiban character varying(27) NOT NULL,
+    CONSTRAINT check_transaction_date CHECK ((date < CURRENT_DATE))
 );
 
 
@@ -225,7 +230,8 @@ CREATE TABLE smu."user" (
     name character varying(20) NOT NULL,
     surname character varying(30) NOT NULL,
     cf character varying(16) NOT NULL,
-    dateofbirth date NOT NULL
+    dateofbirth date NOT NULL,
+    CONSTRAINT check_birthdate_user CHECK ((dateofbirth < CURRENT_DATE))
 );
 
 
@@ -453,6 +459,22 @@ ALTER TABLE ONLY smu.transaction
 
 ALTER TABLE ONLY smu.wallet
     ADD CONSTRAINT pk_wallet PRIMARY KEY (id_wallet);
+
+
+--
+-- Name: user unique_cf; Type: CONSTRAINT; Schema: smu; Owner: postgres
+--
+
+ALTER TABLE ONLY smu."user"
+    ADD CONSTRAINT unique_cf UNIQUE (cf);
+
+
+--
+-- Name: user unique_username; Type: CONSTRAINT; Schema: smu; Owner: postgres
+--
+
+ALTER TABLE ONLY smu."user"
+    ADD CONSTRAINT unique_username UNIQUE (username);
 
 
 --
