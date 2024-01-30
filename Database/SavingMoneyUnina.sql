@@ -25,6 +25,42 @@ CREATE SCHEMA smu;
 
 ALTER SCHEMA smu OWNER TO postgres;
 
+--
+-- Name: connect_transaction_to_wallet(); Type: FUNCTION; Schema: smu; Owner: postgres
+--
+
+CREATE FUNCTION smu.connect_transaction_to_wallet() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    wallet_row smu.wallet%ROWTYPE;
+BEGIN
+    
+    -- Trova i wallet con la stessa categoria della transazione appena inserita
+    FOR wallet_row IN
+        SELECT *
+        FROM smu.wallet
+        WHERE walletcategory = NEW.category
+    LOOP
+
+        -- Collega la transazione al wallet trovato
+        INSERT INTO smu.transactioninwallet (id_transaction, id_wallet)
+        VALUES (NEW.id_transaction, wallet_row.id_wallet);
+
+        -- Aggiorna il campo totalamount del wallet
+        UPDATE smu.wallet
+        SET totalamount = totalamount + NEW.amount
+        WHERE id_wallet = wallet_row.id_wallet;
+
+    END LOOP;
+
+    RETURN NEW;
+END;
+$$;
+
+
+ALTER FUNCTION smu.connect_transaction_to_wallet() OWNER TO postgres;
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -38,7 +74,7 @@ CREATE TABLE smu.bankaccount (
     accountnumber integer NOT NULL,
     bank character varying(40),
     ownercf character varying(16),
-    owneremail character varying(100) NOT NULL,
+    owneremail character varying(100),
     CONSTRAINT ownership_check_ba CHECK (((ownercf IS NULL) <> (owneremail IS NULL)))
 );
 
@@ -77,8 +113,8 @@ CREATE TABLE smu.card (
     expiredata date NOT NULL,
     cardtype character varying(11),
     ba_number integer NOT NULL,
-    ownercf character varying(16) NOT NULL,
-    owneremail character varying(100) NOT NULL,
+    ownercf character varying(16),
+    owneremail character varying(100),
     CONSTRAINT cardtype_check CHECK (((cardtype)::text = ANY ((ARRAY['prepaid'::character varying, 'debit'::character varying, 'credit'::character varying])::text[]))),
     CONSTRAINT ownership_check_card CHECK (((ownercf IS NULL) <> (owneremail IS NULL)))
 );
@@ -134,7 +170,7 @@ CREATE TABLE smu.transaction (
     date date NOT NULL,
     category character varying(35),
     cardiban character varying(27) NOT NULL,
-    CONSTRAINT check_transaction_date CHECK ((date < CURRENT_DATE))
+    CONSTRAINT check_transaction_date CHECK ((date <= CURRENT_DATE))
 );
 
 
@@ -320,6 +356,7 @@ ALTER TABLE ONLY smu.wallet ALTER COLUMN id_wallet SET DEFAULT nextval('smu.wall
 --
 
 COPY smu.bankaccount (balance, accountnumber, bank, ownercf, owneremail) FROM stdin;
+50000	3	Poste Italiane	\N	franwik_@outlook.com
 \.
 
 
@@ -328,6 +365,7 @@ COPY smu.bankaccount (balance, accountnumber, bank, ownercf, owneremail) FROM st
 --
 
 COPY smu.card (iban, cvv, expiredata, cardtype, ba_number, ownercf, owneremail) FROM stdin;
+IT3461987542619784536215739	059	2025-06-19	prepaid	3	\N	franwik_@outlook.com
 \.
 
 
@@ -336,6 +374,7 @@ COPY smu.card (iban, cvv, expiredata, cardtype, ba_number, ownercf, owneremail) 
 --
 
 COPY smu.familiar (name, surname, cf, dateofbirth, familiaremail) FROM stdin;
+Arturo	Donnarumma	ABC	2001-10-30	franwik_@outlook.com
 \.
 
 
@@ -344,6 +383,7 @@ COPY smu.familiar (name, surname, cf, dateofbirth, familiaremail) FROM stdin;
 --
 
 COPY smu.transaction (id_transaction, amount, date, category, cardiban) FROM stdin;
+7	100.5	2024-01-30	Spesa	IT3461987542619784536215739
 \.
 
 
@@ -352,6 +392,7 @@ COPY smu.transaction (id_transaction, amount, date, category, cardiban) FROM std
 --
 
 COPY smu.transactioninwallet (id_transaction, id_wallet) FROM stdin;
+7	1
 \.
 
 
@@ -360,6 +401,7 @@ COPY smu.transactioninwallet (id_transaction, id_wallet) FROM stdin;
 --
 
 COPY smu."user" (email, username, password, address, name, surname, cf, dateofbirth) FROM stdin;
+franwik_@outlook.com	Franwik_	Ifs4ppic	Via Napoli 281	Francesco	Donnarumma	DNNFNC03A22C129A	2003-01-22
 \.
 
 
@@ -368,6 +410,7 @@ COPY smu."user" (email, username, password, address, name, surname, cf, dateofbi
 --
 
 COPY smu.wallet (id_wallet, name, walletcategory, totalamount) FROM stdin;
+1	Conad	Spesa	100.5
 \.
 
 
@@ -375,7 +418,7 @@ COPY smu.wallet (id_wallet, name, walletcategory, totalamount) FROM stdin;
 -- Name: bankaccount_accountnumber_seq; Type: SEQUENCE SET; Schema: smu; Owner: postgres
 --
 
-SELECT pg_catalog.setval('smu.bankaccount_accountnumber_seq', 1, false);
+SELECT pg_catalog.setval('smu.bankaccount_accountnumber_seq', 3, true);
 
 
 --
@@ -389,7 +432,7 @@ SELECT pg_catalog.setval('smu.card_ba_number_seq', 1, false);
 -- Name: transaction_id_transaction_seq; Type: SEQUENCE SET; Schema: smu; Owner: postgres
 --
 
-SELECT pg_catalog.setval('smu.transaction_id_transaction_seq', 1, false);
+SELECT pg_catalog.setval('smu.transaction_id_transaction_seq', 7, true);
 
 
 --
@@ -410,7 +453,7 @@ SELECT pg_catalog.setval('smu.transactionwallet_id_wallet_seq', 1, false);
 -- Name: wallet_id_wallet_seq; Type: SEQUENCE SET; Schema: smu; Owner: postgres
 --
 
-SELECT pg_catalog.setval('smu.wallet_id_wallet_seq', 1, false);
+SELECT pg_catalog.setval('smu.wallet_id_wallet_seq', 1, true);
 
 
 --
@@ -475,6 +518,13 @@ ALTER TABLE ONLY smu."user"
 
 ALTER TABLE ONLY smu."user"
     ADD CONSTRAINT unique_username UNIQUE (username);
+
+
+--
+-- Name: transaction transaction_insert_trigger; Type: TRIGGER; Schema: smu; Owner: postgres
+--
+
+CREATE TRIGGER transaction_insert_trigger AFTER INSERT ON smu.transaction FOR EACH ROW EXECUTE FUNCTION smu.connect_transaction_to_wallet();
 
 
 --
