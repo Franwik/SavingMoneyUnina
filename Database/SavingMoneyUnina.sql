@@ -281,7 +281,8 @@ CREATE TABLE smu.wallet (
     id_wallet integer NOT NULL,
     name character varying(35) NOT NULL,
     walletcategory character varying(35) NOT NULL,
-    totalamount double precision NOT NULL
+    totalamount double precision NOT NULL,
+    owneremail character varying(100) NOT NULL
 );
 
 
@@ -383,7 +384,6 @@ Arturo	Donnarumma	ABC	2001-10-30	franwik_@outlook.com
 --
 
 COPY smu.transaction (id_transaction, amount, date, category, cardiban) FROM stdin;
-7	100.5	2024-01-30	Spesa	IT3461987542619784536215739
 \.
 
 
@@ -392,7 +392,6 @@ COPY smu.transaction (id_transaction, amount, date, category, cardiban) FROM std
 --
 
 COPY smu.transactioninwallet (id_transaction, id_wallet) FROM stdin;
-7	1
 \.
 
 
@@ -409,8 +408,8 @@ franwik_@outlook.com	Franwik_	Ifs4ppic	Via Napoli 281	Francesco	Donnarumma	DNNFN
 -- Data for Name: wallet; Type: TABLE DATA; Schema: smu; Owner: postgres
 --
 
-COPY smu.wallet (id_wallet, name, walletcategory, totalamount) FROM stdin;
-1	Conad	Spesa	100.5
+COPY smu.wallet (id_wallet, name, walletcategory, totalamount, owneremail) FROM stdin;
+2	Conad	Spesa	0	franwik_@outlook.com
 \.
 
 
@@ -453,7 +452,7 @@ SELECT pg_catalog.setval('smu.transactionwallet_id_wallet_seq', 1, false);
 -- Name: wallet_id_wallet_seq; Type: SEQUENCE SET; Schema: smu; Owner: postgres
 --
 
-SELECT pg_catalog.setval('smu.wallet_id_wallet_seq', 1, true);
+SELECT pg_catalog.setval('smu.wallet_id_wallet_seq', 2, true);
 
 
 --
@@ -597,6 +596,14 @@ ALTER TABLE ONLY smu.transactioninwallet
 
 ALTER TABLE ONLY smu.transactioninwallet
     ADD CONSTRAINT fk_transactionwallet2 FOREIGN KEY (id_wallet) REFERENCES smu.wallet(id_wallet);
+
+
+--
+-- Name: wallet fk_wallet; Type: FK CONSTRAINT; Schema: smu; Owner: postgres
+--
+
+ALTER TABLE ONLY smu.wallet
+    ADD CONSTRAINT fk_wallet FOREIGN KEY (owneremail) REFERENCES smu."user"(email);
 
 
 --

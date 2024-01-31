@@ -26,7 +26,8 @@
     \hspace{2.79cm} ownerEmail $ \rightarrow $ User.email \\ \\ \hline
 
     \\ \rowcolor{black!10}
-    \textbf{Wallet} (\uline{ID\_Wallet}, name, WalletCategory, totalAmount) \\ \\ \hline
+    \textbf{Wallet} (\uline{ID\_Wallet}, name, WalletCategory, totalAmount, \uuline{ownerEmail}) \\
+    \textit{Chiavi esterne}: ownerEmail $ \rightarrow $ User.email \\ \\ \hline
 
     \\ \rowcolor{black!10}
     \textbf{Transaction} (\uline{ID\_Transaction}, amount, date, category, \uuline{CardIBAN}) \\
@@ -52,7 +53,7 @@
     Relazione 0..* a 1, è stata migrata la chiave primaria di \textit{User} (username) in \textit{Familiar} (familiarUsername) \\ \hline
 
     \textbf{To Own} &
-    Tutte le relazioni di questo genere, tra \textit{Familiar}, \textit{User}, \textit{BankAccount} e \textit{Card}, sono di tipologia 0..* a 1,
+    Tutte le relazioni di questo genere, tra \textit{Familiar}, \textit{User}, \textit{BankAccount}, \textit{Card} e \textit{Wallet}, sono di tipologia 0..* a 1,
     di conseguenza sono state gestite tutte allo stesso modo. Ovvero migrando la chiave primaria dell'entità debole, nell'entità forte.
     Per controllare nel dettaglio le chiavi esterne in ognuna delle tabelle indicate vedere la tabella Traduzione delle classi. \\ \hline
 
