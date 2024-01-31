@@ -34,18 +34,52 @@ CREATE FUNCTION smu.connect_transaction_to_wallet() RETURNS trigger
     AS $$
 DECLARE
     wallet_row smu.wallet%ROWTYPE;
+    card_row smu.card%ROWTYPE;
+    account_email smu.user.email%TYPE;
+    ba_row smu.bankaccount%ROWTYPE;
 BEGIN
+
+    -- Seleziono la carta con la quale è stata effettuata la transazione
+    SELECT *
+    INTO card_row
+    FROM smu.card
+    WHERE iban = NEW.cardiban;
+
+    -- Recupero il conto corrente al quale è associato la carta
+    SELECT *
+    INTO ba_row
+    FROM smu.bankaccount
+    WHERE accountnumber = card_row.ba_number;
     
-    -- Trova i wallet con la stessa categoria della transazione appena inserita
+    -- Controllo se la transazione può essere effettuata o meno
+    IF ba_row.balance < NEW.amount THEN
+        RAISE EXCEPTION 'Saldo sul conto corrente insufficiente';
+    END IF;
+
+    -- Recupero l'email dell'account al quale saranno associati i portafogli
+    IF card_row.owneremail IS NOT NULL THEN
+        -- Se la carta appartiene ad un utente, mi salvo l'email nella variabile account_email
+        account_email := card_row.owneremail;
+    ELSE
+        -- Altrimenti, appartiene sicuramente ad un familiare e vado a
+        -- recuperare l'email dell'utente al quale è associato
+        SELECT familiaremail
+        INTO account_email
+        FROM smu.familiar
+        WHERE cf = card_row.ownercf;
+    END IF;
+
+    -- Trova i wallet con la stessa categoria della transazione
+    -- appena inserita che appartengono all'utente corretto
     FOR wallet_row IN
         SELECT *
         FROM smu.wallet
-        WHERE walletcategory = NEW.category
+        WHERE walletcategory = NEW.category AND owneremail = account_email
     LOOP
 
         -- Collega la transazione al wallet trovato
         INSERT INTO smu.transactioninwallet (id_transaction, id_wallet)
-        VALUES (NEW.id_transaction, wallet_row.id_wallet);
+        VALUES (NEW.id_transaction, wallet_row.id_wallet); -- Utilizzo wallet_row.id_wallet
 
         -- Aggiorna il campo totalamount del wallet
         UPDATE smu.wallet
@@ -53,6 +87,10 @@ BEGIN
         WHERE id_wallet = wallet_row.id_wallet;
 
     END LOOP;
+
+    UPDATE smu.bankaccount
+    SET balance = balance - NEW.amount
+    WHERE accountnumber = ba_row.accountnumber;
 
     RETURN NEW;
 END;
@@ -357,7 +395,8 @@ ALTER TABLE ONLY smu.wallet ALTER COLUMN id_wallet SET DEFAULT nextval('smu.wall
 --
 
 COPY smu.bankaccount (balance, accountnumber, bank, ownercf, owneremail) FROM stdin;
-50000	3	Poste Italiane	\N	franwik_@outlook.com
+49900	3	Poste Italiane	\N	franwik_@outlook.com
+99990	4	Intesa San Paolo	\N	donnarumma_rosanna@outlook.com
 \.
 
 
@@ -367,6 +406,9 @@ COPY smu.bankaccount (balance, accountnumber, bank, ownercf, owneremail) FROM st
 
 COPY smu.card (iban, cvv, expiredata, cardtype, ba_number, ownercf, owneremail) FROM stdin;
 IT3461987542619784536215739	059	2025-06-19	prepaid	3	\N	franwik_@outlook.com
+IT9764358127948723561943682	123	2026-10-30	debit	3	ABC	\N
+IT9764358127948923561943682	789	2030-10-13	debit	4	\N	donnarumma_rosanna@outlook.com
+IT1234567890987654321012345	456	2029-02-20	prepaid	3	\N	donnarumma_rosanna@outlook.com
 \.
 
 
@@ -384,6 +426,9 @@ Arturo	Donnarumma	ABC	2001-10-30	franwik_@outlook.com
 --
 
 COPY smu.transaction (id_transaction, amount, date, category, cardiban) FROM stdin;
+18	100	2024-01-31	Spesa	IT3461987542619784536215739
+19	200	2024-01-31	Spesa	IT3461987542619784536215739
+21	10	2024-01-31	\N	IT9764358127948923561943682
 \.
 
 
@@ -392,6 +437,8 @@ COPY smu.transaction (id_transaction, amount, date, category, cardiban) FROM std
 --
 
 COPY smu.transactioninwallet (id_transaction, id_wallet) FROM stdin;
+18	2
+19	2
 \.
 
 
@@ -401,6 +448,7 @@ COPY smu.transactioninwallet (id_transaction, id_wallet) FROM stdin;
 
 COPY smu."user" (email, username, password, address, name, surname, cf, dateofbirth) FROM stdin;
 franwik_@outlook.com	Franwik_	Ifs4ppic	Via Napoli 281	Francesco	Donnarumma	DNNFNC03A22C129A	2003-01-22
+donnarumma_rosanna@outlook.com	Ross	Rosanna97!	Via Napoli 281	Rosanna	Donnarumma	ABCD	1997-10-13
 \.
 
 
@@ -409,7 +457,8 @@ franwik_@outlook.com	Franwik_	Ifs4ppic	Via Napoli 281	Francesco	Donnarumma	DNNFN
 --
 
 COPY smu.wallet (id_wallet, name, walletcategory, totalamount, owneremail) FROM stdin;
-2	Conad	Spesa	0	franwik_@outlook.com
+3	Eurospin	Spesa	0	donnarumma_rosanna@outlook.com
+2	Conad	Spesa	300	franwik_@outlook.com
 \.
 
 
@@ -417,7 +466,7 @@ COPY smu.wallet (id_wallet, name, walletcategory, totalamount, owneremail) FROM 
 -- Name: bankaccount_accountnumber_seq; Type: SEQUENCE SET; Schema: smu; Owner: postgres
 --
 
-SELECT pg_catalog.setval('smu.bankaccount_accountnumber_seq', 3, true);
+SELECT pg_catalog.setval('smu.bankaccount_accountnumber_seq', 4, true);
 
 
 --
@@ -431,7 +480,7 @@ SELECT pg_catalog.setval('smu.card_ba_number_seq', 1, false);
 -- Name: transaction_id_transaction_seq; Type: SEQUENCE SET; Schema: smu; Owner: postgres
 --
 
-SELECT pg_catalog.setval('smu.transaction_id_transaction_seq', 7, true);
+SELECT pg_catalog.setval('smu.transaction_id_transaction_seq', 21, true);
 
 
 --
@@ -452,7 +501,7 @@ SELECT pg_catalog.setval('smu.transactionwallet_id_wallet_seq', 1, false);
 -- Name: wallet_id_wallet_seq; Type: SEQUENCE SET; Schema: smu; Owner: postgres
 --
 
-SELECT pg_catalog.setval('smu.wallet_id_wallet_seq', 2, true);
+SELECT pg_catalog.setval('smu.wallet_id_wallet_seq', 4, true);
 
 
 --
