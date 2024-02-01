@@ -26,6 +26,59 @@ CREATE SCHEMA smu;
 ALTER SCHEMA smu OWNER TO postgres;
 
 --
+-- Name: check_card_owner(); Type: FUNCTION; Schema: smu; Owner: postgres
+--
+
+CREATE FUNCTION smu.check_card_owner() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    BA_used smu.bankaccount%ROWTYPE;
+    familiar_email smu.familiar.familiaremail%TYPE;
+BEGIN
+
+    familiar_email := NULL;
+
+    -- Recupera le informazioni relative al conto corrente
+    -- al quale si sta associando la carta
+    SELECT *
+    INTO BA_used
+    FROM smu.bankaccount
+    WHERE accountnumber = NEW.ba_number;
+
+    -- Recupera l'email dell'account al quale è associato
+    -- il familiare, proprietario della carta
+    IF NEW.ownercf IS NOT NULL THEN
+        SELECT familiaremail
+        INTO familiar_email
+        FROM smu.familiar
+        WHERE cf = NEW.ownercf;
+    END IF;
+
+    -- Se tutte le condizioni sono vere, viene inserita la carta, altrimenti viene restituita una exception
+    IF (BA_used.owneremail = NEW.owneremail OR BA_used.ownercf = NEW.ownercf) OR
+    (familiar_email = BA_used.owneremail) OR BA_used.ownercf IN (SELECT CF FROM smu.familiar WHERE familiaremail = NEW.owneremail)
+    THEN
+        -- L'IF è stato strutturato in questo modo perché non basta negare le condizioni per avere
+        -- solo un IF THEN. Questo perché nel caso in cui alcuni attributi sono NULL il sistema
+        -- non è in grado di fornire una valutazione sulla condizione, quindi gli AND da sostituire
+        -- agli attuali OR sarebbero sempre falsi.
+    ELSE
+        RAISE EXCEPTION 'Il proprietario della carta deve essere anche il proprietario del conto corrente, o al massimo un suo familiare.';
+    END IF;
+
+    -- Nell'ultima porzione della condizione dell'IF viene controllato se il codice fiscale
+    -- del proprietario del conto corrente è presente nell'elenco dei familiari associati
+    -- all'email del proprietario della carta
+
+    RETURN NEW;
+END;
+$$;
+
+
+ALTER FUNCTION smu.check_card_owner() OWNER TO postgres;
+
+--
 -- Name: connect_transaction_to_wallet(); Type: FUNCTION; Schema: smu; Owner: postgres
 --
 
@@ -102,6 +155,17 @@ ALTER FUNCTION smu.connect_transaction_to_wallet() OWNER TO postgres;
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
+
+--
+-- Name: familiar_email; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.familiar_email (
+    familiaremail character varying(100)
+);
+
+
+ALTER TABLE public.familiar_email OWNER TO postgres;
 
 --
 -- Name: bankaccount; Type: TABLE; Schema: smu; Owner: postgres
@@ -391,12 +455,22 @@ ALTER TABLE ONLY smu.wallet ALTER COLUMN id_wallet SET DEFAULT nextval('smu.wall
 
 
 --
+-- Data for Name: familiar_email; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.familiar_email (familiaremail) FROM stdin;
+franwik_@outlook.com
+\.
+
+
+--
 -- Data for Name: bankaccount; Type: TABLE DATA; Schema: smu; Owner: postgres
 --
 
 COPY smu.bankaccount (balance, accountnumber, bank, ownercf, owneremail) FROM stdin;
 49900	3	Poste Italiane	\N	franwik_@outlook.com
 99990	4	Intesa San Paolo	\N	donnarumma_rosanna@outlook.com
+10000	5	Buddy Bank	ABC	\N
 \.
 
 
@@ -405,10 +479,11 @@ COPY smu.bankaccount (balance, accountnumber, bank, ownercf, owneremail) FROM st
 --
 
 COPY smu.card (iban, cvv, expiredata, cardtype, ba_number, ownercf, owneremail) FROM stdin;
-IT3461987542619784536215739	059	2025-06-19	prepaid	3	\N	franwik_@outlook.com
-IT9764358127948723561943682	123	2026-10-30	debit	3	ABC	\N
-IT9764358127948923561943682	789	2030-10-13	debit	4	\N	donnarumma_rosanna@outlook.com
-IT1234567890987654321012345	456	2029-02-20	prepaid	3	\N	donnarumma_rosanna@outlook.com
+PI1	123	2029-02-20	prepaid	3	ABC	\N
+PI2	123	2029-02-20	prepaid	3	\N	franwik_@outlook.com
+ISP1	123	2029-02-20	prepaid	4	\N	donnarumma_rosanna@outlook.com
+BB1	123	2029-02-20	prepaid	5	ABC	\N
+BB2	123	2029-02-20	prepaid	5	\N	franwik_@outlook.com
 \.
 
 
@@ -426,9 +501,6 @@ Arturo	Donnarumma	ABC	2001-10-30	franwik_@outlook.com
 --
 
 COPY smu.transaction (id_transaction, amount, date, category, cardiban) FROM stdin;
-18	100	2024-01-31	Spesa	IT3461987542619784536215739
-19	200	2024-01-31	Spesa	IT3461987542619784536215739
-21	10	2024-01-31	\N	IT9764358127948923561943682
 \.
 
 
@@ -437,8 +509,6 @@ COPY smu.transaction (id_transaction, amount, date, category, cardiban) FROM std
 --
 
 COPY smu.transactioninwallet (id_transaction, id_wallet) FROM stdin;
-18	2
-19	2
 \.
 
 
@@ -466,7 +536,7 @@ COPY smu.wallet (id_wallet, name, walletcategory, totalamount, owneremail) FROM 
 -- Name: bankaccount_accountnumber_seq; Type: SEQUENCE SET; Schema: smu; Owner: postgres
 --
 
-SELECT pg_catalog.setval('smu.bankaccount_accountnumber_seq', 4, true);
+SELECT pg_catalog.setval('smu.bankaccount_accountnumber_seq', 5, true);
 
 
 --
@@ -566,6 +636,13 @@ ALTER TABLE ONLY smu."user"
 
 ALTER TABLE ONLY smu."user"
     ADD CONSTRAINT unique_username UNIQUE (username);
+
+
+--
+-- Name: card check_card_owner_trigger; Type: TRIGGER; Schema: smu; Owner: postgres
+--
+
+CREATE TRIGGER check_card_owner_trigger BEFORE INSERT ON smu.card FOR EACH ROW EXECUTE FUNCTION smu.check_card_owner();
 
 
 --

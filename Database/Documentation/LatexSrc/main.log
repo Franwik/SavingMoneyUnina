@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2023.11.2)  31 JAN 2024 13:35
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2023.11.2)  1 FEB 2024 13:44
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -605,7 +605,11 @@ Underfull \hbox (badness 1043) in paragraph at lines 208--208
 \OT1/cmr/m/n/12 de-ve es-se-re ne-ces-sa-ria-men-te
  []
 
-) (./chapters/chapter_3.tex
+
+Underfull \hbox (badness 1755) in paragraph at lines 214--214
+[]|\OT1/cmr/m/n/12 Quando vie-ne in-se-ri-ta una
+ []
+
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -613,14 +617,22 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[9]
+[9]) (./chapters/chapter_3.tex
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[10]
 Capitolo 3.
 
 Underfull \hbox (badness 3525) in paragraph at lines 11--11
 []|\OT1/cmr/bx/n/12 User \OT1/cmr/m/n/12 (|   [], user-na-me, pas-sword, ad-dress, na-me, sur-na-me, CF,
  []
 
-[10
+[11
 
 ]
 Underfull \hbox (badness 5147) in paragraph at lines 61--61
@@ -645,9 +657,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[11]
+[12]
 Capitolo 4.
-) [12
+) [13
 
 ] (./main.aux)
  ***********
@@ -658,18 +670,18 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: 98846BB597A30152F91C4BD21BC735A1;3371.
  ) 
 Here is how much of TeX's memory you used:
- 12251 strings out of 475735
- 192612 string characters out of 5784786
+ 12252 strings out of 475735
+ 192619 string characters out of 5784786
  1873759 words of memory out of 5000000
  32768 multiletter control sequences out of 15000+600000
  519013 words of font info for 53 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,11n,79p,421b,550s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on main.pdf (13 pages, 466857 bytes).
+Output written on main.pdf (14 pages, 467899 bytes).
 PDF statistics:
- 240 PDF objects out of 1000 (max. 8388607)
- 200 compressed objects within 2 object streams
- 41 named destinations out of 1000 (max. 500000)
+ 245 PDF objects out of 1000 (max. 8388607)
+ 203 compressed objects within 3 object streams
+ 42 named destinations out of 1000 (max. 500000)
  173 words of extra memory for PDF output out of 10000 (max. 10000000)
 
