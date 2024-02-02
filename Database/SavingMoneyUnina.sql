@@ -98,6 +98,11 @@ BEGIN
     FROM smu.card
     WHERE iban = NEW.cardiban;
 
+    -- Controlla se la carta è scaduta o meno al momento della transazione
+    IF smu.expired_card(card_row.expiredata, NEW.date) THEN
+        RAISE EXCEPTION 'La carta risultava scaduta al momento della transazione';
+    END IF;
+
     -- Recupero il conto corrente al quale è associato la carta
     SELECT *
     INTO ba_row
@@ -151,6 +156,30 @@ $$;
 
 
 ALTER FUNCTION smu.connect_transaction_to_wallet() OWNER TO postgres;
+
+--
+-- Name: expired_card(date, date); Type: FUNCTION; Schema: smu; Owner: postgres
+--
+
+CREATE FUNCTION smu.expired_card(card_expire_date date, transaction_date date) RETURNS boolean
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    -- Questa funzione controlla se la carta data in input era scaduta
+    -- al momento della transazione data in input. La funzione viene usata
+    -- all'interno della funzione "connect_transaction_to_wallet" la quale viene
+    -- eseguita ad ogni inserimento di una nuova transazione.
+    -- Questa funzione viene utilizzata per garantire il vincolo "check_expire_date".
+    IF card_expire_date < transaction_date THEN
+        RETURN TRUE;
+    ELSE
+        RETURN FALSE;
+    END IF;
+END;
+$$;
+
+
+ALTER FUNCTION smu.expired_card(card_expire_date date, transaction_date date) OWNER TO postgres;
 
 SET default_tablespace = '';
 
@@ -468,9 +497,9 @@ franwik_@outlook.com
 --
 
 COPY smu.bankaccount (balance, accountnumber, bank, ownercf, owneremail) FROM stdin;
-49900	3	Poste Italiane	\N	franwik_@outlook.com
 99990	4	Intesa San Paolo	\N	donnarumma_rosanna@outlook.com
 10000	5	Buddy Bank	ABC	\N
+49700	3	Poste Italiane	\N	franwik_@outlook.com
 \.
 
 
@@ -479,11 +508,11 @@ COPY smu.bankaccount (balance, accountnumber, bank, ownercf, owneremail) FROM st
 --
 
 COPY smu.card (iban, cvv, expiredata, cardtype, ba_number, ownercf, owneremail) FROM stdin;
-PI1	123	2029-02-20	prepaid	3	ABC	\N
 PI2	123	2029-02-20	prepaid	3	\N	franwik_@outlook.com
 ISP1	123	2029-02-20	prepaid	4	\N	donnarumma_rosanna@outlook.com
 BB1	123	2029-02-20	prepaid	5	ABC	\N
 BB2	123	2029-02-20	prepaid	5	\N	franwik_@outlook.com
+PI1	123	2020-02-20	prepaid	3	ABC	\N
 \.
 
 
@@ -501,6 +530,8 @@ Arturo	Donnarumma	ABC	2001-10-30	franwik_@outlook.com
 --
 
 COPY smu.transaction (id_transaction, amount, date, category, cardiban) FROM stdin;
+23	100	2024-02-02	Spesa	PI2
+27	100	2020-01-22	Spesa	PI1
 \.
 
 
@@ -509,6 +540,8 @@ COPY smu.transaction (id_transaction, amount, date, category, cardiban) FROM std
 --
 
 COPY smu.transactioninwallet (id_transaction, id_wallet) FROM stdin;
+23	2
+27	2
 \.
 
 
@@ -528,7 +561,7 @@ donnarumma_rosanna@outlook.com	Ross	Rosanna97!	Via Napoli 281	Rosanna	Donnarumma
 
 COPY smu.wallet (id_wallet, name, walletcategory, totalamount, owneremail) FROM stdin;
 3	Eurospin	Spesa	0	donnarumma_rosanna@outlook.com
-2	Conad	Spesa	300	franwik_@outlook.com
+2	Conad	Spesa	200	franwik_@outlook.com
 \.
 
 
@@ -550,7 +583,7 @@ SELECT pg_catalog.setval('smu.card_ba_number_seq', 1, false);
 -- Name: transaction_id_transaction_seq; Type: SEQUENCE SET; Schema: smu; Owner: postgres
 --
 
-SELECT pg_catalog.setval('smu.transaction_id_transaction_seq', 21, true);
+SELECT pg_catalog.setval('smu.transaction_id_transaction_seq', 27, true);
 
 
 --
