@@ -88,8 +88,10 @@ CREATE FUNCTION smu.connect_transaction_to_wallet() RETURNS trigger
 DECLARE
     wallet_row smu.wallet%ROWTYPE;
     card_row smu.card%ROWTYPE;
+    old_card_row smu.card%ROWTYPE;
     account_email smu.user.email%TYPE;
     ba_row smu.bankaccount%ROWTYPE;
+    old_ba_row smu.bankaccount%ROWTYPE;
 BEGIN
 
     -- Seleziono la carta con la quale è stata effettuata la transazione
@@ -110,8 +112,10 @@ BEGIN
     WHERE accountnumber = card_row.ba_number;
     
     -- Controllo se la transazione può essere effettuata o meno
-    IF ba_row.balance < NEW.amount THEN
+    IF TG_OP = 'INSERT' AND ba_row.balance < NEW.amount THEN
         RAISE EXCEPTION 'Saldo sul conto corrente insufficiente';
+    ELSIF TG_OP = 'UPDATE' AND (ba_row.balance + OLD.amount) < NEW.amount THEN
+        RAISE EXCEPTION 'Saldo sul conto corrente insufficiente al momento della transazione';
     END IF;
 
     -- Recupero l'email dell'account al quale saranno associati i portafogli
@@ -127,28 +131,95 @@ BEGIN
         WHERE cf = card_row.ownercf;
     END IF;
 
-    -- Trova i wallet con la stessa categoria della transazione
-    -- appena inserita che appartengono all'utente corretto
-    FOR wallet_row IN
+    IF TG_OP = 'INSERT' THEN
+        -- Trova i wallet con la stessa categoria della transazione
+        -- appena inserita che appartengono all'utente corretto
+        FOR wallet_row IN
+            SELECT *
+            FROM smu.wallet
+            WHERE walletcategory = NEW.category AND owneremail = account_email
+        LOOP
+
+            -- Collega la transazione al wallet trovato
+            INSERT INTO smu.transactioninwallet (id_transaction, id_wallet)
+            VALUES (NEW.id_transaction, wallet_row.id_wallet);
+
+            -- Aggiorna il campo totalamount del wallet
+            UPDATE smu.wallet
+            SET totalamount = totalamount + NEW.amount
+            WHERE id_wallet = wallet_row.id_wallet;
+
+        END LOOP;
+
+        -- Aggiorna il saldo del conto corrente
+        UPDATE smu.bankaccount
+        SET balance = balance - NEW.amount
+        WHERE accountnumber = ba_row.accountnumber;
+    END IF;
+
+    IF TG_OP = 'UPDATE' THEN
+
+        -- Se è stata modificata la categoria, la transazione viene collegata ai nuovi portafogli
+        -- altrimenti viene ricollegata agli stessi
+
+        -- Scollego la transazione da tutti i portafogli
+        DELETE FROM smu.transactioninwallet WHERE id_transaction = OLD.id_transaction;
+        
+        -- Seleziona tutti i portafogli a cui era collegata la transazione
+        FOR wallet_row IN
+            SELECT *
+            FROM smu.wallet
+            WHERE walletcategory = OLD.category AND owneremail = account_email
+        LOOP
+
+            -- Aggiorna il campo totalamount del wallet
+            UPDATE smu.wallet
+            SET totalamount = totalamount - OLD.amount
+            WHERE id_wallet = wallet_row.id_wallet;
+
+        END LOOP;
+
+        -- Seleziona tutti i portafogli a cui deve essere collegata la transazione
+        FOR wallet_row IN
+            SELECT *
+            FROM smu.wallet
+            WHERE walletcategory = NEW.category AND owneremail = account_email
+        LOOP
+
+            -- Collega la transazione al wallet trovato
+            INSERT INTO smu.transactioninwallet (id_transaction, id_wallet)
+            VALUES (NEW.id_transaction, wallet_row.id_wallet);
+
+            -- Aggiorna il campo totalamount del wallet
+            UPDATE smu.wallet
+            SET totalamount = totalamount + NEW.amount
+            WHERE id_wallet = wallet_row.id_wallet;
+
+        END LOOP;        
+
+        -- Seleziono la carta con la quale è stata effettuata inizialmente la transazione
         SELECT *
-        FROM smu.wallet
-        WHERE walletcategory = NEW.category AND owneremail = account_email
-    LOOP
+        INTO old_card_row
+        FROM smu.card
+        WHERE iban = OLD.cardiban;
 
-        -- Collega la transazione al wallet trovato
-        INSERT INTO smu.transactioninwallet (id_transaction, id_wallet)
-        VALUES (NEW.id_transaction, wallet_row.id_wallet); -- Utilizzo wallet_row.id_wallet
+        -- Recupero il conto corrente al quale è associato la vecchia carta
+        SELECT *
+        INTO old_ba_row
+        FROM smu.bankaccount
+        WHERE accountnumber = old_card_row.ba_number;
 
-        -- Aggiorna il campo totalamount del wallet
-        UPDATE smu.wallet
-        SET totalamount = totalamount + NEW.amount
-        WHERE id_wallet = wallet_row.id_wallet;
+        -- Aggiorno il saldo del vecchio conto corrente
+        UPDATE smu.bankaccount
+        SET balance = balance + OLD.amount
+        WHERE accountnumber = old_ba_row.accountnumber;
 
-    END LOOP;
+        -- Aggiorno il saldo del nuovo conto corrente
+        UPDATE smu.bankaccount
+        SET balance = balance - NEW.amount
+        WHERE accountnumber = ba_row.accountnumber;
 
-    UPDATE smu.bankaccount
-    SET balance = balance - NEW.amount
-    WHERE accountnumber = ba_row.accountnumber;
+    END IF;
 
     RETURN NEW;
 END;
@@ -498,8 +569,8 @@ franwik_@outlook.com
 
 COPY smu.bankaccount (balance, accountnumber, bank, ownercf, owneremail) FROM stdin;
 99990	4	Intesa San Paolo	\N	donnarumma_rosanna@outlook.com
-10000	5	Buddy Bank	ABC	\N
 49700	3	Poste Italiane	\N	franwik_@outlook.com
+9960	5	Buddy Bank	ABC	\N
 \.
 
 
@@ -532,6 +603,7 @@ Arturo	Donnarumma	ABC	2001-10-30	franwik_@outlook.com
 COPY smu.transaction (id_transaction, amount, date, category, cardiban) FROM stdin;
 23	100	2024-02-02	Spesa	PI2
 27	100	2020-01-22	Spesa	PI1
+28	40	2024-02-05	Spesa	BB1
 \.
 
 
@@ -542,6 +614,7 @@ COPY smu.transaction (id_transaction, amount, date, category, cardiban) FROM std
 COPY smu.transactioninwallet (id_transaction, id_wallet) FROM stdin;
 23	2
 27	2
+28	2
 \.
 
 
@@ -561,7 +634,8 @@ donnarumma_rosanna@outlook.com	Ross	Rosanna97!	Via Napoli 281	Rosanna	Donnarumma
 
 COPY smu.wallet (id_wallet, name, walletcategory, totalamount, owneremail) FROM stdin;
 3	Eurospin	Spesa	0	donnarumma_rosanna@outlook.com
-2	Conad	Spesa	200	franwik_@outlook.com
+5	Game Stop	gaming	0	franwik_@outlook.com
+2	Conad	Spesa	240	franwik_@outlook.com
 \.
 
 
@@ -583,7 +657,7 @@ SELECT pg_catalog.setval('smu.card_ba_number_seq', 1, false);
 -- Name: transaction_id_transaction_seq; Type: SEQUENCE SET; Schema: smu; Owner: postgres
 --
 
-SELECT pg_catalog.setval('smu.transaction_id_transaction_seq', 27, true);
+SELECT pg_catalog.setval('smu.transaction_id_transaction_seq', 28, true);
 
 
 --
@@ -604,7 +678,7 @@ SELECT pg_catalog.setval('smu.transactionwallet_id_wallet_seq', 1, false);
 -- Name: wallet_id_wallet_seq; Type: SEQUENCE SET; Schema: smu; Owner: postgres
 --
 
-SELECT pg_catalog.setval('smu.wallet_id_wallet_seq', 4, true);
+SELECT pg_catalog.setval('smu.wallet_id_wallet_seq', 5, true);
 
 
 --
@@ -679,10 +753,10 @@ CREATE TRIGGER check_card_owner_trigger BEFORE INSERT ON smu.card FOR EACH ROW E
 
 
 --
--- Name: transaction transaction_insert_trigger; Type: TRIGGER; Schema: smu; Owner: postgres
+-- Name: transaction connect_transaction_to_wallet_trigger; Type: TRIGGER; Schema: smu; Owner: postgres
 --
 
-CREATE TRIGGER transaction_insert_trigger AFTER INSERT ON smu.transaction FOR EACH ROW EXECUTE FUNCTION smu.connect_transaction_to_wallet();
+CREATE TRIGGER connect_transaction_to_wallet_trigger AFTER INSERT OR UPDATE ON smu.transaction FOR EACH ROW EXECUTE FUNCTION smu.connect_transaction_to_wallet();
 
 
 --
