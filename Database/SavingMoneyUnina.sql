@@ -252,6 +252,55 @@ $$;
 
 ALTER FUNCTION smu.expired_card(card_expire_date date, transaction_date date) OWNER TO postgres;
 
+--
+-- Name: update_wallet_category(); Type: FUNCTION; Schema: smu; Owner: postgres
+--
+
+CREATE FUNCTION smu.update_wallet_category() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    transaction_row smu.transaction%ROWTYPE;
+BEGIN
+
+    -- Vengono scollegate tutte le transazioni dal wallet
+    DELETE FROM smu.transactioninwallet WHERE id_wallet = OLD.id_wallet;
+
+    -- Reimposta a 0 la somma degli importi del portafoglio
+    UPDATE smu.wallet
+    SET totalamount = 0
+    WHERE id_wallet = NEW.id_wallet;
+
+    FOR transaction_row IN
+        SELECT *
+        FROM smu.transaction AS T
+        WHERE T.category = NEW.walletcategory AND T.cardiban IN (SELECT iban FROM smu.card WHERE owneremail = NEW.owneremail
+                                                            UNION
+                                                            SELECT C.iban
+                                                            FROM smu.familiar AS F
+                                                            JOIN smu.card AS C ON F.cf = C.ownercf
+                                                            WHERE familiaremail = NEW.owneremail)
+    LOOP
+
+        -- Collega la transazione trovata
+        INSERT INTO smu.transactioninwallet (id_transaction, id_wallet)
+        VALUES (transaction_row.id_transaction, NEW.id_wallet);
+
+        -- Aggiorna il campo totalamount del wallet
+        UPDATE smu.wallet
+        SET totalamount = totalamount + transaction_row.amount
+        WHERE id_wallet = NEW.id_wallet;
+
+    END LOOP;
+
+    RETURN NEW;
+    
+END;
+$$;
+
+
+ALTER FUNCTION smu.update_wallet_category() OWNER TO postgres;
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -603,7 +652,7 @@ Arturo	Donnarumma	ABC	2001-10-30	franwik_@outlook.com
 COPY smu.transaction (id_transaction, amount, date, category, cardiban) FROM stdin;
 23	100	2024-02-02	Spesa	PI2
 27	100	2020-01-22	Spesa	PI1
-28	40	2024-02-05	Spesa	BB1
+28	40	2024-02-05	Gaming	BB1
 \.
 
 
@@ -614,7 +663,7 @@ COPY smu.transaction (id_transaction, amount, date, category, cardiban) FROM std
 COPY smu.transactioninwallet (id_transaction, id_wallet) FROM stdin;
 23	2
 27	2
-28	2
+28	5
 \.
 
 
@@ -634,8 +683,8 @@ donnarumma_rosanna@outlook.com	Ross	Rosanna97!	Via Napoli 281	Rosanna	Donnarumma
 
 COPY smu.wallet (id_wallet, name, walletcategory, totalamount, owneremail) FROM stdin;
 3	Eurospin	Spesa	0	donnarumma_rosanna@outlook.com
-5	Game Stop	gaming	0	franwik_@outlook.com
-2	Conad	Spesa	240	franwik_@outlook.com
+2	Conad	Spesa	200	franwik_@outlook.com
+5	Game Stop	Gaming	40	franwik_@outlook.com
 \.
 
 
@@ -757,6 +806,13 @@ CREATE TRIGGER check_card_owner_trigger BEFORE INSERT ON smu.card FOR EACH ROW E
 --
 
 CREATE TRIGGER connect_transaction_to_wallet_trigger AFTER INSERT OR UPDATE ON smu.transaction FOR EACH ROW EXECUTE FUNCTION smu.connect_transaction_to_wallet();
+
+
+--
+-- Name: wallet update_wallet_category_trigger; Type: TRIGGER; Schema: smu; Owner: postgres
+--
+
+CREATE TRIGGER update_wallet_category_trigger AFTER UPDATE OF walletcategory ON smu.wallet FOR EACH ROW EXECUTE FUNCTION smu.update_wallet_category();
 
 
 --
