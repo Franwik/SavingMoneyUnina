@@ -1,4 +1,5 @@
 \documentclass[12pt]{report}
+\usepackage{listings}
 \usepackage[table]{xcolor}
 \usepackage{tabularx}
 \usepackage{ltablex}
@@ -23,6 +24,19 @@
 \renewcommand{\headrulewidth}{0.4pt}
 \renewcommand{\footrulewidth}{0.4pt}
 \hypersetup{colorlinks=true, linkcolor=black}
+
+\lstset{
+    language=SQL,
+    basicstyle=\ttfamily,
+    keywordstyle=\color{blue}\ttfamily,
+    stringstyle=\color{red}\ttfamily,
+    commentstyle=\color{green}\ttfamily,
+    morecomment=[l][\color{magenta}]{\#},
+    breaklines=true,
+    postbreak=\mbox{\space},
+    linewidth=\textwidth,
+    escapeinside={(*@}{@*)}
+}
 
 \fancypagestyle{plain}{
     \fancyhf{}

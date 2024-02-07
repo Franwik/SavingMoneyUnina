@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2023.11.2)  2 FEB 2024 16:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2023.11.2)  7 FEB 2024 12:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -24,7 +24,32 @@ File: size12.clo 2023/05/17 v1.4n Standard LaTeX file (size option)
 \abovecaptionskip=\skip48
 \belowcaptionskip=\skip49
 \bibindent=\dimen140
-) (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks17
+)
+\lst@mode=\count194
+\lst@gtempboxa=\box51
+\lst@token=\toks18
+\lst@length=\count195
+\lst@currlwidth=\dimen141
+\lst@column=\count196
+\lst@pos=\count197
+\lst@lostspace=\dimen142
+\lst@width=\dimen143
+\lst@newlines=\count198
+\lst@lineno=\count199
+\lst@maxwidth=\dimen144
+ (/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
+\c@lstnumber=\count266
+\lst@skipnumbers=\count267
+\lst@framebox=\box52
+) (/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2023/02/27 1.9 listings configuration
+))
+Package: listings 2023/02/27 1.9 (Carsten Heinz)
+ (/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
 Package: xcolor 2022/06/12 v2.14 LaTeX color extensions (UK)
  (/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
 File: color.cfg 2016/01/02 v1.6 sample color configuration
@@ -36,17 +61,17 @@ File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
 Package: colortbl 2022/06/20 v1.0f Color table columns (DPC)
  (/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
 Package: array 2022/09/04 v2.5g Tabular extension package (FMi)
-\col@sep=\dimen141
-\ar@mcellbox=\box51
-\extrarowheight=\dimen142
-\NC@list=\toks17
+\col@sep=\dimen145
+\ar@mcellbox=\box53
+\extrarowheight=\dimen146
+\NC@list=\toks19
 \extratabsurround=\skip50
 \backup@length=\skip51
-\ar@cellbox=\box52
+\ar@cellbox=\box54
 )
-\everycr=\toks18
+\everycr=\toks20
 \minrowclearance=\skip52
-\rownum=\count194
+\rownum=\count268
 ) (/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx)
 Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1353.
 Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1357.
@@ -59,13 +84,13 @@ Package xcolor Info: Model `Gray' substituted by `gray' on input line 1375.
 Package xcolor Info: Model `wave' substituted by `hsb' on input line 1376.
 ) (/usr/share/texlive/texmf-dist/tex/latex/tools/tabularx.sty
 Package: tabularx 2020/01/15 v2.11c `tabularx' package (DPC)
-\TX@col@width=\dimen143
-\TX@old@table=\dimen144
-\TX@old@col=\dimen145
-\TX@target=\dimen146
-\TX@delta=\dimen147
-\TX@cols=\count195
-\TX@ftn=\toks19
+\TX@col@width=\dimen147
+\TX@old@table=\dimen148
+\TX@old@col=\dimen149
+\TX@target=\dimen150
+\TX@delta=\dimen151
+\TX@cols=\count269
+\TX@ftn=\toks21
 ) (/usr/share/texlive/texmf-dist/tex/latex/ltablex/ltablex.sty
 Package: ltablex 2014/08/13 v1.1 Modified tabularx
  (/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
@@ -74,42 +99,42 @@ Package: longtable 2021-09-01 v4.17 Multi-page Table package (DPC)
 \LTright=\skip54
 \LTpre=\skip55
 \LTpost=\skip56
-\LTchunksize=\count196
-\LTcapwidth=\dimen148
-\LT@head=\box53
-\LT@firsthead=\box54
-\LT@foot=\box55
-\LT@lastfoot=\box56
-\LT@gbox=\box57
-\LT@cols=\count197
-\LT@rows=\count198
-\c@LT@tables=\count199
-\c@LT@chunks=\count266
-\LT@p@ftn=\toks20
+\LTchunksize=\count270
+\LTcapwidth=\dimen152
+\LT@head=\box55
+\LT@firsthead=\box56
+\LT@foot=\box57
+\LT@lastfoot=\box58
+\LT@gbox=\box59
+\LT@cols=\count271
+\LT@rows=\count272
+\c@LT@tables=\count273
+\c@LT@chunks=\count274
+\LT@p@ftn=\toks22
 )) (/usr/share/texlive/texmf-dist/tex/generic/soul/soul.sty
 Package: soul 2023-02-18 v3.0 Permit use of UTF-8 characters in soul (HO)
  (/usr/share/texlive/texmf-dist/tex/generic/soul/soul-ori.sty
 Package: soul-ori 2023-02-18 v3.0 letterspacing/underlining (mf)
-\SOUL@word=\toks21
-\SOUL@lasttoken=\toks22
-\SOUL@syllable=\toks23
-\SOUL@cmds=\toks24
-\SOUL@buffer=\toks25
-\SOUL@token=\toks26
-\SOUL@syllgoal=\dimen149
-\SOUL@syllwidth=\dimen150
-\SOUL@charkern=\dimen151
-\SOUL@hyphkern=\dimen152
-\SOUL@dimen=\dimen153
-\SOUL@dimeni=\dimen154
-\SOUL@minus=\count267
-\SOUL@comma=\count268
-\SOUL@apo=\count269
-\SOUL@grave=\count270
+\SOUL@word=\toks23
+\SOUL@lasttoken=\toks24
+\SOUL@syllable=\toks25
+\SOUL@cmds=\toks26
+\SOUL@buffer=\toks27
+\SOUL@token=\toks28
+\SOUL@syllgoal=\dimen153
+\SOUL@syllwidth=\dimen154
+\SOUL@charkern=\dimen155
+\SOUL@hyphkern=\dimen156
+\SOUL@dimen=\dimen157
+\SOUL@dimeni=\dimen158
+\SOUL@minus=\count275
+\SOUL@comma=\count276
+\SOUL@apo=\count277
+\SOUL@grave=\count278
 \SOUL@spaceskip=\skip57
-\SOUL@ttwidth=\dimen155
-\SOUL@uldp=\dimen156
-\SOUL@ulht=\dimen157
+\SOUL@ttwidth=\dimen159
+\SOUL@uldp=\dimen160
+\SOUL@ulht=\dimen161
 ) (/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty
 Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
 ) (/usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty
@@ -117,40 +142,37 @@ Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
  (/usr/share/texlive/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2022/02/03 v1.0f TeX engine tests
 ))) (/usr/share/texlive/texmf-dist/tex/generic/ulem/ulem.sty
-\UL@box=\box58
-\UL@hyphenbox=\box59
+\UL@box=\box60
+\UL@hyphenbox=\box61
 \UL@skip=\skip58
-\UL@hook=\toks27
-\UL@height=\dimen158
-\UL@pe=\count271
-\UL@pixel=\dimen159
-\ULC@box=\box60
+\UL@hook=\toks29
+\UL@height=\dimen162
+\UL@pe=\count279
+\UL@pixel=\dimen163
+\ULC@box=\box62
 Package: ulem 2019/11/18
-\ULdepth=\dimen160
+\ULdepth=\dimen164
 ) (/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pdfpages.sty
 Package: pdfpages 2022/12/19 v0.5x Insert pages of external PDF documents (AM)
  (/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
 ) (/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count272
-\calc@Bcount=\count273
-\calc@Adimen=\dimen161
-\calc@Bdimen=\dimen162
+\calc@Acount=\count280
+\calc@Bcount=\count281
+\calc@Adimen=\dimen165
+\calc@Bdimen=\dimen166
 \calc@Askip=\skip59
 \calc@Bskip=\skip60
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count274
+\calc@Ccount=\count282
 \calc@Cskip=\skip61
 ) (/usr/share/texlive/texmf-dist/tex/latex/eso-pic/eso-pic.sty
 Package: eso-pic 2023/05/03 v3.0c eso-pic (RN)
-\ESO@tempdima=\dimen163
-\ESO@tempdimb=\dimen164
- (/usr/share/texlive/texmf-dist/tex/latex/graphics/keyval.sty
-Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
-\KV@toks@=\toks28
-)) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+\ESO@tempdima=\dimen167
+\ESO@tempdimb=\dimen168
+) (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
  (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
@@ -161,23 +183,23 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: pdftex.def on input line 107.
 )
-\Gin@req@height=\dimen165
-\Gin@req@width=\dimen166
+\Gin@req@height=\dimen169
+\Gin@req@width=\dimen170
 )
-\AM@pagewidth=\dimen167
-\AM@pageheight=\dimen168
-\AM@fboxrule=\dimen169
+\AM@pagewidth=\dimen171
+\AM@pageheight=\dimen172
+\AM@fboxrule=\dimen173
  (/usr/share/texlive/texmf-dist/tex/latex/pdfpages/pppdftex.def
 File: pppdftex.def 2022/12/19 v0.5x Pdfpages driver for pdfTeX (AM)
 )
-\pdfpages@includegraphics@status=\count275
-\AM@pagebox=\box61
-\AM@global@opts=\toks29
-\AM@pagecnt=\count276
-\AM@toc@title=\toks30
-\AM@lof@heading=\toks31
-\c@AM@survey=\count277
-\AM@templatesizebox=\box62
+\pdfpages@includegraphics@status=\count283
+\AM@pagebox=\box63
+\AM@global@opts=\toks30
+\AM@pagecnt=\count284
+\AM@toc@title=\toks31
+\AM@lof@heading=\toks32
+\c@AM@survey=\count285
+\AM@templatesizebox=\box64
 ) (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hyperref.sty
 Package: hyperref 2023-05-16 v7.00y Hypertext links for LaTeX
  (/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
@@ -208,14 +230,14 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
  (/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
-\c@section@level=\count278
+\c@section@level=\count286
 ) (/usr/share/texlive/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2020/10/05 v2.5k e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count279
+\etb@tempcnta=\count287
 )
-\@linkdim=\dimen170
-\Hy@linkcounter=\count280
-\Hy@pagecounter=\count281
+\@linkdim=\dimen174
+\Hy@linkcounter=\count288
+\Hy@pagecounter=\count289
  (/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2023-05-16 v7.00y Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
@@ -223,7 +245,7 @@ Now handling font encoding PD1 ...
 ) (/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count282
+\Hy@SavedSpaceFactor=\count290
  (/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2023-05-16 v7.00y Hyperref: PDF Unicode definition (HO)
 Now handling font encoding PU ...
@@ -236,21 +258,21 @@ Package hyperref Info: Plain pages OFF on input line 4182.
 Package hyperref Info: Backreferencing OFF on input line 4187.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4434.
-\c@Hy@tempcnt=\count283
+\c@Hy@tempcnt=\count291
  (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip16
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4772.
-\XeTeXLinkMargin=\dimen171
+\XeTeXLinkMargin=\dimen175
  (/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
  (/usr/share/texlive/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
 ))
-\Fld@menulength=\count284
-\Field@Width=\dimen172
-\Fld@charsize=\dimen173
+\Fld@menulength=\count292
+\Field@Width=\dimen176
+\Fld@charsize=\dimen177
 Package hyperref Info: Hyper figures OFF on input line 6051.
 Package hyperref Info: Link nesting OFF on input line 6056.
 Package hyperref Info: Hyper index ON on input line 6059.
@@ -262,9 +284,9 @@ Package hyperref Info: PDF/A mode OFF on input line 6081.
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count285
-\c@Item=\count286
-\c@Hfootnote=\count287
+\Hy@abspage=\count293
+\c@Item=\count294
+\c@Hfootnote=\count295
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
  (/usr/share/texlive/texmf-dist/tex/latex/hyperref/hpdftex.def
@@ -273,8 +295,8 @@ File: hpdftex.def 2023-05-16 v7.00y Hyperref driver for pdfTeX
 Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
 with kernel methods
 )
-\Fld@listcount=\count288
-\c@bookmark@seq@number=\count289
+\Fld@listcount=\count296
+\c@bookmark@seq@number=\count297
  (/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
  (/usr/share/texlive/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
@@ -285,41 +307,41 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 28
 \Hy@SectionHShift=\skip62
 ) (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
 Package: babel 2023/05/11 v3.89 The Babel package
-\babel@savecnt=\count290
-\U@D=\dimen174
+\babel@savecnt=\count298
+\U@D=\dimen178
 \l@unhyphenated=\language87
  (/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
 \bbl@readstream=\read2
-\bbl@dirlevel=\count291
+\bbl@dirlevel=\count299
  (/usr/share/texlive/texmf-dist/tex/generic/babel-italian/italian.ldf
 Language: italian 2022/03/27 v.1.4.07 Italian support for the babel system
-\it@lettering=\count292
-\it@doublequoteactive=\count293
-\it@ISOcompliance=\count294
+\it@lettering=\count300
+\it@doublequoteactive=\count301
+\it@ISOcompliance=\count302
 )) (/usr/share/texlive/texmf-dist/tex/generic/babel/locale/it/babel-italian.tex
 Package babel Info: Importing font and identification data for italian
 (babel)             from babel-it.ini. Reported on input line 11.
 ) (/usr/share/texlive/texmf-dist/tex/latex/base/inputenc.sty
 Package: inputenc 2021/02/14 v1.3d Input encoding file
-\inpenc@prehook=\toks32
-\inpenc@posthook=\toks33
+\inpenc@prehook=\toks33
+\inpenc@posthook=\toks34
 ) (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
  (/usr/share/texlive/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
-\Gm@cnth=\count295
-\Gm@cntv=\count296
-\c@Gm@tempcnt=\count297
-\Gm@bindingoffset=\dimen175
-\Gm@wd@mp=\dimen176
-\Gm@odd@mp=\dimen177
-\Gm@even@mp=\dimen178
-\Gm@layoutwidth=\dimen179
-\Gm@layoutheight=\dimen180
-\Gm@layouthoffset=\dimen181
-\Gm@layoutvoffset=\dimen182
-\Gm@dimlist=\toks34
+\Gm@cnth=\count303
+\Gm@cntv=\count304
+\c@Gm@tempcnt=\count305
+\Gm@bindingoffset=\dimen179
+\Gm@wd@mp=\dimen180
+\Gm@odd@mp=\dimen181
+\Gm@even@mp=\dimen182
+\Gm@layoutwidth=\dimen183
+\Gm@layoutheight=\dimen184
+\Gm@layouthoffset=\dimen185
+\Gm@layoutvoffset=\dimen186
+\Gm@dimlist=\toks35
 ) (/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 Package: fancyhdr 2022/11/09 v4.1 Extensive control of page headers and footers
 \f@nch@headwidth=\skip63
@@ -332,45 +354,48 @@ Package: fancyhdr 2022/11/09 v4.1 Extensive control of page headers and footers
 \f@nch@O@olf=\skip70
 \f@nch@O@orf=\skip71
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 25.
- (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
+Package hyperref Info: Option `colorlinks' set `true' on input line 26.
+ (/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2023/02/27 1.9 listings language file
+) (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2023-04-19 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count298
-\l__pdf_internal_box=\box63
+\l__color_backend_stack_int=\count306
+\l__pdf_internal_box=\box65
 ) (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 35.
-LaTeX Font Info:    ... okay on input line 35.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 49.
+LaTeX Font Info:    ... okay on input line 49.
+\c@lstlisting=\count307
  (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count299
-\scratchdimen=\dimen183
-\scratchbox=\box64
-\nofMPsegments=\count300
-\nofMParguments=\count301
-\everyMPshowfont=\toks35
-\MPscratchCnt=\count302
-\MPscratchDim=\dimen184
-\MPnumerator=\count303
-\makeMPintoPDFobject=\count304
-\everyMPtoPDFconversion=\toks36
+\scratchcounter=\count308
+\scratchdimen=\dimen187
+\scratchbox=\box66
+\nofMPsegments=\count309
+\nofMParguments=\count310
+\everyMPshowfont=\toks36
+\MPscratchCnt=\count311
+\MPscratchDim=\dimen188
+\MPnumerator=\count312
+\makeMPintoPDFobject=\count313
+\everyMPtoPDFconversion=\toks37
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 485.
@@ -385,13 +410,13 @@ Package: lscape 2020/05/28 v3.02 Landscape Pages (DPC)
 )
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 ))
-Package hyperref Info: Link coloring ON on input line 35.
+Package hyperref Info: Link coloring ON on input line 49.
  (./main.out) (./main.out)
 \@outlinefile=\write3
 \openout3 = `main.out'.
 
-LaTeX Info: Redefining \it@ocap on input line 35.
-LaTeX Info: Redefining \it@ccap on input line 35.
+LaTeX Info: Redefining \it@ocap on input line 49.
+LaTeX Info: Redefining \it@ccap on input line 49.
 
 
 File italian.ldf warning: 
@@ -399,7 +424,7 @@ italian.ldf    With OT1 encoding guillemets are poorly faked
 italian.ldf    Use T1 encoding
 italian.ldf    or specify a font with command \CaporaliFrom
 italian.ldf    See the documentation concerning the babel-italian typesetting 
-italian.ldf    on input line 35.
+italian.ldf    on input line 49.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -436,7 +461,7 @@ italian.ldf    on input line 35.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 (./chapters/titlepage.tex
-<images/FII_logo.png, id=80, 556.0775pt x 556.0775pt>
+<images/FII_logo.png, id=132, 556.0775pt x 556.0775pt>
 File: images/FII_logo.png Graphic file (type png)
 <use images/FII_logo.png>
 Package pdftex.def Info: images/FII_logo.png  used on input line 3.
@@ -485,7 +510,7 @@ Capitolo 2.
 
 
 pdfTeX warning: pdflatex (file ./pdfs/UMLdiagram.drawio.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<pdfs/UMLdiagram.drawio.pdf, id=117, 598.15468pt x 846.0408pt>
+<pdfs/UMLdiagram.drawio.pdf, id=183, 598.15468pt x 846.0408pt>
 File: pdfs/UMLdiagram.drawio.pdf Graphic file (type pdf)
 <use pdfs/UMLdiagram.drawio.pdf>
 Package pdftex.def Info: pdfs/UMLdiagram.drawio.pdf  used on input line 7.
@@ -493,7 +518,7 @@ Package pdftex.def Info: pdfs/UMLdiagram.drawio.pdf  used on input line 7.
 
 
 pdfTeX warning: pdflatex (file ./pdfs/ERdiagram.drawio.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<pdfs/ERdiagram.drawio.pdf, id=118, 598.15468pt x 846.0408pt>
+<pdfs/ERdiagram.drawio.pdf, id=184, 598.15468pt x 846.0408pt>
 File: pdfs/ERdiagram.drawio.pdf Graphic file (type pdf)
 <use pdfs/ERdiagram.drawio.pdf>
 Package pdftex.def Info: pdfs/ERdiagram.drawio.pdf  used on input line 15.
@@ -519,7 +544,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [5]
 
 pdfTeX warning: pdflatex (file ./pdfs/RestructuredUMLdiagram.drawio.pdf): PDF inclusion: found PDF version <1.7>, but at most version <1.5> allowed
-<pdfs/RestructuredUMLdiagram.drawio.pdf, id=158, 598.15468pt x 846.0408pt>
+<pdfs/RestructuredUMLdiagram.drawio.pdf, id=223, 598.15468pt x 846.0408pt>
 File: pdfs/RestructuredUMLdiagram.drawio.pdf Graphic file (type pdf)
 <use pdfs/RestructuredUMLdiagram.drawio.pdf>
 Package pdftex.def Info: pdfs/RestructuredUMLdiagram.drawio.pdf  used on input line 55.
@@ -674,29 +699,101 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [12]
 Capitolo 4.
-) [13
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 8.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 8.
+[13
 
-] (./main.aux)
+]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[14]
+LaTeX Font Info:    Trying to load font information for TS1+cmtt on input line 113.
+ (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmtt.fd
+File: ts1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
+)
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[15{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[16]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[17]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[18]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[19]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[20])
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[21] (./main.aux)
  ***********
 LaTeX2e <2023-06-01>
 L3 programming layer <2023-06-05>
  ***********
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 98846BB597A30152F91C4BD21BC735A1;3371.
+(rerunfilecheck)             Checksum: 9145283951192D5965EECCE726272EEF;5319.
  ) 
 Here is how much of TeX's memory you used:
- 12252 strings out of 475735
- 192619 string characters out of 5784786
- 1874759 words of memory out of 5000000
- 32768 multiletter control sequences out of 15000+600000
- 519013 words of font info for 53 fonts, out of 8000000 for 9000
+ 14581 strings out of 475735
+ 224494 string characters out of 5784786
+ 2084759 words of memory out of 5000000
+ 34734 multiletter control sequences out of 15000+600000
+ 519825 words of font info for 56 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,11n,79p,421b,550s stack positions out of 10000i,1000n,20000p,200000b,200000s
-</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
-Output written on main.pdf (14 pages, 468102 bytes).
+ 75i,12n,79p,458b,1948s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt12.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb>
+Output written on main.pdf (22 pages, 555030 bytes).
 PDF statistics:
- 245 PDF objects out of 1000 (max. 8388607)
- 203 compressed objects within 3 object streams
- 42 named destinations out of 1000 (max. 500000)
- 173 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 773 PDF objects out of 1000 (max. 8388607)
+ 706 compressed objects within 8 object streams
+ 387 named destinations out of 1000 (max. 500000)
+ 277 words of extra memory for PDF output out of 10000 (max. 10000000)
 

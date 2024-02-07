@@ -1,3 +1,382 @@
 \chapter{Schema Fisico}
 
 \section{Definizoni SQL delle tabelle}
+
+\subsection{User}
+
+\begin{lstlisting}
+CREATE TABLE smu."user"(*@\footnote{vengono usate le virgolette perché altrimenti la parola \textit{user} verrebbe identificata come keyword}@*) (
+    email character varying(100) NOT NULL,
+    username character varying(20) NOT NULL,
+    password character varying(30) NOT NULL,
+    address character varying(100),
+    name character varying(20) NOT NULL,
+    surname character varying(30) NOT NULL,
+    cf character varying(16) NOT NULL,
+    dateofbirth date NOT NULL,
+    CONSTRAINT check_birthdate_user CHECK ((dateofbirth < CURRENT_DATE))
+);    
+\end{lstlisting}
+
+\subsection{Familiar}
+
+\begin{lstlisting}
+CREATE TABLE smu.familiar (
+    name character varying(20) NOT NULL,
+    surname character varying(30) NOT NULL,
+    cf character varying(16) NOT NULL,
+    dateofbirth date NOT NULL,
+    familiaremail character varying(100) NOT NULL,
+    CONSTRAINT check_birthdate_familiar CHECK ((dateofbirth < CURRENT_DATE))
+);  
+\end{lstlisting}
+
+\newpage
+
+\subsection{BankAccount}
+
+\begin{lstlisting}
+CREATE TABLE smu.bankaccount (
+    balance integer NOT NULL,
+    accountnumber integer NOT NULL,
+    bank character varying(40),
+    ownercf character varying(16),
+    owneremail character varying(100),
+    CONSTRAINT ownership_check_ba CHECK (((ownercf IS NULL) <> (owneremail IS NULL)))
+);  
+\end{lstlisting}
+
+\subsection{Card}
+
+\begin{lstlisting}
+CREATE TABLE smu.card (
+    iban character varying(27) NOT NULL,
+    cvv character varying(3) NOT NULL,
+    expiredata date NOT NULL,
+    cardtype character varying(11),
+    ba_number integer NOT NULL,
+    ownercf character varying(16),
+    owneremail character varying(100),
+    CONSTRAINT cardtype_check CHECK (((cardtype)::text = ANY ((ARRAY['prepaid'::character varying, 'debit'::character varying, 'credit'::character varying])::text[]))),
+    CONSTRAINT ownership_check_card CHECK (((ownercf IS NULL) <> (owneremail IS NULL)))
+);
+\end{lstlisting}
+
+\subsection{Transaction}
+
+\begin{lstlisting}
+CREATE TABLE smu.transaction (
+    id_transaction integer NOT NULL,
+    amount double precision NOT NULL,
+    date date NOT NULL,
+    category character varying(35),
+    cardiban character varying(27) NOT NULL,
+    CONSTRAINT check_transaction_date CHECK ((date <= CURRENT_DATE))
+);
+\end{lstlisting}
+
+\subsection{Wallet}
+
+\begin{lstlisting}
+CREATE TABLE smu.wallet (
+    id_wallet integer NOT NULL,
+    name character varying(35) NOT NULL,
+    walletcategory character varying(35) NOT NULL,
+    totalamount double precision NOT NULL,
+    owneremail character varying(100) NOT NULL
+);
+\end{lstlisting}
+
+\subsection{TransactionInWallet}
+
+\begin{lstlisting}
+CREATE TABLE smu.transactioninwallet (
+    id_transaction integer NOT NULL,
+    id_wallet integer NOT NULL
+);
+\end{lstlisting}
+
+\section{Definizoni SQL dei trigger}
+
+\subsection{check\_card\_owner\_trigger}
+
+\begin{lstlisting}
+CREATE TRIGGER check_card_owner_trigger
+    BEFORE INSERT ON smu.card
+    FOR EACH ROW
+    EXECUTE FUNCTION smu.check_card_owner();
+\end{lstlisting}
+
+\begin{lstlisting}
+CREATE FUNCTION smu.check_card_owner() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    BA_used smu.bankaccount%ROWTYPE;
+    familiar_email smu.familiar.familiaremail%TYPE;
+BEGIN
+
+    familiar_email := NULL;
+
+    -- Recupera le informazioni relative al conto corrente
+    -- al quale si sta associando la carta
+    SELECT *
+    INTO BA_used
+    FROM smu.bankaccount
+    WHERE accountnumber = NEW.ba_number;
+
+    -- Recupera l'email dell'account al quale e' associato
+    -- il familiare, proprietario della carta
+    IF NEW.ownercf IS NOT NULL THEN
+        SELECT familiaremail
+        INTO familiar_email
+        FROM smu.familiar
+        WHERE cf = NEW.ownercf;
+    END IF;
+
+    -- Se tutte le condizioni sono vere, viene inserita la carta, altrimenti viene restituita una exception
+    IF (BA_used.owneremail = NEW.owneremail OR BA_used.ownercf = NEW.ownercf) OR
+    (familiar_email = BA_used.owneremail) OR BA_used.ownercf IN (SELECT CF FROM smu.familiar WHERE familiaremail = NEW.owneremail)
+    THEN
+        -- L'IF e' stato strutturato in questo modo perche' non basta negare le condizioni per avere
+        -- solo un IF THEN. Questo perche' nel caso in cui alcuni attributi sono NULL il sistema
+        -- non e' in grado di fornire una valutazione sulla condizione, quindi gli AND da sostituire
+        -- agli attuali OR sarebbero sempre falsi.
+    ELSE
+        RAISE EXCEPTION 'Il proprietario della carta deve essere anche il proprietario del conto corrente, o al massimo un suo familiare.';
+    END IF;
+
+    -- Nell'ultima porzione della condizione dell'IF viene controllato se il codice fiscale
+    -- del proprietario del conto corrente e' presente nell'elenco dei familiari associati
+    -- all'email del proprietario della carta
+
+    RETURN NEW;
+END;
+$$;
+\end{lstlisting}
+
+\subsection{connect\_transaction\_to\_wallet\_trigger}
+
+\begin{lstlisting}
+CREATE TRIGGER connect_transaction_to_wallet_trigger
+    AFTER INSERT OR UPDATE ON smu.transaction
+    FOR EACH ROW
+    EXECUTE FUNCTION smu.connect_transaction_to_wallet();
+\end{lstlisting}
+
+\begin{lstlisting}
+CREATE FUNCTION smu.connect_transaction_to_wallet() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    wallet_row smu.wallet%ROWTYPE;
+    card_row smu.card%ROWTYPE;
+    old_card_row smu.card%ROWTYPE;
+    account_email smu.user.email%TYPE;
+    ba_row smu.bankaccount%ROWTYPE;
+    old_ba_row smu.bankaccount%ROWTYPE;
+BEGIN
+
+    -- Seleziono la carta con la quale e' stata effettuata la transazione
+    SELECT *
+    INTO card_row
+    FROM smu.card
+    WHERE iban = NEW.cardiban;
+
+    -- Controlla se la carta e' scaduta o meno al momento della transazione
+    IF smu.expired_card(card_row.expiredata, NEW.date) THEN
+        RAISE EXCEPTION 'La carta risultava scaduta al momento della transazione';
+    END IF;
+
+    -- Recupero il conto corrente al quale e' associato la carta
+    SELECT *
+    INTO ba_row
+    FROM smu.bankaccount
+    WHERE accountnumber = card_row.ba_number;
+    
+    -- Controllo se la transazione puo' essere effettuata o meno
+    IF TG_OP = 'INSERT' AND ba_row.balance < NEW.amount THEN
+        RAISE EXCEPTION 'Saldo sul conto corrente insufficiente';
+    ELSIF TG_OP = 'UPDATE' AND (ba_row.balance + OLD.amount) < NEW.amount THEN
+        RAISE EXCEPTION 'Saldo sul conto corrente insufficiente al momento della transazione';
+    END IF;
+
+    -- Recupero l'email dell'account al quale saranno associati i portafogli
+    IF card_row.owneremail IS NOT NULL THEN
+        -- Se la carta appartiene ad un utente, mi salvo l'email nella variabile account_email
+        account_email := card_row.owneremail;
+    ELSE
+        -- Altrimenti, appartiene sicuramente ad un familiare e vado a
+        -- recuperare l'email dell'utente al quale e' associato
+        SELECT familiaremail
+        INTO account_email
+        FROM smu.familiar
+        WHERE cf = card_row.ownercf;
+    END IF;
+
+    IF TG_OP = 'INSERT' THEN
+        -- Trova i wallet con la stessa categoria della transazione
+        -- appena inserita che appartengono all'utente corretto
+        FOR wallet_row IN
+            SELECT *
+            FROM smu.wallet
+            WHERE walletcategory = NEW.category AND owneremail = account_email
+        LOOP
+
+            -- Collega la transazione al wallet trovato
+            INSERT INTO smu.transactioninwallet (id_transaction, id_wallet)
+            VALUES (NEW.id_transaction, wallet_row.id_wallet);
+
+            -- Aggiorna il campo totalamount del wallet
+            UPDATE smu.wallet
+            SET totalamount = totalamount + NEW.amount
+            WHERE id_wallet = wallet_row.id_wallet;
+
+        END LOOP;
+
+        -- Aggiorna il saldo del conto corrente
+        UPDATE smu.bankaccount
+        SET balance = balance - NEW.amount
+        WHERE accountnumber = ba_row.accountnumber;
+    END IF;
+
+    IF TG_OP = 'UPDATE' THEN
+
+        -- Se e' stata modificata la categoria, la transazione viene collegata ai nuovi portafogli
+        -- altrimenti viene ricollegata agli stessi
+
+        -- Scollego la transazione da tutti i portafogli
+        DELETE FROM smu.transactioninwallet WHERE id_transaction = OLD.id_transaction;
+        
+        -- Seleziona tutti i portafogli a cui era collegata la transazione
+        FOR wallet_row IN
+            SELECT *
+            FROM smu.wallet
+            WHERE walletcategory = OLD.category AND owneremail = account_email
+        LOOP
+
+            -- Aggiorna il campo totalamount del wallet
+            UPDATE smu.wallet
+            SET totalamount = totalamount - OLD.amount
+            WHERE id_wallet = wallet_row.id_wallet;
+
+        END LOOP;
+
+        -- Seleziona tutti i portafogli a cui deve essere collegata la transazione
+        FOR wallet_row IN
+            SELECT *
+            FROM smu.wallet
+            WHERE walletcategory = NEW.category AND owneremail = account_email
+        LOOP
+            -- Collega la transazione al wallet trovato
+            INSERT INTO smu.transactioninwallet (id_transaction, id_wallet)
+            VALUES (NEW.id_transaction, wallet_row.id_wallet);
+
+            -- Aggiorna il campo totalamount del wallet
+            UPDATE smu.wallet
+            SET totalamount = totalamount + NEW.amount
+            WHERE id_wallet = wallet_row.id_wallet;
+        END LOOP;        
+
+        -- Seleziono la carta con la quale e' stata effettuata inizialmente la transazione
+        SELECT *
+        INTO old_card_row
+        FROM smu.card
+        WHERE iban = OLD.cardiban;
+
+        -- Recupero il conto corrente al quale e' associato la vecchia carta
+        SELECT *
+        INTO old_ba_row
+        FROM smu.bankaccount
+        WHERE accountnumber = old_card_row.ba_number;
+
+        -- Aggiorno il saldo del vecchio conto corrente
+        UPDATE smu.bankaccount
+        SET balance = balance + OLD.amount
+        WHERE accountnumber = old_ba_row.accountnumber;
+
+        -- Aggiorno il saldo del nuovo conto corrente
+        UPDATE smu.bankaccount
+        SET balance = balance - NEW.amount
+        WHERE accountnumber = ba_row.accountnumber;
+
+    END IF;
+
+    RETURN NEW;
+END;
+$$;
+\end{lstlisting}
+
+\subsection{update\_wallet\_category\_trigger}
+
+\begin{lstlisting}
+CREATE TRIGGER update_wallet_category_trigger
+    AFTER UPDATE OF walletcategory ON smu.wallet
+    FOR EACH ROW
+    EXECUTE FUNCTION smu.update_wallet_category();
+\end{lstlisting}
+
+\begin{lstlisting}
+CREATE FUNCTION smu.update_wallet_category() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    transaction_row smu.transaction%ROWTYPE;
+BEGIN
+
+    -- Vengono scollegate tutte le transazioni dal wallet
+    DELETE FROM smu.transactioninwallet WHERE id_wallet = OLD.id_wallet;
+
+    -- Reimposta a 0 la somma degli importi del portafoglio
+    UPDATE smu.wallet
+    SET totalamount = 0
+    WHERE id_wallet = NEW.id_wallet;
+
+    FOR transaction_row IN
+        SELECT *
+        FROM smu.transaction AS T
+        WHERE T.category = NEW.walletcategory AND T.cardiban IN
+        (SELECT iban FROM smu.card
+        WHERE owneremail = NEW.owneremail UNION
+        SELECT C.iban FROM smu.familiar AS F JOIN
+        smu.card AS C ON F.cf = C.ownercf
+        WHERE familiaremail = NEW.owneremail)
+    LOOP
+        -- Collega la transazione trovata
+        INSERT INTO smu.transactioninwallet (id_transaction, id_wallet)
+        VALUES (transaction_row.id_transaction, NEW.id_wallet);
+
+        -- Aggiorna il campo totalamount del wallet
+        UPDATE smu.wallet
+        SET totalamount = totalamount + transaction_row.amount
+        WHERE id_wallet = NEW.id_wallet;
+    END LOOP;
+
+    RETURN NEW;
+    
+END;
+$$;
+\end{lstlisting}
+
+\section{Definizoni SQL delle funzioni}
+
+\subsection{expired\_card}
+
+\begin{lstlisting}
+CREATE FUNCTION smu.expired_card(card_expire_date date, transaction_date date) RETURNS boolean
+    LANGUAGE plpgsql
+    AS $$
+BEGIN
+    -- Questa funzione controlla se la carta data in input era scaduta
+    -- al momento della transazione data in input. La funzione viene usata
+    -- all'interno della funzione "connect_transaction_to_wallet" la quale viene
+    -- eseguita ad ogni inserimento di una nuova transazione.
+    -- Questa funzione viene utilizzata per garantire il vincolo "check_expire_date".
+    IF card_expire_date < transaction_date THEN
+        RETURN TRUE;
+    ELSE
+        RETURN FALSE;
+    END IF;
+END;
+$$;
+\end{lstlisting}

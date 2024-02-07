@@ -306,17 +306,6 @@ SET default_tablespace = '';
 SET default_table_access_method = heap;
 
 --
--- Name: familiar_email; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE public.familiar_email (
-    familiaremail character varying(100)
-);
-
-
-ALTER TABLE public.familiar_email OWNER TO postgres;
-
---
 -- Name: bankaccount; Type: TABLE; Schema: smu; Owner: postgres
 --
 
@@ -601,15 +590,6 @@ ALTER TABLE ONLY smu.transactioninwallet ALTER COLUMN id_wallet SET DEFAULT next
 --
 
 ALTER TABLE ONLY smu.wallet ALTER COLUMN id_wallet SET DEFAULT nextval('smu.wallet_id_wallet_seq'::regclass);
-
-
---
--- Data for Name: familiar_email; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-COPY public.familiar_email (familiaremail) FROM stdin;
-franwik_@outlook.com
-\.
 
 
 --
