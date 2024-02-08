@@ -10,5 +10,6 @@
             "password": "postgres",
             "database": "saving_money_unina"
         }
-    ]
+    ],
+    "java.configuration.updateBuildConfiguration": "automatic"
 }
