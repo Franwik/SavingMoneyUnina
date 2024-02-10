@@ -9,4 +9,10 @@ public class RegisterController {
     private void switchToPrimary() throws IOException {
         App.setRoot("Login");
     }
+
+    @FXML
+    private void register() throws IOException {
+        System.out.println("bravo");
+        App.setRoot("Login");
+    }
 }
