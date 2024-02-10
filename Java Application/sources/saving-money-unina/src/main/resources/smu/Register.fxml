@@ -37,27 +37,35 @@
    <right>
       <AnchorPane prefHeight="200.0" prefWidth="500.0" BorderPane.alignment="CENTER">
          <children>
+            <TextField layoutX="114.0" layoutY="80.0" prefHeight="25.0" prefWidth="130.0" promptText="Nome" />
+            <TextField layoutX="274.0" layoutY="80.0" prefHeight="25.0" prefWidth="140.0" promptText="Cognome" />
+            <TextField layoutX="114.0" layoutY="120.0" prefHeight="25.0" prefWidth="300.0" promptText="Indirizzo" />
+            <DatePicker layoutX="114.0" layoutY="160.0" prefHeight="27.0" prefWidth="155.0" promptText="Data di Nascita" />
+            <TextField layoutX="274.0" layoutY="160.0" prefHeight="25.0" prefWidth="140.0" promptText="Codice Fiscale" />
+            <TextField layoutX="114.0" layoutY="220.0" prefHeight="25.0" prefWidth="300.0" promptText="Username" />
+            <TextField fx:id="emailField" layoutX="114.0" layoutY="260.0" prefHeight="25.0" prefWidth="300.0" promptText="Email" />
+            <PasswordField fx:id="passwordField" layoutX="114.0" layoutY="300.0" prefHeight="25.0" prefWidth="300.0" promptText="Password" />
+            <PasswordField fx:id="confirmPasswordField" layoutX="114.0" layoutY="340.0" prefHeight="25.0" prefWidth="300.0" promptText="Conferma Password" />
+            <Button fx:id="registerButton" focusTraversable="false" layoutX="207.0" layoutY="400.0" mnemonicParsing="false" onAction="#register" prefHeight="40.0" prefWidth="87.0" text="Registrati">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
             <FontAwesomeIcon fill="#009900" glyphName="USERS" layoutX="95.0" layoutY="47.0" size="35" />
             <Text fill="#009900" layoutX="151.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrazione">
                <font>
                   <Font name="System Bold" size="31.0" />
                </font>
             </Text>
-            <TextField fx:id="emailField" focusTraversable="false" layoutX="114.0" layoutY="260.0" prefHeight="25.0" prefWidth="300.0" promptText="Email" />
-            <PasswordField fx:id="passwordField" focusTraversable="false" layoutX="114.0" layoutY="300.0" prefHeight="25.0" prefWidth="300.0" promptText="Password" />
-            <Button fx:id="registerButton" focusTraversable="false" layoutX="207.0" layoutY="400.0" mnemonicParsing="false" onAction="#register" prefHeight="40.0" prefWidth="87.0" text="Registrati">
-               <font>
-                  <Font name="System Bold" size="14.0" />
-               </font>
-            </Button>
             <Text layoutX="172.0" layoutY="479.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hai già un account?" />
             <Hyperlink focusTraversable="false" layoutX="276.0" layoutY="463.0" onAction="#switchToPrimary" text="Accedi!" />
-            <TextField focusTraversable="false" layoutX="114.0" layoutY="80.0" prefHeight="25.0" prefWidth="130.0" promptText="Nome" />
-            <TextField focusTraversable="false" layoutX="284.0" layoutY="80.0" prefHeight="25.0" prefWidth="130.0" promptText="Cognome" />
-            <TextField focusTraversable="false" layoutX="114.0" layoutY="120.0" prefHeight="25.0" prefWidth="300.0" promptText="Indirizzo" />
-            <DatePicker focusTraversable="false" layoutX="114.0" layoutY="160.0" promptText="Data di Nascita" />
-            <TextField focusTraversable="false" layoutX="114.0" layoutY="220.0" prefHeight="25.0" prefWidth="300.0" promptText="Codice Fiscale" />
-            <PasswordField fx:id="passwordField1" focusTraversable="false" layoutX="114.0" layoutY="340.0" prefHeight="25.0" prefWidth="300.0" promptText="Password" />
+            <FontAwesomeIcon fill="#009900" glyphName="LOCK" layoutX="83.0" layoutY="320.0" size="20" />
+            <FontAwesomeIcon fill="#009900" glyphName="LOCK" layoutX="83.0" layoutY="360.0" size="20" />
+            <FontAwesomeIcon fill="#009900" glyphName="CALENDAR" layoutX="80.0" layoutY="180.0" size="20" />
+            <FontAwesomeIcon fill="#009900" glyphName="USER" layoutX="81.0" layoutY="100.0" size="20" />
+            <FontAwesomeIcon fill="#009900" glyphName="AT" layoutX="81.0" layoutY="280.0" size="20" />
+            <FontAwesomeIcon fill="#009900" glyphName="MAP_MARKER" layoutX="83.0" layoutY="140.0" size="20" />
+            <FontAwesomeIcon fill="#009900" glyphName="USER" layoutX="81.0" layoutY="240.0" size="20" />
          </children>
       </AnchorPane>
    </right>

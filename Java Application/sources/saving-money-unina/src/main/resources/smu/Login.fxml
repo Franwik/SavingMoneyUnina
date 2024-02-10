@@ -43,8 +43,8 @@
                </font>
             </Text>
             <TextField fx:id="emailField" focusTraversable="false" layoutX="116.0" layoutY="238.0" prefHeight="25.0" prefWidth="300.0" promptText="Email" />
-            <FontAwesomeIcon fill="#009900" glyphName="USER" layoutX="85.0" layoutY="257.0" size="20" />
-            <FontAwesomeIcon fill="#009900" glyphName="KEY" layoutX="83.0" layoutY="324.0" size="20" />
+            <FontAwesomeIcon fill="#009900" glyphName="AT" layoutX="84.0" layoutY="258.0" size="20" />
+            <FontAwesomeIcon fill="#009900" glyphName="LOCK" layoutX="86.0" layoutY="325.0" size="20" />
             <PasswordField fx:id="passwordField" focusTraversable="false" layoutX="116.0" layoutY="305.0" prefHeight="25.0" prefWidth="300.0" promptText="Password" />
             <Button focusTraversable="false" layoutX="210.0" layoutY="373.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="80.0" text="Accedi">
                <font>
