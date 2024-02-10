@@ -46,7 +46,7 @@
             <TextField fx:id="emailField" layoutX="114.0" layoutY="260.0" prefHeight="25.0" prefWidth="300.0" promptText="Email" />
             <PasswordField fx:id="passwordField" layoutX="114.0" layoutY="300.0" prefHeight="25.0" prefWidth="300.0" promptText="Password" />
             <PasswordField fx:id="confirmPasswordField" layoutX="114.0" layoutY="340.0" prefHeight="25.0" prefWidth="300.0" promptText="Conferma Password" />
-            <Button fx:id="registerButton" focusTraversable="false" layoutX="207.0" layoutY="400.0" mnemonicParsing="false" onAction="#register" prefHeight="40.0" prefWidth="87.0" text="Registrati">
+            <Button fx:id="registerButton" layoutX="207.0" layoutY="400.0" mnemonicParsing="false" onAction="#register" prefHeight="40.0" prefWidth="87.0" text="Registrati">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
