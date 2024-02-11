@@ -51,8 +51,8 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Button>
-            <Text layoutX="143.0" layoutY="479.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Non hai ancora un account?" />
-            <Hyperlink focusTraversable="false" layoutX="293.0" layoutY="463.0" onAction="#switchToSecondary" text="Registrati!" />
+            <Text layoutX="144.0" layoutY="479.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Non hai ancora un account?" />
+            <Hyperlink focusTraversable="false" layoutX="293.0" layoutY="463.0" onAction="#switchToSecondary" prefHeight="0.0" prefWidth="62.0" text="Registrati!" />
          </children>
       </AnchorPane>
    </right>

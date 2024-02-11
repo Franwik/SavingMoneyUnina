@@ -17,6 +17,7 @@ public class App extends Application {
         scene = new Scene(loadFXML("Login"), 700, 500);
         stage.setScene(scene);
         stage.setTitle("Saving Money Unina");
+        stage.setResizable(false);
         stage.show();
     }
 
