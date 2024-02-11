@@ -46,7 +46,7 @@
             <TextField fx:id="emailField" layoutX="114.0" layoutY="260.0" prefHeight="25.0" prefWidth="300.0" promptText="Email" />
             <PasswordField fx:id="passwordField" layoutX="114.0" layoutY="300.0" prefHeight="25.0" prefWidth="300.0" promptText="Password" />
             <PasswordField fx:id="confirmPasswordField" layoutX="114.0" layoutY="340.0" prefHeight="25.0" prefWidth="300.0" promptText="Conferma Password" />
-            <Button fx:id="registerButton" layoutX="207.0" layoutY="400.0" mnemonicParsing="false" onAction="#register" prefHeight="40.0" prefWidth="87.0" text="Registrati">
+            <Button fx:id="registerButton" layoutX="197.0" layoutY="400.0" mnemonicParsing="false" onAction="#register" prefHeight="40.0" prefWidth="95.0" text="Registrati">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
@@ -57,8 +57,8 @@
                   <Font name="System Bold" size="31.0" />
                </font>
             </Text>
-            <Text layoutX="167.0" layoutY="479.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hai già un account?" />
-            <Hyperlink focusTraversable="false" layoutX="274.0" layoutY="463.0" onAction="#switchToPrimary" prefHeight="21.0" prefWidth="47.0" text="Accedi!" />
+            <Text layoutX="164.0" layoutY="479.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hai già un account?" />
+            <Hyperlink focusTraversable="false" layoutX="283.0" layoutY="462.0" onAction="#switchToPrimary" prefHeight="24.0" prefWidth="55.0" text="Accedi!" />
             <FontAwesomeIcon fill="#009900" glyphName="LOCK" layoutX="83.0" layoutY="320.0" size="20" />
             <FontAwesomeIcon fill="#009900" glyphName="LOCK" layoutX="83.0" layoutY="360.0" size="20" />
             <FontAwesomeIcon fill="#009900" glyphName="CALENDAR" layoutX="80.0" layoutY="180.0" size="20" />
