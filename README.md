@@ -1,15 +1,8 @@
 # SavingMoneyUnina
 
-<h1 align="center"> Contributori </h1>
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-2-orange.svg?style=flat-square)](#membri-del-gruppo)
+<!-- ALL-CONTRIBUTORS-LIST:END -->
 
-<p align="center" width="100%">
-    <a href="https://github.com/Franwik">
-        <img width="10%" src="/Pictures/franwik.png">
-    </a>
-</p>
-<p align="center" width="100%">
-    <a href="https://github.com/thankyousomaz">
-        <img width="10%" src="/Pictures/tysm.jpeg">
-    </a>
-</p>
+## Membri del gruppo
 
