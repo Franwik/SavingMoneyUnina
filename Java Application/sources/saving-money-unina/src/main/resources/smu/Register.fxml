@@ -15,20 +15,20 @@
    <left>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #009900;" BorderPane.alignment="CENTER">
          <children>
-            <FontAwesomeIcon fill="WHITE" glyphName="BANK" layoutX="42.0" layoutY="210.0" size="100" />
-            <Text fill="WHITE" layoutX="51.0" layoutY="283.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Saving">
+            <FontAwesomeIcon fill="WHITE" glyphName="BANK" layoutX="45.0" layoutY="193.0" size="100" wrappingWidth="109.28571319580078" />
+            <Text fill="WHITE" layoutX="50.0" layoutY="260.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Saving">
                <font>
-                  <Font name="System Bold" size="31.0" />
+                  <Font name="Arial Bold" size="30.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="49.0" layoutY="329.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Money">
+            <Text fill="WHITE" layoutX="52.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Money">
                <font>
-                  <Font name="System Bold" size="31.0" />
+                  <Font name="Arial Bold" size="30.0" />
                </font>
             </Text>
-            <Text fill="WHITE" layoutX="57.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Unina">
+            <Text fill="WHITE" layoutX="58.0" layoutY="341.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Unina">
                <font>
-                  <Font name="System Bold" size="31.0" />
+                  <Font name="Arial Bold" size="30.0" />
                </font>
             </Text>
          </children>
@@ -37,28 +37,58 @@
    <right>
       <AnchorPane prefHeight="200.0" prefWidth="500.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField layoutX="114.0" layoutY="80.0" prefHeight="25.0" prefWidth="130.0" promptText="Nome" />
-            <TextField layoutX="274.0" layoutY="80.0" prefHeight="25.0" prefWidth="140.0" promptText="Cognome" />
-            <TextField layoutX="114.0" layoutY="120.0" prefHeight="25.0" prefWidth="300.0" promptText="Indirizzo" />
-            <DatePicker layoutX="114.0" layoutY="160.0" prefHeight="27.0" prefWidth="155.0" promptText="Data di Nascita" />
-            <TextField layoutX="274.0" layoutY="160.0" prefHeight="25.0" prefWidth="140.0" promptText="Codice Fiscale" />
-            <TextField layoutX="114.0" layoutY="220.0" prefHeight="25.0" prefWidth="300.0" promptText="Username" />
-            <TextField fx:id="emailField" layoutX="114.0" layoutY="260.0" prefHeight="25.0" prefWidth="300.0" promptText="Email" />
-            <PasswordField fx:id="passwordField" layoutX="114.0" layoutY="300.0" prefHeight="25.0" prefWidth="300.0" promptText="Password" />
-            <PasswordField fx:id="confirmPasswordField" layoutX="114.0" layoutY="340.0" prefHeight="25.0" prefWidth="300.0" promptText="Conferma Password" />
-            <Button fx:id="registerButton" layoutX="197.0" layoutY="400.0" mnemonicParsing="false" onAction="#register" prefHeight="40.0" prefWidth="95.0" text="Registrati">
+            <TextField layoutX="114.0" layoutY="80.0" prefHeight="25.0" prefWidth="130.0" promptText="Nome">
                <font>
-                  <Font name="System Bold" size="14.0" />
+                  <Font name="Arial" size="12.0" />
+               </font></TextField>
+            <TextField layoutX="274.0" layoutY="80.0" prefHeight="25.0" prefWidth="140.0" promptText="Cognome">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font></TextField>
+            <TextField layoutX="114.0" layoutY="120.0" prefHeight="25.0" prefWidth="300.0" promptText="Indirizzo">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font></TextField>
+            <DatePicker layoutX="114.0" layoutY="160.0" prefHeight="27.0" prefWidth="155.0" promptText="Data di Nascita" />
+            <TextField layoutX="274.0" layoutY="160.0" prefHeight="25.0" prefWidth="140.0" promptText="Codice Fiscale">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font></TextField>
+            <TextField layoutX="114.0" layoutY="220.0" prefHeight="25.0" prefWidth="300.0" promptText="Username">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font></TextField>
+            <TextField fx:id="emailField" layoutX="114.0" layoutY="260.0" prefHeight="25.0" prefWidth="300.0" promptText="Email">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font></TextField>
+            <PasswordField fx:id="passwordField" layoutX="114.0" layoutY="300.0" prefHeight="25.0" prefWidth="300.0" promptText="Password">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font></PasswordField>
+            <PasswordField fx:id="confirmPasswordField" layoutX="114.0" layoutY="340.0" prefHeight="25.0" prefWidth="300.0" promptText="Conferma Password">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font></PasswordField>
+            <Button fx:id="registerButton" layoutX="203.0" layoutY="392.0" mnemonicParsing="false" onAction="#register" prefHeight="40.0" prefWidth="95.0" text="Registrati">
+               <font>
+                  <Font name="Arial Bold" size="15.0" />
                </font>
             </Button>
-            <FontAwesomeIcon fill="#009900" glyphName="USERS" layoutX="95.0" layoutY="47.0" size="35" />
-            <Text fill="#009900" layoutX="151.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrazione">
+            <FontAwesomeIcon fill="#009900" glyphName="USERS" layoutX="121.0" layoutY="44.0" size="35" />
+            <Text fill="#009900" layoutX="172.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrazione">
                <font>
-                  <Font name="System Bold" size="31.0" />
+                  <Font name="Arial Bold" size="30.0" />
                </font>
             </Text>
-            <Text layoutX="164.0" layoutY="479.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hai già un account?" />
-            <Hyperlink focusTraversable="false" layoutX="283.0" layoutY="462.0" onAction="#switchToPrimary" prefHeight="24.0" prefWidth="55.0" text="Accedi!" />
+            <Text layoutX="164.0" layoutY="478.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hai già un account?">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font></Text>
+            <Hyperlink focusTraversable="false" layoutX="270.0" layoutY="462.0" onAction="#switchToPrimary" prefHeight="24.0" prefWidth="55.0" text="Accedi!">
+               <font>
+                  <Font name="Arial" size="12.0" />
+               </font></Hyperlink>
             <FontAwesomeIcon fill="#009900" glyphName="LOCK" layoutX="83.0" layoutY="320.0" size="20" />
             <FontAwesomeIcon fill="#009900" glyphName="LOCK" layoutX="83.0" layoutY="360.0" size="20" />
             <FontAwesomeIcon fill="#009900" glyphName="CALENDAR" layoutX="80.0" layoutY="180.0" size="20" />
