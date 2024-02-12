@@ -18,6 +18,17 @@
         "content",
         "doc"
       ]
+    },
+    {
+      "login": "thankyousomaz",
+      "name": "thankyousomaz",
+      "avatar_url": "https://avatars.githubusercontent.com/u/80754300?v=4",
+      "profile": "https://github.com/thankyousomaz",
+      "contributions": [
+        "code",
+        "ideas",
+        "content"
+      ]
     }
   ],
   "contributorsPerLine": 7,
