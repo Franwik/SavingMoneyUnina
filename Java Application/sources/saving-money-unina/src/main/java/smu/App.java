@@ -8,23 +8,35 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import java.io.IOException;
 
-
 public class App extends Application {
 
-    private static Scene scene;
+    private static Stage primaryStage;
 
     @Override
     public void start(@SuppressWarnings("exports") Stage stage) throws IOException {
-        scene = new Scene(loadFXML("Login"), 700, 500);
-        stage.setScene(scene);
-        stage.getIcons().add(new Image(getClass().getResourceAsStream( "icon.png" )));
-        stage.setTitle("Saving Money Unina");
-        stage.setResizable(false);
-        stage.show();
+        primaryStage = stage;
+        setScene("Login", 716, 539);
+        //primaryStage.setScene(new Scene(loadFXML("Login"), 700, 500));
+        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream( "icon.png" )));
+        primaryStage.setTitle("Saving Money Unina");
+        Resizable(false);
+        Center();
+        primaryStage.show();
     }
 
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
+    static void Resizable(boolean check) {
+        primaryStage.setResizable(check);
+    }
+
+    static void Center() {
+        primaryStage.centerOnScreen();
+    }
+
+    static void setScene(String fxml, double width, double height) throws IOException {
+        primaryStage.setScene(new Scene(loadFXML(fxml)));
+        primaryStage.setWidth(width);
+        primaryStage.setHeight(height);
+        Center();
     }
 
     private static Parent loadFXML(String fxml) throws IOException {

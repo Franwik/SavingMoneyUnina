@@ -1,3 +1,7 @@
+* {
+    font-family: "Arial";
+}
+
 #registerButton {
     -fx-background-color: #009900;
     -fx-text-fill: #ffffff;
