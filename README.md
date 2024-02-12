@@ -9,14 +9,10 @@
   - [Membri del gruppo](#membri-del-gruppo)
 - [Organizzazione del progetto](#organizzazione-del-progetto)
   - [Strumenti utilizzati](#strumenti-utilizzati)
-  - [Struttura del progetto](#struttura-del-progetto)
   - [Struttura del repository](#struttura-del-repository)
   - [Gestione repository GitHub](#gestione-repository-github)
-    - [Gestione branches](#gestione-branches)
-      - [Workflow](#workflow)
     - [Standard dei Commit Messages](#standard-dei-commit-messages)
     - [Gestione Issues](#gestione-issues)
-    - [Gestione Pull Requests](#gestione-pull-requests)
   - [Distribuzione dei ruoli](#distribuzione-dei-ruoli)
     - [Progettazione](#progettazione)
     - [Implementazione](#implementazione)
@@ -63,10 +59,6 @@ Questo progetto segue le specifiche di [all-contributors](https://GitHub.com/all
 - Maven
 - Latex
 - Discord
-
-### Struttura del progetto
-
-Da definire in seguito ad assegnazione traccia.
 
 ### Struttura del repository
 
