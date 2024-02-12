@@ -16,7 +16,6 @@ public class App extends Application {
     public void start(@SuppressWarnings("exports") Stage stage) throws IOException {
         primaryStage = stage;
         setScene("Login", 716, 539);
-        //primaryStage.setScene(new Scene(loadFXML("Login"), 700, 500));
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream( "icon.png" )));
         primaryStage.setTitle("Saving Money Unina");
         Resizable(false);
@@ -36,7 +35,6 @@ public class App extends Application {
         primaryStage.setScene(new Scene(loadFXML(fxml)));
         primaryStage.setWidth(width);
         primaryStage.setHeight(height);
-        Center();
     }
 
     private static Parent loadFXML(String fxml) throws IOException {

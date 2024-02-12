@@ -13,8 +13,9 @@ public class LoginController {
     @FXML
     private void login() throws IOException {
         System.out.println("ci siamo");
-        App.setScene("HomePage", 1296, 839);
+        App.setScene("HomePage", 1296, 759);
         App.Resizable(true);
+        App.Center();
     }
 
 }

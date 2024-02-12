@@ -8,11 +8,11 @@
 }
 
 #registerButton:hover {
-    -fx-background-color: #008100;
+    -fx-background-color: #00af00;
 }
 
 #registerButton:pressed {
-    -fx-background-color: rgb(0, 153, 0);
+    -fx-background-color: #008100;
 }
 
 .text-field {

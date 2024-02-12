@@ -7,7 +7,9 @@ public class HomePageController {
 
     @FXML
     private void switchToLogin() throws IOException {
+        System.out.println("Arrivederci");
         App.setScene("Login", 716, 539);
         App.Resizable(false);
+        App.Center();
     }
 }
