@@ -7,12 +7,12 @@ public class RegisterController {
 
     @FXML
     private void switchToLogin() throws IOException {
-        App.setScene("Login", 716, 539);
+        App.setScene("Login");
     }
 
     @FXML
     private void register() throws IOException {
         System.out.println("bravo");
-        App.setScene("Login", 716, 539);
+        App.setScene("Login");
     }
 }

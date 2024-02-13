@@ -15,6 +15,16 @@
     -fx-background-color: #008d00;
 }
 
+#transactionButton {
+    -fx-background-color: linear-gradient(to top, #ffffff59, #009900);
+    -fx-border-color: #ffffff;
+    -fx-border-width: 0px 0px 2px 0px;
+}
+
+#logoutButton {
+    -fx-background-color: transparent;
+}
+
 .text-field {
     -fx-background-color: transparent;
     -fx-border-color: #009900;

@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 
 public class App extends Application {
@@ -15,7 +16,8 @@ public class App extends Application {
     @Override
     public void start(@SuppressWarnings("exports") Stage stage) throws IOException {
         primaryStage = stage;
-        setScene("Login", 716, 539);
+        setResolution(750, 550);
+        setScene("Login");
         primaryStage.getIcons().add(new Image(getClass().getResourceAsStream( "icon.png" )));
         primaryStage.setTitle("Saving Money Unina");
         Resizable(false);
@@ -31,8 +33,11 @@ public class App extends Application {
         primaryStage.centerOnScreen();
     }
 
-    static void setScene(String fxml, double width, double height) throws IOException {
+    static void setScene(String fxml) throws IOException {
         primaryStage.setScene(new Scene(loadFXML(fxml)));
+    }
+
+    static void setResolution(double width, double height) throws IOException {
         primaryStage.setWidth(width);
         primaryStage.setHeight(height);
     }

@@ -12,7 +12,7 @@
 }
 
 #registerButton:pressed {
-    -fx-background-color: #008100;
+    -fx-background-color: #008d00;
 }
 
 .text-field {
@@ -30,9 +30,9 @@
 }
 
 .date-picker .arrow-button:hover {
-    -fx-background-color: #d4d4d4;
+    -fx-background-color: #f7f7f7;
 }
 
 .date-picker .arrow-button:pressed {
-    -fx-background-color: #f7f7f7;
+    -fx-background-color: #d4d4d4;
 }

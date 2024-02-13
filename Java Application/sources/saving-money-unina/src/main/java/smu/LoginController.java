@@ -7,13 +7,14 @@ public class LoginController {
 
     @FXML
     private void switchToRegister() throws IOException {
-        App.setScene("Register", 716, 539);
+        App.setScene("Register");
     }
 
     @FXML
     private void login() throws IOException {
         System.out.println("ci siamo");
-        App.setScene("HomePage", 1296, 759);
+        App.setResolution(1330, 770);
+        App.setScene("Home");
         App.Resizable(true);
         App.Center();
     }
