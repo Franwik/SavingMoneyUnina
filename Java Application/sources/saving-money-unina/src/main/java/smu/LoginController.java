@@ -15,7 +15,7 @@ public class LoginController {
         System.out.println("ci siamo");
         App.setResolution(1330, 770);
         App.setScene("Home");
-        App.Resizable(true);
+        //App.Resizable(true);
         App.Center();
     }
 
