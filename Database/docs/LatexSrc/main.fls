@@ -1,9 +1,9 @@
-PWD /home/franwik/Documenti/REPO/SavingMoneyUnina/Database/Documentation/LatexSrc
+PWD /home/franwik/Scrivania/SavingMoneyUnina/Database/docs/LatexSrc
 INPUT /etc/texmf/web2c/texmf.cnf
 INPUT /usr/share/texmf/web2c/texmf.cnf
 INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
 INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
-INPUT /home/franwik/Documenti/REPO/SavingMoneyUnina/Database/Documentation/LatexSrc/main.tex
+INPUT /home/franwik/Scrivania/SavingMoneyUnina/Database/docs/LatexSrc/main.tex
 OUTPUT main.log
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/report.cls
 INPUT /usr/share/texlive/texmf-dist/tex/latex/base/report.cls
