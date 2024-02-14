@@ -22,13 +22,8 @@ public class App extends Application {
         setScene("Login");
         //primaryStage.getIcons().add(new Image(getClass().getResourceAsStream( "icon.png" )));
         primaryStage.setTitle("Saving Money Unina");
-        //Resizable(false);
         Center();
         primaryStage.show();
-    }
-
-    static void Resizable(boolean check) {
-        primaryStage.setResizable(check);
     }
 
     static void Center() {

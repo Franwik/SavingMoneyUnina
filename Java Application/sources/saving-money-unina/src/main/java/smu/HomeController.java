@@ -10,7 +10,6 @@ public class HomeController {
         System.out.println("Arrivederci");
         App.setResolution(750, 550);
         App.setScene("Login");
-        App.Resizable(false);
         App.Center();
     }
 
