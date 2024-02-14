@@ -38,7 +38,7 @@ Contribuzione al progetto ([emoji key](https://allcontributors.org/docs/en/emoji
       <tbody>
         <tr>
           <td align="center" valign="top" width="14.28%"><a href="https://github.com/Franwik"><img src="https://avatars.githubusercontent.com/u/133138546?v=4?s=100" width="100px;" alt="Francesco Donnarumma"/><br /><sub><b>Francesco Donnarumma</b></sub></a><br /><a href="https://github.com/Franwik/SavingMoneyUnina/commits?author=Franwik" title="Code">💻</a> <a href="#ideas-Franwik" title="Ideas, Planning, & Feedback">🤔</a> <a href="#content-Franwik" title="Content">🖋</a> <a href="https://github.com/Franwik/SavingMoneyUnina/commits?author=Franwik" title="Documentation">📖</a></td>
-          <td align="center" valign="top" width="14.28%"><a href="https://github.com/thankyousomaz"><img src="https://avatars.githubusercontent.com/u/80754300?v=4?s=100" width="100px;" alt="Arturo Donnarumma"/><br /><sub><b>thankyousomaz</b></sub></a><br /><a href="https://github.com/Franwik/SavingMoneyUnina/commits?author=thankyousomaz" title="Code">💻</a> <a href="#ideas-thankyousomaz" title="Ideas, Planning, & Feedback">🤔</a> <a href="#content-thankyousomaz" title="Content">🖋</a></td>
+          <td align="center" valign="top" width="14.28%"><a href="https://github.com/thankyousomaz"><img src="https://avatars.githubusercontent.com/u/80754300?v=4?s=100" width="100px;" alt="Arturo Donnarumma"/><br /><sub><b>Arturo Donnarumma</b></sub></a><br /><a href="https://github.com/Franwik/SavingMoneyUnina/commits?author=thankyousomaz" title="Code">💻</a> <a href="#ideas-thankyousomaz" title="Ideas, Planning, & Feedback">🤔</a> <a href="#content-thankyousomaz" title="Content">🖋</a></td>
         </tr>
       </tbody>
     </table>
