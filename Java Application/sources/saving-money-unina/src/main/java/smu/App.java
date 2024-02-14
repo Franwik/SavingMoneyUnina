@@ -18,7 +18,7 @@ public class App extends Application {
         primaryStage = stage;
         setResolution(750, 550);
         setScene("Login");
-        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream( "icon.png" )));
+        //primaryStage.getIcons().add(new Image(getClass().getResourceAsStream( "icon.png" )));
         primaryStage.setTitle("Saving Money Unina");
         Resizable(false);
         Center();
