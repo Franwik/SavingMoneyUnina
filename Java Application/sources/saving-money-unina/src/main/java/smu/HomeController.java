@@ -8,9 +8,7 @@ public class HomeController {
     @FXML
     private void logout() throws IOException {
         System.out.println("Arrivederci");
-        App.setResolution(750, 550);
         App.setScene("Login");
-        App.Center();
     }
 
     @FXML

@@ -22,12 +22,8 @@ public class App extends Application {
         setScene("Login");
         //primaryStage.getIcons().add(new Image(getClass().getResourceAsStream( "icon.png" )));
         primaryStage.setTitle("Saving Money Unina");
-        Center();
-        primaryStage.show();
-    }
-
-    static void Center() {
         primaryStage.centerOnScreen();
+        primaryStage.show();
     }
 
     static void setScene(String fxml) throws IOException {

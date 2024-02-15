@@ -21,10 +21,6 @@
     -fx-border-width: 0px 0px 2px 0px;
 }
 
-#logoutButton {
-    -fx-background-color: transparent;
-}
-
 .text-field {
     -fx-background-color: transparent;
     -fx-border-color: #009900;
