@@ -16,13 +16,12 @@ public class App extends Application {
     @Override
     public void start(@SuppressWarnings("exports") Stage stage) throws IOException {
         primaryStage = stage;
-        setResolution(750, 550);
-        primaryStage.setMinWidth(750);
+        setResolution(850, 550);
+        primaryStage.setMinWidth(850);
         primaryStage.setMinHeight(550);
         setScene("Login");
         //primaryStage.getIcons().add(new Image(getClass().getResourceAsStream( "icon.png" )));
         primaryStage.setTitle("Saving Money Unina");
-        primaryStage.centerOnScreen();
         primaryStage.show();
     }
 

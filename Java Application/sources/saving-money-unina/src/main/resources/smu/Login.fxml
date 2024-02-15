@@ -6,6 +6,7 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -29,6 +30,9 @@
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
+                     <tooltip>
+                        <Tooltip text="Email" />
+                     </tooltip>
                   </TextField>
                </children>
                <padding>
@@ -42,6 +46,9 @@
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
+                     <tooltip>
+                        <Tooltip text="Password" />
+                     </tooltip>
                   </PasswordField>
                </children>
                <padding>

@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" stylesheets="@WalletStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smu.WalletController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@WalletStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smu.WalletController">
    <top>
       <AnchorPane prefHeight="60.0" prefWidth="721.0" style="-fx-background-color: #009900;" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="logoutButton" layoutY="3.0" mnemonicParsing="false" onAction="#logout" AnchorPane.leftAnchor="0.0">
+            <Button fx:id="logoutButton" layoutY="3.0" mnemonicParsing="false" onAction="#logout" AnchorPane.rightAnchor="0.0">
                <graphic>
                   <ImageView fitHeight="45.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -19,8 +22,11 @@
                      </image>
                   </ImageView>
                </graphic>
+               <tooltip>
+                  <Tooltip text="Esci" />
+               </tooltip>
             </Button>
-            <HBox alignment="CENTER" layoutX="168.0" prefHeight="60.0" prefWidth="307.0" spacing="15.0" AnchorPane.leftAnchor="168.0" AnchorPane.rightAnchor="167.0">
+            <HBox alignment="CENTER" layoutX="218.0" prefHeight="60.0" prefWidth="307.0" spacing="15.0" AnchorPane.leftAnchor="217.5" AnchorPane.rightAnchor="217.5">
                <children>
                   <Button fx:id="bankAccoutButton" mnemonicParsing="false" onAction="#switchToBankAccount">
                      <graphic>
@@ -30,6 +36,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="Conti Bancari" />
+                     </tooltip>
                   </Button>
                   <Button fx:id="cardButton" mnemonicParsing="false" onAction="#switchToCard">
                      <graphic>
@@ -39,6 +48,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="Carte" />
+                     </tooltip>
                   </Button>
                   <Button fx:id="homeButton" mnemonicParsing="false" onAction="#switchToHome">
                      <graphic>
@@ -48,6 +60,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="Home" />
+                     </tooltip>
                   </Button>
                   <Button fx:id="transactionButton" mnemonicParsing="false" onAction="#switchToTransaction">
                      <graphic>
@@ -57,6 +72,9 @@
                            </image>
                         </ImageView>
                      </graphic>
+                     <tooltip>
+                        <Tooltip text="Transazioni" />
+                     </tooltip>
                   </Button>
                   <Button fx:id="walletButton" mnemonicParsing="false">
                      <graphic>
@@ -69,6 +87,11 @@
                   </Button>
                </children>
             </HBox>
+            <Text fill="WHITE" layoutX="5.0" layoutY="40.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Portafogli" AnchorPane.leftAnchor="5.0">
+               <font>
+                  <Font name="Arial Bold" size="30.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </top>

@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
@@ -34,12 +35,18 @@
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
+                     <tooltip>
+                        <Tooltip text="Nome" />
+                     </tooltip>
                   </TextField>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="      " />
                   <TextField fx:id="emailField21" prefHeight="25.0" prefWidth="132.0" promptText="Cognome">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
+                     <tooltip>
+                        <Tooltip text="Cognome" />
+                     </tooltip>
                   </TextField>
                </children>
                <padding>
@@ -53,6 +60,9 @@
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
+                     <tooltip>
+                        <Tooltip text="Indirizzo di Residenza" />
+                     </tooltip>
                   </TextField>
                </children>
                <padding>
@@ -62,11 +72,17 @@
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <FontAwesomeIcon fill="#009900" glyphName="CALENDAR" size="20" />
-                  <DatePicker prefHeight="25.0" prefWidth="160.0" promptText="Data di Nascita" />
+                  <DatePicker prefHeight="25.0" prefWidth="160.0" promptText="Data di Nascita">
+                     <tooltip>
+                        <Tooltip text="Data di Nascita" />
+                     </tooltip></DatePicker>
                   <TextField fx:id="emailField2" prefHeight="25.0" prefWidth="132.0" promptText="Codice Fiscale">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
+                     <tooltip>
+                        <Tooltip text="Codice Fiscale" />
+                     </tooltip>
                   </TextField>
                </children>
                <padding>
@@ -80,6 +96,9 @@
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
+                     <tooltip>
+                        <Tooltip text="Username" />
+                     </tooltip>
                   </TextField>
                </children>
                <padding>
@@ -93,6 +112,9 @@
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
+                     <tooltip>
+                        <Tooltip text="Email" />
+                     </tooltip>
                   </TextField>
                </children>
                <padding>
@@ -106,6 +128,9 @@
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
+                     <tooltip>
+                        <Tooltip text="Password" />
+                     </tooltip>
                   </PasswordField>
                </children>
                <padding>
