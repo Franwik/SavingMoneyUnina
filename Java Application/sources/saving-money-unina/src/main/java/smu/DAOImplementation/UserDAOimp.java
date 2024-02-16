@@ -54,8 +54,24 @@ public class UserDAOimp implements UserDAO {
 
     @Override
     public int insert(User user) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insert'");
+        Connection con = Database.getConnection();
+
+        String sql = "INSERT INTO smu.user (email, username, password, address, name, surname, cf, dateofbirth) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ps.setString(1, user.getEmail());
+        ps.setString(2, user.getUsername());
+        ps.setString(3, user.getPassword());
+        ps.setString(4, user.getAddress());
+        ps.setString(5, user.getName());
+        ps.setString(6, user.getSurname());
+        ps.setString(7, user.getCF());
+        ps.setDate(8, java.sql.Date.valueOf(user.getDateOfBirth()));
+
+        int result = ps.executeUpdate();
+
+        return result;
     }
 
     @Override

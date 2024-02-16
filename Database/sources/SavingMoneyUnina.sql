@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 16.1 (Ubuntu 16.1-1.pgdg23.10+1)
--- Dumped by pg_dump version 16.1 (Ubuntu 16.1-1.pgdg23.10+1)
+-- Dumped from database version 16.2
+-- Dumped by pg_dump version 16.2
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -355,7 +355,7 @@ CREATE TABLE smu.card (
     ba_number integer NOT NULL,
     ownercf character varying(16),
     owneremail character varying(100),
-    CONSTRAINT cardtype_check CHECK (((cardtype)::text = ANY ((ARRAY['prepaid'::character varying, 'debit'::character varying, 'credit'::character varying])::text[]))),
+    CONSTRAINT cardtype_check CHECK (((cardtype)::text = ANY (ARRAY[('prepaid'::character varying)::text, ('debit'::character varying)::text, ('credit'::character varying)::text]))),
     CONSTRAINT ownership_check_card CHECK (((ownercf IS NULL) <> (owneremail IS NULL)))
 );
 
@@ -654,6 +654,7 @@ COPY smu.transactioninwallet (id_transaction, id_wallet) FROM stdin;
 COPY smu."user" (email, username, password, address, name, surname, cf, dateofbirth) FROM stdin;
 franwik_@outlook.com	Franwik_	Ifs4ppic	Via Napoli 281	Francesco	Donnarumma	DNNFNC03A22C129A	2003-01-22
 donnarumma_rosanna@outlook.com	Ross	Rosanna97!	Via Napoli 281	Rosanna	Donnarumma	ABCD	1997-10-13
+arturodonnarumma01@gmail.com	thankyousomaz	maradona	Via Stazione 23	thankyousomaz	Donnarumma	DNNRTR01R30L245F	2001-10-30
 \.
 
 
