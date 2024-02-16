@@ -2,12 +2,12 @@ package smu;
 
 import java.sql.*;
 
-public class DBConnection {
+public class Database {
 
-    public Connection DBlink;
+    public static Connection DBlink;
 
-    public Connection GetConnection(){
-
+    public static Connection getConnection() throws SQLException{
+ 
         try {
 
             Class.forName("org.postgresql.Driver");

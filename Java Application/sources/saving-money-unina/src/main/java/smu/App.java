@@ -4,7 +4,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -17,7 +16,6 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("Login"), 800, 500);
         stage.setScene(scene);
-        new Image(getClass().getResourceAsStream( "icon.png" ));
         stage.setTitle("Saving Money Unina");
         stage.show();
         stage.setMinWidth(stage.getWidth());

@@ -3,7 +3,10 @@ package smu;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
+import DAO.UserDAO;
+import DAOImplementation.UserDAOimp;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -26,44 +29,40 @@ public class LoginController {
     @FXML
     private void login() throws IOException {
 
+        //DAO to interact with DB
+        UserDAO userDAO = new UserDAOimp();
+
+        //email and password from Login page
         String email = emailField.getText();
         String password = passwordField.getText();
 
+        //Aletrs to show in case of errors
         Alert emptyAlert = new Alert(AlertType.ERROR);
         emptyAlert.setTitle("Errore");
         emptyAlert.setHeaderText("Si è verificato un errore.");
-        emptyAlert.setContentText("I campi Email o Password sono vuoti.");
+        emptyAlert.setContentText("I campi Email e/o Password sono vuoti.");
 
         Alert wrongLogin = new Alert(AlertType.ERROR);
         wrongLogin.setTitle("Errore");
         wrongLogin.setHeaderText("Si è verificato un errore.");
-        wrongLogin.setContentText("Email o password errati.");
+        wrongLogin.setContentText("Email e/o password errati.");
 
+        //In case one of the field is empty
         if(email.isEmpty() || password.isEmpty()){
             emptyAlert.showAndWait();
         }
         else{
-            DBConnection connectNow = new DBConnection();
-            Connection connectDB = connectNow.GetConnection();
-            String query = "SELECT * FROM smu.user WHERE email = '" + email + "' AND password = '" + password + "'";
 
             try {
-                
-                java.sql.Statement statement = connectDB.createStatement();
-                ResultSet result = statement.executeQuery(query);
-
-                if(result.next()){
-
-                    App.setRoot("Home");
-    
+                if(userDAO.checkLogin(email, password)){
+                    App.setRoot("HOME");
                 }
                 else{
                     wrongLogin.showAndWait();
                 }
-
-                connectDB.close();
-
-            } catch (Exception e) {
+            } catch (SQLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
                 e.printStackTrace();
             }
 
