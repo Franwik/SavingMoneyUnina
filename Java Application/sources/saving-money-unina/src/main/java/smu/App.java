@@ -11,27 +11,21 @@ import java.io.IOException;
 
 public class App extends Application {
 
-    private static Stage primaryStage;
+    private static Scene scene;
 
     @Override
-    public void start(@SuppressWarnings("exports") Stage stage) throws IOException {
-        primaryStage = stage;
-        setResolution(850, 550);
-        primaryStage.setMinWidth(850);
-        primaryStage.setMinHeight(550);
-        setScene("Login");
-        //primaryStage.getIcons().add(new Image(getClass().getResourceAsStream( "icon.png" )));
-        primaryStage.setTitle("Saving Money Unina");
-        primaryStage.show();
+    public void start(Stage stage) throws IOException {
+        scene = new Scene(loadFXML("Login"), 800, 500);
+        stage.setScene(scene);
+        new Image(getClass().getResourceAsStream( "icon.png" ));
+        stage.setTitle("Saving Money Unina");
+        stage.show();
+        stage.setMinWidth(stage.getWidth());
+        stage.setMinHeight(stage.getHeight());
     }
 
-    static void setScene(String fxml) throws IOException {
-        primaryStage.setScene(new Scene(loadFXML(fxml)));
-    }
-
-    static void setResolution(double width, double height) throws IOException {
-        primaryStage.setWidth(width);
-        primaryStage.setHeight(height);
+    static void setRoot(String fxml) throws IOException {
+        scene.setRoot(loadFXML(fxml));
     }
 
     private static Parent loadFXML(String fxml) throws IOException {

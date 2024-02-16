@@ -8,31 +8,31 @@ public class HomeController {
     @FXML
     private void logout() throws IOException {
         System.out.println("Arrivederci");
-        App.setScene("Login");
+        App.setRoot("Login");
     }
 
     @FXML
     private void switchToHome() throws IOException {
-        App.setScene("Home");
+        App.setRoot("Home");
     }
 
     @FXML
     private void switchToBankAccount() throws IOException {
-        App.setScene("BankAccount");
+        App.setRoot("BankAccount");
     }
 
     @FXML
     private void switchToCard() throws IOException {
-        App.setScene("Card");
+        App.setRoot("Card");
     }
 
     @FXML
     private void switchToTransaction() throws IOException {
-        App.setScene("Transaction");
+        App.setRoot("Transaction");
     }
 
     @FXML
     private void switchToWallet() throws IOException {
-        App.setScene("Wallet");
+        App.setRoot("Wallet");
     }
 }

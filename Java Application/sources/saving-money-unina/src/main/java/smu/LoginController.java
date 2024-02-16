@@ -1,12 +1,8 @@
 package smu;
 
-import java.beans.Statement;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
-
-import javax.naming.spi.DirStateFactory.Result;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -24,7 +20,7 @@ public class LoginController {
 
     @FXML
     private void switchToRegister() throws IOException {
-        App.setScene("Register");
+        App.setRoot("Register");
     }
 
     @FXML
@@ -58,7 +54,7 @@ public class LoginController {
 
                 if(result.next()){
 
-                    App.setScene("Home");
+                    App.setRoot("Home");
     
                 }
                 else{
