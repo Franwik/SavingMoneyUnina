@@ -1,4 +1,4 @@
-package DTO;
+package smu.DTO;
 
 import java.time.*;
 

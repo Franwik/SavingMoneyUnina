@@ -1,11 +1,11 @@
-package DAOImplementation;
+package smu.DAOImplementation;
 
 import java.sql.*;
 import java.util.List;
 import java.time.*;
 
-import DAO.UserDAO;
-import DTO.User;
+import smu.DAO.UserDAO;
+import smu.DTO.User;
 import smu.Database;
 
 public class UserDAOimp implements UserDAO {

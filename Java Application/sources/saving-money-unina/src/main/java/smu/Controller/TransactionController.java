@@ -1,4 +1,4 @@
-package smu;
+package smu.Controller;
 
 public class TransactionController extends HomeController{
 

@@ -22,7 +22,7 @@ public class App extends Application {
         stage.setMinHeight(stage.getHeight());
     }
 
-    static void setRoot(String fxml) throws IOException {
+    public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 

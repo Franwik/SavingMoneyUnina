@@ -1,12 +1,11 @@
-package smu;
+package smu.Controller;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
-import DAO.UserDAO;
-import DAOImplementation.UserDAOimp;
+import smu.App;
+import smu.DAO.UserDAO;
+import smu.DAOImplementation.UserDAOimp;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;

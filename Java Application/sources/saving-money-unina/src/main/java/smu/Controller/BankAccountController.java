@@ -1,4 +1,4 @@
-package smu;
+package smu.Controller;
 
 public class BankAccountController extends HomeController{
 

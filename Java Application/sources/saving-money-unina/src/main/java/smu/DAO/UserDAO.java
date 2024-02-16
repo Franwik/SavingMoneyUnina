@@ -1,6 +1,6 @@
-package DAO;
+package smu.DAO;
 
-import DTO.User;
+import smu.DTO.User;
 import java.sql.SQLException;
 
 public interface UserDAO extends DAO<User>{

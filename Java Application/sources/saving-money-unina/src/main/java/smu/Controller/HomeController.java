@@ -1,7 +1,8 @@
-package smu;
+package smu.Controller;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
+import smu.App;
 
 public class HomeController {
 
