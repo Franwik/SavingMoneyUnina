@@ -21,7 +21,7 @@
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <FontAwesomeIcon fill="#009900" glyphName="USERS" size="30" />
-                  <Text fill="#009900" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrazione">
+                  <Text fill="#009900" focusTraversable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Registrazione">
                      <font>
                         <Font name="Arial Bold" size="30.0" />
                      </font>
@@ -31,7 +31,7 @@
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <FontAwesomeIcon fill="#009900" glyphName="USER" size="20" />
-                  <TextField fx:id="nameField" prefHeight="25.0" prefWidth="132.0" promptText="Nome">
+                  <TextField fx:id="nameField" onAction="#register" prefHeight="25.0" prefWidth="132.0" promptText="Nome">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
@@ -40,7 +40,7 @@
                      </tooltip>
                   </TextField>
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="      " />
-                  <TextField fx:id="surnameField" prefHeight="25.0" prefWidth="132.0" promptText="Cognome">
+                  <TextField fx:id="surnameField" onAction="#register" prefHeight="25.0" prefWidth="132.0" promptText="Cognome">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
@@ -56,7 +56,7 @@
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <FontAwesomeIcon fill="#009900" glyphName="MAP_MARKER" size="20" />
-                  <TextField fx:id="addressField" prefHeight="25.0" prefWidth="300.0" promptText="Indirizzo">
+                  <TextField fx:id="addressField" onAction="#register" prefHeight="25.0" prefWidth="300.0" promptText="Indirizzo">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
@@ -76,7 +76,7 @@
                      <tooltip>
                         <Tooltip text="Data di Nascita" />
                      </tooltip></DatePicker>
-                  <TextField fx:id="cfField" prefHeight="25.0" prefWidth="132.0" promptText="Codice Fiscale">
+                  <TextField fx:id="cfField" onAction="#register" prefHeight="25.0" prefWidth="132.0" promptText="Codice Fiscale">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
@@ -92,7 +92,7 @@
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <FontAwesomeIcon fill="#009900" glyphName="USER" size="20" />
-                  <TextField fx:id="usernameField" prefHeight="25.0" prefWidth="300.0" promptText="Username">
+                  <TextField fx:id="usernameField" onAction="#register" prefHeight="25.0" prefWidth="300.0" promptText="Username">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
@@ -108,7 +108,7 @@
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <FontAwesomeIcon fill="#009900" glyphName="AT" size="20" />
-                  <TextField fx:id="emailField" prefHeight="25.0" prefWidth="300.0" promptText="Email">
+                  <TextField fx:id="emailField" onAction="#register" prefHeight="25.0" prefWidth="300.0" promptText="Email">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
@@ -124,7 +124,7 @@
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <FontAwesomeIcon fill="#009900" glyphName="LOCK" size="20" />
-                  <PasswordField fx:id="passwordField" prefHeight="25.0" prefWidth="300.0" promptText="Password">
+                  <PasswordField fx:id="passwordField" onAction="#register" prefHeight="25.0" prefWidth="300.0" promptText="Password">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>

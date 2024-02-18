@@ -17,28 +17,28 @@ import smu.DTO.User;
 public class RegisterController {
 
     @FXML
-    TextField nameField;
+    private TextField nameField;
 
     @FXML
-    TextField surnameField;
+    private TextField surnameField;
 
     @FXML
-    TextField addressField;
+    private TextField addressField;
 
     @FXML
-    DatePicker dobField;
+    private DatePicker dobField;
 
     @FXML
-    TextField cfField;
+    private TextField cfField;
 
     @FXML
-    TextField usernameField;
+    private TextField usernameField;
 
     @FXML
-    TextField emailField;
+    private TextField emailField;
 
     @FXML
-    PasswordField passwordField;
+    private PasswordField passwordField;
 
     @FXML
     private void switchToLogin() throws IOException {
@@ -66,8 +66,19 @@ public class RegisterController {
         Alert emptyAlert = new Alert(AlertType.ERROR);
         emptyAlert.setTitle("Errore");
         emptyAlert.setHeaderText("Si è verificato un errore.");
-        emptyAlert.setContentText("Uno dei campi è vuoto.");
+        emptyAlert.setContentText("Almeno uno dei campi è vuoto.");
 
+        Alert dobAlert = new Alert(AlertType.ERROR);
+        dobAlert.setTitle("Errore");
+        dobAlert.setHeaderText("Si è verificato un errore.");
+        dobAlert.setContentText("La data di nascita inserita non è valida.");
+
+        Alert emailAlert = new Alert(AlertType.ERROR);
+        emailAlert.setTitle("Errore");
+        emailAlert.setHeaderText("Si è verificato un errore.");
+        emailAlert.setContentText("Email e/o Username già in uso.");
+
+        //Alert for success registration
         Alert successAlert = new Alert(AlertType.CONFIRMATION);
         successAlert.setTitle("Successo");
         successAlert.setContentText("Registrazione avvenuta con successo.");
@@ -83,11 +94,20 @@ public class RegisterController {
                     successAlert.showAndWait();
                     App.setRoot("Home");
                 }
-                else{
-                    System.out.println("SYSTEM ERROR");
-                }
+
             } catch (SQLException e) {
-                e.printStackTrace();
+                String state = e.getSQLState();
+                System.out.println(state);
+
+                if(state.equals("23514")){
+                    //data di nascita non valida
+                    dobAlert.showAndWait();
+                }
+                else if(state.equals("23505")){
+                    //email o username già in uso
+                    emailAlert.showAndWait();
+                }
+
             } catch (IOException e) {
                 e.printStackTrace();
             }

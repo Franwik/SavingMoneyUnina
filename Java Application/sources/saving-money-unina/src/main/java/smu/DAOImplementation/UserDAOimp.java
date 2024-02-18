@@ -87,8 +87,9 @@ public class UserDAOimp implements UserDAO {
     }
 
     @Override
-    public boolean checkLogin(String email, String password) throws SQLException {
+    public User checkLogin(String email, String password) throws SQLException {
         Connection con = Database.getConnection();
+        User user = null;
 
         String sql = "SELECT * FROM smu.user WHERE email = ? AND password = ?";
 
@@ -100,10 +101,10 @@ public class UserDAOimp implements UserDAO {
         ResultSet rs = ps.executeQuery();
 
         if(rs.next()){
-            return true;
+            user = new User(rs.getString("email"), rs.getString("username"), rs.getString("password"), rs.getString("address"), rs.getString("name"), rs.getString("surname"), rs.getString("cf"), rs.getDate("dateofbirth").toLocalDate());
         }
 
-        return false;
+        return user;
     }
 
 }

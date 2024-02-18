@@ -7,6 +7,6 @@ public interface UserDAO extends DAO<User>{
 
     User get(String email) throws SQLException;
 
-    boolean checkLogin(String email, String password) throws SQLException;
+    User checkLogin(String email, String password) throws SQLException;
 
 }

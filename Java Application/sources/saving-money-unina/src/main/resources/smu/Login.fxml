@@ -18,7 +18,7 @@
       <VBox alignment="CENTER" prefHeight="500.0" prefWidth="100000.0" BorderPane.alignment="CENTER">
          <children>
             <FontAwesomeIcon fill="#009900" glyphName="USERS" size="70" />
-            <Text fill="#009900" strokeType="OUTSIDE" strokeWidth="0.0" text="Accesso">
+            <Text fill="#009900" focusTraversable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Accesso">
                <font>
                   <Font name="Arial Bold" size="30.0" />
                </font>

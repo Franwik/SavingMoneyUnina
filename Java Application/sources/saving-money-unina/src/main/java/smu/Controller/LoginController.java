@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.*;
 
 import smu.App;
+import smu.LoggedUser;
 import smu.DAO.UserDAO;
 import smu.DAOImplementation.UserDAOimp;
 import javafx.fxml.FXML;
@@ -31,6 +32,9 @@ public class LoginController {
         //DAO to interact with DB
         UserDAO userDAO = new UserDAOimp();
 
+        //Singleton of logged user
+        LoggedUser loggedUser = null;
+
         //email and password from Login page
         String email = emailField.getText();
         String password = passwordField.getText();
@@ -53,8 +57,11 @@ public class LoginController {
         else{
 
             try {
-                if(userDAO.checkLogin(email, password)){
-                    App.setRoot("HOME");
+
+                loggedUser = LoggedUser.getInstance(userDAO.checkLogin(email, password));
+
+                if(loggedUser != null){
+                    App.setRoot("Home");
                 }
                 else{
                     wrongLogin.showAndWait();
