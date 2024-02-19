@@ -10,4 +10,6 @@ public interface CardDAO {
 
     List<Card> getByCF(String CF) throws SQLException;
 
+    int insert(Card card) throws SQLException;
+
 }

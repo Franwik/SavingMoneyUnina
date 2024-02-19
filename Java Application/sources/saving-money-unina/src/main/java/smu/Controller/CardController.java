@@ -8,11 +8,14 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import smu.App;
 import smu.LoggedUser;
 import smu.DAO.CardDAO;
 import smu.DAO.FamiliarDAO;
@@ -20,6 +23,7 @@ import smu.DAOImplementation.CardDAOimp;
 import smu.DAOImplementation.FamiliarDAOimp;
 import smu.DTO.Card;
 import smu.DTO.Familiar;
+import java.io.IOException;
 
 public class CardController extends ApplicationController implements Initializable{
 
@@ -46,6 +50,18 @@ public class CardController extends ApplicationController implements Initializab
 
     @FXML
     private TableColumn<Card, Integer> BA_ass;
+
+    private static Scene NewCardscene;
+    private static Stage NewCardStage;
+
+    @FXML
+    private void showNewCardDialog() throws IOException {
+        NewCardscene = new Scene(App.loadFXML("NewCardDialog").load(), 370, 365);
+        NewCardStage.setScene(NewCardscene);
+        NewCardStage.setTitle("Creazione Nuova Carta");
+        NewCardStage.setResizable(false);
+        NewCardStage.show();
+    }
 
     private void loadPeople(){
 
@@ -77,7 +93,8 @@ public class CardController extends ApplicationController implements Initializab
 
     }
 
-    public void loadCards(){
+    @FXML
+    private void loadCards(){
 
         List<Card> cards = new ArrayList<>();
         String chosenPerson = peopleChoser.getSelectionModel().getSelectedItem().toString();
@@ -126,6 +143,9 @@ public class CardController extends ApplicationController implements Initializab
 
         //Loads People in ComboBox
         loadPeople();
+
+        //Initialize Stage
+        NewCardStage = new Stage();
 
         //Initalize table columns
         IBAN.setCellValueFactory(new PropertyValueFactory<Card, String>("iban"));

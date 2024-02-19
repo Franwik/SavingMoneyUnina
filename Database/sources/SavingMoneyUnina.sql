@@ -355,7 +355,7 @@ CREATE TABLE smu.card (
     ba_number integer NOT NULL,
     ownercf character varying(16),
     owneremail character varying(100),
-    CONSTRAINT cardtype_check CHECK (((cardtype)::text = ANY (ARRAY[('prepaid'::character varying)::text, ('debit'::character varying)::text, ('credit'::character varying)::text]))),
+    CONSTRAINT cardtype_check CHECK (((cardtype)::text = ANY (ARRAY[('Prepagata'::character varying)::text, ('Debito'::character varying)::text, ('Credito'::character varying)::text]))),
     CONSTRAINT ownership_check_card CHECK (((ownercf IS NULL) <> (owneremail IS NULL)))
 );
 
@@ -608,11 +608,11 @@ COPY smu.bankaccount (balance, accountnumber, bank, ownercf, owneremail) FROM st
 --
 
 COPY smu.card (iban, cvv, expiredata, cardtype, ba_number, ownercf, owneremail) FROM stdin;
-PI2	123	2029-02-20	prepaid	3	\N	franwik_@outlook.com
-ISP1	123	2029-02-20	prepaid	4	\N	donnarumma_rosanna@outlook.com
-BB1	123	2029-02-20	prepaid	5	ABC	\N
-BB2	123	2029-02-20	prepaid	5	\N	franwik_@outlook.com
-PI1	123	2020-02-20	prepaid	3	ABC	\N
+PI2	123	2029-02-20	Prepagata	3	\N	franwik_@outlook.com
+ISP1	123	2029-02-20	Prepagata	4	\N	donnarumma_rosanna@outlook.com
+BB1	123	2029-02-20	Prepagata	5	ABC	\N
+BB2	123	2029-02-20	Prepagata	5	\N	franwik_@outlook.com
+PI1	123	2020-02-20	Prepagata	3	ABC	\N
 \.
 
 
@@ -654,7 +654,7 @@ COPY smu.transactioninwallet (id_transaction, id_wallet) FROM stdin;
 COPY smu."user" (email, username, password, address, name, surname, cf, dateofbirth) FROM stdin;
 franwik_@outlook.com	Franwik_	Ifs4ppic	Via Napoli 281	Francesco	Donnarumma	DNNFNC03A22C129A	2003-01-22
 donnarumma_rosanna@outlook.com	Ross	Rosanna97!	Via Napoli 281	Rosanna	Donnarumma	ABCD	1997-10-13
-arturodonnarumma01@gmail.com	thankyousomaz	maradona	Via Stazione 23	thankyousomaz	Donnarumma	DNNRTR01R30L245F	2001-10-30
+arturodonnarumma01@gmail.com	thankyousomaz	maradona	Via Stazione 23	Arturo	Donnarumma	DNNRTR01R30L245F	2001-10-30
 \.
 
 

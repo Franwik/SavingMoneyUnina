@@ -101,8 +101,8 @@
    <center>
       <AnchorPane prefHeight="440.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
-            <ComboBox fx:id="peopleChoser" layoutX="239.0" layoutY="50.0" onAction="#loadCards" prefHeight="25.0" prefWidth="200.0" promptText="---" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="50.0" />
-            <Text fx:id="nameDisplay" fill="#009900" layoutX="283.0" layoutY="69.0" strokeType="OUTSIDE" strokeWidth="0.0" AnchorPane.leftAnchor="283.0" AnchorPane.topAnchor="50.89453125">
+            <ComboBox fx:id="peopleChoser" layoutX="50.0" layoutY="60.0" onAction="#loadCards" prefHeight="25.0" prefWidth="200.0" promptText="---" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="60.0" />
+            <Text fx:id="nameDisplay" fill="#009900" layoutX="283.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" AnchorPane.leftAnchor="283.0" AnchorPane.topAnchor="60.89453125">
                <font>
                   <Font name="Arial Bold" size="20.0" />
                </font>
@@ -119,11 +119,16 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Text layoutX="50.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seleziona una persona" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="30.0">
+            <Text layoutX="50.0" layoutY="53.5791015625" strokeType="OUTSIDE" strokeWidth="0.0" text="Seleziona una persona" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="40.0">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>
             </Text>
+            <Button fx:id="newCard" layoutX="630.0" layoutY="60.0" mnemonicParsing="false" onAction="#showNewCardDialog" text="Aggiungi Carta">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Button>
          </children>
       </AnchorPane>
    </center>

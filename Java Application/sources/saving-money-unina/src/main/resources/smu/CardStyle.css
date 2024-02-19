@@ -2,27 +2,68 @@
     font-family: "Arial";
 }
 
-.button {
+#logoutButton {
     -fx-background-color: #009900;
-    -fx-text-fill: #ffffff;
 }
 
-.button:hover {
+#logoutButton:hover {
     -fx-background-color: #00af00;
 }
 
-.button:pressed {
+#logoutButton:pressed {
+    -fx-background-color: #008d00;
+}
+
+#bankAccoutButton {
+    -fx-background-color: #009900;
+}
+
+#bankAccoutButton:hover {
+    -fx-background-color: #00af00;
+}
+
+#bankAccoutButton:pressed {
+    -fx-background-color: #008d00;
+}
+
+#homeButton {
+    -fx-background-color: #009900;
+}
+
+#homeButton:hover {
+    -fx-background-color: #00af00;
+}
+
+#homeButton:pressed {
+    -fx-background-color: #008d00;
+}
+
+#transactionButton {
+    -fx-background-color: #009900;
+}
+
+#transactionButton:hover {
+    -fx-background-color: #00af00;
+}
+
+#transactionButton:pressed {
+    -fx-background-color: #008d00;
+}
+
+#walletButton {
+    -fx-background-color: #009900;
+}
+
+#walletButton:hover {
+    -fx-background-color: #00af00;
+}
+
+#walletButton:pressed {
     -fx-background-color: #008d00;
 }
 
 #cardButton {
     -fx-background-color: linear-gradient(to top, #ffffff59, #009900);
     -fx-border-color: #ffffff;
-    -fx-border-width: 0px 0px 2px 0px;
-}
-
-.text-field {
-    -fx-background-color: transparent;
-    -fx-border-color: #009900;
     -fx-border-width: 0px 0px 2px 0px;
 }
