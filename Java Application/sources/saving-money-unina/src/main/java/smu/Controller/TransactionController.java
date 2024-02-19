@@ -1,5 +1,5 @@
 package smu.Controller;
 
-public class TransactionController extends HomeController{
+public class TransactionController extends ApplicationController {
 
 }

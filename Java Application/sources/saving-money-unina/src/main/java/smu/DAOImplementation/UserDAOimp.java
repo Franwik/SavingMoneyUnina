@@ -1,7 +1,6 @@
 package smu.DAOImplementation;
 
 import java.sql.*;
-import java.util.List;
 import java.time.*;
 
 import smu.DAO.UserDAO;
@@ -41,18 +40,6 @@ public class UserDAOimp implements UserDAO {
     }
 
     @Override
-    public List<User> getAll() throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
-    }
-
-    @Override
-    public int save(User user) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
-    }
-
-    @Override
     public int insert(User user) throws SQLException {
         Connection con = Database.getConnection();
 
@@ -72,18 +59,6 @@ public class UserDAOimp implements UserDAO {
         int result = ps.executeUpdate();
 
         return result;
-    }
-
-    @Override
-    public int update(User user) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
-    }
-
-    @Override
-    public int delete(User user) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
     }
 
     @Override

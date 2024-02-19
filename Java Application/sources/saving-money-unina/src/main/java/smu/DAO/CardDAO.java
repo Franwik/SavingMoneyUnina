@@ -1,11 +1,10 @@
 package smu.DAO;
 
-import java.sql.SQLException;
-import java.util.List;
-
 import smu.DTO.Card;
+import java.sql.SQLException;
+import java.util.*;
 
-public interface CardDAO extends DAO<Card>{
+public interface CardDAO {
 
     List<Card> getByEmail(String email) throws SQLException;
 

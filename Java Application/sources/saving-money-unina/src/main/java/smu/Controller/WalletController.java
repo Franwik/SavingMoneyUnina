@@ -1,5 +1,5 @@
 package smu.Controller;
 
-public class WalletController extends HomeController{
+public class WalletController extends ApplicationController {
 
 }

@@ -26,7 +26,7 @@
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <FontAwesomeIcon fill="#009900" glyphName="AT" size="20" />
-                  <TextField fx:id="emailField" onAction="#login" prefHeight="25.0" prefWidth="300.0" promptText="Email">
+                  <TextField fx:id="emailField" onAction="#login" prefHeight="25.0" prefWidth="300.0" promptText="Email" text="franwik_@outlook.com">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>
@@ -42,7 +42,7 @@
             <HBox alignment="CENTER" prefHeight="50.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <FontAwesomeIcon fill="#009900" glyphName="LOCK" size="20" />
-                  <PasswordField fx:id="passwordField" onAction="#login" prefHeight="25.0" prefWidth="300.0" promptText="Password">
+                  <PasswordField fx:id="passwordField" onAction="#login" prefHeight="25.0" prefWidth="300.0" promptText="Password" text="Ifs4ppic">
                      <font>
                         <Font name="Arial" size="12.0" />
                      </font>

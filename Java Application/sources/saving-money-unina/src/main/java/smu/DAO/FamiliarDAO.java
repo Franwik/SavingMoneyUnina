@@ -5,7 +5,9 @@ import java.util.List;
 
 import smu.DTO.Familiar;
 
-public interface FamiliarDAO extends DAO<Familiar>{
+public interface FamiliarDAO {
+
+    public Familiar getByCF(String CF) throws SQLException;
 
     public List<Familiar> getByEmail(String email) throws SQLException;
 

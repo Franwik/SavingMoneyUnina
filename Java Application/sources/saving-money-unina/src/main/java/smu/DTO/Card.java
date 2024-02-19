@@ -81,5 +81,11 @@ public class Card {
     public void setOwnerEmail(String ownerEmail) {
         this.ownerEmail = ownerEmail;
     }
+
+    @Override
+    public String toString() {
+        return "Card [iban=" + iban + ", cvv=" + cvv + ", expireDate=" + expireDate + ", cardType=" + cardType
+                + ", ba_number=" + ba_number + ", ownerCF=" + ownerCF + ", ownerEmail=" + ownerEmail + "]";
+    }
     
 }

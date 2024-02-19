@@ -1,5 +1,5 @@
 package smu.Controller;
 
-public class BankAccountController extends HomeController{
+public class BankAccountController extends ApplicationController{
 
 }

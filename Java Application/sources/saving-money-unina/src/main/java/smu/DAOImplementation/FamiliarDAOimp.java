@@ -12,7 +12,27 @@ import smu.DAO.FamiliarDAO;
 import smu.DTO.Familiar;
 
 public class FamiliarDAOimp implements FamiliarDAO{
+    
+    @Override
+    public Familiar getByCF(String CF) throws SQLException {
+        Connection con = Database.getConnection();
+        Familiar result = null;
 
+        String sql = "SELECT * FROM smu.familiar WHERE cf = ?";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ps.setString(1, CF);
+        
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            result = new Familiar(rs.getString("name"), rs.getString("surname"), rs.getString("cf"), rs.getDate("dateofbirth").toLocalDate(), rs.getString("familiaremail"));
+        }
+
+        return result;
+    }
+    
     @Override
     public List<Familiar> getByEmail(String email) throws SQLException {
         Connection con = Database.getConnection();
@@ -32,36 +52,6 @@ public class FamiliarDAOimp implements FamiliarDAO{
         }
 
         return result;
-    }
-
-    @Override
-    public int save(Familiar t) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'save'");
-    }
-
-    @Override
-    public int insert(Familiar t) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'insert'");
-    }
-
-    @Override
-    public int update(Familiar t) throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'update'");
-    }
-
-    @Override
-    public int delete(Familiar t) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
-    }
-
-    @Override
-    public List<Familiar> getAll() throws SQLException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getAll'");
     }
 
 }

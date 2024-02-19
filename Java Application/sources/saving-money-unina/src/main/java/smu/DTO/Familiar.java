@@ -62,8 +62,10 @@ public class Familiar {
         this.familiarEmail = familiarEmail;
     }
 
-
-
-    
+    @Override
+    public String toString() {
+        return "Familiar [name=" + name + ", surname=" + surname + ", CF=" + CF + ", dateOfBirth=" + dateOfBirth
+                + ", familiarEmail=" + familiarEmail + "]";
+    }
 
 }
