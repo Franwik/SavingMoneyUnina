@@ -5,13 +5,13 @@ import java.time.LocalDate;
 public class Card {
 
     //Attributes
-    String iban;
-    String cvv;
-    LocalDate expireDate;
-    String cardType;
-    int ba_number;
-    String ownerCF;
-    String ownerEmail;
+    private String iban;
+    private String cvv;
+    private LocalDate expireDate;
+    private String cardType;
+    private int ba_number;
+    private String ownerCF;
+    private String ownerEmail;
 
     //Contructor
     public Card(String iban, String cvv, LocalDate expireDate, String cardType, int ba_number, String ownerCF, String ownerEmail) {

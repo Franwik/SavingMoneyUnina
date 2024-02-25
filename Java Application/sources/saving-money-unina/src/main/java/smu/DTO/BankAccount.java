@@ -1,13 +1,14 @@
 package smu.DTO;
 
+
 public class BankAccount {
 
     //Attributes
-    int balance;
-    int accountNumber;
-    String bank;
-    String ownerEmail;
-    String ownerCF;
+    private int balance;
+    private int accountNumber;
+    private String bank;
+    private String ownerEmail;
+    private String ownerCF;
 
     //Constructor
     public BankAccount(int balance, int accountNumber, String bank, String ownerEmail, String ownerCF) {

@@ -80,8 +80,8 @@ public class User {
         return CF;
     }
 
-    public void setCF(String cF) {
-        CF = cF;
+    public void setCF(String CF) {
+        this.CF = CF;
     }
 
     public LocalDate getDateOfBirth() {

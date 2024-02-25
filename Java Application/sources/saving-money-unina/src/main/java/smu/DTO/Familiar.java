@@ -12,10 +12,10 @@ public class Familiar {
     private String familiarEmail;
 
     //Contructor
-    public Familiar(String name, String surname, String cF, LocalDate dateOfBirth, String familiarEmail) {
+    public Familiar(String name, String surname, String CF, LocalDate dateOfBirth, String familiarEmail) {
         this.name = name;
         this.surname = surname;
-        CF = cF;
+        this.CF = CF;
         this.dateOfBirth = dateOfBirth;
         this.familiarEmail = familiarEmail;
     }
@@ -42,8 +42,8 @@ public class Familiar {
         return CF;
     }
 
-    public void setCF(String cF) {
-        CF = cF;
+    public void setCF(String CF) {
+        this.CF = CF;
     }
 
     public LocalDate getDateOfBirth() {
