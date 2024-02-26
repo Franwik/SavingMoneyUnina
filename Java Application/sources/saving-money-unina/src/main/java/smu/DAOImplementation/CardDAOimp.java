@@ -72,6 +72,40 @@ public class CardDAOimp implements CardDAO{
         return result;
     }
 
+    @Override
+    public int update(Card card) throws SQLException {
+
+        Connection con = Database.getConnection();
+        //TODO: CardNumber
+        String sql = "UPDATE smu.card SET cvv = ?, expiredata = ?, cardtype = ? WHERE iban = ?";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ps.setString(1, card.getCvv());
+        ps.setDate(2, java.sql.Date.valueOf(card.getExpireDate()));
+        ps.setString(3, card.getCardType());
+        ps.setString(5, card.getIban());
+
+        int result = ps.executeUpdate();
+
+        return result;
+    }
+
+    @Override
+    public int delete(String iban) throws SQLException {
+        Connection con = Database.getConnection();
+
+        String sql = "DELETE FROM smu.card WHERE iban = ? CASCADE";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ps.setString(1, iban);
+
+        int result = ps.executeUpdate();
+
+        return result;
+    }
 
 
 }
+
