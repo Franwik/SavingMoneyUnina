@@ -82,4 +82,42 @@ public class UserDAOimp implements UserDAO {
         return user;
     }
 
+    @Override
+    public int update(User user) throws SQLException {
+        Connection con = Database.getConnection();
+
+        String sql = "UPDATE smu.user SET username = ?, password = ?, address = ?, name = ?, surname = ?, cf = ?, dateofbirth = ? WHERE email = ?";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ps.setString(1, user.getUsername());
+        ps.setString(2, user.getPassword());
+        ps.setString(3, user.getAddress());
+        ps.setString(4, user.getName());
+        ps.setString(5, user.getSurname());
+        ps.setString(6, user.getCF());
+        ps.setDate(7, java.sql.Date.valueOf(user.getDateOfBirth()));
+        ps.setString(8, user.getEmail());
+
+        int result = ps.executeUpdate();
+
+        return result;
+    }
+
+    @Override
+    public int delete(String email) throws SQLException {
+        Connection con = Database.getConnection();
+
+        String sql = "DELETE FROM smu.user WHERE email = ? CASCADE";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ps.setString(1, email);
+
+        int result = ps.executeUpdate();
+
+        return result;
+    }
+
+    
 }

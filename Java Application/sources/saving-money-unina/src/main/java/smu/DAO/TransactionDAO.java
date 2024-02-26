@@ -10,4 +10,13 @@ public interface TransactionDAO {
 
     List<Transaction> getAllByEmail(String email) throws SQLException;
 
+    //just for ideas
+    //List<Transaction> getAllByIBAN(String iban) throws SQLException;
+
+    int insert(Transaction transaction) throws SQLException;
+
+    int update(Transaction transaction) throws SQLException;
+
+    int delete(int id_transaction) throws SQLException;
+
 }

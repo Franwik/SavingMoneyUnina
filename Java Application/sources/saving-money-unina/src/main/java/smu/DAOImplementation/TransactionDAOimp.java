@@ -30,7 +30,7 @@ public class TransactionDAOimp implements TransactionDAO {
 		ResultSet rs = ps.executeQuery();
 		
 		if (rs.next())
-            transaction = new Transaction(rs.getInt("ID_Transaction"), rs.getFloat("amount"), rs.getDate("Date"), rs.getString("category"));
+            transaction = new Transaction(rs.getInt("ID_Transaction"), rs.getFloat("amount"), rs.getDate("Date").toLocalDate(), rs.getString("category"), rs.getString("cardiban"));
         
 
         return transaction;
@@ -68,11 +68,63 @@ public class TransactionDAOimp implements TransactionDAO {
 			ps.setString(1, card.getIban());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				transaction = new Transaction(rs.getInt("ID_Transaction"), rs.getFloat("amount"), rs.getDate("Date"), rs.getString("category"));
+				transaction = new Transaction(rs.getInt("ID_Transaction"), rs.getFloat("amount"), rs.getDate("Date").toLocalDate(), rs.getString("category"), rs.getString("cardiban"));
 			}
 			transactions.add(transaction);
 		}	
 		return transactions;
 	}
+
+	public int insert(Transaction transaction) throws SQLException {
+		Connection con = Database.getConnection();
+
+		String sql = "INSERT INTO transaction (amount, Date, category, cardiban) VALUES (?, ?, ?, ?)";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setFloat(1, transaction.getAmount());
+		ps.setDate(2, java.sql.Date.valueOf(transaction.getDate()));
+		ps.setString(3, transaction.getCategory());
+		ps.setString(4, transaction.getCardiban());
+
+		int result = ps.executeUpdate();
+
+		return result;
+	}
+
+	@Override
+	public int update(Transaction transaction) throws SQLException {
+		Connection con = Database.getConnection();
+
+		String sql = "UPDATE transaction SET amount = ?, Date = ?, category = ?, cardiban = ? WHERE ID_Transaction = ?";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setFloat(1, transaction.getAmount());
+		ps.setDate(2, java.sql.Date.valueOf(transaction.getDate()));
+		ps.setString(3, transaction.getCategory());
+		ps.setString(4, transaction.getCardiban());
+		ps.setInt(5, transaction.getID_Transaction());
+
+		int result = ps.executeUpdate();
+
+		return result;
+	}
+
+	@Override
+	public int delete(int id) throws SQLException {
+		Connection con = Database.getConnection();
+
+		String sql = "DELETE FROM transaction WHERE ID_Transaction = ? CASCADE";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setInt(1, id);
+
+		int result = ps.executeUpdate();
+
+		return result;
+	}
+	
 
 }

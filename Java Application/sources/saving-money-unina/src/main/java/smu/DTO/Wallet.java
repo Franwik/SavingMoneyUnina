@@ -8,19 +8,22 @@ public class Wallet {
     private String name;
     private String walletCategory;
     private int totalAmount;
+    private String ownerEmail;
+
 
 
 
 	//Constructor
-    public Wallet(int id_wallet, String name, String walletCategory, int totalAmount) {
+    public Wallet(int id_wallet, String name, String walletCategory, int totalAmount, String ownerEmail) {
         this.id_wallet = id_wallet;
         this.name = name;
         this.walletCategory = walletCategory;
         this.totalAmount = totalAmount;
+        this.ownerEmail = ownerEmail;
     }
 
-	//Getters and Setters
-	
+    //Getters and Setters
+    
     public int getId_wallet() {
         return id_wallet;
     }
@@ -58,4 +61,13 @@ public class Wallet {
         return "Wallet [id_wallet=" + id_wallet + ", name=" + name + ", walletCategory=" + walletCategory
                 + ", totalAmount=" + totalAmount + "]";
     }
+
+	public String getOwnerEmail() {
+		return ownerEmail;
+	}
+
+    public void setOwnerEmail(String ownerEmail) {
+        this.ownerEmail = ownerEmail;
+    }
+
 }

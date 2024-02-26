@@ -1,21 +1,24 @@
 package smu.DTO;
 
-import java.util.*;
+import java.time.*;
 
 public class Transaction {
 
 	//Attributes
     private int ID_Transaction;
     private float amount;
-    private Date date;
+    private LocalDate date;
     private String category;
+    private String cardiban;
 
 	//Constructor
-    public Transaction(int ID_Transaction, float amount, Date date, String category) {
+    public Transaction(int ID_Transaction, float amount, LocalDate date, String category, String cardiban) {
         this.ID_Transaction = ID_Transaction;
         this.amount = amount;
         this.date = date;
         this.category = category;
+        this.cardiban = cardiban;
+
     }
 
 	
@@ -37,11 +40,11 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public Date getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 
@@ -51,6 +54,14 @@ public class Transaction {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public String getCardiban() {
+        return cardiban;
+    }
+
+    public void setCardiban(String cardiban) {
+        this.cardiban = cardiban;
     }
 
     @Override

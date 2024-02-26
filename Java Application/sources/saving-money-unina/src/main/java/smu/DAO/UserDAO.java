@@ -9,6 +9,10 @@ public interface UserDAO {
 
     public int insert(User user) throws SQLException;
 
+    public int update(User user) throws SQLException;
+
+    public int delete(String email) throws SQLException;
+
     User checkLogin(String email, String password) throws SQLException;
 
 }

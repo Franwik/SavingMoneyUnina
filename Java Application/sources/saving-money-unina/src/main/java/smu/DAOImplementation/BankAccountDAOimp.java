@@ -51,4 +51,53 @@ public class BankAccountDAOimp implements BankAccountDAO{
         return result;
     }
 
+    @Override
+    public int insert(BankAccount bankAccount) throws SQLException {
+        Connection con = Database.getConnection();
+
+        String sql = "INSERT INTO smu.bankaccount (balance, accountnumber, bank, ownercf, owneremail) VALUES (?, ?, ?, ?, ?)";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ps.setInt(1, bankAccount.getBalance());
+        ps.setInt(2, bankAccount.getAccountNumber());
+        ps.setString(3, bankAccount.getBank());
+        ps.setString(4, bankAccount.getOwnerCF());
+        ps.setString(5, bankAccount.getOwnerEmail());
+
+        int result = ps.executeUpdate();
+
+        return result;
+    }
+
+    @Override
+    public int update(BankAccount bankAccount) throws SQLException {
+        Connection con = Database.getConnection();
+
+        String sql = "UPDATE smu.bankaccount SET balance = ? WHERE accountnumber = ?";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ps.setInt(1, bankAccount.getBalance());
+        ps.setInt(2, bankAccount.getAccountNumber());
+
+        int result = ps.executeUpdate();
+
+        return result;
+    }
+
+    @Override
+    public int delete(int accountNumber) throws SQLException {
+        Connection con = Database.getConnection();
+
+        String sql = "DELETE FROM smu.bankaccount WHERE accountnumber = ? CASCADE";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ps.setInt(1, accountNumber);
+
+        int result = ps.executeUpdate();
+
+        return result;
+    }
 }

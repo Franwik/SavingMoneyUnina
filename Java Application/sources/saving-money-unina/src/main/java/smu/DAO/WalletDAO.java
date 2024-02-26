@@ -10,6 +10,12 @@ public interface WalletDAO {
 
     List<Wallet> getAllByEmail(String email) throws SQLException;
 
+    int insert(Wallet wallet) throws SQLException;
+
+    int update(Wallet wallet) throws SQLException;
+
+    int delete(int id_wallet) throws SQLException;
+
 }
 
 

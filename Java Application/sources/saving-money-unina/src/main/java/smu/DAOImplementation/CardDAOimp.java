@@ -76,7 +76,8 @@ public class CardDAOimp implements CardDAO{
     public int update(Card card) throws SQLException {
 
         Connection con = Database.getConnection();
-        //TODO: CardNumber
+        
+        //TODO: Edit the DBMS, tuple and DAO/DAOimp because we frogot the CardNumber attribute into CARD table!!!
         String sql = "UPDATE smu.card SET cvv = ?, expiredata = ?, cardtype = ? WHERE iban = ?";
 
         PreparedStatement ps = con.prepareStatement(sql);

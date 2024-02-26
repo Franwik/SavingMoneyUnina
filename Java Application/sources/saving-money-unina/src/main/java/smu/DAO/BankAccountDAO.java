@@ -10,4 +10,10 @@ public interface BankAccountDAO {
 
     List<BankAccount> getByCF(String CF) throws SQLException;
 
+    int insert(BankAccount bankAccount) throws SQLException;
+
+    int update(BankAccount bankAccount) throws SQLException;
+
+    int delete(int accountnumber) throws SQLException;
+
 }

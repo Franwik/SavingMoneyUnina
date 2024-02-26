@@ -54,4 +54,56 @@ public class FamiliarDAOimp implements FamiliarDAO{
         return result;
     }
 
+    @Override
+    public int insert(Familiar familiar) throws SQLException {
+        Connection con = Database.getConnection();
+
+        String sql = "INSERT INTO smu.familiar (name, surname, cf, dateofbirth, familiaremail) VALUES (?, ?, ?, ?, ?)";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ps.setString(1, familiar.getName());
+        ps.setString(2, familiar.getSurname());
+        ps.setString(3, familiar.getCF());
+        ps.setDate(4, java.sql.Date.valueOf(familiar.getDateOfBirth()));
+        ps.setString(5, familiar.getFamiliarEmail());
+
+        int result = ps.executeUpdate();
+
+        return result;
+    }
+
+    @Override
+    public int delete(String CF) throws SQLException {
+        Connection con = Database.getConnection();
+
+        String sql = "DELETE FROM smu.familiar WHERE cf = ? CASCADE";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ps.setString(1, CF);
+
+        int result = ps.executeUpdate();
+
+        return result;
+    }
+
+    @Override
+    public int update(Familiar familiar) throws SQLException {
+        Connection con = Database.getConnection();
+
+        String sql = "UPDATE smu.familiar SET name = ?, surname = ?, dateofbirth = ?, familiaremail = ? WHERE cf = ?";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ps.setString(1, familiar.getName());
+        ps.setString(2, familiar.getSurname());
+        ps.setDate(3, java.sql.Date.valueOf(familiar.getDateOfBirth()));
+        ps.setString(4, familiar.getFamiliarEmail());
+        ps.setString(5, familiar.getCF());
+
+        int result = ps.executeUpdate();
+
+        return result;
+    }
 }

@@ -11,4 +11,10 @@ public interface FamiliarDAO {
 
     public List<Familiar> getByEmail(String email) throws SQLException;
 
+    public int insert(Familiar familiar) throws SQLException;
+
+    public int update(Familiar familiar) throws SQLException;
+
+    public int delete(String CF) throws SQLException;
+
 }
