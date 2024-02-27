@@ -124,7 +124,7 @@
                   <Font name="Arial" size="15.0" />
                </font>
             </Text>
-            <Button fx:id="newCard" layoutX="630.0" layoutY="60.0" mnemonicParsing="false" onAction="#showNewCardDialog" text="Aggiungi Carta">
+            <Button fx:id="newCard" layoutX="630.0" layoutY="60.0" mnemonicParsing="false" onAction="#showNewCardDialog" text="Aggiungi Carta" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="60.0">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>

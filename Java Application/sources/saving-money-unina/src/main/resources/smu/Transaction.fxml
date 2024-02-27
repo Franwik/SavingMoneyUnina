@@ -101,13 +101,13 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ComboBox fx:id="peopleChoser" layoutX="50.0" layoutY="58.0" onAction="#loadCards" prefHeight="25.0" prefWidth="200.0" promptText="---" />
+            <ComboBox fx:id="peopleChoser" layoutX="50.0" layoutY="58.0" onAction="#loadTransactions" prefHeight="25.0" prefWidth="200.0" promptText="---" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="58.0" />
             <Text fx:id="nameDisplay" fill="#009900" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>
                   <Font name="Arial Bold" size="20.0" />
                </font>
             </Text>
-            <TableView fx:id="cardList" layoutX="50.0" layoutY="120.0" prefHeight="270.0" prefWidth="700.0">
+            <TableView fx:id="cardList" layoutX="50.0" layoutY="120.0" prefHeight="270.0" prefWidth="700.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
                <columns>
                   <TableColumn fx:id="IBAN" minWidth="240.0" prefWidth="240.0" text="IBAN" />
                   <TableColumn fx:id="CVV" minWidth="50.0" prefWidth="50.0" text="CVV" />
@@ -120,12 +120,12 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
             </TableView>
-            <Text layoutX="50.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seleziona la carta">
+            <Text layoutX="50.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seleziona la carta" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="40.4208984375">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>
             </Text>
-            <Button fx:id="newTransaction" layoutX="584.0" layoutY="58.0" mnemonicParsing="false" onAction="#showNewTransactionDialog" text="Aggiungi Transazione">
+            <Button fx:id="newTransaction" layoutX="584.0" layoutY="58.0" mnemonicParsing="false" onAction="#showNewTransactionDialog" text="Aggiungi Transazione" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="58.0">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>

@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 16.2
--- Dumped by pg_dump version 16.2
+-- Dumped from database version 16.2 (Ubuntu 16.2-1.pgdg23.10+1)
+-- Dumped by pg_dump version 16.2 (Ubuntu 16.2-1.pgdg23.10+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -355,6 +355,7 @@ CREATE TABLE smu.card (
     ba_number integer NOT NULL,
     ownercf character varying(16),
     owneremail character varying(100),
+    cardnumber character varying(16),
     CONSTRAINT cardtype_check CHECK (((cardtype)::text = ANY (ARRAY[('Prepagata'::character varying)::text, ('Debito'::character varying)::text, ('Credito'::character varying)::text]))),
     CONSTRAINT ownership_check_card CHECK (((ownercf IS NULL) <> (owneremail IS NULL)))
 );
@@ -599,7 +600,6 @@ ALTER TABLE ONLY smu.wallet ALTER COLUMN id_wallet SET DEFAULT nextval('smu.wall
 COPY smu.bankaccount (balance, accountnumber, bank, ownercf, owneremail) FROM stdin;
 99990	4	Intesa San Paolo	\N	donnarumma_rosanna@outlook.com
 49700	3	Poste Italiane	\N	franwik_@outlook.com
-9960	5	Buddy Bank	ABC	\N
 \.
 
 
@@ -607,12 +607,9 @@ COPY smu.bankaccount (balance, accountnumber, bank, ownercf, owneremail) FROM st
 -- Data for Name: card; Type: TABLE DATA; Schema: smu; Owner: postgres
 --
 
-COPY smu.card (iban, cvv, expiredata, cardtype, ba_number, ownercf, owneremail) FROM stdin;
-PI2	123	2029-02-20	Prepagata	3	\N	franwik_@outlook.com
-ISP1	123	2029-02-20	Prepagata	4	\N	donnarumma_rosanna@outlook.com
-BB1	123	2029-02-20	Prepagata	5	ABC	\N
-BB2	123	2029-02-20	Prepagata	5	\N	franwik_@outlook.com
-PI1	123	2020-02-20	Prepagata	3	ABC	\N
+COPY smu.card (iban, cvv, expiredata, cardtype, ba_number, ownercf, owneremail, cardnumber) FROM stdin;
+PI2	123	2029-02-20	Prepagata	3	\N	franwik_@outlook.com	\N
+ISP1	123	2029-02-20	Prepagata	4	\N	donnarumma_rosanna@outlook.com	1234567890123457
 \.
 
 
@@ -621,7 +618,6 @@ PI1	123	2020-02-20	Prepagata	3	ABC	\N
 --
 
 COPY smu.familiar (name, surname, cf, dateofbirth, familiaremail) FROM stdin;
-Arturo	Donnarumma	ABC	2001-10-30	franwik_@outlook.com
 \.
 
 
@@ -631,8 +627,6 @@ Arturo	Donnarumma	ABC	2001-10-30	franwik_@outlook.com
 
 COPY smu.transaction (id_transaction, amount, date, category, cardiban) FROM stdin;
 23	100	2024-02-02	Spesa	PI2
-27	100	2020-01-22	Spesa	PI1
-28	40	2024-02-05	Gaming	BB1
 \.
 
 
@@ -642,8 +636,6 @@ COPY smu.transaction (id_transaction, amount, date, category, cardiban) FROM std
 
 COPY smu.transactioninwallet (id_transaction, id_wallet) FROM stdin;
 23	2
-27	2
-28	5
 \.
 
 
@@ -765,6 +757,14 @@ ALTER TABLE ONLY smu.wallet
 
 ALTER TABLE ONLY smu."user"
     ADD CONSTRAINT unique_cf UNIQUE (cf);
+
+
+--
+-- Name: card unique_cnumber; Type: CONSTRAINT; Schema: smu; Owner: postgres
+--
+
+ALTER TABLE ONLY smu.card
+    ADD CONSTRAINT unique_cnumber UNIQUE (cardnumber);
 
 
 --

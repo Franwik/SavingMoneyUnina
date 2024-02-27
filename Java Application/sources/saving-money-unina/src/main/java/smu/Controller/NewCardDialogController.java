@@ -13,11 +13,9 @@ import smu.LoggedUser;
 import smu.DAO.BankAccountDAO;
 import smu.DAO.CardDAO;
 import smu.DAO.FamiliarDAO;
-import smu.DAO.UserDAO;
 import smu.DAOImplementation.BankAccountDAOimp;
 import smu.DAOImplementation.CardDAOimp;
 import smu.DAOImplementation.FamiliarDAOimp;
-import smu.DAOImplementation.UserDAOimp;
 import smu.DTO.BankAccount;
 import smu.DTO.Familiar;
 import java.util.*;
@@ -164,15 +162,14 @@ public class NewCardDialogController implements Initializable {
 
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
 
+    @Override
+    public void initialize(URL location, java.util.ResourceBundle resources) {
         typeChoser.getItems().addAll(cardTypes);
 
         loadPeople();
 
         loadBA();
-        
     }
 
 }
