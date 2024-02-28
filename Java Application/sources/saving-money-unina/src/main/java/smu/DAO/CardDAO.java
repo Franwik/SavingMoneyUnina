@@ -14,6 +14,6 @@ public interface CardDAO {
 
     int update(Card card) throws SQLException;
 
-    int delete(String iban) throws SQLException;
+    int delete(String cardNumber) throws SQLException;
 
 }

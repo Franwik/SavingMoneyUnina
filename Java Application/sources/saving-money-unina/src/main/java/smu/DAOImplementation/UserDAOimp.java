@@ -10,7 +10,7 @@ import smu.Database;
 public class UserDAOimp implements UserDAO {
 
     @Override
-    public User get(String email) throws SQLException {
+    public User getByEmail(String email) throws SQLException {
         
         Connection con = Database.getConnection();
         User user = null;
@@ -20,6 +20,36 @@ public class UserDAOimp implements UserDAO {
         PreparedStatement ps = con.prepareStatement(sql);
 
         ps.setString(1, email);
+        
+        ResultSet rs = ps.executeQuery();
+
+        if(rs.next()){
+            String Aemail = rs.getString("email");
+            String username = rs.getString("username");;
+            String password = rs.getString("password");
+            String address = rs.getString("address");
+            String name = rs.getString("name");
+            String surname = rs.getString("surname");
+            String CF = rs.getString("cf");
+            LocalDate dateOfBirth = rs.getDate("dateofbirth").toLocalDate();
+
+            user = new User(Aemail, username, password, address, name, surname, CF, dateOfBirth);
+        }
+
+        return user;
+    }
+
+    @Override
+    public User getByCF(String cf) throws SQLException {
+        
+        Connection con = Database.getConnection();
+        User user = null;
+
+        String sql = "SELECT * FROM smu.user WHERE cf = ?";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ps.setString(1, cf);
         
         ResultSet rs = ps.executeQuery();
 

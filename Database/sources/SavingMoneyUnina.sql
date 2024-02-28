@@ -98,7 +98,7 @@ BEGIN
     SELECT *
     INTO card_row
     FROM smu.card
-    WHERE iban = NEW.cardiban;
+    WHERE cardnumber = NEW.cardnumber;
 
     -- Controlla se la carta è scaduta o meno al momento della transazione
     IF smu.expired_card(card_row.expiredata, NEW.date) THEN
@@ -348,6 +348,7 @@ ALTER SEQUENCE smu.bankaccount_accountnumber_seq OWNED BY smu.bankaccount.accoun
 --
 
 CREATE TABLE smu.card (
+    cardnumber character varying(16) NOT NULL,
     iban character varying(27) NOT NULL,
     cvv character varying(3) NOT NULL,
     expiredata date NOT NULL,
@@ -409,7 +410,7 @@ CREATE TABLE smu.transaction (
     amount double precision NOT NULL,
     date date NOT NULL,
     category character varying(35),
-    cardiban character varying(27) NOT NULL,
+    cardnumber character varying(16) NOT NULL,
     CONSTRAINT check_transaction_date CHECK ((date <= CURRENT_DATE))
 );
 
@@ -597,9 +598,7 @@ ALTER TABLE ONLY smu.wallet ALTER COLUMN id_wallet SET DEFAULT nextval('smu.wall
 --
 
 COPY smu.bankaccount (balance, accountnumber, bank, ownercf, owneremail) FROM stdin;
-99990	4	Intesa San Paolo	\N	donnarumma_rosanna@outlook.com
-49700	3	Poste Italiane	\N	franwik_@outlook.com
-9960	5	Buddy Bank	ABC	\N
+100000	2	Poste Italiane	\N	franwik_@outlook.com
 \.
 
 
@@ -607,12 +606,8 @@ COPY smu.bankaccount (balance, accountnumber, bank, ownercf, owneremail) FROM st
 -- Data for Name: card; Type: TABLE DATA; Schema: smu; Owner: postgres
 --
 
-COPY smu.card (iban, cvv, expiredata, cardtype, ba_number, ownercf, owneremail) FROM stdin;
-PI2	123	2029-02-20	Prepagata	3	\N	franwik_@outlook.com
-ISP1	123	2029-02-20	Prepagata	4	\N	donnarumma_rosanna@outlook.com
-BB1	123	2029-02-20	Prepagata	5	ABC	\N
-BB2	123	2029-02-20	Prepagata	5	\N	franwik_@outlook.com
-PI1	123	2020-02-20	Prepagata	3	ABC	\N
+COPY smu.card (cardnumber, iban, cvv, expiredata, cardtype, ba_number, ownercf, owneremail) FROM stdin;
+1234567890123456	PI0123456789012345678901234	123	2025-10-13	Prepagata	2	\N	franwik_@outlook.com
 \.
 
 
@@ -621,7 +616,6 @@ PI1	123	2020-02-20	Prepagata	3	ABC	\N
 --
 
 COPY smu.familiar (name, surname, cf, dateofbirth, familiaremail) FROM stdin;
-Arturo	Donnarumma	ABC	2001-10-30	franwik_@outlook.com
 \.
 
 
@@ -629,10 +623,7 @@ Arturo	Donnarumma	ABC	2001-10-30	franwik_@outlook.com
 -- Data for Name: transaction; Type: TABLE DATA; Schema: smu; Owner: postgres
 --
 
-COPY smu.transaction (id_transaction, amount, date, category, cardiban) FROM stdin;
-23	100	2024-02-02	Spesa	PI2
-27	100	2020-01-22	Spesa	PI1
-28	40	2024-02-05	Gaming	BB1
+COPY smu.transaction (id_transaction, amount, date, category, cardnumber) FROM stdin;
 \.
 
 
@@ -641,9 +632,6 @@ COPY smu.transaction (id_transaction, amount, date, category, cardiban) FROM std
 --
 
 COPY smu.transactioninwallet (id_transaction, id_wallet) FROM stdin;
-23	2
-27	2
-28	5
 \.
 
 
@@ -652,9 +640,7 @@ COPY smu.transactioninwallet (id_transaction, id_wallet) FROM stdin;
 --
 
 COPY smu."user" (email, username, password, address, name, surname, cf, dateofbirth) FROM stdin;
-franwik_@outlook.com	Franwik_	Ifs4ppic	Via Napoli 281	Francesco	Donnarumma	DNNFNC03A22C129A	2003-01-22
-donnarumma_rosanna@outlook.com	Ross	Rosanna97!	Via Napoli 281	Rosanna	Donnarumma	ABCD	1997-10-13
-arturodonnarumma01@gmail.com	thankyousomaz	maradona	Via Stazione 23	Arturo	Donnarumma	DNNRTR01R30L245F	2001-10-30
+franwik_@outlook.com	Franwik	Ifs4ppic	Via Napoli 281	Francesco	Donnarumma	DNNFNC03A22C129A	2003-01-22
 \.
 
 
@@ -663,9 +649,6 @@ arturodonnarumma01@gmail.com	thankyousomaz	maradona	Via Stazione 23	Arturo	Donna
 --
 
 COPY smu.wallet (id_wallet, name, walletcategory, totalamount, owneremail) FROM stdin;
-3	Eurospin	Spesa	0	donnarumma_rosanna@outlook.com
-2	Conad	Spesa	200	franwik_@outlook.com
-5	Game Stop	Gaming	40	franwik_@outlook.com
 \.
 
 
@@ -673,7 +656,7 @@ COPY smu.wallet (id_wallet, name, walletcategory, totalamount, owneremail) FROM 
 -- Name: bankaccount_accountnumber_seq; Type: SEQUENCE SET; Schema: smu; Owner: postgres
 --
 
-SELECT pg_catalog.setval('smu.bankaccount_accountnumber_seq', 5, true);
+SELECT pg_catalog.setval('smu.bankaccount_accountnumber_seq', 2, true);
 
 
 --
@@ -724,7 +707,7 @@ ALTER TABLE ONLY smu.bankaccount
 --
 
 ALTER TABLE ONLY smu.card
-    ADD CONSTRAINT pk_card PRIMARY KEY (iban);
+    ADD CONSTRAINT pk_card PRIMARY KEY (cardnumber);
 
 
 --
@@ -765,6 +748,14 @@ ALTER TABLE ONLY smu.wallet
 
 ALTER TABLE ONLY smu."user"
     ADD CONSTRAINT unique_cf UNIQUE (cf);
+
+
+--
+-- Name: card unique_cnumber; Type: CONSTRAINT; Schema: smu; Owner: postgres
+--
+
+ALTER TABLE ONLY smu.card
+    ADD CONSTRAINT unique_cnumber UNIQUE (cardnumber);
 
 
 --
@@ -849,7 +840,7 @@ ALTER TABLE ONLY smu.familiar
 --
 
 ALTER TABLE ONLY smu.transaction
-    ADD CONSTRAINT fk_transaction FOREIGN KEY (cardiban) REFERENCES smu.card(iban) ON DELETE CASCADE;
+    ADD CONSTRAINT fk_transaction FOREIGN KEY (cardnumber) REFERENCES smu.card(cardnumber) ON DELETE CASCADE;
 
 
 --

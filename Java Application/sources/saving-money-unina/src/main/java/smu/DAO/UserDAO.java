@@ -5,7 +5,9 @@ import java.sql.SQLException;
 
 public interface UserDAO {
 
-    User get(String email) throws SQLException;
+    User getByEmail(String email) throws SQLException;
+
+    User getByCF(String cf) throws SQLException;
 
     public int insert(User user) throws SQLException;
 

@@ -4,11 +4,12 @@ import java.net.URL;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import smu.App;
+import javafx.stage.Stage;
 import smu.LoggedUser;
 import smu.DAO.BankAccountDAO;
 import smu.DAO.CardDAO;
@@ -17,7 +18,9 @@ import smu.DAOImplementation.BankAccountDAOimp;
 import smu.DAOImplementation.CardDAOimp;
 import smu.DAOImplementation.FamiliarDAOimp;
 import smu.DTO.BankAccount;
+import smu.DTO.Card;
 import smu.DTO.Familiar;
+
 import java.util.*;
 import java.sql.*;
 import java.io.IOException;
@@ -26,13 +29,19 @@ import java.time.*;
 public class NewCardDialogController implements Initializable {
 
     @FXML
+    private Button closeButton;
+
+    @FXML
+    private TextField cardNumberField;
+
+    @FXML
     private TextField ibanField;
 
     @FXML
     private TextField cvvField;
 
     @FXML
-    private DatePicker dobField;
+    private DatePicker expDField;
 
     @FXML
     private ComboBox<String> typeChoser;
@@ -48,15 +57,19 @@ public class NewCardDialogController implements Initializable {
     @FXML
     private void createCard() throws IOException {
         //DAO to interact with DB
-        CardDAO userDAO = new CardDAOimp();
+        CardDAO cardDAO = new CardDAOimp();
 
-        //Singleton of logged user
-        LoggedUser loggedUser = null;
+        //instance of logged user
+        LoggedUser loggedUser = LoggedUser.getInstance(null);
+
+        //Card that needs to be inserted
+        Card card = null;
 
         //Fields from page
+        String cardNumber = cardNumberField.getText();
         String iban = ibanField.getText();
         String cvv = cvvField.getText();
-        LocalDate dob = dobField.getValue();
+        LocalDate expireDate = expDField.getValue();
         String type = typeChoser.getSelectionModel().getSelectedItem().toString();
         Integer ba_number = baChoser.getSelectionModel().getSelectedItem();
         String ownerCF = ownerChoser.getSelectionModel().getSelectedItem().toString();
@@ -67,35 +80,41 @@ public class NewCardDialogController implements Initializable {
         emptyAlert.setHeaderText("Si è verificato un errore.");
         emptyAlert.setContentText("Almeno uno dei campi è vuoto.");
 
-        Alert wrongLogin = new Alert(AlertType.CONFIRMATION);
-        wrongLogin.setTitle("Successo");
-        wrongLogin.setContentText("Nuova carta inserita con successo.");
+        Alert cardAdded = new Alert(AlertType.CONFIRMATION);
+        cardAdded.setTitle("Successo");
+        cardAdded.setContentText("Nuova carta inserita con successo.");
 
         //In case one of the field is empty
-        if(iban.isEmpty() || cvv.isEmpty() || dob == null || type.isEmpty() || ba_number == null || ownerCF.isEmpty()){
+        if(cardNumber.isEmpty() || iban.isEmpty() || cvv.isEmpty() || expDField == null || type.isEmpty() || ba_number == null || ownerCF.isEmpty()){
             emptyAlert.showAndWait();
         }
         else{
 
             try {
 
-                System.out.println(type + " " + ba_number + " " + ownerCF);
+                if(ownerCF.equals(loggedUser.getCF())){
+                    card = new Card(cardNumber, iban, cvv, expireDate, type, ba_number, null, loggedUser.getEmail());
+                }
+                else{
+                    card = new Card(cardNumber, iban, cvv, expireDate, type, ba_number, ownerCF, null);
+                }
+                
+                cardDAO.insert(card);
 
-                loggedUser = LoggedUser.getInstance(null);
+                cardAdded.showAndWait();
 
-                //if(loggedUser != null){
-                    App.setRoot("Home");
-                //}
-                //else{
-                //    wrongLogin.showAndWait();
-                //}
-            //} catch (SQLException e) {
-                //e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
+
+            } catch (SQLException e) {
+                System.out.println("codice: " + e.getSQLState());
             }
 
         }
+    }
+
+    @FXML
+    private void close(){
+        Stage stage = (Stage) closeButton.getScene().getWindow();
+        stage.close();
     }
 
     private void loadPeople(){

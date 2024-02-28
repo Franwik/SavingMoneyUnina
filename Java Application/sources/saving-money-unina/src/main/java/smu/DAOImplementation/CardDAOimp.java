@@ -23,7 +23,7 @@ public class CardDAOimp implements CardDAO{
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
-            Card card = new Card(rs.getString("iban"),rs.getString("cvv") , rs.getDate("expiredata").toLocalDate(), rs.getString("cardtype"), rs.getInt("ba_number"), rs.getString("ownercf"), rs.getString("owneremail"));
+            Card card = new Card(rs.getString("cardnumber"), rs.getString("iban"), rs.getString("cvv"), rs.getDate("expiredata").toLocalDate(), rs.getString("cardtype"), rs.getInt("ba_number"), rs.getString("ownercf"), rs.getString("owneremail"));
             result.add(card);
         }
 
@@ -44,7 +44,7 @@ public class CardDAOimp implements CardDAO{
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
-            Card card = new Card(rs.getString("iban"),rs.getString("cvv") , rs.getDate("expiredata").toLocalDate(), rs.getString("cardtype"), rs.getInt("ba_number"), rs.getString("ownercf"), rs.getString("owneremail"));
+            Card card = new Card(rs.getString("cardnumber"), rs.getString("iban"), rs.getString("cvv"), rs.getDate("expiredata").toLocalDate(), rs.getString("cardtype"), rs.getInt("ba_number"), rs.getString("ownercf"), rs.getString("owneremail"));
             result.add(card);
         }
 
@@ -78,14 +78,15 @@ public class CardDAOimp implements CardDAO{
         Connection con = Database.getConnection();
         
         //TODO: Edit the DBMS, tuple and DAO/DAOimp because we frogot the CardNumber attribute into CARD table!!!
-        String sql = "UPDATE smu.card SET cvv = ?, expiredata = ?, cardtype = ? WHERE iban = ?";
+        String sql = "UPDATE smu.card SET cvv = ?, expiredata = ?, cardtype = ?, iban = ? WHERE cardnumber = ?";
 
         PreparedStatement ps = con.prepareStatement(sql);
 
         ps.setString(1, card.getCvv());
         ps.setDate(2, java.sql.Date.valueOf(card.getExpireDate()));
         ps.setString(3, card.getCardType());
-        ps.setString(5, card.getIban());
+        ps.setString(4, card.getIban());
+        ps.setString(5, card.getCardNumber());
 
         int result = ps.executeUpdate();
 
@@ -93,14 +94,14 @@ public class CardDAOimp implements CardDAO{
     }
 
     @Override
-    public int delete(String iban) throws SQLException {
+    public int delete(String cardNumber) throws SQLException {
         Connection con = Database.getConnection();
 
-        String sql = "DELETE FROM smu.card WHERE iban = ? CASCADE";
+        String sql = "DELETE FROM smu.card WHERE cardNumber = ?";
 
         PreparedStatement ps = con.prepareStatement(sql);
 
-        ps.setString(1, iban);
+        ps.setString(1, cardNumber);
 
         int result = ps.executeUpdate();
 

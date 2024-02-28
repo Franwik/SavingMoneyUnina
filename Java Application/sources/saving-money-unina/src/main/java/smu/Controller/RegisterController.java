@@ -88,7 +88,7 @@ public class RegisterController {
         }else{
             try {
 
-                User user = new User(email, username, password, address, username, surname, CF, DOB);
+                User user = new User(email, username, password, address, name, surname, CF, DOB);
 
                 if(userDAO.insert(user) > 0){
                     successAlert.showAndWait();

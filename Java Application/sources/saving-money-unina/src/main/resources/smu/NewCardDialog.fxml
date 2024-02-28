@@ -20,6 +20,7 @@
           <ColumnConstraints hgrow="SOMETIMES" maxWidth="212.0" minWidth="10.0" prefWidth="210.0" />
         </columnConstraints>
         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -28,7 +29,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Text focusTraversable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="IBAN" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <Text focusTraversable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="IBAN" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>
@@ -36,7 +37,7 @@
                   <Insets left="10.0" right="10.0" />
                </GridPane.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Confice Fiscale Proprietario" textAlignment="CENTER" wrappingWidth="164.24072265625" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Confice Fiscale Proprietario" textAlignment="CENTER" wrappingWidth="164.24072265625" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>
@@ -44,7 +45,7 @@
                   <Insets left="10.0" right="10.0" />
                </GridPane.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Conto Corrente Associato" textAlignment="CENTER" wrappingWidth="160.7529296875" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Conto Corrente Associato" textAlignment="CENTER" wrappingWidth="160.7529296875" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>
@@ -52,7 +53,7 @@
                   <Insets left="10.0" right="10.0" />
                </GridPane.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Tipo" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>
@@ -60,7 +61,7 @@
                   <Insets left="10.0" right="10.0" />
                </GridPane.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Data di Scadenza" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Data di Scadenza" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>
@@ -68,7 +69,7 @@
                   <Insets left="10.0" right="10.0" />
                </GridPane.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CVV" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="CVV" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>
@@ -76,44 +77,57 @@
                   <Insets left="10.0" right="10.0" />
                </GridPane.margin>
             </Text>
-            <TextField fx:id="ibanField" promptText="IBAN" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <TextField fx:id="ibanField" promptText="IBAN" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets left="10.0" right="14.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="cvvField" promptText="CVV" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <TextField fx:id="cvvField" promptText="CVV" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets left="10.0" right="14.0" />
                </GridPane.margin>
             </TextField>
-            <DatePicker fx:id="dobField" prefWidth="200.0" promptText="Data di Scadenza" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <DatePicker fx:id="expDField" prefWidth="200.0" promptText="Data di Scadenza" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets left="10.0" right="14.0" />
                </GridPane.margin>
             </DatePicker>
-            <ComboBox fx:id="typeChoser" prefWidth="200.0" promptText="---" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <ComboBox fx:id="typeChoser" prefWidth="200.0" promptText="---" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets left="10.0" right="14.0" />
                </GridPane.margin>
             </ComboBox>
-            <ComboBox fx:id="ownerChoser" prefWidth="200.0" promptText="---" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+            <ComboBox fx:id="ownerChoser" prefWidth="200.0" promptText="---" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="6" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets left="10.0" right="14.0" />
                </GridPane.margin>
             </ComboBox>
-            <ComboBox fx:id="baChoser" prefWidth="200.0" promptText="---" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <ComboBox fx:id="baChoser" prefWidth="200.0" promptText="---" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets left="10.0" right="14.0" />
                </GridPane.margin>
             </ComboBox>
+            <Text focusTraversable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero Carta" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="10.0" right="10.0" />
+               </GridPane.margin>
+            </Text>
+            <TextField fx:id="cardNumberField" promptText="Numero Carta" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="10.0" right="14.0" />
+               </GridPane.margin>
+            </TextField>
          </children>
       </GridPane>
-      <Button fx:id="createCard" layoutX="281.0" layoutY="316.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="75.0" text="OK">
+      <Button layoutX="281.0" layoutY="316.0" mnemonicParsing="false" onAction="#createCard" prefHeight="35.0" prefWidth="75.0" text="OK">
          <font>
             <Font name="Arial" size="15.0" />
          </font>
       </Button>
-      <Button cancelButton="true" layoutX="171.0" layoutY="316.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="75.0" text="Annulla">
+      <Button fx:id="closeButton" cancelButton="true" layoutX="171.0" layoutY="316.0" mnemonicParsing="false" onAction="#close" prefHeight="35.0" prefWidth="75.0" text="Annulla">
          <font>
             <Font name="Arial" size="15.0" />
          </font>

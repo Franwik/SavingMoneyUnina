@@ -37,6 +37,9 @@ public class CardController extends ApplicationController implements Initializab
     private TableView<Card> cardList;
 
     @FXML
+    private TableColumn<Card, String> cardNumber;
+
+    @FXML
     private TableColumn<Card, String> IBAN;
     
     @FXML
@@ -148,6 +151,7 @@ public class CardController extends ApplicationController implements Initializab
         NewCardStage = new Stage();
 
         //Initalize table columns
+        cardNumber.setCellValueFactory(new PropertyValueFactory<Card, String>("cardNumber"));
         IBAN.setCellValueFactory(new PropertyValueFactory<Card, String>("iban"));
         CVV.setCellValueFactory(new PropertyValueFactory<Card, String>("cvv"));
         expireDate.setCellValueFactory(new PropertyValueFactory<Card, LocalDate>("expireDate"));

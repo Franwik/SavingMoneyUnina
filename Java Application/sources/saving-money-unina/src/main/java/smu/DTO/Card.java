@@ -5,6 +5,7 @@ import java.time.LocalDate;
 public class Card {
 
     //Attributes
+    private String cardNumber;
     private String iban;
     private String cvv;
     private LocalDate expireDate;
@@ -14,7 +15,8 @@ public class Card {
     private String ownerEmail;
 
     //Contructor
-    public Card(String iban, String cvv, LocalDate expireDate, String cardType, int ba_number, String ownerCF, String ownerEmail) {
+    public Card(String cardNumber, String iban, String cvv, LocalDate expireDate, String cardType, int ba_number, String ownerCF, String ownerEmail) {
+        this.cardNumber = cardNumber;
         this.iban = iban;
         this.cvv = cvv;
         this.expireDate = expireDate;
@@ -25,6 +27,14 @@ public class Card {
     }
 
     // Getters and setters
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
 
     public String getIban() {
         return iban;
@@ -84,8 +94,9 @@ public class Card {
 
     @Override
     public String toString() {
-        return "Card [iban=" + iban + ", cvv=" + cvv + ", expireDate=" + expireDate + ", cardType=" + cardType
-                + ", ba_number=" + ba_number + ", ownerCF=" + ownerCF + ", ownerEmail=" + ownerEmail + "]";
+        return "Card [cardNumber=" + cardNumber + ", iban=" + iban + ", cvv=" + cvv + ", expireDate=" + expireDate
+                + ", cardType=" + cardType + ", ba_number=" + ba_number + ", ownerCF=" + ownerCF + ", ownerEmail="
+                + ownerEmail + "]";
     }
     
 }
