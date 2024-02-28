@@ -26,12 +26,12 @@ import java.sql.*;
 import java.io.IOException;
 import java.time.*;
 
-public class NewCardDialogController implements Initializable {
+public class DeleteCardDialogController implements Initializable {
 
     @FXML
     private Button closeButton;
 
-    @FXML
+    /*@FXML
     private TextField cardNumberField;
 
     @FXML
@@ -110,7 +110,7 @@ public class NewCardDialogController implements Initializable {
             }
 
         }
-    }
+    }*/
 
     @FXML
     private void close(){
@@ -118,7 +118,7 @@ public class NewCardDialogController implements Initializable {
         stage.close();
     }
 
-    private void loadPeople(){
+    /*private void loadPeople(){
 
         List<String> people = new ArrayList<>();
         List<Familiar> familiars = new ArrayList<>();
@@ -180,16 +180,16 @@ public class NewCardDialogController implements Initializable {
             e.printStackTrace();
         }
 
-    }
+    }*/
 
 
     @Override
     public void initialize(URL location, java.util.ResourceBundle resources) {
-        typeChoser.getItems().addAll(cardTypes);
+        /*typeChoser.getItems().addAll(cardTypes);
 
         loadPeople();
 
-        loadBA();
+        loadBA();*/
     }
 
 }

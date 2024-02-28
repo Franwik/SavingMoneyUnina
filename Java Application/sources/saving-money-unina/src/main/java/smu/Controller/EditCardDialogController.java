@@ -26,7 +26,7 @@ import java.sql.*;
 import java.io.IOException;
 import java.time.*;
 
-public class NewCardDialogController implements Initializable {
+public class EditCardDialogController implements Initializable {
 
     @FXML
     private Button closeButton;

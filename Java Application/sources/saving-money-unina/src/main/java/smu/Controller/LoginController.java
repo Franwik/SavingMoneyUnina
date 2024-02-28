@@ -7,6 +7,7 @@ import smu.App;
 import smu.LoggedUser;
 import smu.DAO.UserDAO;
 import smu.DAOImplementation.UserDAOimp;
+import smu.DTO.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -32,9 +33,6 @@ public class LoginController {
         //DAO to interact with DB
         UserDAO userDAO = new UserDAOimp();
 
-        //Singleton of logged user
-        LoggedUser loggedUser = null;
-
         //email and password from Login page
         String email = emailField.getText();
         String password = passwordField.getText();
@@ -58,9 +56,14 @@ public class LoginController {
 
             try {
 
-                loggedUser = LoggedUser.getInstance(userDAO.checkLogin(email, password));
+                User user = userDAO.checkLogin(email, password);
 
-                if(loggedUser != null){
+                //If a user is found...
+                if(user != null){
+                    //sets logged user instance..
+                    LoggedUser loggedUser = LoggedUser.getInstance(user);
+                    System.out.println(loggedUser);
+                    //switches to home page of application
                     App.setRoot("Home");
                 }
                 else{

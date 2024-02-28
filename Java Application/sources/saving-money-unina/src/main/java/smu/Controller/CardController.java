@@ -13,7 +13,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import smu.App;
 import smu.LoggedUser;
@@ -26,6 +28,9 @@ import smu.DTO.Familiar;
 import java.io.IOException;
 
 public class CardController extends ApplicationController implements Initializable{
+
+    @FXML
+    private BorderPane mainPage;
 
     @FXML
     private ComboBox<String> peopleChoser;
@@ -59,11 +64,38 @@ public class CardController extends ApplicationController implements Initializab
 
     @FXML
     private void showNewCardDialog() throws IOException {
+        NewCardStage.initOwner((Stage) mainPage.getScene().getWindow());
+        NewCardStage.initModality(Modality.WINDOW_MODAL);
         NewCardscene = new Scene(App.loadFXML("NewCardDialog").load(), 370, 365);
         NewCardStage.setScene(NewCardscene);
         NewCardStage.setTitle("Creazione Nuova Carta");
         NewCardStage.setResizable(false);
-        NewCardStage.show();
+        NewCardStage.showAndWait();
+        App.setRoot("Card");
+    }
+
+    @FXML
+    private void showDeleteCardDialog() throws IOException {
+        NewCardStage.initOwner((Stage) mainPage.getScene().getWindow());
+        NewCardStage.initModality(Modality.WINDOW_MODAL);
+        NewCardscene = new Scene(App.loadFXML("DeleteCardDialog").load(), 370, 365);
+        NewCardStage.setScene(NewCardscene);
+        NewCardStage.setTitle("Eliminazione Carta");
+        NewCardStage.setResizable(false);
+        NewCardStage.showAndWait();
+        App.setRoot("Card");
+    }
+
+    @FXML
+    private void showEditCardDialog() throws IOException {
+        NewCardStage.initOwner((Stage) mainPage.getScene().getWindow());
+        NewCardStage.initModality(Modality.WINDOW_MODAL);
+        NewCardscene = new Scene(App.loadFXML("EditCardDialog").load(), 370, 365);
+        NewCardStage.setScene(NewCardscene);
+        NewCardStage.setTitle("Modifica Carta");
+        NewCardStage.setResizable(false);
+        NewCardStage.showAndWait();
+        App.setRoot("Card");
     }
 
     private void loadPeople(){

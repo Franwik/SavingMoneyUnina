@@ -38,6 +38,10 @@ public class LoggedUser{
         return instance;
     }
 
+    public static LoggedUser getInstance() {
+        return instance;
+    }
+
     public static void cleanUserSession() {
             instance = null;
     }
@@ -72,6 +76,13 @@ public class LoggedUser{
 
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
+    }
+
+    @Override
+    public String toString() {
+        return "LoggedUser [email=" + email + ", username=" + username + ", password=" + password + ", address="
+                + address + ", name=" + name + ", surname=" + surname + ", CF=" + CF + ", dateOfBirth=" + dateOfBirth
+                + "]";
     }
 
 }

@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@CardStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smu.Controller.CardController">
+<BorderPane fx:id="mainPage" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="800.0" stylesheets="@CardStyle.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smu.Controller.CardController">
    <top>
       <AnchorPane prefHeight="60.0" prefWidth="721.0" style="-fx-background-color: #009900;" BorderPane.alignment="CENTER">
          <children>
@@ -101,8 +101,8 @@
    <center>
       <AnchorPane prefHeight="440.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
-            <ComboBox fx:id="peopleChoser" layoutX="50.0" layoutY="60.0" onAction="#loadCards" prefHeight="25.0" prefWidth="200.0" promptText="---" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="60.0" />
-            <Text fx:id="nameDisplay" fill="#009900" layoutX="283.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" AnchorPane.leftAnchor="283.0" AnchorPane.topAnchor="60.89453125">
+            <ComboBox fx:id="peopleChoser" layoutX="50.0" layoutY="60.0" onAction="#loadCards" prefHeight="27.0" prefWidth="200.0" promptText="---" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="60.0" />
+            <Text fx:id="nameDisplay" fill="#009900" layoutX="50.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="95.0">
                <font>
                   <Font name="Arial Bold" size="20.0" />
                </font>
@@ -126,6 +126,16 @@
                </font>
             </Text>
             <Button fx:id="newCard" layoutX="630.0" layoutY="60.0" mnemonicParsing="false" onAction="#showNewCardDialog" text="Aggiungi Carta" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="60.0">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="deleteCard" layoutX="500.0" layoutY="60.0" mnemonicParsing="false" onAction="#showDeleteCardDialog" text="Rimuovi Carta" AnchorPane.rightAnchor="184.0" AnchorPane.topAnchor="60.0">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Button>
+            <Button fx:id="editCard" layoutX="369.0" layoutY="60.0" mnemonicParsing="false" onAction="#showEditCardDialog" text="Modifica Carta" AnchorPane.rightAnchor="314.0" AnchorPane.topAnchor="60.0">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>
