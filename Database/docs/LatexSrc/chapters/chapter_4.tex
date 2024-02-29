@@ -15,7 +15,7 @@ CREATE TABLE smu."user"(*@\footnote{vengono usate le virgolette perché altrimen
     cf character varying(16) NOT NULL,
     dateofbirth date NOT NULL,
     CONSTRAINT check_birthdate_user CHECK ((dateofbirth < CURRENT_DATE))
-);    
+);
 \end{lstlisting}
 
 \subsection{Familiar}
@@ -28,7 +28,7 @@ CREATE TABLE smu.familiar (
     dateofbirth date NOT NULL,
     familiaremail character varying(100) NOT NULL,
     CONSTRAINT check_birthdate_familiar CHECK ((dateofbirth < CURRENT_DATE))
-);  
+);
 \end{lstlisting}
 
 \newpage
@@ -43,13 +43,14 @@ CREATE TABLE smu.bankaccount (
     ownercf character varying(16),
     owneremail character varying(100),
     CONSTRAINT ownership_check_ba CHECK (((ownercf IS NULL) <> (owneremail IS NULL)))
-);  
+);
 \end{lstlisting}
 
 \subsection{Card}
 
 \begin{lstlisting}
 CREATE TABLE smu.card (
+    cardnumber character varying(16) NOT NULL,
     iban character varying(27) NOT NULL,
     cvv character varying(3) NOT NULL,
     expiredata date NOT NULL,
@@ -57,7 +58,7 @@ CREATE TABLE smu.card (
     ba_number integer NOT NULL,
     ownercf character varying(16),
     owneremail character varying(100),
-    CONSTRAINT cardtype_check CHECK (((cardtype)::text = ANY ((ARRAY['prepaid'::character varying, 'debit'::character varying, 'credit'::character varying])::text[]))),
+    CONSTRAINT cardtype_check CHECK (((cardtype)::text = ANY (ARRAY[('Prepagata'::character varying)::text, ('Debito'::character varying)::text, ('Credito'::character varying)::text]))),
     CONSTRAINT ownership_check_card CHECK (((ownercf IS NULL) <> (owneremail IS NULL)))
 );
 \end{lstlisting}
@@ -70,7 +71,7 @@ CREATE TABLE smu.transaction (
     amount double precision NOT NULL,
     date date NOT NULL,
     category character varying(35),
-    cardiban character varying(27) NOT NULL,
+    cardnumber character varying(16) NOT NULL,
     CONSTRAINT check_transaction_date CHECK ((date <= CURRENT_DATE))
 );
 \end{lstlisting}
@@ -108,7 +109,7 @@ CREATE TRIGGER check_card_owner_trigger
 \end{lstlisting}
 
 \begin{lstlisting}
-CREATE FUNCTION smu.check_card_owner() RETURNS trigger
+    CREATE FUNCTION smu.check_card_owner() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -125,7 +126,7 @@ BEGIN
     FROM smu.bankaccount
     WHERE accountnumber = NEW.ba_number;
 
-    -- Recupera l'email dell'account al quale e' associato
+    -- Recupera l'email dell'account al quale è associato
     -- il familiare, proprietario della carta
     IF NEW.ownercf IS NOT NULL THEN
         SELECT familiaremail
@@ -138,16 +139,16 @@ BEGIN
     IF (BA_used.owneremail = NEW.owneremail OR BA_used.ownercf = NEW.ownercf) OR
     (familiar_email = BA_used.owneremail) OR BA_used.ownercf IN (SELECT CF FROM smu.familiar WHERE familiaremail = NEW.owneremail)
     THEN
-        -- L'IF e' stato strutturato in questo modo perche' non basta negare le condizioni per avere
-        -- solo un IF THEN. Questo perche' nel caso in cui alcuni attributi sono NULL il sistema
-        -- non e' in grado di fornire una valutazione sulla condizione, quindi gli AND da sostituire
+        -- L'IF è stato strutturato in questo modo perché non basta negare le condizioni per avere
+        -- solo un IF THEN. Questo perché nel caso in cui alcuni attributi sono NULL il sistema
+        -- non è in grado di fornire una valutazione sulla condizione, quindi gli AND da sostituire
         -- agli attuali OR sarebbero sempre falsi.
     ELSE
         RAISE EXCEPTION 'Il proprietario della carta deve essere anche il proprietario del conto corrente, o al massimo un suo familiare.';
     END IF;
 
     -- Nell'ultima porzione della condizione dell'IF viene controllato se il codice fiscale
-    -- del proprietario del conto corrente e' presente nell'elenco dei familiari associati
+    -- del proprietario del conto corrente è presente nell'elenco dei familiari associati
     -- all'email del proprietario della carta
 
     RETURN NEW;
@@ -158,14 +159,14 @@ $$;
 \subsection{connect\_transaction\_to\_wallet\_trigger}
 
 \begin{lstlisting}
-CREATE TRIGGER connect_transaction_to_wallet_trigger
-    AFTER INSERT OR UPDATE ON smu.transaction
-    FOR EACH ROW
-    EXECUTE FUNCTION smu.connect_transaction_to_wallet();
+    CREATE TRIGGER check_card_owner_trigger 
+    BEFORE INSERT ON smu.card 
+    FOR EACH ROW 
+    EXECUTE FUNCTION smu.check_card_owner();
 \end{lstlisting}
 
 \begin{lstlisting}
-CREATE FUNCTION smu.connect_transaction_to_wallet() RETURNS trigger
+    CREATE FUNCTION smu.connect_transaction_to_wallet() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -177,24 +178,24 @@ DECLARE
     old_ba_row smu.bankaccount%ROWTYPE;
 BEGIN
 
-    -- Seleziono la carta con la quale e' stata effettuata la transazione
+    -- Seleziono la carta con la quale è stata effettuata la transazione
     SELECT *
     INTO card_row
     FROM smu.card
-    WHERE iban = NEW.cardiban;
+    WHERE cardnumber = NEW.cardnumber;
 
-    -- Controlla se la carta e' scaduta o meno al momento della transazione
+    -- Controlla se la carta è scaduta o meno al momento della transazione
     IF smu.expired_card(card_row.expiredata, NEW.date) THEN
         RAISE EXCEPTION 'La carta risultava scaduta al momento della transazione';
     END IF;
 
-    -- Recupero il conto corrente al quale e' associato la carta
+    -- Recupero il conto corrente al quale è associato la carta
     SELECT *
     INTO ba_row
     FROM smu.bankaccount
     WHERE accountnumber = card_row.ba_number;
     
-    -- Controllo se la transazione puo' essere effettuata o meno
+    -- Controllo se la transazione può essere effettuata o meno
     IF TG_OP = 'INSERT' AND ba_row.balance < NEW.amount THEN
         RAISE EXCEPTION 'Saldo sul conto corrente insufficiente';
     ELSIF TG_OP = 'UPDATE' AND (ba_row.balance + OLD.amount) < NEW.amount THEN
@@ -207,7 +208,7 @@ BEGIN
         account_email := card_row.owneremail;
     ELSE
         -- Altrimenti, appartiene sicuramente ad un familiare e vado a
-        -- recuperare l'email dell'utente al quale e' associato
+        -- recuperare l'email dell'utente al quale è associato
         SELECT familiaremail
         INTO account_email
         FROM smu.familiar
@@ -242,7 +243,7 @@ BEGIN
 
     IF TG_OP = 'UPDATE' THEN
 
-        -- Se e' stata modificata la categoria, la transazione viene collegata ai nuovi portafogli
+        -- Se è stata modificata la categoria, la transazione viene collegata ai nuovi portafogli
         -- altrimenti viene ricollegata agli stessi
 
         -- Scollego la transazione da tutti i portafogli
@@ -268,6 +269,7 @@ BEGIN
             FROM smu.wallet
             WHERE walletcategory = NEW.category AND owneremail = account_email
         LOOP
+
             -- Collega la transazione al wallet trovato
             INSERT INTO smu.transactioninwallet (id_transaction, id_wallet)
             VALUES (NEW.id_transaction, wallet_row.id_wallet);
@@ -276,15 +278,16 @@ BEGIN
             UPDATE smu.wallet
             SET totalamount = totalamount + NEW.amount
             WHERE id_wallet = wallet_row.id_wallet;
+
         END LOOP;        
 
-        -- Seleziono la carta con la quale e' stata effettuata inizialmente la transazione
+        -- Seleziono la carta con la quale è stata effettuata inizialmente la transazione
         SELECT *
         INTO old_card_row
         FROM smu.card
         WHERE iban = OLD.cardiban;
 
-        -- Recupero il conto corrente al quale e' associato la vecchia carta
+        -- Recupero il conto corrente al quale è associato la vecchia carta
         SELECT *
         INTO old_ba_row
         FROM smu.bankaccount
@@ -312,9 +315,9 @@ $$;
 \subsection{update\_wallet\_category\_trigger}
 
 \begin{lstlisting}
-CREATE TRIGGER update_wallet_category_trigger
-    AFTER UPDATE OF walletcategory ON smu.wallet
-    FOR EACH ROW
+    CREATE TRIGGER update_wallet_category_trigger 
+    AFTER UPDATE OF walletcategory ON smu.wallet 
+    FOR EACH ROW 
     EXECUTE FUNCTION smu.update_wallet_category();
 \end{lstlisting}
 
@@ -337,13 +340,14 @@ BEGIN
     FOR transaction_row IN
         SELECT *
         FROM smu.transaction AS T
-        WHERE T.category = NEW.walletcategory AND T.cardiban IN
-        (SELECT iban FROM smu.card
-        WHERE owneremail = NEW.owneremail UNION
-        SELECT C.iban FROM smu.familiar AS F JOIN
-        smu.card AS C ON F.cf = C.ownercf
+        WHERE T.category = NEW.walletcategory AND T.cardiban IN 
+        (SELECT iban FROM smu.card WHERE owneremail = NEW.owneremail
+        UNION SELECT C.iban
+        FROM smu.familiar AS F
+        JOIN smu.card AS C ON F.cf = C.ownercf
         WHERE familiaremail = NEW.owneremail)
     LOOP
+
         -- Collega la transazione trovata
         INSERT INTO smu.transactioninwallet (id_transaction, id_wallet)
         VALUES (transaction_row.id_transaction, NEW.id_wallet);
@@ -352,6 +356,7 @@ BEGIN
         UPDATE smu.wallet
         SET totalamount = totalamount + transaction_row.amount
         WHERE id_wallet = NEW.id_wallet;
+
     END LOOP;
 
     RETURN NEW;
@@ -365,7 +370,7 @@ $$;
 \subsection{expired\_card}
 
 \begin{lstlisting}
-CREATE FUNCTION smu.expired_card(card_expire_date date, transaction_date date) RETURNS boolean
+    CREATE FUNCTION smu.expired_card(card_expire_date date, transaction_date date) RETURNS boolean
     LANGUAGE plpgsql
     AS $$
 BEGIN

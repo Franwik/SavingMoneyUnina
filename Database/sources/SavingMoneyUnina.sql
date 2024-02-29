@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 16.2
--- Dumped by pg_dump version 16.2
+-- Dumped from database version 16.2 (Postgres.app)
+-- Dumped by pg_dump version 16.2 (Postgres.app)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -759,6 +759,14 @@ ALTER TABLE ONLY smu.card
 
 
 --
+-- Name: card unique_iban; Type: CONSTRAINT; Schema: smu; Owner: postgres
+--
+
+ALTER TABLE ONLY smu.card
+    ADD CONSTRAINT unique_iban UNIQUE (iban);
+
+
+--
 -- Name: user unique_username; Type: CONSTRAINT; Schema: smu; Owner: postgres
 --
 
@@ -770,7 +778,7 @@ ALTER TABLE ONLY smu."user"
 -- Name: card check_card_owner_trigger; Type: TRIGGER; Schema: smu; Owner: postgres
 --
 
-CREATE TRIGGER check_card_owner_trigger BEFORE INSERT ON smu.card FOR EACH ROW EXECUTE FUNCTION smu.check_card_owner();
+_card_owner_trigger BEFORE INSERT ON sCREATE TRIGGER checkmu.card FOR EACH ROW EXECUTE FUNCTION smu.check_card_owner();
 
 
 --

@@ -20,7 +20,7 @@
     \hspace{2.79cm} ownerEmail $ \rightarrow $ User.email \\ \\ \hline
 
     \\ \rowcolor{black!10}
-    \textbf{Card} (\uline{IBAN}, CVV, expireDate, cardCategory, \uuline{BA\_Number}, \uuline{ownerCF}, \uuline{ownerEmail}) \\
+    \textbf{Card} (\uline{cardNumber}, IBAN, CVV, expireDate, cardCategory, \uuline{BA\_Number}, \uuline{ownerCF}, \uuline{ownerEmail}) \\
     \textit{Chiavi esterne}: BA\_Number $ \rightarrow $ BankAccount.accountNumber \\
     \hspace{2.79cm} ownerCF $ \rightarrow $ Familiar.CF \\
     \hspace{2.79cm} ownerEmail $ \rightarrow $ User.email \\ \\ \hline
@@ -30,8 +30,8 @@
     \textit{Chiavi esterne}: ownerEmail $ \rightarrow $ User.email \\ \\ \hline
 
     \\ \rowcolor{black!10}
-    \textbf{Transaction} (\uline{ID\_Transaction}, amount, date, category, \uuline{CardIBAN}) \\
-    \textit{Chiavi esterne}: cardIBAN $ \rightarrow $ Card.IBAN \\ \\ \hline
+    \textbf{Transaction} (\uline{ID\_Transaction}, amount, date, category, \uuline{cardNumber}) \\
+    \textit{Chiavi esterne}: cardNumber $ \rightarrow $ Card.cardNumber \\ \\ \hline
 
     \\ \rowcolor{black!10}
     \textbf{TransactionInWallet} (\uuline{ID\_Transaction}, \uuline{ID\_Wallet}) \\
@@ -61,7 +61,7 @@
     Relazione 1..* a 1, è stata migrata la chiave primaria di \textit{BankAccount} (accountNumber) in \textit{Card} (BA\_Number) \\ \hline
 
     \textbf{To Make} &
-    Relazione 0..* a 1, è stata migrata la chiave primaria di \textit{Card} (IBAN) in \textit{Transaction} (CardIBAN) \\ \hline
+    Relazione 0..* a 1, è stata migrata la chiave primaria di \textit{Card} (cardNumber) in \textit{Transaction} (cardNumber) \\ \hline
 
     \textbf{To Be In (Transaction/Wallet)} &
     Relazione 0..* a 0..*, è stata creata la tabella ponte \textit{TransactionInWallet} che contiene le chiavi primarie di \textit{Transaction} (ID\_Transaction) e di \textit{Wallet} (ID\_Wallet) \\ \hline

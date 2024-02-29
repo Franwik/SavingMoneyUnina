@@ -96,7 +96,8 @@ identificate con il prefisso \textbf{ID\_}.
 
     \textbf{Card} & \raggedright Classe utilizzata per identificare le carte appartenenti a utenti o familiari. &
     \parbox{7cm}{
-        \textbf{IBAN} (\textit{String}): codice identificativo della carta. \\
+        \textbf{cardNumber} (\textit{String}): codice identificatio della carta
+        \textbf{IBAN} (\textit{String}): codice bancario della carta. \\
         \textbf{CVV} (\textit{String}): codice di sicurezza per le transazioni delle carte. \\
         \textbf{expireDate} (\textit{Date}): data che indica la scadenza della carta. \\
         \textbf{cardType} (\textit{String}): campo che indica la tipologia della carta.
@@ -191,6 +192,9 @@ identificate con il prefisso \textbf{ID\_}.
 
     \raggedright \textbf{unique\_CF} & \raggedright Intrarelazionale &
     Nella tabella User non ci possono essere t-uple diverse con lo stesso CF. \\ \hline
+
+    \raggedright \textbf{unique\_iban} & \raggedright Intrarelazionale &
+    Nella tabella Card non ci possono essere t-uple diverse con lo stesso IBAN. \\ \hline
 
     \raggedright \textbf{check\_BirthDate\_User} & \raggedright Dominio &
     Nella tabella User la data deve essere necessariamente antecedente alla data odierna. \\ \hline
