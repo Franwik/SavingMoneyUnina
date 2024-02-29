@@ -78,7 +78,6 @@ public class CardDAOimp implements CardDAO{
 
         Connection con = Database.getConnection();
         
-        //TODO: Edit the DBMS, tuple and DAO/DAOimp because we frogot the CardNumber attribute into CARD table!!!
         String sql = "UPDATE smu.card SET cvv = ?, expiredata = ?, cardtype = ?, iban = ? WHERE cardnumber = ?";
 
         PreparedStatement ps = con.prepareStatement(sql);
@@ -107,6 +106,26 @@ public class CardDAOimp implements CardDAO{
         int result = ps.executeUpdate();
 
         return result;
+    }
+
+    @Override
+    public Card getByNumber(String cardNumber) throws SQLException {
+        Connection con = Database.getConnection();
+        Card card = null;
+
+        String sql = "SELECT * FROM smu.card WHERE cardnumber = ?";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ps.setString(1, cardNumber);
+        
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            card = new Card(rs.getString("cardnumber"), rs.getString("iban"), rs.getString("cvv"), rs.getDate("expiredata").toLocalDate(), rs.getString("cardtype"), rs.getInt("ba_number"), rs.getString("ownercf"), rs.getString("owneremail"));
+        }
+
+        return card;
     }
 
 

@@ -78,7 +78,7 @@ public class CardController extends ApplicationController implements Initializab
     private void showDeleteCardDialog() throws IOException {
         NewCardStage.initOwner((Stage) mainPage.getScene().getWindow());
         NewCardStage.initModality(Modality.WINDOW_MODAL);
-        NewCardscene = new Scene(App.loadFXML("DeleteCardDialog").load(), 370, 365);
+        NewCardscene = new Scene(App.loadFXML("DeleteCardDialog").load(), 370, 140);
         NewCardStage.setScene(NewCardscene);
         NewCardStage.setTitle("Eliminazione Carta");
         NewCardStage.setResizable(false);

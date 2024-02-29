@@ -80,7 +80,7 @@ public class NewCardDialogController implements Initializable {
         emptyAlert.setHeaderText("Si è verificato un errore.");
         emptyAlert.setContentText("Almeno uno dei campi è vuoto.");
 
-        Alert cardAdded = new Alert(AlertType.CONFIRMATION);
+        Alert cardAdded = new Alert(AlertType.INFORMATION);
         cardAdded.setTitle("Successo");
         cardAdded.setContentText("Nuova carta inserita con successo.");
 
