@@ -14,13 +14,14 @@ import smu.LoggedUser;
 import smu.DAO.BankAccountDAO;
 import smu.DAO.CardDAO;
 import smu.DAO.FamiliarDAO;
+import smu.DAO.UserDAO;
 import smu.DAOImplementation.BankAccountDAOimp;
 import smu.DAOImplementation.CardDAOimp;
 import smu.DAOImplementation.FamiliarDAOimp;
+import smu.DAOImplementation.UserDAOimp;
 import smu.DTO.BankAccount;
 import smu.DTO.Card;
 import smu.DTO.Familiar;
-
 import java.util.*;
 import java.sql.*;
 import java.io.IOException;
@@ -32,7 +33,7 @@ public class EditCardDialogController implements Initializable {
     private Button closeButton;
 
     @FXML
-    private TextField cardNumberField;
+    private ComboBox<String> cardChoser;
 
     @FXML
     private TextField ibanField;
@@ -55,18 +56,18 @@ public class EditCardDialogController implements Initializable {
     private String[] cardTypes = {"Prepagata", "Debito", "Credito"};
 
     @FXML
-    private void createCard() throws IOException {
+    private void updateCard() throws IOException {
         //DAO to interact with DB
         CardDAO cardDAO = new CardDAOimp();
 
         //instance of logged user
-        LoggedUser loggedUser = LoggedUser.getInstance(null);
+        LoggedUser loggedUser = LoggedUser.getInstance();
 
-        //Card that needs to be inserted
+        //Card that needs to be updated
         Card card = null;
 
         //Fields from page
-        String cardNumber = cardNumberField.getText();
+        String cardNumber = cardChoser.getSelectionModel().getSelectedItem();
         String iban = ibanField.getText();
         String cvv = cvvField.getText();
         LocalDate expireDate = expDField.getValue();
@@ -80,12 +81,13 @@ public class EditCardDialogController implements Initializable {
         emptyAlert.setHeaderText("Si è verificato un errore.");
         emptyAlert.setContentText("Almeno uno dei campi è vuoto.");
 
-        Alert cardAdded = new Alert(AlertType.CONFIRMATION);
-        cardAdded.setTitle("Successo");
-        cardAdded.setContentText("Nuova carta inserita con successo.");
+        Alert cardUpdated = new Alert(AlertType.INFORMATION);
+        cardUpdated.setTitle("Successo");
+        cardUpdated.setHeaderText("La carta è stata modificata con successo.");
+        cardUpdated.setContentText("La carta è stata modificata con successo.");
 
         //In case one of the field is empty
-        if(cardNumber.isEmpty() || iban.isEmpty() || cvv.isEmpty() || expireDate == null || type == null || ba_number == null || ownerCF == null){
+        if(cardNumber == null || iban.isEmpty() || cvv.isEmpty() || expireDate == null || type == null || ba_number == null || ownerCF == null){
             emptyAlert.showAndWait();
         }
         else{
@@ -99,16 +101,44 @@ public class EditCardDialogController implements Initializable {
                     card = new Card(cardNumber, iban, cvv, expireDate, type, ba_number, ownerCF, null);
                 }
                 
-                cardDAO.insert(card);
-
-                cardAdded.showAndWait();
-
+                if(cardDAO.update(card) > 0){
+                    cardUpdated.showAndWait();
+                }
 
             } catch (SQLException e) {
                 e.printStackTrace();
                 System.out.println("codice: " + e.getSQLState());
             }
 
+        }
+    }
+
+    @FXML
+    private void loadCardInfo(){
+        //DAO to interact with DB
+        CardDAO cardDAO = new CardDAOimp();
+        UserDAO userDAO = new UserDAOimp();
+
+        //Card that needs to be updated
+        try {
+            Card card = cardDAO.getByNumber(cardChoser.getSelectionModel().getSelectedItem().toString());
+            String ownerCF = null;
+
+            ibanField.setText(card.getIban());
+            cvvField.setText(card.getCvv());
+            expDField.setValue(card.getExpireDate());
+            typeChoser.setValue(card.getCardType());
+            baChoser.setValue(card.getBa_number());
+            if(card.getOwnerCF() == null){
+                ownerCF = userDAO.getByEmail(card.getOwnerEmail()).getCF();
+            }
+            else{
+                ownerCF = card.getOwnerCF();
+            }
+            ownerChoser.setValue(ownerCF);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
 
@@ -182,10 +212,47 @@ public class EditCardDialogController implements Initializable {
 
     }
 
+    private void loadCards(){
+
+        List<String> result = new ArrayList<>();
+        List<Familiar> familiars = new ArrayList<>();
+        List<Card> cards = new ArrayList<>();
+
+        //DAO to interact with DB
+        CardDAO cardDAO = new CardDAOimp();
+        FamiliarDAO familiarDAO = new FamiliarDAOimp();
+
+        //Current user
+        LoggedUser loggedUser = LoggedUser.getInstance(null);
+        
+        try {
+            
+            familiars = familiarDAO.getByEmail(loggedUser.getEmail());
+
+            cards.addAll(cardDAO.getByEmail(loggedUser.getEmail()));
+
+            for(Familiar familiar : familiars){
+                cards.addAll(cardDAO.getByCF(familiar.getCF()));
+            }
+
+            for(Card card : cards){
+                result.add(card.getCardNumber());
+            }
+
+            cardChoser.getItems().addAll(result);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     @Override
     public void initialize(URL location, java.util.ResourceBundle resources) {
         typeChoser.getItems().addAll(cardTypes);
+
+        loadCards();
 
         loadPeople();
 

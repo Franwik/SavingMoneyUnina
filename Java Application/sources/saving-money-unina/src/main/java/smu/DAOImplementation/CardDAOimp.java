@@ -78,15 +78,18 @@ public class CardDAOimp implements CardDAO{
 
         Connection con = Database.getConnection();
         
-        String sql = "UPDATE smu.card SET cvv = ?, expiredata = ?, cardtype = ?, iban = ? WHERE cardnumber = ?";
+        String sql = "UPDATE smu.card SET iban = ?, cvv = ?, expiredata = ?, cardtype = ?, ba_number = ?, ownercf = ?, owneremail = ? WHERE cardnumber = ?";
 
         PreparedStatement ps = con.prepareStatement(sql);
 
-        ps.setString(1, card.getCvv());
-        ps.setDate(2, java.sql.Date.valueOf(card.getExpireDate()));
-        ps.setString(3, card.getCardType());
-        ps.setString(4, card.getIban());
-        ps.setString(5, card.getCardNumber());
+        ps.setString(1, card.getIban());
+        ps.setString(2, card.getCvv());
+        ps.setDate(3, java.sql.Date.valueOf(card.getExpireDate()));
+        ps.setString(4, card.getCardType());
+        ps.setInt(5, card.getBa_number());
+        ps.setString(6, card.getOwnerCF());
+        ps.setString(7, card.getOwnerEmail());
+        ps.setString(8, card.getCardNumber());
 
         int result = ps.executeUpdate();
 

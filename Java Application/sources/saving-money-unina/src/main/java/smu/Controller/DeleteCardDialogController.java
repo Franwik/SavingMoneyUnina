@@ -10,28 +10,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import smu.App;
 import smu.LoggedUser;
-import smu.DAO.BankAccountDAO;
 import smu.DAO.CardDAO;
 import smu.DAO.FamiliarDAO;
-import smu.DAOImplementation.BankAccountDAOimp;
 import smu.DAOImplementation.CardDAOimp;
 import smu.DAOImplementation.FamiliarDAOimp;
-import smu.DTO.BankAccount;
 import smu.DTO.Card;
 import smu.DTO.Familiar;
-
 import java.util.*;
-
-import javax.swing.text.html.Option;
-
 import java.sql.*;
 import java.io.IOException;
-import java.time.*;
 
 public class DeleteCardDialogController implements Initializable {
 
@@ -41,6 +31,7 @@ public class DeleteCardDialogController implements Initializable {
     @FXML
     private ComboBox<String> cardChoser;
 
+    @SuppressWarnings("unused")
     @FXML
     private void deleteCard() throws IOException {
         //DAO to interact with DB

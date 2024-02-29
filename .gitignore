@@ -1,3 +1,14 @@
 Database/Documentation/*.bkp
 Database/Documentation/*.dtmp
+Database/Documentation/docs/*.bkp
+Database/Documentation/docs/*.dtmp
+Database/Documentation/docs/.DS_Store
+Database/Documentation/docs/LatexSrc/*.aux
+Database/Documentation/docs/LatexSrc/*.fdb_latexmk
+Database/Documentation/docs/LatexSrc/*.fls
+Database/Documentation/docs/LatexSrc/*.log
+Database/Documentation/docs/LatexSrc/*.out
+Database/Documentation/docs/LatexSrc/*.toc
+Database/Documentation/docs/LatexSrc/.DS_Store
+Database/Documentation/docs/LatexSrc/main.synctex.gz
 Java Application/sources/saving-money-unina/target/

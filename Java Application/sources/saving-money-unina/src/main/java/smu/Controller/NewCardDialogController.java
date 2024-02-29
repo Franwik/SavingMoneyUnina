@@ -82,6 +82,7 @@ public class NewCardDialogController implements Initializable {
 
         Alert cardAdded = new Alert(AlertType.INFORMATION);
         cardAdded.setTitle("Successo");
+        cardAdded.setHeaderText("Nuova carta inserita con successo.");
         cardAdded.setContentText("Nuova carta inserita con successo.");
 
         //In case one of the field is empty
