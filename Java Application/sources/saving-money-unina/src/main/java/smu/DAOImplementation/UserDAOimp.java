@@ -33,7 +33,7 @@ public class UserDAOimp implements UserDAO {
             String CF = rs.getString("cf");
             LocalDate dateOfBirth = rs.getDate("dateofbirth").toLocalDate();
 
-            user = new User(Aemail, username, password, address, name, surname, CF, dateOfBirth);
+            user = new User(name, surname, CF, dateOfBirth, Aemail, username, password, address);
         }
 
         return user;
@@ -63,7 +63,7 @@ public class UserDAOimp implements UserDAO {
             String CF = rs.getString("cf");
             LocalDate dateOfBirth = rs.getDate("dateofbirth").toLocalDate();
 
-            user = new User(Aemail, username, password, address, name, surname, CF, dateOfBirth);
+            user = new User(name, surname, CF, dateOfBirth, Aemail, username, password, address);
         }
 
         return user;
@@ -106,7 +106,7 @@ public class UserDAOimp implements UserDAO {
         ResultSet rs = ps.executeQuery();
 
         if(rs.next()){
-            user = new User(rs.getString("email"), rs.getString("username"), rs.getString("password"), rs.getString("address"), rs.getString("name"), rs.getString("surname"), rs.getString("cf"), rs.getDate("dateofbirth").toLocalDate());
+            user = new User(rs.getString("name"), rs.getString("surname"), rs.getString("cf"), rs.getDate("dateofbirth").toLocalDate(), rs.getString("email"), rs.getString("username"), rs.getString("password"), rs.getString("address"));
         }
 
         return user;

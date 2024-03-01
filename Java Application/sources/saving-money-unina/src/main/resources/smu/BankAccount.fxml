@@ -107,7 +107,7 @@
                   <Font name="Arial" size="15.0" />
                </font>
             </Text>
-            <ComboBox layoutX="52.0" layoutY="78.0" prefHeight="27.0" prefWidth="200.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="60.0" />
+            <ComboBox layoutX="52.0" layoutY="78.0" prefHeight="27.0" prefWidth="200.0" promptText="---" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="60.0" />
             <Button layoutX="445.0" layoutY="66.0" mnemonicParsing="false" text="Modifica" AnchorPane.rightAnchor="265.0" AnchorPane.topAnchor="60.0">
                <font>
                   <Font name="Arial" size="15.0" />

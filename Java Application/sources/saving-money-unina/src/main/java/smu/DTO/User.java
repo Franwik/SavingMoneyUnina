@@ -2,28 +2,21 @@ package smu.DTO;
 
 import java.time.*;
 
-public class User {
+public class User extends Person{
 
     // Attricutes
     private String email;
     private String username;
     private String password;
     private String address;
-    private String name;
-    private String surname;
-    private String CF;
-    private LocalDate dateOfBirth;
 
     //Contructor
-    public User(String email, String username, String password, String address, String name, String surname, String CF, LocalDate dateOfBirth) {
+    public User(String name, String surname, String cF, LocalDate dateOfBirth, String email, String username, String password, String address) {
+        super(name, surname, cF, dateOfBirth);
         this.email = email;
         this.username = username;
         this.password = password;
         this.address = address;
-        this.name = name;
-        this.surname = surname;
-        this.CF = CF;
-        this.dateOfBirth = dateOfBirth;
     }
 
     //Getters and Setters
@@ -60,42 +53,10 @@ public class User {
         this.address = address;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getCF() {
-        return CF;
-    }
-
-    public void setCF(String CF) {
-        this.CF = CF;
-    }
-
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
-
     @Override
     public String toString() {
         return "User [email=" + email + ", username=" + username + ", password=" + password + ", address=" + address
-                + ", name=" + name + ", surname=" + surname + ", CF=" + CF + ", dateOfBirth=" + dateOfBirth + "]";
+                + ", name=" + super.getName() + ", surname=" + super.getSurname() + ", CF=" + super.getCF() + ", dateOfBirth=" + super.getDateOfBirth() + "]";
     }
 
 }

@@ -2,57 +2,18 @@ package smu.DTO;
 
 import java.time.LocalDate;
 
-public class Familiar {
+public class Familiar extends Person{
 
     //Attributes
-    private String name;
-    private String surname;
-    private String CF;
-    private LocalDate dateOfBirth;
     private String familiarEmail;
 
     //Contructor
-    public Familiar(String name, String surname, String CF, LocalDate dateOfBirth, String familiarEmail) {
-        this.name = name;
-        this.surname = surname;
-        this.CF = CF;
-        this.dateOfBirth = dateOfBirth;
+    public Familiar(String name, String surname, String cF, LocalDate dateOfBirth, String familiarEmail) {
+        super(name, surname, cF, dateOfBirth);
         this.familiarEmail = familiarEmail;
     }
 
     //Getters and Setters
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getSurname() {
-        return surname;
-    }
-
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
-    public String getCF() {
-        return CF;
-    }
-
-    public void setCF(String CF) {
-        this.CF = CF;
-    }
-
-    public LocalDate getDateOfBirth() {
-        return dateOfBirth;
-    }
-
-    public void setDateOfBirth(LocalDate dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
 
     public String getFamiliarEmail() {
         return familiarEmail;
@@ -64,8 +25,8 @@ public class Familiar {
 
     @Override
     public String toString() {
-        return "Familiar [name=" + name + ", surname=" + surname + ", CF=" + CF + ", dateOfBirth=" + dateOfBirth
-                + ", familiarEmail=" + familiarEmail + "]";
-    }
+        return "Familiar [name=" + super.getName() + ", surname=" + super.getSurname() + ", CF=" + super.getCF() +
+            ", dateOfBirth=" + super.getDateOfBirth() + "familiarEmail=" + familiarEmail + "]";
+    }  
 
 }
