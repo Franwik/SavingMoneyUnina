@@ -1,4 +1,4 @@
-package smu.Controller;
+package smu.Boundary;
 
 import java.io.IOException;
 import java.sql.*;
@@ -14,7 +14,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-public class LoginController {
+public class LoginPageController {
 
     @FXML
     TextField emailField;

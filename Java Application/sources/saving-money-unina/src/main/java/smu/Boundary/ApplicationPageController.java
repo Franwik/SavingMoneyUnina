@@ -1,11 +1,11 @@
-package smu.Controller;
+package smu.Boundary;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
 import smu.App;
 import smu.LoggedUser;
 
-public abstract class ApplicationController {
+public abstract class ApplicationPageController {
 
     @FXML
     private void logout() throws IOException {

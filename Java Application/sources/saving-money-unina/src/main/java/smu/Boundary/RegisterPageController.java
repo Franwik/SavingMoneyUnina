@@ -1,4 +1,4 @@
-package smu.Controller;
+package smu.Boundary;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
@@ -14,7 +14,7 @@ import smu.DAO.UserDAO;
 import smu.DAOImplementation.UserDAOimp;
 import smu.DTO.User;
 
-public class RegisterController {
+public class RegisterPageController {
 
     @FXML
     private TextField nameField;

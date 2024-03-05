@@ -1,4 +1,4 @@
-package smu.Controller;
+package smu.Boundary;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -8,7 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import smu.LoggedUser;
 
-public class HomeController extends ApplicationController implements Initializable{
+public class HomePageController extends ApplicationPageController implements Initializable{
 
     @FXML
     Label welcomeLabel;

@@ -1,4 +1,4 @@
-package smu.Controller;
+package smu.Boundary;
 
 import java.net.URL;
 import javafx.fxml.FXML;

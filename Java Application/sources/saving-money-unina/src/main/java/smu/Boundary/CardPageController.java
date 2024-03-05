@@ -1,4 +1,4 @@
-package smu.Controller;
+package smu.Boundary;
 
 import java.time.*;
 import java.util.ResourceBundle;
@@ -27,7 +27,7 @@ import smu.DTO.Card;
 import smu.DTO.Familiar;
 import java.io.IOException;
 
-public class CardController extends ApplicationController implements Initializable{
+public class CardPageController extends ApplicationPageController implements Initializable{
 
     @FXML
     private BorderPane mainPage;

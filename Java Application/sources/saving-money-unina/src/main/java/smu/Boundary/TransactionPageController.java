@@ -1,4 +1,4 @@
-package smu.Controller;
+package smu.Boundary;
 
 import java.io.IOException;
 import java.net.URL;
@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
-public class TransactionController extends ApplicationController implements Initializable{
+public class TransactionPageController extends ApplicationPageController implements Initializable{
 
     @FXML
     private void showNewTransactionDialog() throws IOException{
