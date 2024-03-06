@@ -3,34 +3,20 @@ package smu.Boundary;
 import java.time.*;
 import java.util.ResourceBundle;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
-import smu.App;
-import smu.LoggedUser;
-import smu.DAO.CardDAO;
-import smu.DAO.FamiliarDAO;
-import smu.DAOImplementation.CardDAOimp;
-import smu.DAOImplementation.FamiliarDAOimp;
+import smu.Control.CardControl;
 import smu.DTO.Card;
-import smu.DTO.Familiar;
 import java.io.IOException;
 
 public class CardPageController extends ApplicationPageController implements Initializable{
-
-    @FXML
-    private BorderPane mainPage;
 
     @FXML
     private ComboBox<String> peopleChoser;
@@ -59,72 +45,27 @@ public class CardPageController extends ApplicationPageController implements Ini
     @FXML
     private TableColumn<Card, Integer> BA_ass;
 
-    private static Scene NewCardscene;
-    private static Stage NewCardStage;
-
     @FXML
     private void showNewCardDialog() throws IOException {
-        NewCardStage.initOwner((Stage) mainPage.getScene().getWindow());
-        NewCardStage.initModality(Modality.WINDOW_MODAL);
-        NewCardscene = new Scene(App.loadFXML("NewCardDialog").load(), 370, 365);
-        NewCardStage.setScene(NewCardscene);
-        NewCardStage.setTitle("Creazione Nuova Carta");
-        NewCardStage.setResizable(false);
-        NewCardStage.showAndWait();
-        App.setRoot("Card");
+        showDialog("NewCardDialog", 370, 365, "Creazione Nuova Carta", "Card");
     }
 
     @FXML
     private void showDeleteCardDialog() throws IOException {
-        NewCardStage.initOwner((Stage) mainPage.getScene().getWindow());
-        NewCardStage.initModality(Modality.WINDOW_MODAL);
-        NewCardscene = new Scene(App.loadFXML("DeleteCardDialog").load(), 370, 140);
-        NewCardStage.setScene(NewCardscene);
-        NewCardStage.setTitle("Eliminazione Carta");
-        NewCardStage.setResizable(false);
-        NewCardStage.showAndWait();
-        App.setRoot("Card");
+        showDialog("DeleteCardDialog", 370, 140, "Eliminazione Carta", "Card");
     }
 
     @FXML
     private void showEditCardDialog() throws IOException {
-        NewCardStage.initOwner((Stage) mainPage.getScene().getWindow());
-        NewCardStage.initModality(Modality.WINDOW_MODAL);
-        NewCardscene = new Scene(App.loadFXML("EditCardDialog").load(), 370, 365);
-        NewCardStage.setScene(NewCardscene);
-        NewCardStage.setTitle("Modifica Carta");
-        NewCardStage.setResizable(false);
-        NewCardStage.showAndWait();
-        App.setRoot("Card");
+        showDialog("EditCardDialog", 370, 365, "Modifica Carta", "Card");
     }
 
     private void loadPeople(){
 
-        List<String> people = new ArrayList<>();
-        List<Familiar> familiars = new ArrayList<>();
+        List<String> people = CardControl.loadPeople();
 
-        //DAO to interact with DB
-        FamiliarDAO familiarDAO = new FamiliarDAOimp();
-
-        //Current user
-        LoggedUser loggedUser = LoggedUser.getInstance(null);
-        
-        try {
-            
-            familiars = familiarDAO.getByEmail(loggedUser.getEmail());
-
-            people.add(loggedUser.getCF());
-
-            for(Familiar familiar : familiars){
-                people.add(familiar.getCF());
-            }
-
-            peopleChoser.getItems().add("---");
-            peopleChoser.getItems().addAll(people);
-            
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+        peopleChoser.getItems().add("---");
+        peopleChoser.getItems().addAll(people);
 
     }
 
@@ -134,42 +75,17 @@ public class CardPageController extends ApplicationPageController implements Ini
         List<Card> cards = new ArrayList<>();
         String chosenPerson = peopleChoser.getSelectionModel().getSelectedItem().toString();
 
-        //DAO to interact with DB
-        CardDAO cardDAO = new CardDAOimp();
-        FamiliarDAO familiarDAO = new FamiliarDAOimp();
+        cardList.getItems().clear();
 
-        //Current user
-        LoggedUser loggedUser = LoggedUser.getInstance(null);
-        
-        try {
-
-            cardList.getItems().clear();
-
-            if(chosenPerson.equals("---")){
-                nameDisplay.setText("");
-            }
-            else {
-                if(chosenPerson.equals(loggedUser.getCF())) {
-
-                    nameDisplay.setText(loggedUser.getName() + " " + loggedUser.getSurname());
-                    cards = cardDAO.getByEmail(loggedUser.getEmail());
-                }
-                else {
-
-                    Familiar familiar = familiarDAO.getByCF(chosenPerson);
-
-                    nameDisplay.setText(familiar.getName() + " " + familiar.getSurname());
-
-                    cards = cardDAO.getByCF(chosenPerson);
-
-                }
-
-                cardList.getItems().addAll(cards);
-
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        if(chosenPerson.equals("---")){
+            nameDisplay.setText("");
         }
+        else {
+            cards = CardControl.loadCards(chosenPerson);
+            cardList.getItems().addAll(cards);
+            nameDisplay.setText(CardControl.getPersonInfo(chosenPerson));
+        }
+
 
     }
     
@@ -178,9 +94,6 @@ public class CardPageController extends ApplicationPageController implements Ini
 
         //Loads People in ComboBox
         loadPeople();
-
-        //Initialize Stage
-        NewCardStage = new Stage();
 
         //Initalize table columns
         cardNumber.setCellValueFactory(new PropertyValueFactory<Card, String>("cardNumber"));

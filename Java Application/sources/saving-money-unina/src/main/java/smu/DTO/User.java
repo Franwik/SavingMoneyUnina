@@ -55,7 +55,7 @@ public class User extends Person{
 
     @Override
     public String toString() {
-        return "User [email=" + email + ", username=" + username + ", password=" + password + ", address=" + address
+        return "User [email=" + email + ", username=" + username + ", password=" + password.replaceAll(".", "*") + ", address=" + address
                 + ", name=" + super.getName() + ", surname=" + super.getSurname() + ", CF=" + super.getCF() + ", dateOfBirth=" + super.getDateOfBirth() + "]";
     }
 
