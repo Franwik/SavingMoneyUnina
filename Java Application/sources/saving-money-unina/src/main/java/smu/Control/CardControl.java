@@ -236,7 +236,7 @@ public class CardControl extends BaseControl{
 
             try {
 
-                if(ownerCF.equals(lPI0123456789012345678901234oggedUser.getCF())){
+                if(ownerCF.equals(loggedUser.getCF())){
                     card = new Card(cardNumber, iban, cvv, expireDate, type, ba_number, null, loggedUser.getEmail());
                 }
                 else{
