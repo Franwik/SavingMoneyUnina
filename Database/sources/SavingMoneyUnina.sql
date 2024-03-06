@@ -778,7 +778,7 @@ ALTER TABLE ONLY smu."user"
 -- Name: card check_card_owner_trigger; Type: TRIGGER; Schema: smu; Owner: postgres
 --
 
-_card_owner_trigger BEFORE INSERT ON sCREATE TRIGGER checkmu.card FOR EACH ROW EXECUTE FUNCTION smu.check_card_owner();
+CREATE TRIGGER check_card_owner_trigger BEFORE INSERT ON smu.card FOR EACH ROW EXECUTE FUNCTION smu.check_card_owner();
 
 
 --
