@@ -55,7 +55,7 @@ public class DeleteCardDialogController implements Initializable {
 
         List<String> result = new ArrayList<>();
         
-        result = CardControl.loadAllCards();
+        result = CardControl.getAllCards();
 
         cardChoser.getItems().addAll(result);
 

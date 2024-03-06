@@ -68,7 +68,7 @@ public class NewCardDialogController implements Initializable {
 
         List<String> people = new ArrayList<>();
 
-        people = CardControl.loadPeople();
+        people = CardControl.getPeople();
 
         ownerChoser.getItems().addAll(people);
 
@@ -78,7 +78,7 @@ public class NewCardDialogController implements Initializable {
 
         List<Integer> bankAccounts = new ArrayList<>();
 
-        bankAccounts = CardControl.loadAllBA();
+        bankAccounts = CardControl.getAllBA();
 
         baChoser.getItems().addAll(bankAccounts);
 

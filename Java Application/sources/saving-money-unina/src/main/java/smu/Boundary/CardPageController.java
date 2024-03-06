@@ -14,6 +14,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import smu.Control.CardControl;
 import smu.DTO.Card;
+import smu.DTO.Person;
+
 import java.io.IOException;
 
 public class CardPageController extends ApplicationPageController implements Initializable{
@@ -62,7 +64,7 @@ public class CardPageController extends ApplicationPageController implements Ini
 
     private void loadPeople(){
 
-        List<String> people = CardControl.loadPeople();
+        List<String> people = CardControl.getPeople();
 
         peopleChoser.getItems().add("---");
         peopleChoser.getItems().addAll(people);
@@ -81,9 +83,10 @@ public class CardPageController extends ApplicationPageController implements Ini
             nameDisplay.setText("");
         }
         else {
-            cards = CardControl.loadCards(chosenPerson);
+            cards = CardControl.getCards(chosenPerson);
             cardList.getItems().addAll(cards);
-            nameDisplay.setText(CardControl.getPersonInfo(chosenPerson));
+            Person person = CardControl.getPersonInfo(chosenPerson);
+            nameDisplay.setText(person.getName() + " " + person.getSurname());
         }
 
 

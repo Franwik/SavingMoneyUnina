@@ -10,22 +10,25 @@ import smu.LoggedUser;
 import smu.DAO.BankAccountDAO;
 import smu.DAO.CardDAO;
 import smu.DAO.FamiliarDAO;
+import smu.DAO.UserDAO;
 import smu.DAOImplementation.BankAccountDAOimp;
 import smu.DAOImplementation.CardDAOimp;
 import smu.DAOImplementation.FamiliarDAOimp;
+import smu.DAOImplementation.UserDAOimp;
 import smu.DTO.BankAccount;
 import smu.DTO.Card;
 import smu.DTO.Familiar;
+import smu.DTO.Person;
 
 public class CardControl extends BaseControl{
 
-    public static String getPersonInfo(String CF){
+    public static Person getPersonInfo(String CF){
         
         //Current user
         LoggedUser loggedUser = LoggedUser.getInstance();
         
         if (CF.equals(loggedUser.getCF())) {
-            return loggedUser.getName() + " " + loggedUser.getSurname();
+            return loggedUser;
         }
         else {
 
@@ -41,12 +44,50 @@ public class CardControl extends BaseControl{
                 e.printStackTrace();
             }
             
-            return familiar.getName() + " " + familiar.getSurname();
+            return familiar;
         }
         
     }
 
-    public static List<String> loadPeople(){
+    public static String getCardOwnerCF(String cardNumber){
+
+        CardDAO cardDAO = new CardDAOimp();
+        UserDAO userDAO = new UserDAOimp();
+        Card card = null;
+        String CF = null;
+
+        try {
+            card = cardDAO.getByNumber(cardNumber);
+            if (card.getOwnerCF() != null) {
+                CF = card.getOwnerCF();
+            }
+            else {
+                CF = userDAO.getByEmail(card.getOwnerEmail()).getCF();
+            }
+        } catch (SQLException e) {
+            showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
+            e.printStackTrace();
+        }
+
+        return CF;
+    }
+
+    public static Card getCardInfo(String cardNumber){
+
+        Card card = null;
+        CardDAO cardDAO = new CardDAOimp();
+
+        try {
+            card = cardDAO.getByNumber(cardNumber);
+        } catch (SQLException e) {
+            showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
+            e.printStackTrace();
+        }
+
+        return card;
+    }
+
+    public static List<String> getPeople(){
 
         List<String> peopleCFList = new ArrayList<>();
 
@@ -73,7 +114,7 @@ public class CardControl extends BaseControl{
         return peopleCFList;
     }
     
-    public static List<Card> loadCards(String chosenPerson){
+    public static List<Card> getCards(String chosenPerson){
 
         List<Card> cards = new ArrayList<>();
 
@@ -100,7 +141,7 @@ public class CardControl extends BaseControl{
         return cards;
     }
 
-    public static List<String> loadAllCards(){
+    public static List<String> getAllCards(){
 
         List<String> result = new ArrayList<>();
         List<Familiar> familiars = new ArrayList<>();
@@ -135,7 +176,7 @@ public class CardControl extends BaseControl{
         return result;
     }
 
-    public static List<Integer> loadAllBA(){
+    public static List<Integer> getAllBA(){
 
         List<Integer> result = new ArrayList<>();
         List<Familiar> familiars = new ArrayList<>();
@@ -263,6 +304,68 @@ public class CardControl extends BaseControl{
         }
 
 
+    }
+
+    public static void update (String cardNumber, String iban, String cvv, LocalDate expireDate, String type, Integer ba_number, String ownerCF) {
+        //DAO to interact with DB
+        CardDAO cardDAO = new CardDAOimp();
+
+        //instance of logged user
+        LoggedUser loggedUser = LoggedUser.getInstance();
+
+        //Card that needs to be inserted
+        Card card = null;
+
+        //checks on input
+        if(cardNumber.isEmpty() || iban.isEmpty() || cvv.isEmpty() || expireDate == null || type == null || ba_number == null || ownerCF == null){
+            showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Almeno uno dei campi è vuoto.");
+        }
+        else if (cardNumber.length() < 16){
+            showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Il numero di carta inserito è troppo corto.");
+        }
+        else if (cardNumber.length() > 16){
+            showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Il numero di carta inserito è troppo lungo.");
+        }
+        else if (iban.length() < 27) {
+            showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "L'iban inserito è troppo corto.");
+        }
+        else if (iban.length() > 27) {
+            showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "L'iban inserito è troppo lungo.");
+        }
+        else if (cvv.length() < 3) {
+            showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Il cvv inserito è troppo corto.");
+        }
+        else if (cvv.length() > 3) {
+            showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Il cvv inserito è troppo lungo.");
+        }
+        else{
+
+            try {
+
+                if(ownerCF.equals(loggedUser.getCF())){
+                    card = new Card(cardNumber, iban, cvv, expireDate, type, ba_number, null, loggedUser.getEmail());
+                }
+                else{
+                    card = new Card(cardNumber, iban, cvv, expireDate, type, ba_number, ownerCF, null);
+                }
+                
+                if(cardDAO.update(card) > 0){
+                    showAlert(AlertType.INFORMATION, "Successo", "La carta è stata modificata con successo.", "La carta è stata modificata con successo.");
+                }
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                String state = e.getSQLState();
+                System.out.println("codice: " + state);
+                if (state.equals("23505")){
+                    showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "La carta che si sta tentando di inserire esiste già.");
+                }
+                else{
+                    showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
+                }
+            }
+
+        }
     }
 
 }
