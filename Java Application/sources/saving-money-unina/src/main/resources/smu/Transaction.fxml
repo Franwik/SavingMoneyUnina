@@ -102,7 +102,7 @@
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <ComboBox fx:id="peopleChoser" layoutX="50.0" layoutY="58.0" onAction="#loadTransactions" prefHeight="27.0" prefWidth="200.0" promptText="---" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="60.0" />
+            <ComboBox fx:id="cardChooser" layoutX="50.0" layoutY="58.0" onAction="#loadTransactions" prefHeight="27.0" prefWidth="200.0" promptText="---" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="60.0" />
             <Text fx:id="nameDisplay" fill="#009900" strokeType="OUTSIDE" strokeWidth="0.0">
                <font>
                   <Font name="Arial Bold" size="20.0" />

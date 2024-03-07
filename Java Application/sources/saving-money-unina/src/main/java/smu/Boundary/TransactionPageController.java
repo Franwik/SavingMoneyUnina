@@ -2,12 +2,21 @@ package smu.Boundary;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
+import smu.Control.TransactionControl;
+
 
 public class TransactionPageController extends ApplicationPageController implements Initializable{
+
+
+    @FXML
+    private ComboBox<String> cardChooser;
 
     @FXML
     private void showNewTransactionDialog() throws IOException{
@@ -20,7 +29,11 @@ public class TransactionPageController extends ApplicationPageController impleme
     }
 
     private void loadCards(){
-        System.out.println("Carte caricate");
+        List<String> cards = new ArrayList<>();
+
+        cards = TransactionControl.getCards();
+        cardChooser.getItems().addAll(cards);
+
     }
 
 
