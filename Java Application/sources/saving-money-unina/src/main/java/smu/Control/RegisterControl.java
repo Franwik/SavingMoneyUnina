@@ -3,6 +3,7 @@ package smu.Control;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.regex.*;
 
 import javafx.scene.control.Alert.AlertType;
 import smu.App;
@@ -16,7 +17,11 @@ public class RegisterControl extends BaseControl{
 
         if(name.isEmpty() || surname.isEmpty() || address.isEmpty() || DOB == null || CF.isEmpty() || username.isEmpty() || email.isEmpty() || password.isEmpty()){
             showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Almeno uno dei campi è vuoto.");
-        }else{
+        }
+        else if (!valEmail(email)) {
+            showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Email inserita non valida.");
+        }
+        else{
             try {
 
                 UserDAO userDAO = new UserDAOimp();
@@ -44,6 +49,15 @@ public class RegisterControl extends BaseControl{
                 e.printStackTrace();
             }
         }
+
+    }
+
+    private static boolean valEmail (String input) {
+
+        String emailRegex = "^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$";
+        Pattern emailPat = Pattern.compile(emailRegex, Pattern.CASE_INSENSITIVE);
+        Matcher matcher = emailPat.matcher(input);
+        return matcher.find();
 
     }
 
