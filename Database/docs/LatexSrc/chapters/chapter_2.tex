@@ -108,13 +108,14 @@ identificate con il prefisso \textbf{ID\_}.
         \textbf{ID\_Transaction} (\textit{Serial}): chiave surrogata, identificativo della singola transazione. \\
         \textbf{amount} (\textit{Float}): indica l'ammontare della transazione. \\
         \textbf{date} (\textit{Date}): data in cui è avvenuta la transazione. \\
+        \textbf{walletName} (\textit{Serial}): indica il nome del portafoglio. Serve per l'associazione automatica ai portafogli. \\
         \textbf{category} (\textit{String}): tipologia di transazione. Serve per l'associazione automatica ai portafogli.
     } \\ \hline
 
     \textbf{Wallet} & \raggedright Classe utilizzata per raggruppare transazioni. &
     \parbox{7cm}{
         \textbf{ID\_Wallet} (\textit{Serial}): chiave surrogata, identificativo del singolo protafoglio. \\
-        \textbf{name} (\textit{String}): nome del portafoglio. \\
+        \textbf{walletName} (\textit{String}): nome del portafoglio. \\
         \textbf{walletCategory} (\textit{String}): categoria del portafoglio. \\
         \textbf{totalAmount} (\textit{Float}): indica la somma di tutte le transazioni relative al portafoglio.
     } \\ \hline

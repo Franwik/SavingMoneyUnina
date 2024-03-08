@@ -26,11 +26,11 @@
     \hspace{2.79cm} ownerEmail $ \rightarrow $ User.email \\ \\ \hline
 
     \\ \rowcolor{black!10}
-    \textbf{Wallet} (\uline{ID\_Wallet}, name, WalletCategory, totalAmount, \uuline{ownerEmail}) \\
+    \textbf{Wallet} (\uline{ID\_Wallet}, walletName, WalletCategory, totalAmount, \uuline{ownerEmail}) \\
     \textit{Chiavi esterne}: ownerEmail $ \rightarrow $ User.email \\ \\ \hline
 
     \\ \rowcolor{black!10}
-    \textbf{Transaction} (\uline{ID\_Transaction}, amount, date, category, \uuline{cardNumber}) \\
+    \textbf{Transaction} (\uline{ID\_Transaction}, amount, date, walletName, category, \uuline{cardNumber}) \\
     \textit{Chiavi esterne}: cardNumber $ \rightarrow $ Card.cardNumber \\ \\ \hline
 
     \\ \rowcolor{black!10}

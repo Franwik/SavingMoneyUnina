@@ -134,27 +134,51 @@ BEGIN
     IF TG_OP = 'INSERT' THEN
         -- Trova i wallet con la stessa categoria della transazione
         -- appena inserita che appartengono all'utente corretto
-        FOR wallet_row IN
-            SELECT *
-            FROM smu.wallet
-            WHERE walletcategory = NEW.category AND owneremail = account_email
-        LOOP
+		IF NEW.walletName IS NULL THEN
+			FOR wallet_row IN
+				SELECT *
+				FROM smu.wallet
+				WHERE walletcategory = NEW.category AND owneremail = account_email
+			LOOP
 
-            -- Collega la transazione al wallet trovato
-            INSERT INTO smu.transactioninwallet (id_transaction, id_wallet)
-            VALUES (NEW.id_transaction, wallet_row.id_wallet);
+				-- Collega la transazione al wallet trovato
+				INSERT INTO smu.transactioninwallet (id_transaction, id_wallet)
+				VALUES (NEW.id_transaction, wallet_row.id_wallet);
 
-            -- Aggiorna il campo totalamount del wallet
-            UPDATE smu.wallet
-            SET totalamount = totalamount + NEW.amount
-            WHERE id_wallet = wallet_row.id_wallet;
+				-- Aggiorna il campo totalamount del wallet
+				UPDATE smu.wallet
+				SET totalamount = totalamount + NEW.amount
+				WHERE id_wallet = wallet_row.id_wallet;
 
-        END LOOP;
+			END LOOP;
 
-        -- Aggiorna il saldo del conto corrente
-        UPDATE smu.bankaccount
-        SET balance = balance - NEW.amount
-        WHERE accountnumber = ba_row.accountnumber;
+			-- Aggiorna il saldo del conto corrente
+			UPDATE smu.bankaccount
+			SET balance = balance - NEW.amount
+			WHERE accountnumber = ba_row.accountnumber;
+		ELSE
+			FOR wallet_row IN
+				SELECT *
+				FROM smu.wallet
+				WHERE walletcategory = NEW.category AND owneremail = account_email AND walletName = NEW.walletName
+			LOOP
+
+				-- Collega la transazione al wallet trovato
+				INSERT INTO smu.transactioninwallet (id_transaction, id_wallet)
+				VALUES (NEW.id_transaction, wallet_row.id_wallet);
+
+				-- Aggiorna il campo totalamount del wallet
+				UPDATE smu.wallet
+				SET totalamount = totalamount + NEW.amount
+				WHERE id_wallet = wallet_row.id_wallet;
+
+			END LOOP;
+
+			-- Aggiorna il saldo del conto corrente
+			UPDATE smu.bankaccount
+			SET balance = balance - NEW.amount
+			WHERE accountnumber = ba_row.accountnumber;
+		END IF;
     END IF;
 
     IF TG_OP = 'UPDATE' THEN
@@ -411,6 +435,7 @@ CREATE TABLE smu.transaction (
     date date NOT NULL,
     category character varying(35),
     cardnumber character varying(16) NOT NULL,
+    walletname character varying(35),
     CONSTRAINT check_transaction_date CHECK ((date <= CURRENT_DATE))
 );
 
@@ -520,7 +545,7 @@ ALTER TABLE smu."user" OWNER TO postgres;
 
 CREATE TABLE smu.wallet (
     id_wallet integer NOT NULL,
-    name character varying(35) NOT NULL,
+    walletname character varying(35) NOT NULL,
     walletcategory character varying(35) NOT NULL,
     totalamount double precision NOT NULL,
     owneremail character varying(100) NOT NULL
@@ -623,7 +648,7 @@ COPY smu.familiar (name, surname, cf, dateofbirth, familiaremail) FROM stdin;
 -- Data for Name: transaction; Type: TABLE DATA; Schema: smu; Owner: postgres
 --
 
-COPY smu.transaction (id_transaction, amount, date, category, cardnumber) FROM stdin;
+COPY smu.transaction (id_transaction, amount, date, category, cardnumber, walletname) FROM stdin;
 \.
 
 
@@ -648,7 +673,7 @@ franwik_@outlook.com	Franwik	Ifs4ppic	Via Napoli 281	Francesco	Donnarumma	DNNFNC
 -- Data for Name: wallet; Type: TABLE DATA; Schema: smu; Owner: postgres
 --
 
-COPY smu.wallet (id_wallet, name, walletcategory, totalamount, owneremail) FROM stdin;
+COPY smu.wallet (id_wallet, walletname, walletcategory, totalamount, owneremail) FROM stdin;
 \.
 
 
@@ -772,13 +797,6 @@ ALTER TABLE ONLY smu.card
 
 ALTER TABLE ONLY smu."user"
     ADD CONSTRAINT unique_username UNIQUE (username);
-
-
---
--- Name: card check_card_owner_trigger; Type: TRIGGER; Schema: smu; Owner: postgres
---
-
-CREATE TRIGGER check_card_owner_trigger BEFORE INSERT ON smu.card FOR EACH ROW EXECUTE FUNCTION smu.check_card_owner();
 
 
 --
