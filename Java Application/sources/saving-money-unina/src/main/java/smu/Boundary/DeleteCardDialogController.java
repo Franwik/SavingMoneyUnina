@@ -3,9 +3,7 @@ package smu.Boundary;
 import java.net.URL;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 import smu.App;
@@ -13,10 +11,7 @@ import smu.Control.CardControl;
 import java.util.*;
 import java.io.IOException;
 
-public class DeleteCardDialogController implements Initializable {
-
-    @FXML
-    private Button closeButton;
+public class DeleteCardDialogController extends BaseDialog {
 
     @FXML
     private ComboBox<String> cardChoser;
@@ -31,12 +26,6 @@ public class DeleteCardDialogController implements Initializable {
 
         reload();
         loadCards();
-    }
-
-    @FXML
-    private void close(){
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        stage.close();
     }
 
     private void reload(){

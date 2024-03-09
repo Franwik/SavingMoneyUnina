@@ -317,7 +317,7 @@ public class CardControl extends BaseControl{
         Card card = null;
 
         //checks on input
-        if(cardNumber.isEmpty() || iban.isEmpty() || cvv.isEmpty() || expireDate == null || type == null || ba_number == null || ownerCF == null){
+        if(cardNumber == null || iban.isEmpty() || cvv.isEmpty() || expireDate == null || type == null || ba_number == null || ownerCF == null){
             showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Almeno uno dei campi è vuoto.");
         }
         else if (cardNumber.length() < 16){

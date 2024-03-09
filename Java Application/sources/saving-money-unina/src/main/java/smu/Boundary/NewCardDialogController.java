@@ -2,22 +2,16 @@ package smu.Boundary;
 
 import java.net.URL;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
 import smu.Control.CardControl;
 
 import java.util.*;
 import java.io.IOException;
 import java.time.*;
 
-public class NewCardDialogController implements Initializable {
-
-    @FXML
-    private Button closeButton;
+public class NewCardDialogController extends BaseDialog {
 
     @FXML
     private TextField cardNumberField;
@@ -56,12 +50,6 @@ public class NewCardDialogController implements Initializable {
 
         CardControl.insert(cardNumber, iban, cvv, expireDate, type, ba_number, ownerCF);
 
-    }
-
-    @FXML
-    private void close(){
-        Stage stage = (Stage) closeButton.getScene().getWindow();
-        stage.close();
     }
 
     private void loadPeople(){
