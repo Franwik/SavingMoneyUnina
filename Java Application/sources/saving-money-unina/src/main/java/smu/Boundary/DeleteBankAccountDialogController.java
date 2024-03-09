@@ -12,7 +12,7 @@ import javafx.stage.Stage;
 import smu.App;
 import smu.Control.BankAccountControl;
 
-public class DeleteBankAccountController extends BaseDialog {
+public class DeleteBankAccountDialogController extends BaseDialog {
 
     @FXML
     private ComboBox<Integer> baChoser;

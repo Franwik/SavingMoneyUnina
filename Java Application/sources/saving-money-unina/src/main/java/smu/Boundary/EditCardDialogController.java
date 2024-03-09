@@ -68,7 +68,6 @@ public class EditCardDialogController extends BaseDialog {
         typeChoser.setValue(card.getCardType());
         baChoser.setValue(card.getBa_number());
         ownerChoser.setValue(CardControl.getCardOwnerCF(card.getCardNumber()));
-        System.out.println(CardControl.getCardOwnerCF(card.getCardNumber()));
     }
 
     private void loadPeople(){

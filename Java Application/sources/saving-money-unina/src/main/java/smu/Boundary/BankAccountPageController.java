@@ -47,7 +47,7 @@ public class BankAccountPageController extends ApplicationPageController{
 
     @FXML
     private void showEditBankAccountDialog() throws IOException {
-        showDialog("EditBankAccountDialog", 370, 365, "Modifica Conto Bancario", "BankAccount");
+        showDialog("EditBankAccountDialog", 370, 280, "Modifica Conto Bancario", "BankAccount");
     }
 
     private void loadPeople(){

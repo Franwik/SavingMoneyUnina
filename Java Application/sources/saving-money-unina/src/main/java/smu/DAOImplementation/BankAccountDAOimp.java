@@ -95,12 +95,15 @@ public class BankAccountDAOimp implements BankAccountDAO{
     public int update(BankAccount bankAccount) throws SQLException {
         Connection con = Database.getConnection();
 
-        String sql = "UPDATE smu.bankaccount SET balance = ? WHERE accountnumber = ?";
+        String sql = "UPDATE smu.bankaccount SET balance = ?, bank = ?, ownercf = ?, owneremail = ? WHERE accountnumber = ?";
 
         PreparedStatement ps = con.prepareStatement(sql);
 
         ps.setInt(1, bankAccount.getBalance());
-        ps.setInt(2, bankAccount.getAccountNumber());
+        ps.setString(2, bankAccount.getBank());
+        ps.setString(3, bankAccount.getOwnerCF());
+        ps.setString(4, bankAccount.getOwnerEmail());
+        ps.setInt(5, bankAccount.getAccountNumber());
 
         int result = ps.executeUpdate();
 

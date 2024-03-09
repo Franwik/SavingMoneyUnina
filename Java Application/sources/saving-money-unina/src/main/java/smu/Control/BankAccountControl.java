@@ -10,8 +10,10 @@ import java.sql.*;
 import smu.LoggedUser;
 import smu.DAO.BankAccountDAO;
 import smu.DAO.FamiliarDAO;
+import smu.DAO.UserDAO;
 import smu.DAOImplementation.BankAccountDAOimp;
 import smu.DAOImplementation.FamiliarDAOimp;
+import smu.DAOImplementation.UserDAOimp;
 import smu.DTO.BankAccount;
 import smu.DTO.Familiar;
 import smu.DTO.Person;
@@ -140,7 +142,7 @@ public class BankAccountControl extends BaseControl {
         //instance of logged user
         LoggedUser loggedUser = LoggedUser.getInstance();
 
-        //Card that needs to be inserted
+        //BankAccount that needs to be inserted
         BankAccount bankAccount = null;
 
         //checks on input
@@ -201,6 +203,81 @@ public class BankAccountControl extends BaseControl {
 
         }
 
+    }
+
+    public static BankAccount getBankAccountInfo(Integer baNumber) {
+        BankAccount bankAccount = null;
+        BankAccountDAO bankAccountDAO = new BankAccountDAOimp();
+
+        try {
+            bankAccount = bankAccountDAO.getByID(baNumber);
+        } catch (SQLException e) {
+            showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
+            System.err.println("Errore: " + e.getMessage());
+        }
+
+        return bankAccount;
+    }
+
+    public static String getBankAccountOwnerCF(Integer baNumber) {
+        BankAccountDAO bankAccountDAO = new BankAccountDAOimp();
+        UserDAO userDAO = new UserDAOimp();
+        BankAccount bankAccount = null;
+        String CF = null;
+
+        try {
+            bankAccount = bankAccountDAO.getByID(baNumber);
+            if (bankAccount.getOwnerCF() != null) {
+                CF = bankAccount.getOwnerCF();
+            }
+            else {
+                CF = userDAO.getByEmail(bankAccount.getOwnerEmail()).getCF();
+            }
+        } catch (SQLException e) {
+            showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
+            System.err.println("Errore: " + e.getMessage());
+        }
+
+        return CF;
+    }
+
+    public static void update(Integer baNumber, String bankName, String balance, String ownerCF) {
+        //DAO to interact with DB
+        BankAccountDAO bankAccountDAO = new BankAccountDAOimp();
+
+        //instance of logged user
+        LoggedUser loggedUser = LoggedUser.getInstance();
+
+        //BankAccount that needs to be updated
+        BankAccount bankAccount = null;
+
+        //checks on input
+        if(baNumber == null || bankName.isEmpty() || balance.isEmpty() || ownerCF == null){
+            showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Almeno uno dei campi è vuoto.");
+        }
+        else{
+
+            try {
+
+                if(ownerCF.equals(loggedUser.getCF())){
+                    bankAccount = new BankAccount(Integer.valueOf(balance), baNumber, bankName, loggedUser.getEmail(), null);
+                }
+                else{
+                    bankAccount = new BankAccount(Integer.valueOf(balance), baNumber, bankName, null, ownerCF);
+                }
+                
+                if(bankAccountDAO.update(bankAccount) > 0){
+                    showAlert(AlertType.INFORMATION, "Successo", "Il conto corrente è stato modificato con successo.", "Il conto corrente è stato modificato con successo.");
+                }
+
+            } catch (SQLException e) {
+                showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
+                System.err.println("Errore: " + e.getMessage());
+            }  catch (NumberFormatException e) {
+                showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Il saldo inserito non è valido.");
+                System.err.println("Errore: " + e.getMessage());
+            }
+        }
     }
 
 }
