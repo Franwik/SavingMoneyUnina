@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import smu.Control.CardControl;
 import smu.DTO.Card;
 import java.util.*;
@@ -15,6 +16,9 @@ public class EditCardDialogController extends BaseDialog {
 
     @FXML
     private ComboBox<String> cardChoser;
+
+    @FXML
+    private Text ibanPrefix;
 
     @FXML
     private TextField ibanField;
@@ -57,7 +61,8 @@ public class EditCardDialogController extends BaseDialog {
 
         Card card = CardControl.getCardInfo(cardChoser.getSelectionModel().getSelectedItem().toString());
 
-        ibanField.setText(card.getIban());
+        ibanPrefix.setText(card.getIban().substring(0, 2));
+        ibanField.setText(card.getIban().substring(2));
         cvvField.setText(card.getCvv());
         expDField.setValue(card.getExpireDate());
         typeChoser.setValue(card.getCardType());

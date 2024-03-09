@@ -4,14 +4,14 @@ package smu.DTO;
 public class BankAccount {
 
     //Attributes
-    private int balance;
-    private int accountNumber;
+    private Integer balance;
+    private Integer accountNumber;
     private String bank;
     private String ownerEmail;
     private String ownerCF;
 
     //Constructor
-    public BankAccount(int balance, int accountNumber, String bank, String ownerEmail, String ownerCF) {
+    public BankAccount(Integer balance, Integer accountNumber, String bank, String ownerEmail, String ownerCF) {
         this.balance = balance;
         this.accountNumber = accountNumber;
         this.bank = bank;
@@ -21,19 +21,19 @@ public class BankAccount {
 
     //Getters and Setters
 
-    public int getBalance() {
+    public Integer getBalance() {
         return balance;
     }
 
-    public void setBalance(int balance) {
+    public void setBalance(Integer balance) {
         this.balance = balance;
     }
 
-    public int getAccountNumber() {
+    public Integer getAccountNumber() {
         return accountNumber;
     }
 
-    public void setAccountNumber(int accountNumber) {
+    public void setAccountNumber(Integer accountNumber) {
         this.accountNumber = accountNumber;
     }
 

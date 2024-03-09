@@ -46,7 +46,7 @@ public class RegisterControl extends BaseControl{
                 }
 
             } catch (IOException e) {
-                e.printStackTrace();
+                System.err.println("Errore: " + e.getMessage());
             }
         }
 

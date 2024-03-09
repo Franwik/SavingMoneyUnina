@@ -37,7 +37,7 @@ public class TransactionControl extends BaseControl{
 			}
 		} catch (SQLException e) {
 			showAlert(AlertType.ERROR, "Errore", "Si è verificato un problema inaspettato.", "Problemi con il Database.");
-			e.printStackTrace();
+			System.err.println("Errore: " + e.getMessage());
 		}
 
 		for(Card card : cards){

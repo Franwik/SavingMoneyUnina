@@ -41,7 +41,7 @@ public class CardControl extends BaseControl{
 
             } catch (SQLException e) {
                 showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
-                e.printStackTrace();
+                System.err.println("Errore: " + e.getMessage());
             }
             
             return familiar;
@@ -66,7 +66,7 @@ public class CardControl extends BaseControl{
             }
         } catch (SQLException e) {
             showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
-            e.printStackTrace();
+            System.err.println("Errore: " + e.getMessage());
         }
 
         return CF;
@@ -81,7 +81,7 @@ public class CardControl extends BaseControl{
             card = cardDAO.getByNumber(cardNumber);
         } catch (SQLException e) {
             showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
-            e.printStackTrace();
+            System.err.println("Errore: " + e.getMessage());
         }
 
         return card;
@@ -108,7 +108,7 @@ public class CardControl extends BaseControl{
             }
             
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("Errore: " + e.getMessage());
         }
 
         return peopleCFList;
@@ -135,7 +135,7 @@ public class CardControl extends BaseControl{
             
         } catch (Exception e) {
             showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
-            e.printStackTrace();
+            System.err.println("Errore: " + e.getMessage());
         }
 
         return cards;
@@ -170,7 +170,7 @@ public class CardControl extends BaseControl{
             
         } catch (SQLException e) {
             showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
-            e.printStackTrace();
+            System.err.println("Errore: " + e.getMessage());
         }
 
         return result;
@@ -205,7 +205,7 @@ public class CardControl extends BaseControl{
             
         } catch (SQLException e) {
             showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
-            e.printStackTrace();
+            System.err.println("Errore: " + e.getMessage());
         }
 
         return result;
@@ -233,7 +233,7 @@ public class CardControl extends BaseControl{
 
             } catch (SQLException e) {
                 showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
-                e.printStackTrace();
+                System.err.println("Errore: " + e.getMessage());
             }
 
         }
@@ -244,6 +244,7 @@ public class CardControl extends BaseControl{
         
         //DAO to interact with DB
         CardDAO cardDAO = new CardDAOimp();
+        BankAccountDAO bankAccountDAO = new BankAccountDAOimp();
 
         //instance of logged user
         LoggedUser loggedUser = LoggedUser.getInstance();
@@ -261,10 +262,10 @@ public class CardControl extends BaseControl{
         else if (cardNumber.length() > 16){
             showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Il numero di carta inserito è troppo lungo.");
         }
-        else if (iban.length() < 27) {
+        else if (iban.length() < 25) {
             showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "L'iban inserito è troppo corto.");
         }
-        else if (iban.length() > 27) {
+        else if (iban.length() > 25) {
             showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "L'iban inserito è troppo lungo.");
         }
         else if (cvv.length() < 3) {
@@ -277,6 +278,28 @@ public class CardControl extends BaseControl{
 
             try {
 
+                Long.valueOf(cardNumber);
+                Long.valueOf(iban.substring(0, 12));
+                Long.valueOf(iban.substring(12));
+                Integer.parseInt(cvv);
+
+                String bankName = bankAccountDAO.getByID(ba_number).getBank();
+    
+                String prefix = "";
+    
+                for (int i = 0 ; i < bankName.length() && prefix.length() < 2 ; i++) {
+                    char c = bankName.charAt(i);
+                    if (Character.isUpperCase(c)) {
+                        prefix += c;
+                    }
+                }
+
+                for (int i = prefix.length() ; prefix.length() < 2 ; i++) {
+                    prefix += Character.toUpperCase(bankName.charAt(i));
+                }
+
+                iban = prefix + iban;
+                
                 if(ownerCF.equals(loggedUser.getCF())){
                     card = new Card(cardNumber, iban, cvv, expireDate, type, ba_number, null, loggedUser.getEmail());
                 }
@@ -290,7 +313,7 @@ public class CardControl extends BaseControl{
 
 
             } catch (SQLException e) {
-                e.printStackTrace();
+                System.err.println("Errore: " + e.getMessage());
                 String state = e.getSQLState();
                 System.out.println("codice: " + state);
                 if (state.equals("23505")){
@@ -299,6 +322,9 @@ public class CardControl extends BaseControl{
                 else{
                     showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
                 }
+            } catch (NumberFormatException e) {
+                showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Il numero di carta e/o il cvv e/o l'iban inseriti non sono validi.");
+                System.err.println("Errore: " + e.getMessage());
             }
 
         }
@@ -326,10 +352,10 @@ public class CardControl extends BaseControl{
         else if (cardNumber.length() > 16){
             showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Il numero di carta inserito è troppo lungo.");
         }
-        else if (iban.length() < 27) {
+        else if (iban.length() < 25) {
             showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "L'iban inserito è troppo corto.");
         }
-        else if (iban.length() > 27) {
+        else if (iban.length() > 25) {
             showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "L'iban inserito è troppo lungo.");
         }
         else if (cvv.length() < 3) {
@@ -341,6 +367,11 @@ public class CardControl extends BaseControl{
         else{
 
             try {
+
+                Long.valueOf(cardNumber);
+                Long.valueOf(iban.substring(0, 12));
+                Long.valueOf(iban.substring(12));
+                Integer.parseInt(cvv);
 
                 if(ownerCF.equals(loggedUser.getCF())){
                     card = new Card(cardNumber, iban, cvv, expireDate, type, ba_number, null, loggedUser.getEmail());
@@ -354,7 +385,7 @@ public class CardControl extends BaseControl{
                 }
 
             } catch (SQLException e) {
-                e.printStackTrace();
+                System.err.println("Errore: " + e.getMessage());
                 String state = e.getSQLState();
                 System.out.println("codice: " + state);
                 if (state.equals("23505")){
@@ -363,6 +394,9 @@ public class CardControl extends BaseControl{
                 else{
                     showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
                 }
+            }  catch (NumberFormatException e) {
+                showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Il cvv e/o l'iban inseriti non sono validi.");
+                System.err.println("Errore: " + e.getMessage());
             }
 
         }

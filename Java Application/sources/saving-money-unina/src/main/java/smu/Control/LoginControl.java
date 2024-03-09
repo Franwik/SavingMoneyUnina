@@ -35,9 +35,9 @@ public class LoginControl extends BaseControl{
                     showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Email e/o password errati.");
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
+                System.err.println("Errore: " + e.getMessage());
             } catch (IOException e) {
-                e.printStackTrace();
+                System.err.println("Errore: " + e.getMessage());
             }
 
         }

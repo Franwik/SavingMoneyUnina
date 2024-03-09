@@ -16,4 +16,6 @@ public interface BankAccountDAO {
 
     int delete(int accountnumber) throws SQLException;
 
+    BankAccount getByID(Integer ID) throws SQLException;
+
 }

@@ -37,7 +37,7 @@ public class BankAccountPageController extends ApplicationPageController{
 
     @FXML
     private void showNewBankAccountDialog() throws IOException {
-        showDialog("NewBankAccountDialog", 370, 365, "Creazione Nuovo Conto Bancario", "BankAccount");
+        showDialog("NewBankAccountDialog", 370, 235, "Creazione Nuovo Conto Bancario", "BankAccount");
     }
 
     @FXML

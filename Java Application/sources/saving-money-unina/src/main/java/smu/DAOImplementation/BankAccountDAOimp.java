@@ -9,6 +9,27 @@ import smu.DTO.BankAccount;
 
 public class BankAccountDAOimp implements BankAccountDAO{
 
+    
+    public BankAccount getByID(Integer ID) throws SQLException  {
+
+        Connection con = Database.getConnection();
+        BankAccount bankAccount = null;
+
+        String sql = "SELECT * FROM smu.bankaccount WHERE accountnumber = ?";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ps.setInt(1, ID);
+        
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            bankAccount = new BankAccount(rs.getInt("balance"), rs.getInt("accountnumber"), rs.getString("bank"), rs.getString("owneremail"), rs.getString("ownercf"));
+        }
+
+        return bankAccount;
+    }
+
     @Override
     public List<BankAccount> getByEmail(String email) throws SQLException {
 
@@ -56,15 +77,14 @@ public class BankAccountDAOimp implements BankAccountDAO{
     public int insert(BankAccount bankAccount) throws SQLException {
         Connection con = Database.getConnection();
 
-        String sql = "INSERT INTO smu.bankaccount (balance, accountnumber, bank, ownercf, owneremail) VALUES (?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO smu.bankaccount (balance, bank, ownercf, owneremail) VALUES (?, ?, ?, ?)";
 
         PreparedStatement ps = con.prepareStatement(sql);
 
         ps.setInt(1, bankAccount.getBalance());
-        ps.setInt(2, bankAccount.getAccountNumber());
-        ps.setString(3, bankAccount.getBank());
-        ps.setString(4, bankAccount.getOwnerCF());
-        ps.setString(5, bankAccount.getOwnerEmail());
+        ps.setString(2, bankAccount.getBank());
+        ps.setString(3, bankAccount.getOwnerCF());
+        ps.setString(4, bankAccount.getOwnerEmail());
 
         int result = ps.executeUpdate();
 
