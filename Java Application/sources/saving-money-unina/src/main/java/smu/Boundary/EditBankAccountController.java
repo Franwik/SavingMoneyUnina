@@ -3,7 +3,7 @@ package smu.Boundary;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class WalletPageController extends ApplicationPageController {
+public class EditBankAccountController extends BaseDialog {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {

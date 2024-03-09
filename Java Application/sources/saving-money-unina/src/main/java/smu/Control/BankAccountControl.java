@@ -1,0 +1,165 @@
+package smu.Control;
+
+import java.util.*;
+
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
+
+import java.sql.*;
+
+import smu.LoggedUser;
+import smu.DAO.BankAccountDAO;
+import smu.DAO.FamiliarDAO;
+import smu.DAOImplementation.BankAccountDAOimp;
+import smu.DAOImplementation.FamiliarDAOimp;
+import smu.DTO.BankAccount;
+import smu.DTO.Familiar;
+import smu.DTO.Person;
+
+public class BankAccountControl extends BaseControl {
+
+    public static List<String> getPeople(){
+
+        List<String> peopleCFList = new ArrayList<>();
+
+        //DAO to interact with DB
+        FamiliarDAO familiarDAO = new FamiliarDAOimp();
+
+        //Current user
+        LoggedUser loggedUser = LoggedUser.getInstance();
+        
+        try {
+            
+            List<Familiar> familiars = familiarDAO.getByEmail(loggedUser.getEmail());
+
+            peopleCFList.add(loggedUser.getCF());
+
+            for(Familiar familiar : familiars){
+                peopleCFList.add(familiar.getCF());
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return peopleCFList;
+    }
+
+    public static List<BankAccount> getBankAccounts(String chosenPerson) {
+
+        List<BankAccount> bankAccounts = new ArrayList<>();
+
+        //DAO to interact with DB
+        BankAccountDAO bankAccountDAO = new BankAccountDAOimp();
+
+        //Current user
+        LoggedUser loggedUser = LoggedUser.getInstance();
+        
+        try {
+            
+            if (chosenPerson.equals(loggedUser.getCF())) {
+                bankAccounts = bankAccountDAO.getByEmail(loggedUser.getEmail());
+            }
+            else {
+                bankAccounts = bankAccountDAO.getByCF(chosenPerson);
+            }
+            
+        } catch (Exception e) {
+            showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
+            e.printStackTrace();
+        }
+
+        return bankAccounts;
+    }
+
+    public static Person getPersonInfo(String CF){
+        
+        //Current user
+        LoggedUser loggedUser = LoggedUser.getInstance();
+        
+        if (CF.equals(loggedUser.getCF())) {
+            return loggedUser;
+        }
+        else {
+
+            Familiar familiar = null;
+
+            try {
+
+                FamiliarDAO familiarDAO = new FamiliarDAOimp();
+                familiar = familiarDAO.getByCF(CF);
+
+            } catch (SQLException e) {
+                showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
+                e.printStackTrace();
+            }
+            
+            return familiar;
+        }
+        
+    }
+    
+    public static List<Integer> getAllBankAccounts() {
+        List<Integer> result = new ArrayList<>();
+        List<Familiar> familiars = new ArrayList<>();
+        List<BankAccount> bankAccounts = new ArrayList<>();
+
+        //DAO to interact with DB
+        BankAccountDAO bankAccountDAO = new BankAccountDAOimp();
+        FamiliarDAO familiarDAO = new FamiliarDAOimp();
+
+        //Current user
+        LoggedUser loggedUser = LoggedUser.getInstance();
+        
+        try {
+            
+            familiars = familiarDAO.getByEmail(loggedUser.getEmail());
+
+            bankAccounts.addAll(bankAccountDAO.getByEmail(loggedUser.getEmail()));
+
+            for(Familiar familiar : familiars){
+                bankAccounts.addAll(bankAccountDAO.getByCF(familiar.getCF()));
+            }
+
+            for(BankAccount bankAccount : bankAccounts){
+                result.add(bankAccount.getAccountNumber());
+            }
+            
+        } catch (SQLException e) {
+            showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
+            e.printStackTrace();
+        }
+
+        return result;
+    }
+    
+    public static void delete(Integer baID) {
+
+        //DAO to interact with DB
+        BankAccountDAO bankAccountDAO = new BankAccountDAOimp();
+
+        //In case one of the field is empty
+        if(baID == null){
+            showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Non è stata selezionata nessun conto bancario.");
+        }
+        else{
+
+            try {
+
+                Optional<ButtonType> choice = showAlert(AlertType.CONFIRMATION, "Attenzione", "Vuoi procedere?", "Sei sicuro di voler eliminare la carta " + baID.toString() + "?");
+
+                if(choice.get() == ButtonType.OK){
+                    bankAccountDAO.delete(baID);
+                }
+
+
+            } catch (SQLException e) {
+                showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+}

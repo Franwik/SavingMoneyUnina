@@ -11,6 +11,7 @@ public class BankAccountDAOimp implements BankAccountDAO{
 
     @Override
     public List<BankAccount> getByEmail(String email) throws SQLException {
+
         Connection con = Database.getConnection();
         List<BankAccount> result = new ArrayList<>();
 
@@ -23,7 +24,7 @@ public class BankAccountDAOimp implements BankAccountDAO{
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
-            BankAccount bankAccount = new BankAccount(rs.getInt("balance"), rs.getInt("accountnumber"), rs.getString("bank"), rs.getString("ownercf"), rs.getString("owneremail"));
+            BankAccount bankAccount = new BankAccount(rs.getInt("balance"), rs.getInt("accountnumber"), rs.getString("bank"), rs.getString("owneremail"), rs.getString("ownercf"));
             result.add(bankAccount);
         }
 
@@ -44,7 +45,7 @@ public class BankAccountDAOimp implements BankAccountDAO{
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
-            BankAccount bankAccount = new BankAccount(rs.getInt("balance"), rs.getInt("accountnumber"), rs.getString("bank"), rs.getString("ownercf"), rs.getString("owneremail"));
+            BankAccount bankAccount = new BankAccount(rs.getInt("balance"), rs.getInt("accountnumber"), rs.getString("bank"), rs.getString("owneremail"), rs.getString("ownercf"));
             result.add(bankAccount);
         }
 
@@ -90,7 +91,7 @@ public class BankAccountDAOimp implements BankAccountDAO{
     public int delete(int accountNumber) throws SQLException {
         Connection con = Database.getConnection();
 
-        String sql = "DELETE FROM smu.bankaccount WHERE accountnumber = ? CASCADE";
+        String sql = "DELETE FROM smu.bankaccount WHERE accountnumber = ?";
 
         PreparedStatement ps = con.prepareStatement(sql);
 

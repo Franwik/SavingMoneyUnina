@@ -4,11 +4,10 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import smu.LoggedUser;
 
-public class HomePageController extends ApplicationPageController implements Initializable{
+public class HomePageController extends ApplicationPageController {
 
     @FXML
     Label welcomeLabel;

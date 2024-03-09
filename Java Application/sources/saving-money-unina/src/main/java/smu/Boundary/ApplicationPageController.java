@@ -2,6 +2,7 @@ package smu.Boundary;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
@@ -9,7 +10,7 @@ import javafx.stage.Stage;
 import smu.App;
 import smu.LoggedUser;
 
-public abstract class ApplicationPageController {
+public abstract class ApplicationPageController implements Initializable {
 
     @FXML
     private BorderPane mainPage;
