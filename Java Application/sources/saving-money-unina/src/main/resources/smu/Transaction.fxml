@@ -113,10 +113,11 @@
                   <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                </columnResizePolicy>
                <columns>
-                  <TableColumn prefWidth="75.0" text="ID" />
-                  <TableColumn prefWidth="75.0" text="Quantità" />
-                  <TableColumn prefWidth="75.0" text="Data" />
-                  <TableColumn prefWidth="75.0" text="Categoria" />
+                  <TableColumn fx:id="ID_Transaction" prefWidth="75.0" text="ID" />
+                  <TableColumn fx:id="amount" prefWidth="75.0" text="Somma" />
+                  <TableColumn fx:id="date" prefWidth="75.0" text="Data" />
+                  <TableColumn fx:id="category" prefWidth="75.0" text="Categoria" />
+                  <TableColumn fx:id="walletName" prefWidth="75.0" text="Portafoglio" />
                </columns>
             </TableView>
             <Text layoutX="50.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Seleziona una carta" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="40.0">

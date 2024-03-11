@@ -2,6 +2,7 @@ package smu.Boundary;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -10,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
 import smu.Control.TransactionControl;
 import smu.DTO.Transaction;
@@ -34,7 +36,7 @@ public class TransactionPageController extends ApplicationPageController {
     private TableColumn<Transaction, String> amount;
 
     @FXML
-    private TableColumn<Transaction, String> date;
+    private TableColumn<Transaction, LocalDate> date;
 
     @FXML
     private TableColumn<Transaction, String> category;
@@ -42,8 +44,6 @@ public class TransactionPageController extends ApplicationPageController {
     @FXML
     private TableColumn<Transaction, String> walletName;
 
-    @FXML
-    private TableColumn<Transaction, String> cardNumber;
 
     @FXML
     private void showNewTransactionDialog() throws IOException{
@@ -88,13 +88,11 @@ public class TransactionPageController extends ApplicationPageController {
         
         loadCards();
 
-        //ID_Transaction.setCellValueFactory(new PropertyValueFactory<Transaction, String>("ID_Transaction"));
-        //amount.setCellValueFactory(new PropertyValueFactory<Transaction, String>("amount"));
-        //date.setCellValueFactory(new PropertyValueFactory<Transaction, String>("date"));
-        //category.setCellValueFactory(new PropertyValueFactory<Transaction, String>("category"));
-        //walletName.setCellValueFactory(new PropertyValueFactory<Transaction, String>("walletName"));
-        //cardNumber.setCellValueFactory(new PropertyValueFactory<Transaction, String>("cardNumber"));
-
+        ID_Transaction.setCellValueFactory(new PropertyValueFactory<Transaction, String>("ID_Transaction"));
+        amount.setCellValueFactory(new PropertyValueFactory<Transaction, String>("amount"));
+        date.setCellValueFactory(new PropertyValueFactory<Transaction, LocalDate>("date"));
+        category.setCellValueFactory(new PropertyValueFactory<Transaction, String>("category"));
+        walletName.setCellValueFactory(new PropertyValueFactory<Transaction, String>("walletName"));
     }
 
 }

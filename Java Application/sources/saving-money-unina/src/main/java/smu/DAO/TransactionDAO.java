@@ -8,7 +8,7 @@ public interface TransactionDAO {
 
     Transaction getById(int id) throws SQLException;
 
-    List<Transaction> getAllByEmail(String email) throws SQLException;
+    List<Transaction> getByCardNumber(String chosenCard) throws SQLException;
 
     int insert(Transaction transaction) throws SQLException;
 
@@ -16,6 +16,5 @@ public interface TransactionDAO {
 
     int delete(int id_transaction) throws SQLException;
 
-    List<Transaction> getByCardNumber(String chosenCard) throws SQLException;
 
 }
