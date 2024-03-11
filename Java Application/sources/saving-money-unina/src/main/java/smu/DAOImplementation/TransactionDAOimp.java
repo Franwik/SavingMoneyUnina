@@ -30,7 +30,7 @@ public class TransactionDAOimp implements TransactionDAO {
 		ResultSet rs = ps.executeQuery();
 		
 		if (rs.next())
-            transaction = new Transaction(rs.getInt("ID_Transaction"), rs.getFloat("amount"), rs.getDate("Date").toLocalDate(), rs.getString("category"), rs.getString("cardiban"));
+            transaction = new Transaction(rs.getInt("ID_Transaction"), rs.getFloat("amount"), rs.getDate("Date").toLocalDate(), rs.getString("category"), rs.getString("walletName"), rs.getString("cardNumber"));
         
 
         return transaction;
@@ -68,7 +68,7 @@ public class TransactionDAOimp implements TransactionDAO {
 			ps.setString(1, card.getIban());
 			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				transaction = new Transaction(rs.getInt("ID_Transaction"), rs.getFloat("amount"), rs.getDate("Date").toLocalDate(), rs.getString("category"), rs.getString("cardiban"));
+				transaction = new Transaction(rs.getInt("ID_Transaction"), rs.getFloat("amount"), rs.getDate("Date").toLocalDate(), rs.getString("category"), rs.getString("walletName"), rs.getString("cardNumber"));
 			}
 			transactions.add(transaction);
 		}	
@@ -85,7 +85,9 @@ public class TransactionDAOimp implements TransactionDAO {
 		ps.setFloat(1, transaction.getAmount());
 		ps.setDate(2, java.sql.Date.valueOf(transaction.getDate()));
 		ps.setString(3, transaction.getCategory());
-		ps.setString(4, transaction.getCardiban());
+		ps.setString(4, transaction.getWalletName());
+		//!!!!!!!!!!
+		//ps.setString(5, transaction.getCardNumber());
 
 		int result = ps.executeUpdate();
 
@@ -103,7 +105,7 @@ public class TransactionDAOimp implements TransactionDAO {
 		ps.setFloat(1, transaction.getAmount());
 		ps.setDate(2, java.sql.Date.valueOf(transaction.getDate()));
 		ps.setString(3, transaction.getCategory());
-		ps.setString(4, transaction.getCardiban());
+		ps.setString(4, transaction.getWalletName());
 		ps.setInt(5, transaction.getID_Transaction());
 
 		int result = ps.executeUpdate();
@@ -125,6 +127,27 @@ public class TransactionDAOimp implements TransactionDAO {
 
 		return result;
 	}
+
+	@Override
+	public List<Transaction> getByCardNumber(String chosenCard) throws SQLException{
+		Connection con = Database.getConnection();
+        List<Transaction> result = new ArrayList<>();
+
+        String sql = "SELECT * FROM smu.card WHERE cardnumber = ?";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ps.setString(1, chosenCard);
+        
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+           Transaction transactions = new Transaction(rs.getInt("ID_Transaction"), rs.getFloat("amount"), rs.getDate("Date").toLocalDate(), rs.getString("category"), rs.getString("walletName"), rs.getString("cardNumber"));
+		   result.add(transactions);
+		}
+        
+		return result;
 	
 
+	}
 }

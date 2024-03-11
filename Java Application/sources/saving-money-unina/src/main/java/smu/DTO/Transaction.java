@@ -9,15 +9,18 @@ public class Transaction {
     private float amount;
     private LocalDate date;
     private String category;
-    private String cardiban;
+    private String walletName;
+    private String cardNumber;
 
 	//Constructor
-    public Transaction(int ID_Transaction, float amount, LocalDate date, String category, String cardiban) {
+    public Transaction(int ID_Transaction, float amount, LocalDate date, String category, String walletName, String cardNumber) {
         this.ID_Transaction = ID_Transaction;
         this.amount = amount;
         this.date = date;
         this.category = category;
-        this.cardiban = cardiban;
+        this.walletName = walletName;
+        this.cardNumber = cardNumber;
+
 
     }
 
@@ -56,16 +59,24 @@ public class Transaction {
         this.category = category;
     }
 
-    public String getCardiban() {
-        return cardiban;
+    public String getWalletName() {
+        return walletName;
     }
 
-    public void setCardiban(String cardiban) {
-        this.cardiban = cardiban;
+    public void setWalletName(String walletName) {
+        this.walletName = walletName;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
     }
 
     @Override
     public String toString() {
-        return "Transaction [ID_Transaction=" + ID_Transaction + ", amount=" + amount + ", date=" + date + ", category=" + category + "]";
+        return "Transaction [ID_Transaction=" + ID_Transaction + ", amount=" + amount + ", date=" + date + ", category=" + category + " walletName=" + walletName + " cardNumber=" + cardNumber + "]";
     }
 }

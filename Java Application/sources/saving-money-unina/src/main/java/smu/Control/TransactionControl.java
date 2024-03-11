@@ -6,11 +6,14 @@ import java.util.*;
 import javafx.scene.control.Alert.AlertType;
 import smu.LoggedUser;
 import smu.DAO.CardDAO;
+import smu.DAO.TransactionDAO;
 import smu.DAO.FamiliarDAO;
 import smu.DAOImplementation.CardDAOimp;
 import smu.DAOImplementation.FamiliarDAOimp;
+import smu.DAOImplementation.TransactionDAOimp;
 import smu.DTO.Card;
 import smu.DTO.Familiar;
+import smu.DTO.Transaction;
 
 
 public class TransactionControl extends BaseControl{
@@ -46,5 +49,21 @@ public class TransactionControl extends BaseControl{
 
 		return result;
 	}
+
+	public static List<Transaction> getTransactions(String chosenCard) {
+		List<Transaction> transactions = new ArrayList<>();
+	
+		TransactionDAO transactionDAO = new TransactionDAOimp();
+	
+		try {
+			transactions = transactionDAO.getByCardNumber(chosenCard);
+		} catch (SQLException e) {
+			showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
+			System.err.println("Errore: " + e.getMessage());
+		}
+	
+		return transactions;
+	}
+	
 
 }
