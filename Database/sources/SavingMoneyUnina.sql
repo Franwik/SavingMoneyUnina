@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 16.2
--- Dumped by pg_dump version 16.2
+-- Dumped from database version 16.2 (Postgres.app)
+-- Dumped by pg_dump version 16.2 (Postgres.app)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -623,7 +623,7 @@ ALTER TABLE ONLY smu.wallet ALTER COLUMN id_wallet SET DEFAULT nextval('smu.wall
 --
 
 COPY smu.bankaccount (balance, accountnumber, bank, ownercf, owneremail) FROM stdin;
-100000	2	Poste Italiane	\N	franwik_@outlook.com
+99987	2	Poste Italiane	\N	franwik_@outlook.com
 \.
 
 
@@ -649,6 +649,7 @@ COPY smu.familiar (name, surname, cf, dateofbirth, familiaremail) FROM stdin;
 --
 
 COPY smu.transaction (id_transaction, amount, date, category, cardnumber, walletname) FROM stdin;
+30	13	2024-03-11	\N	1234567890123456	\N
 \.
 
 
@@ -695,7 +696,7 @@ SELECT pg_catalog.setval('smu.card_ba_number_seq', 1, false);
 -- Name: transaction_id_transaction_seq; Type: SEQUENCE SET; Schema: smu; Owner: postgres
 --
 
-SELECT pg_catalog.setval('smu.transaction_id_transaction_seq', 28, true);
+SELECT pg_catalog.setval('smu.transaction_id_transaction_seq', 30, true);
 
 
 --
