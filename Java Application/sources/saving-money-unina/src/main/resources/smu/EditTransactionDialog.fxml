@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="368.0" prefWidth="373.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="smu.Boundary.EditBankAccountDialogController">
+   <children>
+      <GridPane prefHeight="293.0" prefWidth="370.0" AnchorPane.topAnchor="0.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="180.0" minWidth="10.0" prefWidth="160.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="212.0" minWidth="10.0" prefWidth="210.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <TextField fx:id="amountField" promptText="Somma" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="10.0" right="14.0" />
+               </GridPane.margin>
+            </TextField>
+            <Text focusTraversable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Data" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="10.0" right="10.0" />
+               </GridPane.margin>
+            </Text>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Categoria" textAlignment="CENTER" wrappingWidth="164.24072265625" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="10.0" right="10.0" />
+               </GridPane.margin>
+            </Text>
+            <Text focusTraversable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Somma" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="10.0" right="10.0" />
+               </GridPane.margin>
+            </Text>
+            <Text focusTraversable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="ID Transazione" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Text>
+            <ComboBox fx:id="transactionChoser" onAction="#loadTransactionInfo" prefWidth="200.0" promptText="---" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="10.0" right="14.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <Text focusTraversable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome Portafoglio" textAlignment="CENTER" wrappingWidth="160.71142578125" GridPane.rowIndex="4">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Text>
+            <TextField fx:id="walletField" promptText="Nome Portafoglio" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="10.0" right="14.0" />
+               </GridPane.margin>
+            </TextField>
+            <Text focusTraversable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Numero della Carta" textAlignment="CENTER" wrappingWidth="160.71142578125" GridPane.rowIndex="5">
+               <font>
+                  <Font name="Arial" size="15.0" />
+               </font>
+            </Text>
+            <ComboBox fx:id="cardChooser" onAction="#loadCards" prefWidth="200.0" promptText="---" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="5" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="10.0" right="14.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <TextField fx:id="categoryField" promptText="Categoria" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="10.0" right="14.0" />
+               </GridPane.margin>
+            </TextField>
+            <DatePicker fx:id="dateField" prefWidth="200.0" promptText="Data Transazione" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets left="10.0" right="14.0" />
+               </GridPane.margin>
+            </DatePicker>
+         </children>
+      </GridPane>
+      <Button layoutX="284.0" layoutY="314.0" mnemonicParsing="false" onAction="#updateTransaction" prefHeight="35.0" prefWidth="75.0" text="OK">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Button>
+      <Button fx:id="closeButton" cancelButton="true" layoutX="185.0" layoutY="314.0" mnemonicParsing="false" onAction="#close" prefHeight="35.0" prefWidth="75.0" text="Annulla">
+         <font>
+            <Font name="Arial" size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

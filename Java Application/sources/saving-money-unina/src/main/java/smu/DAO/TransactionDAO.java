@@ -8,7 +8,7 @@ public interface TransactionDAO {
 
     Transaction getById(int id) throws SQLException;
 
-    List<Transaction> getByCardNumber(String chosenCard) throws SQLException;
+    List<Transaction> getByCardNumber(String choosenCard) throws SQLException;
 
     int insert(Transaction transaction) throws SQLException;
 

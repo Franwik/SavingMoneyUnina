@@ -25,7 +25,7 @@ public class TransactionDAOimp implements TransactionDAO {
 		ResultSet rs = ps.executeQuery();
 		
 		if (rs.next())
-            transaction = new Transaction(rs.getInt("ID_Transaction"), rs.getFloat("amount"), rs.getDate("Date").toLocalDate(), rs.getString("category"), rs.getString("walletName"), rs.getString("cardNumber"));
+            transaction = new Transaction(rs.getInt("ID_Transaction"), rs.getString("cardNumber"), rs.getDate("Date").toLocalDate(), rs.getString("category"), rs.getString("walletName"), rs.getString("amount"));
         
 
         return transaction;
@@ -45,7 +45,7 @@ public class TransactionDAOimp implements TransactionDAO {
         ResultSet rs = ps.executeQuery();
 
         if (rs.next()) {
-           Transaction transactions = new Transaction(rs.getInt("ID_Transaction"), rs.getFloat("amount"), rs.getDate("Date").toLocalDate(), rs.getString("category"), rs.getString("walletName"), rs.getString("cardNumber"));
+           Transaction transactions = new Transaction(rs.getInt("ID_Transaction"), rs.getString("cardNumber"), rs.getDate("Date").toLocalDate(), rs.getString("category"), rs.getString("walletName"), rs.getString("amount"));
 		   result.add(transactions);
 		}
         
@@ -60,7 +60,7 @@ public class TransactionDAOimp implements TransactionDAO {
 
 		PreparedStatement ps = con.prepareStatement(sql);
 
-		ps.setFloat(1, transaction.getAmount());
+		ps.setString(1, transaction.getAmount());
 		ps.setDate(2, java.sql.Date.valueOf(transaction.getDate()));
 		ps.setString(3, transaction.getCategory());
 		ps.setString(4, transaction.getWalletName());
@@ -79,7 +79,7 @@ public class TransactionDAOimp implements TransactionDAO {
 
 		PreparedStatement ps = con.prepareStatement(sql);
 
-		ps.setFloat(1, transaction.getAmount());
+		ps.setString(1, transaction.getAmount());
 		ps.setDate(2, java.sql.Date.valueOf(transaction.getDate()));
 		ps.setString(3, transaction.getCategory());
 		ps.setString(4, transaction.getWalletName());

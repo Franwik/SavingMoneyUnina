@@ -125,7 +125,7 @@
                   <Font name="Arial" size="15.0" />
                </font>
             </Text>
-            <Button fx:id="newTransaction" layoutX="584.0" layoutY="58.0" mnemonicParsing="false" onAction="#showNewTransactionDialog" text="Aggiungi" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="60.0">
+            <Button fx:id="newTransaction" layoutX="584.0" layoutY="58.0" mnemonicParsing="false" text="Aggiungi" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="60.0">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>
@@ -133,7 +133,7 @@
                   <FontAwesomeIcon glyphName="PLUS" />
                </graphic>
             </Button>
-            <Button fx:id="newTransaction1" layoutX="511.0" layoutY="59.0" mnemonicParsing="false" onAction="#showNewTransactionDialog" text="Rimuovi" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="60.0">
+            <Button fx:id="deleteTransaction" layoutX="511.0" layoutY="59.0" mnemonicParsing="false" text="Rimuovi" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="60.0">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>
@@ -141,7 +141,7 @@
                   <FontAwesomeIcon glyphName="CLOSE" />
                </graphic>
             </Button>
-            <Button fx:id="newTransaction2" layoutX="362.0" layoutY="58.0" mnemonicParsing="false" onAction="#showNewTransactionDialog" text="Modifica" AnchorPane.rightAnchor="265.0" AnchorPane.topAnchor="60.0">
+            <Button fx:id="editTransaction" layoutX="362.0" layoutY="58.0" mnemonicParsing="false" onAction="#showEditTransactionDialog" text="Modifica" AnchorPane.rightAnchor="265.0" AnchorPane.topAnchor="60.0">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>

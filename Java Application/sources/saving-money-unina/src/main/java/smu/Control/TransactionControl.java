@@ -1,6 +1,7 @@
 package smu.Control;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.*;
 
 import javafx.scene.control.Alert.AlertType;
@@ -50,13 +51,13 @@ public class TransactionControl extends BaseControl{
 		return result;
 	}
 
-	public static List<Transaction> getTransactions(String chosenCard) {
+	public static List<Transaction> getTransactions(String choosenCard) {
 		List<Transaction> transactions = new ArrayList<>();
 	
 		TransactionDAO transactionDAO = new TransactionDAOimp();
 	
 		try {
-			transactions = transactionDAO.getByCardNumber(chosenCard);
+			transactions = transactionDAO.getByCardNumber(choosenCard);
 		} catch (SQLException e) {
 			showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
 			System.err.println("Errore: " + e.getMessage());
@@ -65,5 +66,21 @@ public class TransactionControl extends BaseControl{
 		return transactions;
 	}
 	
+	public static void update(Integer transactionID, String amount, LocalDate date, String category, String wallet, String cardNumber) {
+		TransactionDAO transactionDAO = new TransactionDAOimp();
+		Transaction transaction = new Transaction(transactionID, amount, date, category, wallet, cardNumber);
+		
+		try {
+			transactionDAO.update(transaction);
+		} catch (SQLException e) {
+			showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
+			System.err.println("Errore: " + e.getMessage());
+		}
+	}
+
+	public static Transaction getTransactions(Integer selectedItem) {
+		// TODO Auto-generated method stub
+		throw new UnsupportedOperationException("Unimplemented method 'getTransactions'");
+	}
 
 }
