@@ -92,5 +92,35 @@ public class TransactionControl extends BaseControl{
 		return transaction;
 	}
 	
+	public static List<Integer> getAllTransactions(){
+
+		List<Integer> result = new ArrayList<>();
+		List<Card> cards = new ArrayList<>();
+		List<Transaction> transactions = new ArrayList<>();
+
+		TransactionDAO transactionDAO = new TransactionDAOimp();
+		CardDAO cardDAO = new CardDAOimp();
+
+		LoggedUser loggedUser = LoggedUser.getInstance();
+
+		try {
+
+			cards.addAll(cardDAO.getByEmail(loggedUser.getEmail()));
+
+			for(Card card : cards){
+				transactions.addAll(transactionDAO.getByCardNumber(card.getCardNumber()));
+			}
+
+			for(Transaction transaction : transactions){
+				result.add(transaction.getID_Transaction());
+			}
+
+		} catch (SQLException e) {
+			showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
+			System.err.println("Errore: " + e.getMessage());
+		}
+
+		return result;
+	}
 
 }

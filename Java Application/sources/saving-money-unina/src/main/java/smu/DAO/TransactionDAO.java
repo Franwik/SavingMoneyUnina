@@ -16,5 +16,4 @@ public interface TransactionDAO {
 
     int delete(int id_transaction) throws SQLException;
 
-
 }

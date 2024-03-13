@@ -48,6 +48,16 @@ public class EditTransactionDialogController extends BaseDialog{
 		
 	}
 
+	private void loadTransactions(){
+
+		List<Integer> transactions = new ArrayList<>();
+
+		transactions = TransactionControl.getAllTransactions();
+
+		transactionChooser.getItems().addAll(transactions);
+
+	}
+
 	@FXML
 	private void loadTransactionInfo(){
 		Transaction transaction = TransactionControl.getTransactionInfo(transactionChooser.getSelectionModel().getSelectedItem());
@@ -74,6 +84,8 @@ public class EditTransactionDialogController extends BaseDialog{
 	public void initialize(URL location, ResourceBundle resources) {
 		
 		loadCards();
+
+		loadTransactions();
 	}
 	
 }
