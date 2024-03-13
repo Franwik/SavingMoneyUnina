@@ -6,14 +6,14 @@ public class Transaction {
 
 	//Attributes
     private int ID_Transaction;
-    private String amount;
+    private Float amount;
     private LocalDate date;
     private String category;
     private String walletName;
     private String cardNumber;
 
 	//Constructor
-    public Transaction(int ID_Transaction, String amount, LocalDate date, String category, String walletName, String cardNumber) {
+    public Transaction(int ID_Transaction, Float amount, LocalDate date, String category, String walletName, String cardNumber) {
         this.ID_Transaction = ID_Transaction;
         this.amount = amount;
         this.date = date;
@@ -35,11 +35,11 @@ public class Transaction {
         this.ID_Transaction = ID_Transaction;
     }
 
-    public String getAmount() {
+    public Float getAmount() {
         return amount;
     }
 
-    public void setAmount(String amount) {
+    public void setAmount(Float amount) {
         this.amount = amount;
     }
 

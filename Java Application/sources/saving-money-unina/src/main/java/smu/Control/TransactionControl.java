@@ -68,7 +68,7 @@ public class TransactionControl extends BaseControl{
 	
 	public static void update(Integer transactionID, String amount, LocalDate date, String category, String wallet, String cardNumber) {
 		TransactionDAO transactionDAO = new TransactionDAOimp();
-		Transaction transaction = new Transaction(transactionID, amount, date, category, wallet, cardNumber);
+		Transaction transaction = new Transaction(transactionID, Float.valueOf(amount), date, category, wallet, cardNumber);
 		
 		try {
 			transactionDAO.update(transaction);
