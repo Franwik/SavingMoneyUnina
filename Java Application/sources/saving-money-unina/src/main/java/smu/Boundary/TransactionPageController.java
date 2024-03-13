@@ -30,10 +30,10 @@ public class TransactionPageController extends ApplicationPageController {
     private TableView<Transaction> transactionList;
 
     @FXML
-    private TableColumn<Transaction, String> ID_Transaction;
+    private TableColumn<Transaction, Integer> ID_Transaction;
 
     @FXML
-    private TableColumn<Transaction, String> amount;
+    private TableColumn<Transaction, Float> amount;
 
     @FXML
     private TableColumn<Transaction, LocalDate> date;
@@ -48,6 +48,11 @@ public class TransactionPageController extends ApplicationPageController {
     @FXML
     private void showNewTransactionDialog() throws IOException{
         System.out.println("mostrato il dialog panel");
+    }
+
+    @FXML
+    private void showEditTransactionDialog() throws IOException{
+        showDialog("EditTransactionDialog", 370, 370, "Modifica Transazione", "Transaction");
     }
 
     @FXML
@@ -88,8 +93,8 @@ public class TransactionPageController extends ApplicationPageController {
         
         loadCards();
 
-        ID_Transaction.setCellValueFactory(new PropertyValueFactory<Transaction, String>("ID_Transaction"));
-        amount.setCellValueFactory(new PropertyValueFactory<Transaction, String>("amount"));
+        ID_Transaction.setCellValueFactory(new PropertyValueFactory<Transaction, Integer>("ID_Transaction"));
+        amount.setCellValueFactory(new PropertyValueFactory<Transaction, Float>("amount"));
         date.setCellValueFactory(new PropertyValueFactory<Transaction, LocalDate>("date"));
         category.setCellValueFactory(new PropertyValueFactory<Transaction, String>("category"));
         walletName.setCellValueFactory(new PropertyValueFactory<Transaction, String>("walletName"));

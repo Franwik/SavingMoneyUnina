@@ -78,9 +78,19 @@ public class TransactionControl extends BaseControl{
 		}
 	}
 
-	public static Transaction getTransactions(Integer selectedItem) {
-		// TODO Auto-generated method stub
-		throw new UnsupportedOperationException("Unimplemented method 'getTransactions'");
+	public static Transaction getTransactionInfo(Integer ID_Transaction) {
+		TransactionDAO transactionDAO = new TransactionDAOimp();
+		Transaction transaction = null;
+		
+		try {
+			transaction = transactionDAO.getById(ID_Transaction);
+		} catch (SQLException e) {
+			showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
+			System.err.println("Errore: " + e.getMessage());
+		}
+		
+		return transaction;
 	}
+	
 
 }

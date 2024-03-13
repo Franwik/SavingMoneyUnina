@@ -50,7 +50,7 @@ public class EditTransactionDialogController extends BaseDialog{
 
 	@FXML
 	private void loadTransactionInfo(){
-		Transaction transaction = TransactionControl.getTransactions(transactionChooser.getSelectionModel().getSelectedItem());
+		Transaction transaction = TransactionControl.getTransactionInfo(transactionChooser.getSelectionModel().getSelectedItem());
 		
 		amountField.setText(String.valueOf(transaction.getAmount()));
 		dateField.setValue(transaction.getDate());
