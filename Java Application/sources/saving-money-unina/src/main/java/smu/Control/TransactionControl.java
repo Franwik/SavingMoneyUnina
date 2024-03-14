@@ -66,36 +66,6 @@ public class TransactionControl extends BaseControl{
 	
 		return transactions;
 	}
-	
-	public static void update(Integer transactionID, String amount, LocalDate date, String category, String wallet, String cardNumber) {
-		
-		 //DAO to interact with DB
-		 TransactionDAO transactionDAO = new TransactionDAOimp();
- 
-		 //Card that needs to be inserted
-		 Transaction transaction = null;
- 
-		 //checks on input
-		 if(transactionID == null || amount.isEmpty() || date == null || cardNumber == null){
-
-			showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Almeno uno dei campi è vuoto.");
-		 
-		}
-		else{
-
-			 try {
-
-					transaction = new Transaction(transactionID, Float.parseFloat(amount), date, category, wallet, cardNumber);
-					transactionDAO.update(transaction);
-					showAlert(AlertType.INFORMATION, "Informazione", "Transazione modificata con successo.", "La transazione è stata modificata con successo.");
-				
-				} catch (SQLException e) {
-				 showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
-				 System.err.println("Errore: " + e.getMessage());
-			 }
- 
-		 }
-	 }
 
 	public static Transaction getTransactionInfo(Integer ID_Transaction) {
 		TransactionDAO transactionDAO = new TransactionDAOimp();
@@ -111,40 +81,84 @@ public class TransactionControl extends BaseControl{
 		return transaction;
 	}
 	
-	public static List<Integer> getAllTransactions(){
+	public static List<Integer> getAllTransactions() {
 
 		List<Integer> result = new ArrayList<>();
 		List<Card> cards = new ArrayList<>();
 		List<Transaction> transactions = new ArrayList<>();
-
+		List<Familiar> familiars = new ArrayList<>();
+	
 		TransactionDAO transactionDAO = new TransactionDAOimp();
 		CardDAO cardDAO = new CardDAOimp();
-
+		FamiliarDAO familiarDAO = new FamiliarDAOimp();
+	
 		LoggedUser loggedUser = LoggedUser.getInstance();
-
+	
 		try {
-
+			// Recupero delle carte dell'utente loggato
 			cards.addAll(cardDAO.getByEmail(loggedUser.getEmail()));
-
-			for(Card card : cards){
+	
+			// Recupero dei familiari associati all'utente loggato
+			familiars.addAll(familiarDAO.getByEmail(loggedUser.getEmail()));
+	
+			// Recupero delle carte dei familiari e delle loro transazioni
+			for (Familiar familiar : familiars) {
+				cards.addAll(cardDAO.getByCF(familiar.getCF()));
+			}
+	
+			// Recupero delle transazioni associate alle carte
+			for (Card card : cards) {
 				transactions.addAll(transactionDAO.getByCardNumber(card.getCardNumber()));
 			}
-
-			for(Transaction transaction : transactions){
+	
+			for (Transaction transaction : transactions) {
 				result.add(transaction.getID_Transaction());
 			}
-
+	
 		} catch (SQLException e) {
 			showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
 			System.err.println("Errore: " + e.getMessage());
 		}
-
+	
 		return result;
+	}
+	
+
+	public static void update(Integer transactionID, String amount, LocalDate date, String category, String wallet, String cardNumber) {
+		
+		//DAO to interact with DB
+		TransactionDAO transactionDAO = new TransactionDAOimp();
+
+		//Card that needs to be inserted
+		Transaction transaction = null;
+
+		//checks on input
+		if(transactionID == null || amount.isEmpty() || date == null || cardNumber == null){
+
+		   showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Almeno uno dei campi è vuoto.");
+		
+	   }
+	   else{
+
+			try{
+			
+					transaction = new Transaction(transactionID, Float.parseFloat(amount), date, category, wallet, cardNumber);
+				   	transactionDAO.update(transaction);
+				   	showAlert(AlertType.INFORMATION, "Informazione", "Transazione modificata con successo.", "La transazione è stata modificata con successo.");
+			   
+			   } catch (SQLException e) {
+				showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
+				System.err.println("Errore: " + e.getMessage());
+			}
+
+		}
 	}
 
 	public static void delete(Integer transactionID) {
 
+		//DAO to interact with DB
 		TransactionDAO transactionDAO = new TransactionDAOimp();
+
 		
 		if(transactionID == null){
 			showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Nessuna transazione selezionata.");
@@ -170,12 +184,12 @@ public class TransactionControl extends BaseControl{
 
 	public static void insert(Integer iD_Transaction, Float amount, LocalDate date, String category, String walletName, String cardNumber) {
 		
+		//DAO to interact with DB
 		TransactionDAO transactionDAO = new TransactionDAOimp();
-		//CardDAO cardDAO = new CardDAOimp();
 
-		//LoggedUser loggedUser = LoggedUser.getInstance();
-
+		//Transaction that needs to be inserted
 		Transaction transaction = null;
+		
 
 		if(iD_Transaction == null || amount == null || date == null || cardNumber.isEmpty()){
 			showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Almeno uno dei campi è vuoto.");
