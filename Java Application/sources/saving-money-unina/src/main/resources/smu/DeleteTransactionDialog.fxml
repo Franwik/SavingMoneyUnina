@@ -29,7 +29,7 @@
                   <Insets left="10.0" right="10.0" />
                </GridPane.margin>
             </Text>
-            <ComboBox fx:id="transactionChoser" prefWidth="200.0" promptText="---" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+            <ComboBox fx:id="transactionChooser" prefWidth="200.0" promptText="---" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets left="10.0" right="14.0" />
                </GridPane.margin>

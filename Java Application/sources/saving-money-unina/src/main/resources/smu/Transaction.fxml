@@ -133,7 +133,7 @@
                   <FontAwesomeIcon glyphName="PLUS" />
                </graphic>
             </Button>
-            <Button fx:id="deleteTransaction" layoutX="511.0" layoutY="59.0" mnemonicParsing="false" text="Rimuovi" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="60.0">
+            <Button fx:id="deleteTransaction" layoutX="511.0" layoutY="59.0" mnemonicParsing="false" onAction="#showDeleteTransactionDialog" text="Rimuovi" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="60.0">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>

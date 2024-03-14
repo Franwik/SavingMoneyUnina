@@ -51,6 +51,11 @@ public class TransactionPageController extends ApplicationPageController {
     }
 
     @FXML
+    private void showDeleteTransactionDialog() throws IOException{
+        showDialog("DeleteTransactionDialog", 370, 140, "Elimina Transazione", "Transaction");
+    }
+
+    @FXML
     private void showEditTransactionDialog() throws IOException{
         showDialog("EditTransactionDialog", 370, 370, "Modifica Transazione", "Transaction");
     }

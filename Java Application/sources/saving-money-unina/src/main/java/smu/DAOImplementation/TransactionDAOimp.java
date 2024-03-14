@@ -16,7 +16,7 @@ public class TransactionDAOimp implements TransactionDAO {
         
 		Transaction transaction = null;
 
-        String sql = "SELECT * FROM transaction WHERE ID_Transaction = ?";
+        String sql = "SELECT * FROM smu.transaction WHERE ID_Transaction = ?";
 
         PreparedStatement ps = con.prepareStatement(sql);
 
