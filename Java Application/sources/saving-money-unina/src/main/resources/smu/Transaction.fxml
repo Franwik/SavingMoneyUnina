@@ -125,7 +125,7 @@
                   <Font name="Arial" size="15.0" />
                </font>
             </Text>
-            <Button fx:id="newTransaction" layoutX="584.0" layoutY="58.0" mnemonicParsing="false" text="Aggiungi" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="60.0">
+            <Button fx:id="newTransaction" layoutX="584.0" layoutY="58.0" mnemonicParsing="false" onAction="#showNewTransactionDialog" text="Aggiungi" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="60.0">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>

@@ -47,7 +47,7 @@ public class TransactionPageController extends ApplicationPageController {
 
     @FXML
     private void showNewTransactionDialog() throws IOException{
-        System.out.println("mostrato il dialog panel");
+        showDialog("NewTransactionDialog", 370, 340, "Nuova Transazione", "Transaction");
     }
 
     @FXML

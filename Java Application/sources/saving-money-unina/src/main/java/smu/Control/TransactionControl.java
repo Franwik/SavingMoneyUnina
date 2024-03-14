@@ -168,4 +168,32 @@ public class TransactionControl extends BaseControl{
 
 	}
 
+	public static void insert(Integer iD_Transaction, Float amount, LocalDate date, String category, String walletName, String cardNumber) {
+		
+		TransactionDAO transactionDAO = new TransactionDAOimp();
+		//CardDAO cardDAO = new CardDAOimp();
+
+		//LoggedUser loggedUser = LoggedUser.getInstance();
+
+		Transaction transaction = null;
+
+		if(iD_Transaction == null || amount == null || date == null || cardNumber.isEmpty()){
+			showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Almeno uno dei campi è vuoto.");
+		}
+		else{
+			try {
+
+				transaction = new Transaction(iD_Transaction, amount, date, category, walletName, cardNumber);
+				transactionDAO.insert(transaction);
+				showAlert(AlertType.INFORMATION, "Informazione", "Transazione inserita con successo.", "La transazione è stata inserita con successo.");
+
+			} catch (SQLException e) {
+				showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
+                System.err.println("Errore: " + e.getMessage());
+			} catch(RuntimeException e){
+				showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Il saldo inserito non è valido.");
+				System.err.println("Errore: " + e.getMessage());
+			}
+		}
+	}
 }
