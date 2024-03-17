@@ -1,4 +1,4 @@
-package smu.Boundary;
+package smu.Boundary.BankAccount;
 
 import java.net.URL;
 import java.util.*;
@@ -9,6 +9,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import smu.Boundary.ApplicationPageController;
 import smu.Control.BankAccountControl;
 import smu.DTO.BankAccount;
 import smu.DTO.Person;

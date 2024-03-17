@@ -1,4 +1,4 @@
-package smu.Boundary;
+package smu.Boundary.Transaction;
 
 import java.net.URL;
 import java.time.LocalDate;
@@ -10,6 +10,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import smu.Boundary.BaseDialog;
 import smu.Control.TransactionControl;
 
 public class NewTransactionDialogController extends BaseDialog{

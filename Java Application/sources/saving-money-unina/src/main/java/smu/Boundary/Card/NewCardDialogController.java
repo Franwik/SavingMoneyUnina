@@ -1,10 +1,11 @@
-package smu.Boundary;
+package smu.Boundary.Card;
 
 import java.net.URL;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import smu.Boundary.BaseDialog;
 import smu.Control.CardControl;
 
 import java.util.*;

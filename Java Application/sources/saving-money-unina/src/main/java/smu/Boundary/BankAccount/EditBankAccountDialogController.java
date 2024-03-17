@@ -1,4 +1,4 @@
-package smu.Boundary;
+package smu.Boundary.BankAccount;
 
 import java.io.IOException;
 import java.net.URL;
@@ -7,6 +7,7 @@ import java.util.*;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import smu.Boundary.BaseDialog;
 import smu.Control.BankAccountControl;
 import smu.Control.CardControl;
 import smu.DTO.BankAccount;

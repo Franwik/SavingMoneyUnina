@@ -1,4 +1,4 @@
-package smu.Boundary;
+package smu.Boundary.Wallet;
 
 public class NewWalletDialogController {
 

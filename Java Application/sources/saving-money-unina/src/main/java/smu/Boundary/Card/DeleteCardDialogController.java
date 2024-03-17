@@ -1,4 +1,4 @@
-package smu.Boundary;
+package smu.Boundary.Card;
 
 import java.net.URL;
 import javafx.fxml.FXML;
@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 import smu.App;
+import smu.Boundary.BaseDialog;
 import smu.Control.CardControl;
 import java.util.*;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package smu.Boundary;
+package smu.Boundary.BankAccount;
 
 import java.net.URL;
 import java.io.*;
@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 import smu.App;
+import smu.Boundary.BaseDialog;
 import smu.Control.BankAccountControl;
 
 public class DeleteBankAccountDialogController extends BaseDialog {

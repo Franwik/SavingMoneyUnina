@@ -1,4 +1,4 @@
-package smu.Boundary;
+package smu.Boundary.Transaction;
 
 import java.io.IOException;
 import java.net.URL;
@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 import smu.App;
+import smu.Boundary.BaseDialog;
 import smu.Control.TransactionControl;
 
 public class DeleteTransactionDialogController extends BaseDialog{

@@ -1,4 +1,4 @@
-package smu.Boundary;
+package smu.Boundary.Card;
 
 import java.time.*;
 import java.util.ResourceBundle;
@@ -11,6 +11,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import smu.Boundary.ApplicationPageController;
 import smu.Control.CardControl;
 import smu.DTO.Card;
 import smu.DTO.Person;

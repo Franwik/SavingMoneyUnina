@@ -1,4 +1,4 @@
-package smu.Boundary;
+package smu.Boundary.Transaction;
 
 import java.io.IOException;
 import java.net.URL;
@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
+import smu.Boundary.BaseDialog;
 import smu.Control.TransactionControl;
 import smu.DTO.Transaction;
 

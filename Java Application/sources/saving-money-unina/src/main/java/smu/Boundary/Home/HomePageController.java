@@ -1,4 +1,4 @@
-package smu.Boundary;
+package smu.Boundary.Home;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -6,6 +6,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import smu.LoggedUser;
+import smu.Boundary.ApplicationPageController;
 
 public class HomePageController extends ApplicationPageController {
 
@@ -13,8 +14,8 @@ public class HomePageController extends ApplicationPageController {
     Label welcomeLabel;
 
     private void setWelcomeLabel() {
-        LoggedUser loggedUser = LoggedUser.getInstance(null);
-        welcomeLabel.setText("Benvenuto/a,\n" + loggedUser.getName() + " " + loggedUser.getSurname());
+        LoggedUser loggedUser = LoggedUser.getInstance();
+        welcomeLabel.setText("Benvenuto/a, " + loggedUser.getName() + " " + loggedUser.getSurname());
     }
 
     @Override

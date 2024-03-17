@@ -1,4 +1,4 @@
-package smu.Boundary;
+package smu.Boundary.Transaction;
 
 import java.io.IOException;
 import java.net.URL;
@@ -13,6 +13,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import smu.Boundary.ApplicationPageController;
 import smu.Control.TransactionControl;
 import smu.DTO.Transaction;
 
