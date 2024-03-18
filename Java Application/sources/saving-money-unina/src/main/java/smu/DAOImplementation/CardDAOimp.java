@@ -1,11 +1,14 @@
 package smu.DAOImplementation;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.*;
 
 import smu.Database;
+import smu.LoggedUser;
 import smu.DAO.CardDAO;
 import smu.DTO.Card;
+import smu.DTO.ReportCard;
 
 public class CardDAOimp implements CardDAO{
 
@@ -129,6 +132,32 @@ public class CardDAOimp implements CardDAO{
         }
 
         return card;
+    }
+
+    @Override
+    public List<ReportCard> getReports(LocalDate firstDay, LocalDate lastDay) throws SQLException {
+        
+        Connection con = Database.getConnection();
+        List<ReportCard> result = new ArrayList<>();
+
+        LoggedUser loggedUser = LoggedUser.getInstance();
+
+        String sql = "SELECT C.cardnumber,F.cf, MIN(CASE WHEN t.amount > 0 THEN t.amount END) AS minIN, MAX(CASE WHEN t.amount > 0 THEN t.amount END) AS maxIN, MIN(CASE WHEN t.amount < 0 THEN ABS(t.amount) END) AS minOUT, MAX(CASE WHEN t.amount < 0 THEN ABS(t.amount) END) AS maxOUT FROM smu.user AS U LEFT JOIN smu.familiar AS F ON U.email = F.familiaremail LEFT JOIN  smu.card AS C ON U.email = C.owneremail OR F.cf = C.ownercf LEFT JOIN smu.transaction AS T ON c.cardnumber = t.cardnumber WHERE U.email = ? AND T.date >= ? AND T.date <= ? GROUP BY C.cardnumber, F.cf";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        ps.setString(1, loggedUser.getEmail());
+        ps.setDate(2, java.sql.Date.valueOf(firstDay));
+        ps.setDate(3, java.sql.Date.valueOf(lastDay));
+
+        ResultSet rs = ps.executeQuery();
+
+        while(rs.next()) {
+            ReportCard reportCard = new ReportCard(rs.getString("cardnumber"), null, null, null, null, 0, rs.getString("cf"), null, rs.getFloat("minIN"), rs.getFloat("maxIN"), rs.getFloat("minOUT"), rs.getFloat("maxOUT"));
+            result.add(reportCard);
+        }
+
+        return result;
     }
 
 

@@ -9,9 +9,11 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import smu.LoggedUser;
 import smu.Boundary.ApplicationPageController;
+import smu.Control.HomeControl;
 import smu.DTO.ReportCard;
 
 public class HomePageController extends ApplicationPageController {
@@ -21,6 +23,9 @@ public class HomePageController extends ApplicationPageController {
 
     @FXML
     private ComboBox<String> monthChooser;
+
+    @FXML
+    private TextField yearField;
 
     @FXML
     private TableView<ReportCard> reportList;
@@ -46,6 +51,19 @@ public class HomePageController extends ApplicationPageController {
     private void setWelcomeLabel() {
         LoggedUser loggedUser = LoggedUser.getInstance();
         welcomeLabel.setText("Benvenuto/a, " + loggedUser.getName() + " " + loggedUser.getSurname());
+    }
+
+    @FXML
+    private void loadReport(){
+
+        String chosenMonth = monthChooser.getSelectionModel().getSelectedItem();
+        String year = yearField.getText();
+
+        List<ReportCard> reportCards = HomeControl.getReports(chosenMonth, year);
+
+        reportList.getItems().clear();
+        reportList.getItems().addAll(reportCards);
+
     }
 
     private static String capitalizeFirstLetter(String word) {

@@ -4,12 +4,15 @@ import java.time.LocalDate;
 
 public class ReportCard extends Card{
 
-    Integer minIN;
-    Integer maxIN;
-    Integer minOUT;
-    Integer maxOUT;
+    //Attributes
+    float minIN;
+    float maxIN;
+    float minOUT;
+    float maxOUT;
 
-    public ReportCard(String cardNumber, String iban, String cvv, LocalDate expireDate, String cardType, int ba_number, String ownerCF, String ownerEmail, Integer minIN, Integer maxIN, Integer minOUT, Integer maxOUT) {
+    //Contructor
+    public ReportCard(String cardNumber, String iban, String cvv, LocalDate expireDate, String cardType, int ba_number,
+            String ownerCF, String ownerEmail, float minIN, float maxIN, float minOUT, float maxOUT) {
         super(cardNumber, iban, cvv, expireDate, cardType, ba_number, ownerCF, ownerEmail);
         this.minIN = minIN;
         this.maxIN = maxIN;
@@ -17,37 +20,47 @@ public class ReportCard extends Card{
         this.maxOUT = maxOUT;
     }
 
-    public Integer getMinIN() {
+    // Getters and setters
+
+    public float getMinIN() {
         return minIN;
     }
 
-    public void setMinIN(Integer minIN) {
+
+    public void setMinIN(float minIN) {
         this.minIN = minIN;
     }
 
-    public Integer getMaxIN() {
+
+    public float getMaxIN() {
         return maxIN;
     }
 
-    public void setMaxIN(Integer maxIN) {
+
+    public void setMaxIN(float maxIN) {
         this.maxIN = maxIN;
     }
 
-    public Integer getMinOUT() {
+
+    public float getMinOUT() {
         return minOUT;
     }
 
-    public void setMinOUT(Integer minOUT) {
+
+    public void setMinOUT(float minOUT) {
         this.minOUT = minOUT;
     }
 
-    public Integer getMaxOUT() {
+
+    public float getMaxOUT() {
         return maxOUT;
     }
 
-    public void setMaxOUT(Integer maxOUT) {
+
+    public void setMaxOUT(float maxOUT) {
         this.maxOUT = maxOUT;
     }
+    
 
     @Override
     public String toString() {
@@ -55,5 +68,5 @@ public class ReportCard extends Card{
                 + ", cardType=" + super.getCardType() + ", ba_number=" + super.getBa_number() + ", ownerCF=" + super.getOwnerCF() + ", ownerEmail="
                 + super.getOwnerEmail() +  ", minIN=" + minIN + ", maxIN=" + maxIN + ", minOUT=" + minOUT + ", maxOUT=" + maxOUT + "]";
     }
-    
+
 }
