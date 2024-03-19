@@ -6,7 +6,10 @@ import java.sql.*;
 
 import smu.LoggedUser;
 import smu.DAO.CardDAO;
+import smu.DAO.FamiliarDAO;
 import smu.DAOImplementation.CardDAOimp;
+import smu.DAOImplementation.FamiliarDAOimp;
+import smu.DTO.Familiar;
 import smu.DTO.ReportCard;
 import javafx.scene.control.Alert.AlertType;
 
@@ -79,6 +82,24 @@ public class HomeControl extends BaseControl{
         }
 
         return reports;
+    }
+
+    public static List<Familiar> getFamiliars() {
+        
+        FamiliarDAO familiarDAO = new FamiliarDAOimp();
+
+        LoggedUser loggedUser = LoggedUser.getInstance();
+
+        List<Familiar> familiars = new ArrayList<>();
+
+        try {
+            familiars = familiarDAO.getByEmail(loggedUser.getEmail());
+        } catch (SQLException e) {
+            showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
+            e.printStackTrace();
+        }
+
+        return familiars;
     }
 
 }
