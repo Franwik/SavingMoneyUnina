@@ -2,6 +2,7 @@ package smu.Boundary.Home;
 
 import java.text.DateFormatSymbols;
 import java.time.*;
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 
@@ -64,6 +65,21 @@ public class HomePageController extends ApplicationPageController {
 
     @FXML
     private TableColumn<Familiar, LocalDate> dob;
+
+    @FXML
+    private void showNewFamiliarDialog() throws IOException {
+        showDialog("NewFamiliarDialog", 370, 315, "Creazione Nuovo Familiare", "Home");
+    }
+
+    @FXML
+    private void showDeleteFamiliarDialog() throws IOException {
+        showDialog("DeleteFamiliarDialog", 370, 140, "Eliminazione Familiare", "Home");
+    }
+
+    @FXML
+    private void showEditFamiliarDialog() throws IOException {
+        showDialog("EditFamiliarDialog", 370, 365, "Modifica Familiare", "Home");
+    }
 
     private void setWelcomeLabel() {
         LoggedUser loggedUser = LoggedUser.getInstance();

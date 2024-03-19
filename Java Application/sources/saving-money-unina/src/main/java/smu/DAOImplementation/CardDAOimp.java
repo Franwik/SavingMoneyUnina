@@ -30,6 +30,12 @@ public class CardDAOimp implements CardDAO{
             result.add(card);
         }
 
+        rs.close();
+
+        ps.close();
+
+        con.close();
+
         return result;
     }
 

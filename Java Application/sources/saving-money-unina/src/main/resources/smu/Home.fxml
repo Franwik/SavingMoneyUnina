@@ -128,7 +128,7 @@
                   <Font name="Arial" size="15.0" />
                </font>
             </Text>
-            <Button layoutX="446.0" layoutY="80.0" mnemonicParsing="false" text="Modifica" AnchorPane.rightAnchor="230.0" AnchorPane.topAnchor="80.0">
+            <Button layoutX="446.0" layoutY="80.0" mnemonicParsing="false" onAction="#showEditFamiliarDialog" text="Modifica" AnchorPane.rightAnchor="230.0" AnchorPane.topAnchor="80.0">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>
@@ -136,7 +136,7 @@
                   <FontAwesomeIcon glyphName="PENCIL" />
                </graphic>
             </Button>
-            <Button layoutX="554.0" layoutY="80.0" mnemonicParsing="false" text="Rimuovi" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="80.0">
+            <Button layoutX="554.0" layoutY="80.0" mnemonicParsing="false" onAction="#showDeleteFamiliarDialog" text="Rimuovi" AnchorPane.rightAnchor="125.0" AnchorPane.topAnchor="80.0">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>
@@ -144,7 +144,7 @@
                   <FontAwesomeIcon glyphName="CLOSE" />
                </graphic>
             </Button>
-            <Button layoutX="659.0" layoutY="80.0" mnemonicParsing="false" text="Aggiungi" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="80.0">
+            <Button layoutX="659.0" layoutY="80.0" mnemonicParsing="false" onAction="#showNewFamiliarDialog" text="Aggiungi" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="80.0">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>
