@@ -77,7 +77,7 @@ public class FamiliarDAOimp implements FamiliarDAO{
     public int delete(String CF) throws SQLException {
         Connection con = Database.getConnection();
 
-        String sql = "DELETE FROM smu.familiar WHERE cf = ? CASCADE";
+        String sql = "DELETE FROM smu.familiar WHERE cf = ?";
 
         PreparedStatement ps = con.prepareStatement(sql);
 

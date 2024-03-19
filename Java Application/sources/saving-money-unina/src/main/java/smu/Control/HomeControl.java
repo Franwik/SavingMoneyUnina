@@ -12,6 +12,7 @@ import smu.DAOImplementation.FamiliarDAOimp;
 import smu.DTO.Familiar;
 import smu.DTO.ReportCard;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonType;
 
 public class HomeControl extends BaseControl{
 
@@ -114,14 +115,17 @@ public class HomeControl extends BaseControl{
         if(name.isEmpty() || surname.isEmpty() || cf.isEmpty() || dob == null){
             showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Almeno uno dei campi è vuoto.");
         }
-        /*else if (cf.length() < 16){
-            showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Il numero di carta inserito è troppo corto.");
-        }*/
+        else if (cf.length() < 16){
+            showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Il codice fiscale inserito è troppo corto.");
+        }
+        else if (cf.length() > 16){
+            showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Il codice fiscale inserito è troppo lungo.");
+        }
         else {
 
             try {
 
-                familiar = new Familiar(name, surname, cf, dob, loggedUser.getEmail());
+                familiar = new Familiar(name, surname, cf.toUpperCase(), dob, loggedUser.getEmail());
 
                 familiarDAO.insert(familiar);
                 
@@ -144,5 +148,99 @@ public class HomeControl extends BaseControl{
 
         }
     } 
+
+    public static void delete(String cf) {
+
+        //DAO to interact with DB
+        FamiliarDAO familiarDAO = new FamiliarDAOimp();
+
+        //In case one of the field is empty
+        if(cf == null){
+            showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Non è stato selezionato nessun familiare.");
+        }
+        else{
+
+            try {
+
+                Optional<ButtonType> choice = showAlert(AlertType.CONFIRMATION, "Attenzione", "Vuoi procedere?", "Sei sicuro di voler eliminare il familiare " + cf.toString() + "?");
+
+                if(choice.get() == ButtonType.OK){
+                    familiarDAO.delete(cf);
+                }
+
+
+            } catch (SQLException e) {
+                showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
+                System.err.println("Errore: " + e.getMessage());
+            }
+
+        }
+
+    }
+
+    public static void update (String name, String surname, String cf, LocalDate dob) {
+
+        FamiliarDAO familiarDAO = new FamiliarDAOimp();
+
+        LoggedUser loggedUser = LoggedUser.getInstance();
+
+        Familiar familiar = null;
+
+        //checks on input
+        if(name.isEmpty() || surname.isEmpty() || cf.isEmpty() || dob == null){
+            showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Almeno uno dei campi è vuoto.");
+        }
+        else if (cf.length() < 16){
+            showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Il numero di carta inserito è troppo corto.");
+        }
+        else if (cf.length() > 16){
+            showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Il codice fiscale inserito è troppo lungo.");
+        }
+        else {
+
+            try {
+
+                familiar = new Familiar(name, surname, cf.toUpperCase(), dob, loggedUser.getEmail());
+
+                familiarDAO.update(familiar);
+                
+                showAlert(AlertType.INFORMATION, "Successo", "Familiare modificato con successo.", "Familiare modificato con successo.");
+            
+            } catch (SQLException e) {
+                System.err.println("Errore: " + e.getMessage());
+                String state = e.getSQLState();
+                System.out.println("codice: " + state);
+                if (state.equals("23505")){
+                    showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Il familiare che si sta tentando di inserire esiste già.");
+                }
+                else if (state.equals("23514")) {
+                    showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "La data di nascita inserita non è valida.");
+                }
+                else{
+                    showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
+                }
+            }
+
+        }
+
+    }
+
+    public static Familiar getFamiliarInfo(String cf) {
+        
+
+        FamiliarDAO familiarDAO = new FamiliarDAOimp();
+
+        Familiar familiar = null;
+
+        try {
+            familiar = familiarDAO.getByCF(cf);
+        } catch (SQLException e) {
+            showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
+            System.err.println("Errore: " + e.getMessage());
+        }
+
+        return familiar;
+
+    }
 
 }

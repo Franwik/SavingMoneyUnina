@@ -8,29 +8,31 @@ import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 import smu.App;
 import smu.Boundary.BaseDialog;
-import smu.Control.CardControl;
+import smu.Control.HomeControl;
+import smu.DTO.Familiar;
+
 import java.util.*;
 import java.io.IOException;
 
 public class DeleteFamiliarDialogController extends BaseDialog {
 
     @FXML
-    private ComboBox<String> cardChoser;
+    private ComboBox<String> familiarChooser;
 
     @FXML
-    private void deleteCard() throws IOException {
+    private void deleteFamiliar() throws IOException {
 
         //Fields from page
-        String cardNumber = cardChoser.getSelectionModel().getSelectedItem();
+        String cf = familiarChooser.getSelectionModel().getSelectedItem();
 
-        CardControl.delete(cardNumber);
+        HomeControl.delete(cf);
 
         reload();
-        loadCards();
+        loadFamiliars();
     }
 
     private void reload(){
-        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("DeleteCardDialog.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("DeleteFamiliarDialog.fxml"));
         Scene scene;
         try {
             scene = new Scene(fxmlLoader.load(), 370, 140);
@@ -41,20 +43,23 @@ public class DeleteFamiliarDialogController extends BaseDialog {
         }
     }
 
-    private void loadCards(){
+    private void loadFamiliars(){
 
         List<String> result = new ArrayList<>();
-        
-        result = CardControl.getAllCards();
 
-        cardChoser.getItems().addAll(result);
+        List<Familiar> familiars = HomeControl.getFamiliars();
+        
+        for (Familiar familiar : familiars)
+            result.add(familiar.getCF());
+
+        familiarChooser.getItems().addAll(result);
 
     }
 
 
     @Override
     public void initialize(URL location, java.util.ResourceBundle resources) {
-        loadCards();
+        loadFamiliars();
     }
 
 }
