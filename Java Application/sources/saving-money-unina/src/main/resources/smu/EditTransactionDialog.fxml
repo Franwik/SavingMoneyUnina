@@ -41,7 +41,7 @@
                   <Insets left="10.0" right="10.0" />
                </GridPane.margin>
             </Text>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Categoria" textAlignment="CENTER" wrappingWidth="164.24072265625" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Categoria Portagolio" textAlignment="CENTER" wrappingWidth="164.24072265625" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>
@@ -67,7 +67,7 @@
                   <Insets left="10.0" right="14.0" />
                </GridPane.margin>
             </ComboBox>
-            <Text focusTraversable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Portafoglio" textAlignment="CENTER" wrappingWidth="160.71142578125" GridPane.rowIndex="4">
+            <Text focusTraversable="true" strokeType="OUTSIDE" strokeWidth="0.0" text="Nome Portafoglio" textAlignment="CENTER" wrappingWidth="160.71142578125" GridPane.rowIndex="4">
                <font>
                   <Font name="Arial" size="15.0" />
                </font>
@@ -82,11 +82,6 @@
                   <Insets left="10.0" right="14.0" />
                </GridPane.margin>
             </ComboBox>
-            <TextField fx:id="categoryField" promptText="Categoria" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets left="10.0" right="14.0" />
-               </GridPane.margin>
-            </TextField>
             <DatePicker fx:id="dateField" prefWidth="200.0" promptText="Data Transazione" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <opaqueInsets>
                   <Insets />
@@ -95,7 +90,12 @@
                   <Insets left="10.0" right="14.0" />
                </GridPane.margin>
             </DatePicker>
-            <ComboBox fx:id="walletChooser" prefWidth="200.0" promptText="---" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <ComboBox fx:id="walletNameChooser" prefWidth="200.0" promptText="---" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets left="10.0" right="14.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <ComboBox fx:id="walletCategoryChooser" prefWidth="200.0" promptText="---" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets left="10.0" right="14.0" />
                </GridPane.margin>
