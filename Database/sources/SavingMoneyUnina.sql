@@ -649,7 +649,7 @@ COPY smu.familiar (name, surname, cf, dateofbirth, familiaremail) FROM stdin;
 --
 
 COPY smu.transaction (id_transaction, amount, date, category, cardnumber, walletname) FROM stdin;
-30	13	2024-03-11	\N	1234567890123456	\N
+30	13	2024-03-11	Spesa	1234567890123456	Conad
 \.
 
 
@@ -658,6 +658,7 @@ COPY smu.transaction (id_transaction, amount, date, category, cardnumber, wallet
 --
 
 COPY smu.transactioninwallet (id_transaction, id_wallet) FROM stdin;
+30	1
 \.
 
 
@@ -675,6 +676,7 @@ franwik_@outlook.com	Franwik	Ifs4ppic	Via Napoli 281	Francesco	Donnarumma	DNNFNC
 --
 
 COPY smu.wallet (id_wallet, walletname, walletcategory, totalamount, owneremail) FROM stdin;
+1	Conad	Spesa	26	franwik_@outlook.com
 \.
 
 
