@@ -9,13 +9,16 @@ import javafx.scene.control.ButtonType;
 import smu.LoggedUser;
 import smu.DAO.CardDAO;
 import smu.DAO.TransactionDAO;
+import smu.DAO.WalletDAO;
 import smu.DAO.FamiliarDAO;
 import smu.DAOImplementation.CardDAOimp;
 import smu.DAOImplementation.FamiliarDAOimp;
 import smu.DAOImplementation.TransactionDAOimp;
+import smu.DAOImplementation.WalletDAOimp;
 import smu.DTO.Card;
 import smu.DTO.Familiar;
 import smu.DTO.Transaction;
+import smu.DTO.Wallet;
 
 
 public class TransactionControl extends BaseControl{
@@ -52,6 +55,32 @@ public class TransactionControl extends BaseControl{
 		return result;
 	}
 
+	public static List<String> getWallet() {
+		
+		List<String> result = new ArrayList<>();
+		List<Wallet> wallets = new ArrayList<>();
+
+		LoggedUser loggedUser = LoggedUser.getInstance();
+
+		WalletDAO walletDAO = new WalletDAOimp();
+
+		try {
+			wallets = walletDAO.getAllByEmail(loggedUser.getEmail());
+
+			for(Wallet wallet : wallets){
+				result.add(wallet.getName());
+			}
+		} catch (SQLException e) {
+			showAlert(AlertType.ERROR, "Errore", "Si è verificato un problema inaspettato.", "Problemi con il Database.");
+			System.err.println("Errore: " + e.getMessage());
+		}
+
+		return result;
+
+
+
+	}
+
 	public static List<Transaction> getTransactions(String choosenCard) {
 		List<Transaction> transactions = new ArrayList<>();
 	
@@ -66,6 +95,8 @@ public class TransactionControl extends BaseControl{
 	
 		return transactions;
 	}
+
+
 
 	public static Transaction getTransactionInfo(Integer ID_Transaction) {
 		TransactionDAO transactionDAO = new TransactionDAOimp();
@@ -210,4 +241,6 @@ public class TransactionControl extends BaseControl{
 			}
 		}
 	}
+
+	
 }

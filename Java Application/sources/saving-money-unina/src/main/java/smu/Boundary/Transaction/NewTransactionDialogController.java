@@ -28,7 +28,7 @@ public class NewTransactionDialogController extends BaseDialog{
 	private TextField categoryField;
 
 	@FXML
-	private TextField walletNameField;
+	private ComboBox<String> walletChooser;
 
 	@FXML
 	private ComboBox<String> cardChooser;
@@ -41,7 +41,7 @@ public class NewTransactionDialogController extends BaseDialog{
 		Float amount = Float.parseFloat(amountField.getText());
 		LocalDate date = dateField.getValue();
 		String category = categoryField.getText();
-		String walletName = walletNameField.getText();
+		String walletName = walletChooser.getSelectionModel().getSelectedItem();;
 		String cardNumber = cardChooser.getSelectionModel().getSelectedItem();
 
 		TransactionControl.insert(ID_Transaction, amount, date, category, walletName, cardNumber);
@@ -58,7 +58,15 @@ public class NewTransactionDialogController extends BaseDialog{
 
 	}
 
-	
+	private void loadWallet(){
+
+		List<String> wallets = new ArrayList<>();
+
+		wallets = TransactionControl.getWallet();
+
+		walletChooser.getItems().addAll(wallets);
+
+	}
 	
 
 	@Override
@@ -66,6 +74,7 @@ public class NewTransactionDialogController extends BaseDialog{
 		
 		loadCards();
 
+		loadWallet();
 
 	}
 	
