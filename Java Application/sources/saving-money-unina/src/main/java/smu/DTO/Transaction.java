@@ -51,11 +51,11 @@ public class Transaction {
         this.date = date;
     }
 
-    public String getCategory() {
+    public String getWalletCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setWalletCategory(String category) {
         this.category = category;
     }
 

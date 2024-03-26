@@ -62,7 +62,7 @@ public class TransactionDAOimp implements TransactionDAO {
 
 		ps.setFloat(1, transaction.getAmount());
 		ps.setDate(2, java.sql.Date.valueOf(transaction.getDate()));
-		ps.setString(3, transaction.getCategory());
+		ps.setString(3, transaction.getWalletCategory());
 		ps.setString(4, transaction.getWalletName());
 		ps.setString(5, transaction.getCardNumber());
 
@@ -81,7 +81,7 @@ public class TransactionDAOimp implements TransactionDAO {
 
 		ps.setFloat(1, transaction.getAmount());
 		ps.setDate(2, java.sql.Date.valueOf(transaction.getDate()));
-		ps.setString(3, transaction.getCategory());
+		ps.setString(3, transaction.getWalletCategory());
 		ps.setString(4, transaction.getWalletName());
 		ps.setString(5, transaction.getCardNumber());
 		ps.setInt(6, transaction.getID_Transaction());

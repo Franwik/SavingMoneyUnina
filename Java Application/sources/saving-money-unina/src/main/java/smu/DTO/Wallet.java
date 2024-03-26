@@ -5,7 +5,7 @@ public class Wallet {
 
 	//Attributes
     private int id_wallet;
-    private String name;
+    private String walletName;
     private String walletCategory;
     private int totalAmount;
     private String ownerEmail;
@@ -14,9 +14,9 @@ public class Wallet {
 
 
 	//Constructor
-    public Wallet(int id_wallet, String name, String walletCategory, int totalAmount, String ownerEmail) {
+    public Wallet(int id_wallet, String walletName, String walletCategory, int totalAmount, String ownerEmail) {
         this.id_wallet = id_wallet;
-        this.name = name;
+        this.walletName = walletName;
         this.walletCategory = walletCategory;
         this.totalAmount = totalAmount;
         this.ownerEmail = ownerEmail;
@@ -32,12 +32,12 @@ public class Wallet {
         this.id_wallet = id_wallet;
     }
 
-    public String getName() {
-        return name;
+    public String getWalletName() {
+        return walletName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setWalletName(String walletName) {
+        this.walletName = walletName;
     }
 
     public String getWalletCategory() {
@@ -58,7 +58,7 @@ public class Wallet {
 
     @Override
     public String toString() {
-        return "Wallet [id_wallet=" + id_wallet + ", name=" + name + ", walletCategory=" + walletCategory
+        return "Wallet [id_wallet=" + id_wallet + ", walletName=" + walletName + ", walletCategory=" + walletCategory
                 + ", totalAmount=" + totalAmount + "]";
     }
 

@@ -55,7 +55,7 @@ public class TransactionControl extends BaseControl{
 		return result;
 	}
 
-	public static List<String> getWallet() {
+	public static List<String> getWalletName() {
 		
 		List<String> result = new ArrayList<>();
 		List<Wallet> wallets = new ArrayList<>();
@@ -68,7 +68,7 @@ public class TransactionControl extends BaseControl{
 			wallets = walletDAO.getAllByEmail(loggedUser.getEmail());
 
 			for(Wallet wallet : wallets){
-				result.add(wallet.getName());
+				result.add(wallet.getWalletName());
 			}
 		} catch (SQLException e) {
 			showAlert(AlertType.ERROR, "Errore", "Si è verificato un problema inaspettato.", "Problemi con il Database.");
@@ -77,8 +77,29 @@ public class TransactionControl extends BaseControl{
 
 		return result;
 
+	}
 
+	public static List<String> getWalletCategory(){
 
+		List<String> result = new ArrayList<>();
+		List<Wallet> category = new ArrayList<>();
+
+		LoggedUser loggedUser = LoggedUser.getInstance();
+
+		WalletDAO walletDAO = new WalletDAOimp();
+
+		try {
+			category = walletDAO.getAllByEmail(loggedUser.getEmail());
+
+			for(Wallet wallet : category){
+				result.add(wallet.getWalletCategory());
+			}
+		} catch (SQLException e) {
+			showAlert(AlertType.ERROR, "Errore", "Si è verificato un problema inaspettato.", "Problemi con il Database.");
+			System.err.println("Errore: " + e.getMessage());
+		}
+
+		return result;
 	}
 
 	public static List<Transaction> getTransactions(String choosenCard) {

@@ -16,7 +16,7 @@ public class WalletDAOimp implements WalletDAO {
 
         Wallet wallet = null;
 
-        String sql = "SELECT * FROM wallet WHERE id_wallet = ?";
+        String sql = "SELECT * FROM smu.wallet WHERE id_wallet = ?";
 
         PreparedStatement ps = con.prepareStatement(sql) ;
             
@@ -25,7 +25,7 @@ public class WalletDAOimp implements WalletDAO {
         ResultSet rs = ps.executeQuery();
 		
         if (rs.next()) 
-            wallet = new Wallet(rs.getInt("id_wallet"), rs.getString("name"), rs.getString("walletCategory"), rs.getInt("totalAmount"), rs.getString("owneremail"));            
+            wallet = new Wallet(rs.getInt("id_wallet"), rs.getString("walletName"), rs.getString("walletCategory"), rs.getInt("totalAmount"), rs.getString("owneremail"));            
 		
 
 		return wallet;
@@ -42,7 +42,7 @@ public class WalletDAOimp implements WalletDAO {
 
         List<Wallet> wallets = new ArrayList<>();
 
-        String sql = "SELECT * FROM wallet WHERE owneremail = ?";
+        String sql = "SELECT * FROM smu.wallet WHERE owneremail = ?";
 
         PreparedStatement ps = con.prepareStatement(sql);
 
@@ -52,7 +52,7 @@ public class WalletDAOimp implements WalletDAO {
 
         while (rs.next()) {
 
-            Wallet wallet = new Wallet(rs.getInt("id_wallet"), rs.getString("name"), rs.getString("walletCategory"), rs.getInt("totalAmount"), rs.getString("owneremail"));
+            Wallet wallet = new Wallet(rs.getInt("id_wallet"), rs.getString("walletName"), rs.getString("walletCategory"), rs.getInt("totalAmount"), rs.getString("owneremail"));
             wallets.add(wallet);
 
         }
@@ -64,11 +64,11 @@ public class WalletDAOimp implements WalletDAO {
     public int insert(Wallet wallet) throws SQLException {
         Connection con = Database.getConnection();
 
-        String sql = "INSERT INTO wallet (name, walletCategory, totalAmount, owneremail) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO smu.wallet (walletname, walletCategory, totalAmount, owneremail) VALUES (?, ?, ?, ?)";
 
         PreparedStatement ps = con.prepareStatement(sql);
 
-        ps.setString(1, wallet.getName());
+        ps.setString(1, wallet.getWalletName());
         ps.setString(2, wallet.getWalletCategory());
         ps.setInt(3, wallet.getTotalAmount());
         ps.setString(4, wallet.getOwnerEmail());
@@ -82,11 +82,11 @@ public class WalletDAOimp implements WalletDAO {
     public int update(Wallet wallet) throws SQLException {
         Connection con = Database.getConnection();
 
-        String sql = "UPDATE wallet SET name = ?, walletCategory = ?, totalAmount = ? WHERE id_wallet = ?";
+        String sql = "UPDATE smu.wallet SET walletname = ?, walletCategory = ?, totalAmount = ? WHERE id_wallet = ?";
 
         PreparedStatement ps = con.prepareStatement(sql);
 
-        ps.setString(1, wallet.getName());
+        ps.setString(1, wallet.getWalletName());
         ps.setString(2, wallet.getWalletCategory());
         ps.setInt(3, wallet.getTotalAmount());
         ps.setInt(4, wallet.getId_wallet());
@@ -100,7 +100,7 @@ public class WalletDAOimp implements WalletDAO {
     public int delete(int id) throws SQLException {
         Connection con = Database.getConnection();
 
-        String sql = "DELETE FROM wallet WHERE id_wallet = ? CASCADE";
+        String sql = "DELETE FROM smu.wallet WHERE id_wallet = ? CASCADE";
 
         PreparedStatement ps = con.prepareStatement(sql);
 

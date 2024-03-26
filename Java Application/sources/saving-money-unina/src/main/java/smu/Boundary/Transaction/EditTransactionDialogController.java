@@ -27,7 +27,7 @@ public class EditTransactionDialogController extends BaseDialog{
 	private DatePicker dateField;
 
 	@FXML
-	private TextField categoryField;
+	private ComboBox<String> categoryChooser;
 
 	@FXML
 	private ComboBox<String> walletChooser;
@@ -41,7 +41,7 @@ public class EditTransactionDialogController extends BaseDialog{
 		Integer transactionID = transactionChooser.getSelectionModel().getSelectedItem();
 		String amount = amountField.getText();
 		LocalDate date = dateField.getValue();
-		String category = categoryField.getText();
+		String category = categoryChooser.getSelectionModel().getSelectedItem();
 		String wallet = walletChooser.getSelectionModel().getSelectedItem();
 		String cardNumber = cardChooser.getSelectionModel().getSelectedItem();
 
@@ -65,7 +65,7 @@ public class EditTransactionDialogController extends BaseDialog{
 		
 		amountField.setText(String.valueOf(transaction.getAmount()));
 		dateField.setValue(transaction.getDate());
-		categoryField.setText(transaction.getCategory());
+		categoryChooser.setValue(transaction.getWalletCategory());
 		walletChooser.setValue(transaction.getWalletName());
 		cardChooser.setValue(transaction.getCardNumber());
 
@@ -80,12 +80,21 @@ public class EditTransactionDialogController extends BaseDialog{
 		cardChooser.getItems().addAll(cards);
 	}
 
-	private void loadWallet(){
+	private void loadWalletName(){
 		List<String> wallets = new ArrayList<>();
 
-		wallets = TransactionControl.getWallet();
+		wallets = TransactionControl.getWalletName();
 
+		//!!!
 		walletChooser.getItems().addAll(wallets);
+	}
+
+	private void loadCategory(){
+		List<String> categories = new ArrayList<>();
+
+		categories = TransactionControl.getWalletCategory();
+
+		categoryChooser.getItems().addAll(categories);
 	}
 
 	@Override
@@ -95,7 +104,9 @@ public class EditTransactionDialogController extends BaseDialog{
 
 		loadTransactions();
 
-		loadWallet();
+		loadWalletName();
+
+		loadCategory();
 	}
 	
 }

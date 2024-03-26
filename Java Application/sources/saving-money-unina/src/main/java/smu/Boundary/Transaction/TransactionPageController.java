@@ -75,8 +75,6 @@ public class TransactionPageController extends ApplicationPageController {
         else{
             transactions = TransactionControl.getTransactions(choosenCard);
             transactionList.getItems().addAll(transactions);
-
-            //TODO: getCardInfo
         }
 
         System.out.println("Caricate transazioni");
@@ -93,7 +91,6 @@ public class TransactionPageController extends ApplicationPageController {
     }
 
 
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         
@@ -102,7 +99,7 @@ public class TransactionPageController extends ApplicationPageController {
         ID_Transaction.setCellValueFactory(new PropertyValueFactory<Transaction, Integer>("ID_Transaction"));
         amount.setCellValueFactory(new PropertyValueFactory<Transaction, Float>("amount"));
         date.setCellValueFactory(new PropertyValueFactory<Transaction, LocalDate>("date"));
-        category.setCellValueFactory(new PropertyValueFactory<Transaction, String>("category"));
+        category.setCellValueFactory(new PropertyValueFactory<Transaction, String>("walletCategory"));
         walletName.setCellValueFactory(new PropertyValueFactory<Transaction, String>("walletName"));
     }
 
