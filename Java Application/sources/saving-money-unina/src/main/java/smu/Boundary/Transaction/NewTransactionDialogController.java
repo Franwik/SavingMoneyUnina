@@ -16,10 +16,10 @@ import smu.Control.TransactionControl;
 public class NewTransactionDialogController extends BaseDialog{
 
 	@FXML
-	private TextField ID_TransactionField;
+	private TextField amountField;
 
 	@FXML
-	private TextField amountField;
+	private ComboBox<String> InOutChooser;
 
 	@FXML
 	private DatePicker dateField;
@@ -33,18 +33,20 @@ public class NewTransactionDialogController extends BaseDialog{
 	@FXML
 	private ComboBox<String> cardChooser;
 
+	private String[] InOutTypes = {"Entrata", "Uscita"};
 
 	@FXML
 	private void createTransaction() {
+		//Fields from page
 
-		Integer ID_Transaction = Integer.parseInt(ID_TransactionField.getText());
-		Float amount = Float.parseFloat(amountField.getText());
+		String amount = amountField.getText();
+		String InOut = InOutChooser.getSelectionModel().getSelectedItem();
 		LocalDate date = dateField.getValue();
 		String category = categoryChooser.getSelectionModel().getSelectedItem();
-		String walletName = walletChooser.getSelectionModel().getSelectedItem();;
+		String walletName = walletChooser.getSelectionModel().getSelectedItem();
 		String cardNumber = cardChooser.getSelectionModel().getSelectedItem();
 
-		TransactionControl.insert(ID_Transaction, amount, date, category, walletName, cardNumber);
+		TransactionControl.insert(amount, InOut, date, category, walletName, cardNumber);
 		
 	}
 
@@ -58,16 +60,6 @@ public class NewTransactionDialogController extends BaseDialog{
 
 	}
 
-	private void loadWallet(){
-
-		List<String> wallets = new ArrayList<>();
-
-		wallets = TransactionControl.getWalletName();
-
-		walletChooser.getItems().addAll(wallets);
-
-	}
-
 	private void loadCategory(){
 		
 		List<String> categories = new ArrayList<>();
@@ -75,15 +67,26 @@ public class NewTransactionDialogController extends BaseDialog{
 		categories = TransactionControl.getWalletCategory();
 
 		categoryChooser.getItems().addAll(categories);
+
 	}
-	
+
+	@FXML
+	private void loadWallet(){
+
+		List<String> wallets = new ArrayList<>();
+
+		wallets = TransactionControl.getWalletNameByCategory(categoryChooser.getSelectionModel().getSelectedItem());
+
+		walletChooser.getItems().addAll(wallets);
+
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		
-		loadCards();
+		InOutChooser.getItems().addAll(InOutTypes);
 
-		loadWallet();
+		loadCards();
 
 		loadCategory();
 

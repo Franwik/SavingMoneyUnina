@@ -20,11 +20,17 @@ public class Transaction {
         this.category = category;
         this.walletName = walletName;
         this.cardNumber = cardNumber;
-
-
     }
 
-	
+    //Overloaded constructor without ID
+	public Transaction(Float amount, LocalDate date, String category, String walletName, String cardNumber) {
+        this.ID_Transaction = 0;
+        this.amount = amount;
+        this.date = date;
+        this.category = category;
+        this.walletName = walletName;
+        this.cardNumber = cardNumber;
+    }
 
 	//Getters and Setters
     public int getID_Transaction() {

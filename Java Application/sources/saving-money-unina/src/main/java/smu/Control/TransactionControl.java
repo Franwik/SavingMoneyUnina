@@ -55,7 +55,7 @@ public class TransactionControl extends BaseControl{
 		return result;
 	}
 
-	public static List<String> getWalletName() {
+	public static List<String> getWalletNameByCategory(String category) {
 		
 		List<String> result = new ArrayList<>();
 		List<Wallet> wallets = new ArrayList<>();
@@ -65,11 +65,12 @@ public class TransactionControl extends BaseControl{
 		WalletDAO walletDAO = new WalletDAOimp();
 
 		try {
-			wallets = walletDAO.getAllByEmail(loggedUser.getEmail());
+			wallets = walletDAO.getAllByEmailAndCategory(loggedUser.getEmail(), category);
 
 			for(Wallet wallet : wallets){
 				result.add(wallet.getWalletName());
 			}
+			
 		} catch (SQLException e) {
 			showAlert(AlertType.ERROR, "Errore", "Si è verificato un problema inaspettato.", "Problemi con il Database.");
 			System.err.println("Errore: " + e.getMessage());
@@ -102,13 +103,13 @@ public class TransactionControl extends BaseControl{
 		return result;
 	}
 
-	public static List<Transaction> getTransactions(String choosenCard) {
+	public static List<Transaction> getTransactions(String cardNumber) {
 		List<Transaction> transactions = new ArrayList<>();
 	
 		TransactionDAO transactionDAO = new TransactionDAOimp();
 	
 		try {
-			transactions = transactionDAO.getByCardNumber(choosenCard);
+			transactions = transactionDAO.getByCardNumber(cardNumber);
 		} catch (SQLException e) {
 			showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
 			System.err.println("Errore: " + e.getMessage());
@@ -116,8 +117,6 @@ public class TransactionControl extends BaseControl{
 	
 		return transactions;
 	}
-
-
 
 	public static Transaction getTransactionInfo(Integer ID_Transaction) {
 		TransactionDAO transactionDAO = new TransactionDAOimp();
@@ -176,33 +175,49 @@ public class TransactionControl extends BaseControl{
 	}
 	
 
-	public static void update(Integer transactionID, String amount, LocalDate date, String category, String wallet, String cardNumber) {
+	public static void update(Integer transactionID, String amount, String InOut, LocalDate date, String category, String wallet, String cardNumber) {
 		
 		//DAO to interact with DB
 		TransactionDAO transactionDAO = new TransactionDAOimp();
 
-		//Card that needs to be inserted
+		//Transaction that needs to be inserted
 		Transaction transaction = null;
-
-		//checks on input
-		if(transactionID == null || amount.isEmpty() || date == null || cardNumber == null){
-
-		   showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Almeno uno dei campi è vuoto.");
 		
-	   }
-	   else{
+		if(transactionID == null || amount == null || InOut == null || date == null || category == null || wallet == null || cardNumber == null){
+			showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Almeno uno dei campi è vuoto.");
+		}
+		else{
+			try {
 
-			try{
-			
-					transaction = new Transaction(transactionID, Float.parseFloat(amount), date, category, wallet, cardNumber);
-				   	transactionDAO.update(transaction);
-				   	showAlert(AlertType.INFORMATION, "Informazione", "Transazione modificata con successo.", "La transazione è stata modificata con successo.");
-			   
-			   } catch (SQLException e) {
+				Float convertedAmount = Float.parseFloat(amount);
+
+				if (convertedAmount != 0) {
+					if (InOut.equals("Entrata") && convertedAmount < 0) {
+	
+						convertedAmount *= -1;
+	
+					}
+					else if (InOut.equals("Uscita") && convertedAmount > 0) {
+	
+						convertedAmount *= -1;
+	
+					}
+	
+					transaction = new Transaction(transactionID, convertedAmount, date, category, wallet, cardNumber);
+					transactionDAO.update(transaction);
+					showAlert(AlertType.INFORMATION, "Informazione", "Transazione modificata con successo.", "La transazione è stata modificata con successo.");
+				}
+				else {
+					showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "La somma inserita non può essere uguale a 0.");
+				}
+
+			} catch (SQLException e) {
 				showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
+                System.err.println("Errore: " + e.getMessage());
+			} catch(RuntimeException e){
+				showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "La somma inserita non è valida.");
 				System.err.println("Errore: " + e.getMessage());
 			}
-
 		}
 	}
 
@@ -234,7 +249,7 @@ public class TransactionControl extends BaseControl{
 
 	}
 
-	public static void insert(Integer iD_Transaction, Float amount, LocalDate date, String category, String walletName, String cardNumber) {
+	public static void insert(String amount, String InOut, LocalDate date, String category, String walletName, String cardNumber) {
 		
 		//DAO to interact with DB
 		TransactionDAO transactionDAO = new TransactionDAOimp();
@@ -242,26 +257,42 @@ public class TransactionControl extends BaseControl{
 		//Transaction that needs to be inserted
 		Transaction transaction = null;
 		
-
-		if(iD_Transaction == null || amount == null || date == null || cardNumber.isEmpty()){
+		if(amount == null || InOut == null || date == null || category == null || walletName == null || cardNumber == null){
 			showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Almeno uno dei campi è vuoto.");
 		}
 		else{
 			try {
 
-				transaction = new Transaction(iD_Transaction, amount, date, category, walletName, cardNumber);
-				transactionDAO.insert(transaction);
-				showAlert(AlertType.INFORMATION, "Informazione", "Transazione inserita con successo.", "La transazione è stata inserita con successo.");
+				Float convertedAmount = Float.parseFloat(amount);
+
+				if (convertedAmount != 0) {
+					if (InOut.equals("Entrata") && convertedAmount < 0) {
+	
+						convertedAmount *= -1;
+	
+					}
+					else if (InOut.equals("Uscita") && convertedAmount > 0) {
+	
+						convertedAmount *= -1;
+	
+					}
+	
+					transaction = new Transaction(convertedAmount, date, category, walletName, cardNumber);
+					transactionDAO.insert(transaction);
+					showAlert(AlertType.INFORMATION, "Informazione", "Transazione inserita con successo.", "La transazione è stata inserita con successo.");
+				}
+				else {
+					showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "La somma inserita non può essere uguale a 0.");
+				}
 
 			} catch (SQLException e) {
 				showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
                 System.err.println("Errore: " + e.getMessage());
 			} catch(RuntimeException e){
-				showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Il saldo inserito non è valido.");
+				showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "La somma inserita non è valida.");
 				System.err.println("Errore: " + e.getMessage());
 			}
 		}
 	}
-
 	
 }

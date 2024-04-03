@@ -12,7 +12,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.text.Text;
 import smu.Boundary.ApplicationPageController;
 import smu.Control.TransactionControl;
 import smu.DTO.Transaction;
@@ -23,9 +22,6 @@ public class TransactionPageController extends ApplicationPageController {
 
     @FXML
     private ComboBox<String> cardChooser;
-
-    @FXML
-    private Text nameDisplay;
 
     @FXML
     private TableView<Transaction> transactionList;
@@ -45,10 +41,9 @@ public class TransactionPageController extends ApplicationPageController {
     @FXML
     private TableColumn<Transaction, String> walletName;
 
-
     @FXML
     private void showNewTransactionDialog() throws IOException{
-        showDialog("NewTransactionDialog", 370, 340, "Nuova Transazione", "Transaction");
+        showDialog("NewTransactionDialog", 370, 365, "Nuova Transazione", "Transaction");
     }
 
     @FXML
@@ -69,15 +64,8 @@ public class TransactionPageController extends ApplicationPageController {
 
         transactionList.getItems().clear();
 
-        if(choosenCard.equals("---")){
-            nameDisplay.setText("");
-        }
-        else{
-            transactions = TransactionControl.getTransactions(choosenCard);
-            transactionList.getItems().addAll(transactions);
-        }
-
-        System.out.println("Caricate transazioni");
+        transactions = TransactionControl.getTransactions(choosenCard);
+        transactionList.getItems().addAll(transactions);
     }
 
     private void loadCards(){

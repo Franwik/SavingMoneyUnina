@@ -16,6 +16,8 @@ public interface WalletDAO {
 
     int delete(int id_wallet) throws SQLException;
 
+    List<Wallet> getAllByEmailAndCategory(String email, String category) throws SQLException;
+
 }
 
 

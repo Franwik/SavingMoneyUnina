@@ -31,10 +31,6 @@ public class WalletDAOimp implements WalletDAO {
 		return wallet;
 	}
 
-	
-
-
-
     @Override
     public List<Wallet> getAllByEmail(String email) throws SQLException {
 
@@ -48,6 +44,32 @@ public class WalletDAOimp implements WalletDAO {
 
 		ps.setString(1, email);
             
+		ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+
+            Wallet wallet = new Wallet(rs.getInt("id_wallet"), rs.getString("walletName"), rs.getString("walletCategory"), rs.getInt("totalAmount"), rs.getString("owneremail"));
+            wallets.add(wallet);
+
+        }
+
+		return wallets;
+    }
+
+    @Override
+    public List<Wallet> getAllByEmailAndCategory(String email, String category) throws SQLException {
+
+        Connection con = Database.getConnection();
+
+        List<Wallet> wallets = new ArrayList<>();
+
+        String sql = "SELECT * FROM smu.wallet WHERE owneremail = ? AND walletcategory = ?";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setString(1, email);
+        ps.setString(2, category);
+
 		ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {

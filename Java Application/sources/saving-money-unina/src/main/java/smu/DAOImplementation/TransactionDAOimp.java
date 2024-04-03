@@ -44,7 +44,7 @@ public class TransactionDAOimp implements TransactionDAO {
         
         ResultSet rs = ps.executeQuery();
 
-        if (rs.next()) {
+        while (rs.next()) {
            Transaction transactions = new Transaction(rs.getInt("ID_Transaction"), rs.getFloat("amount"), rs.getDate("Date").toLocalDate(), rs.getString("category"), rs.getString("walletName"), rs.getString("cardNumber"));
 		   result.add(transactions);
 		}
@@ -56,7 +56,7 @@ public class TransactionDAOimp implements TransactionDAO {
 	public int insert(Transaction transaction) throws SQLException {
 		Connection con = Database.getConnection();
 
-		String sql = "INSERT INTO smu.transaction (amount, Date, category, walletname, cardnumber) VALUES (?, ?, ?, ?, ?)";
+		String sql = "INSERT INTO smu.transaction (amount, date, category, walletname, cardnumber) VALUES (?, ?, ?, ?, ?)";
 
 		PreparedStatement ps = con.prepareStatement(sql);
 
@@ -75,7 +75,7 @@ public class TransactionDAOimp implements TransactionDAO {
 	public int update(Transaction transaction) throws SQLException {
 		Connection con = Database.getConnection();
 
-		String sql = "UPDATE smu.transaction SET amount = ?, Date = ?, category = ?, walletname = ?, cardnumber = ? WHERE ID_Transaction = ?";
+		String sql = "UPDATE smu.transaction SET amount = ?, date = ?, category = ?, walletname = ?, cardnumber = ? WHERE id_transaction = ?";
 
 		PreparedStatement ps = con.prepareStatement(sql);
 
