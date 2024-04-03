@@ -53,6 +53,49 @@ public class TransactionDAOimp implements TransactionDAO {
 
 	}
 
+	@Override
+	public List<Transaction> getByWalletCategory(String choosenWallet) throws SQLException {
+		Connection con = Database.getConnection();
+		List<Transaction> result = new ArrayList<>();
+
+		String sql = "SELECT * FROM smu.transaction WHERE category = ?";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setString(1, choosenWallet);
+		
+		ResultSet rs = ps.executeQuery();
+
+		if (rs.next()) {
+		   Transaction transactions = new Transaction(rs.getInt("ID_Transaction"), rs.getFloat("amount"), rs.getDate("Date").toLocalDate(), rs.getString("category"), rs.getString("walletName"), rs.getString("cardNumber"));
+		   result.add(transactions);
+		}
+
+		return result;
+		
+	}
+
+	@Override
+	public List<Transaction> getByWalletName(String choosenWalletName) throws SQLException{
+		Connection con = Database.getConnection();
+		List<Transaction> result = new ArrayList<>();
+
+		String sql = "SELECT * FROM smu.transaction WHERE walletname = ?";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		ps.setString(1, choosenWalletName);
+		
+		ResultSet rs = ps.executeQuery();
+
+		if (rs.next()) {
+		   Transaction transactions = new Transaction(rs.getInt("ID_Transaction"), rs.getFloat("amount"), rs.getDate("Date").toLocalDate(), rs.getString("category"), rs.getString("walletName"), rs.getString("cardNumber"));
+		   result.add(transactions);
+		}
+
+		return result;
+	}
+
 	public int insert(Transaction transaction) throws SQLException {
 		Connection con = Database.getConnection();
 
@@ -105,6 +148,8 @@ public class TransactionDAOimp implements TransactionDAO {
 
 		return result;
 	}
+
+	
 
 	
 

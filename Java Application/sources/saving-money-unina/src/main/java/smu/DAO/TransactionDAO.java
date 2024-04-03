@@ -10,6 +10,10 @@ public interface TransactionDAO {
 
     List<Transaction> getByCardNumber(String choosenCard) throws SQLException;
 
+    List<Transaction> getByWalletCategory(String choosenWallet) throws SQLException;
+
+    List<Transaction> getByWalletName(String choosenWalletName) throws SQLException;
+
     int insert(Transaction transaction) throws SQLException;
 
     int update(Transaction transaction) throws SQLException;

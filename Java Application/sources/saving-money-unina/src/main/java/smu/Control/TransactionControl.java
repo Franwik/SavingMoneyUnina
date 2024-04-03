@@ -103,6 +103,30 @@ public class TransactionControl extends BaseControl{
 		return result;
 	}
 
+	public static List<String> getWalletName() {
+		
+		List<String> result = new ArrayList<>();
+		List<Wallet> wallets = new ArrayList<>();
+
+		LoggedUser loggedUser = LoggedUser.getInstance();
+
+		WalletDAO walletDAO = new WalletDAOimp();
+
+		try {
+			wallets = walletDAO.getAllByEmail(loggedUser.getEmail());
+
+			for(Wallet wallet : wallets){
+				result.add(wallet.getWalletName());
+			}
+		} catch (SQLException e) {
+			showAlert(AlertType.ERROR, "Errore", "Si è verificato un problema inaspettato.", "Problemi con il Database.");
+			System.err.println("Errore: " + e.getMessage());
+		}
+
+		return result;
+
+	}
+
 	public static List<Transaction> getTransactions(String cardNumber) {
 		List<Transaction> transactions = new ArrayList<>();
 	

@@ -7,14 +7,14 @@ public class Wallet {
     private int id_wallet;
     private String walletName;
     private String walletCategory;
-    private int totalAmount;
+    private Float totalAmount;
     private String ownerEmail;
 
 
 
 
 	//Constructor
-    public Wallet(int id_wallet, String walletName, String walletCategory, int totalAmount, String ownerEmail) {
+    public Wallet(int id_wallet, String walletName, String walletCategory, Float totalAmount, String ownerEmail) {
         this.id_wallet = id_wallet;
         this.walletName = walletName;
         this.walletCategory = walletCategory;
@@ -22,8 +22,16 @@ public class Wallet {
         this.ownerEmail = ownerEmail;
     }
 
+    //Overloaded constructor without ID
+    public Wallet(String walletName, String walletCategory, Float totalAmount, String ownerEmail) {
+        this.id_wallet = 0;
+        this.walletName = walletName;
+        this.walletCategory = walletCategory;
+        this.totalAmount = totalAmount;
+        this.ownerEmail = ownerEmail;
+    }
+
     //Getters and Setters
-    
     public int getId_wallet() {
         return id_wallet;
     }
@@ -48,11 +56,11 @@ public class Wallet {
         this.walletCategory = walletCategory;
     }
 
-    public int getTotalAmount() {
+    public Float getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(int totalAmount) {
+    public void setTotalAmount(Float totalAmount) {
         this.totalAmount = totalAmount;
     }
 

@@ -16,7 +16,7 @@ public class WalletDAOimp implements WalletDAO {
 
         Wallet wallet = null;
 
-        String sql = "SELECT * FROM smu.wallet WHERE id_wallet = ?";
+        String sql = "SELECT * FROM smu.wallet WHERE ID_Wallet = ?";
 
         PreparedStatement ps = con.prepareStatement(sql) ;
             
@@ -24,9 +24,9 @@ public class WalletDAOimp implements WalletDAO {
 
         ResultSet rs = ps.executeQuery();
 		
-        if (rs.next()) 
-            wallet = new Wallet(rs.getInt("id_wallet"), rs.getString("walletName"), rs.getString("walletCategory"), rs.getInt("totalAmount"), rs.getString("owneremail"));            
-		
+        if (rs.next()){
+            wallet = new Wallet(rs.getInt("id_wallet"), rs.getString("walletCategory"), rs.getString("walletName"), rs.getFloat("totalAmount"), rs.getString("owneremail"));            
+        }
 
 		return wallet;
 	}
@@ -48,7 +48,7 @@ public class WalletDAOimp implements WalletDAO {
 
         while (rs.next()) {
 
-            Wallet wallet = new Wallet(rs.getInt("id_wallet"), rs.getString("walletName"), rs.getString("walletCategory"), rs.getInt("totalAmount"), rs.getString("owneremail"));
+            Wallet wallet = new Wallet(rs.getInt("id_wallet"), rs.getString("walletName"), rs.getString("walletCategory"), rs.getFloat("totalAmount"), rs.getString("owneremail"));
             wallets.add(wallet);
 
         }
@@ -74,7 +74,7 @@ public class WalletDAOimp implements WalletDAO {
 
         while (rs.next()) {
 
-            Wallet wallet = new Wallet(rs.getInt("id_wallet"), rs.getString("walletName"), rs.getString("walletCategory"), rs.getInt("totalAmount"), rs.getString("owneremail"));
+            Wallet wallet = new Wallet(rs.getInt("id_wallet"), rs.getString("walletName"), rs.getString("walletCategory"), rs.getFloat("totalAmount"), rs.getString("owneremail"));
             wallets.add(wallet);
 
         }
@@ -92,7 +92,7 @@ public class WalletDAOimp implements WalletDAO {
 
         ps.setString(1, wallet.getWalletName());
         ps.setString(2, wallet.getWalletCategory());
-        ps.setInt(3, wallet.getTotalAmount());
+        ps.setFloat(3, wallet.getTotalAmount());
         ps.setString(4, wallet.getOwnerEmail());
 
         int result = ps.executeUpdate();
@@ -110,7 +110,7 @@ public class WalletDAOimp implements WalletDAO {
 
         ps.setString(1, wallet.getWalletName());
         ps.setString(2, wallet.getWalletCategory());
-        ps.setInt(3, wallet.getTotalAmount());
+        ps.setFloat(3, wallet.getTotalAmount());
         ps.setInt(4, wallet.getId_wallet());
 
         int result = ps.executeUpdate();
@@ -122,7 +122,7 @@ public class WalletDAOimp implements WalletDAO {
     public int delete(int id) throws SQLException {
         Connection con = Database.getConnection();
 
-        String sql = "DELETE FROM smu.wallet WHERE id_wallet = ? CASCADE";
+        String sql = "DELETE FROM smu.wallet WHERE id_wallet = ?";
 
         PreparedStatement ps = con.prepareStatement(sql);
 
