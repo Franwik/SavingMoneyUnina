@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import de.jensd.fx.glyphs.testapps.App;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
+import smu.App;
 import smu.Boundary.BaseDialog;
 import smu.Control.WalletControl;
 
@@ -22,7 +22,7 @@ public class DeleteWalletDialogController extends BaseDialog{
 
 	@FXML
 	private void deleteWallet() throws IOException{
-		Integer walletID = walletChooser.getSelectionModel().getSelectedIndex();
+		Integer walletID = walletChooser.getSelectionModel().getSelectedItem();
 
 		WalletControl.delete(walletID);
 
