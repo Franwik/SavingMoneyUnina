@@ -61,72 +61,78 @@ public class WalletPageController extends ApplicationPageController {
 
     @FXML
     private void loadTransactions(){
-        
-        loadWalletName();
-        List<Transaction> transactions = new ArrayList<>();
-        String choosenWallet = walletChooser.getSelectionModel().getSelectedItem().toString();
 
         transactionList.getItems().clear();
 
-        if(choosenWallet.equals("---")){
-            nameDisplay.setText("");
-        }
-        else{
-            transactions = WalletControl.getTransaction(choosenWallet);
-            transactionList.getItems().addAll(transactions);
-        }
+        loadWalletName();
 
-        System.out.println("Caricate transazioni");
+        List<Transaction> transactions = new ArrayList<>();
+        String choosenWallet = walletChooser.getSelectionModel().getSelectedItem();
+        transactions = WalletControl.getTransaction(choosenWallet);
+        transactionList.getItems().addAll(transactions);
 
     }
 
     @FXML
     private void loadTransactionsWallet(){
         List<Transaction> transactions = new ArrayList<>();
-        String choosenWalletName = walletNameChooser.getSelectionModel().getSelectedItem().toString();
+        String choosenWalletName = walletNameChooser.getSelectionModel().getSelectedItem();
 
-        transactionList.getItems().clear();
-        if(choosenWalletName.equals("---")){
-            nameDisplay.setText("");
-        }
-        else{
-            transactions = WalletControl.getTransactionWallet(choosenWalletName);
-            transactionList.getItems().addAll(transactions);
-        }
+        if(choosenWalletName != null){
 
-        System.out.println("Caricate transazioni");
+            transactionList.getItems().clear();
+            
+            if(choosenWalletName.equals("---")){
+                transactions = WalletControl.getTransaction(walletChooser.getSelectionModel().getSelectedItem());
+                transactionList.getItems().addAll(transactions);
+            }
+            else{
+                transactions = WalletControl.getTransactionWallet(choosenWalletName, walletChooser.getSelectionModel().getSelectedItem());
+                transactionList.getItems().addAll(transactions);
+            }
+        }
     }
 
     private void loadWallets(){
 
-        List<String> wallets = new ArrayList<>();
-
-        wallets = TransactionControl.getWalletCategory();
-
-        walletChooser.getItems().addAll(wallets);
-
+        walletChooser.getItems().clear();
+        List<String> uniqueWalletCategories = new ArrayList<>();
+    
+        List<String> wallets = TransactionControl.getWalletCategory();
+    
+        for (String category : wallets) {
+            if (!uniqueWalletCategories.contains(category)) {
+                uniqueWalletCategories.add(category);
+            }
+        }
+    
+        walletChooser.getItems().add("---");
+        walletChooser.getItems().addAll(uniqueWalletCategories);
     }
 
+    @FXML
     private void loadWalletName(){
 
-        List<String> wallets = new ArrayList<>();
+        walletNameChooser.getItems().clear();
+        List<String> walletsName = new ArrayList<>();
 
-        wallets = TransactionControl.getWalletNameByCategory(walletChooser.getSelectionModel().getSelectedItem());
+        walletsName = TransactionControl.getWalletNameByCategory(walletChooser.getSelectionModel().getSelectedItem());
 
-        walletNameChooser.getItems().addAll(wallets);
+        walletNameChooser.getItems().add("---");
+        walletNameChooser.getItems().addAll(walletsName);
     }
     
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        
-        loadWallets();
-
-        loadWalletName();
 
         ID_Transaction.setCellValueFactory(new PropertyValueFactory<Transaction, Integer>("ID_Transaction"));
         amount.setCellValueFactory(new PropertyValueFactory<Transaction, Float>("amount"));
         date.setCellValueFactory(new PropertyValueFactory<Transaction, LocalDate>("date"));
         walletName.setCellValueFactory(new PropertyValueFactory<Transaction, String>("walletName")); 
+
+        loadWallets();
+
+        loadWalletName();
     }
 
 }

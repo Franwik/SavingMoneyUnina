@@ -61,18 +61,25 @@ public class NewTransactionDialogController extends BaseDialog{
 	}
 
 	private void loadCategory(){
-		
-		List<String> categories = new ArrayList<>();
 
-		categories = TransactionControl.getWalletCategory();
+		categoryChooser.getItems().clear();
+		List<String> categories = TransactionControl.getWalletCategory();
+		List<String> uniqueCategories = new ArrayList<>(); 
+	
+		for (String category : categories) {
+			if (!uniqueCategories.contains(category)) {
+				uniqueCategories.add(category);
+			}
+		}
 
-		categoryChooser.getItems().addAll(categories);
-
+		categoryChooser.getItems().addAll(uniqueCategories);
 	}
+	
 
 	@FXML
 	private void loadWallet(){
 
+		walletChooser.getItems().clear();
 		List<String> wallets = new ArrayList<>();
 
 		wallets = TransactionControl.getWalletNameByCategory(categoryChooser.getSelectionModel().getSelectedItem());

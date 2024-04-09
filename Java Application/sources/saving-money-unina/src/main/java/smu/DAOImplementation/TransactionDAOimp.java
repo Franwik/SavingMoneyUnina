@@ -66,7 +66,7 @@ public class TransactionDAOimp implements TransactionDAO {
 		
 		ResultSet rs = ps.executeQuery();
 
-		if (rs.next()) {
+		while (rs.next()) {
 		   Transaction transactions = new Transaction(rs.getInt("ID_Transaction"), rs.getFloat("amount"), rs.getDate("Date").toLocalDate(), rs.getString("category"), rs.getString("walletName"), rs.getString("cardNumber"));
 		   result.add(transactions);
 		}
@@ -76,15 +76,16 @@ public class TransactionDAOimp implements TransactionDAO {
 	}
 
 	@Override
-	public List<Transaction> getByWalletName(String choosenWalletName) throws SQLException{
+	public List<Transaction> getByWalletName(String choosenWalletName, String category) throws SQLException{
 		Connection con = Database.getConnection();
 		List<Transaction> result = new ArrayList<>();
 
-		String sql = "SELECT * FROM smu.transaction WHERE walletname = ?";
+		String sql = "SELECT * FROM smu.transaction WHERE walletname = ? AND category = ?";
 
 		PreparedStatement ps = con.prepareStatement(sql);
 
 		ps.setString(1, choosenWalletName);
+		ps.setString(2, category);
 		
 		ResultSet rs = ps.executeQuery();
 

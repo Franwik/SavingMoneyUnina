@@ -1,5 +1,6 @@
 package smu.Boundary.Wallet;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +31,7 @@ public class EditWalletDialogController extends BaseDialog{
 	private ComboBox<String> emailChooser;
 
 	@FXML
-	private void updateWallet(){
+	private void updateWallet() throws IOException{
 		//Fields from page
 
 		Integer ID_Wallet = walletChooser.getSelectionModel().getSelectedItem();
@@ -50,9 +51,10 @@ public class EditWalletDialogController extends BaseDialog{
 		walletChooser.getItems().addAll(wallets);
 	}
 
-	@FXML
 	private void loadWalletInfo(){
-		Wallet wallet = WalletControl.getWalletInfo(walletChooser.getSelectionModel().getSelectedItem());
+		Wallet wallet = null;
+
+		wallet = WalletControl.getWalletInfo(walletChooser.getSelectionModel().getSelectedItem());
 
 		walletCategoryField.setText(wallet.getWalletCategory());
 		walletNameField.setText(wallet.getWalletName());

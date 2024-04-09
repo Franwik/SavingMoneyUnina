@@ -9,12 +9,19 @@ import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import smu.Boundary.BaseDialog;
+import smu.Control.TransactionControl;
 import smu.Control.WalletControl;
 
 public class NewWalletDialogController extends BaseDialog{
 
 	@FXML
+	private ComboBox<String> walletChooser;
+
+	@FXML
 	private TextField walletCategoryField;
+
+	@FXML
+	private ComboBox<String> walletNameChooser;
 
 	@FXML
 	private TextField walletNameField;
@@ -28,23 +35,91 @@ public class NewWalletDialogController extends BaseDialog{
 	@FXML
 	private void createWallet(){
 		//Fields from page
+		String walletCategory = "";
+		String walletName = "";
+		
+		if (walletChooser.getValue().equals("Inserisci nuova categoria")) {
+			walletCategory = walletCategoryField.getText();
+		} else {
+			walletCategory = walletChooser.getSelectionModel().getSelectedItem();
+		}
 
-		String walletCategory = walletCategoryField.getText();
-		String walletName = walletNameField.getText();
+		if (walletNameChooser.getValue().equals("Inserisci nuovo nome")) {
+			walletName = walletNameField.getText();
+		} else {
+			walletName = walletNameChooser.getSelectionModel().getSelectedItem();
+		}
+
 		String totalAmount = totalAmountField.getText();
 		String email = emailChooser.getSelectionModel().getSelectedItem();
+		
+		WalletControl.insert(walletName, walletCategory, totalAmount, email);
+	}
 
-		WalletControl.insert(walletCategory, walletName, totalAmount, email);
-	
+	private void loadWallet(){
+		walletChooser.getItems().clear();
+		List<String> uniqueCategories = new ArrayList<>();
+
+		List<String> wallets = TransactionControl.getWalletCategory();
+		
+		for (String category : wallets) {
+			if (!uniqueCategories.contains(category)) {
+				uniqueCategories.add(category);
+			}
+		}
+
+		walletChooser.getItems().add("---");
+		walletChooser.getItems().add("Inserisci nuova categoria");
+		walletChooser.getItems().addAll(uniqueCategories);
+	}
+
+	private void loadWalletName(){
+
+		walletNameChooser.getItems().clear();
+		
+		List<String> walletsName = new ArrayList<>();
+
+        walletsName = TransactionControl.getWalletNameByCategory(walletChooser.getSelectionModel().getSelectedItem());
+
+        walletNameChooser.getItems().add("---");
+		walletNameChooser.getItems().add("Inserisci nuovo nome");
+        walletNameChooser.getItems().addAll(walletsName);
 	}
 
 	private void loadEmails(){
+
+		emailChooser.getItems().clear();
 
 		List<String> emails = new ArrayList<>();
 
 		emails = WalletControl.getOwnerEmail();
 
+		emailChooser.getItems().add("---");
 		emailChooser.getItems().addAll(emails);
+	}
+
+	@FXML
+	private void checkCategoryField(){
+
+		loadWalletName();
+		if(walletChooser.getValue().equals("Inserisci nuova categoria")){
+			walletCategoryField.setDisable(false);
+		}
+		else{
+			walletChooser.setDisable(false);
+			walletCategoryField.setDisable(true);
+		}
+	}
+
+	@FXML
+	private void checkNameField(){
+		if(walletNameChooser.getValue().equals("Inserisci nuovo nome")){
+			walletNameField.setDisable(false);
+		}
+		else{
+			walletNameChooser.setDisable(false);
+			walletNameField.setDisable(true);
+		}
 	}
 
 
@@ -53,6 +128,12 @@ public class NewWalletDialogController extends BaseDialog{
 
 		loadEmails();
 
+		loadWallet();
+
+		loadWalletName();
+
 	}
 
 }
+
+

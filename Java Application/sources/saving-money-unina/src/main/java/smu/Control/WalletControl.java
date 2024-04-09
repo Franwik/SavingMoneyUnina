@@ -39,7 +39,7 @@ public class WalletControl extends BaseControl{
 			for(Familiar familiar : familiars){
 				wallets.addAll(walletDAO.getAllByEmail(familiar.getCF()));
 			}
-		} catch (Exception e){
+		} catch (SQLException e){
 			showAlert(AlertType.ERROR, "Errore", "Si è verificato un problema inaspettato.", "Problemi con il Database.");
 			System.err.println("Errore: " + e.getMessage());
 		}
@@ -114,14 +114,14 @@ public class WalletControl extends BaseControl{
 			
 	}
 
-	public static List<Transaction> getTransactionWallet(String choosenWalletName) {
+	public static List<Transaction> getTransactionWallet(String choosenWalletName, String category) {
 		
 		List<Transaction> transactions = new ArrayList<>();
 		
 		TransactionDAO transactionDAO = new TransactionDAOimp();
 		
 		try {
-			transactions = transactionDAO.getByWalletName(choosenWalletName);
+			transactions = transactionDAO.getByWalletName(choosenWalletName, category);
 		} catch (SQLException e) {
 			showAlert(AlertType.ERROR, "Errore", "Si è verificato un problema inaspettato.", "Problemi con il Database.");
 			System.err.println("Errore: " + e.getMessage());
@@ -243,8 +243,11 @@ public class WalletControl extends BaseControl{
 				wallet = new Wallet(ID_Wallet, walletName, walletCategory, convertedTotalAmount, ownerEmail);
 				walletDAO.update(wallet);
 				showAlert(AlertType.INFORMATION, "Informazione", "Portafoglio aggiornato con successo.", "Il portafoglio è stato aggiornato con successo.");
-			} catch (Exception e) {
+			} catch (SQLException e) {
 				showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
+				System.err.println("Errore: " + e.getMessage());
+			} catch (RuntimeException e){
+				showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "La somma inserita non è valida.");
 				System.err.println("Errore: " + e.getMessage());
 			}
 		}
@@ -264,7 +267,7 @@ public class WalletControl extends BaseControl{
 					walletDAO.delete(ID_Wallet);
 					showAlert(AlertType.INFORMATION, "Informazione", "Portafoglio eliminato con successo.", "");
 				}
-			} catch (Exception e) {
+			} catch (SQLException e) {
 				showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
 				System.err.println("Errore: " + e.getMessage());
 			}
@@ -290,19 +293,15 @@ public class WalletControl extends BaseControl{
 				wallet = new Wallet(walletName, walletCategory, convertedTotalAmount, ownerEmail);
 				walletDAO.insert(wallet);
 				showAlert(AlertType.INFORMATION, "Informazione", "Portafoglio inserito con successo.", "");
-			} catch (Exception e) {
+			} catch (SQLException e) {
 				showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
+				System.err.println("Errore: " + e.getMessage());
+			} catch (RuntimeException e){
+				showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "La somma inserita non è valida.");
 				System.err.println("Errore: " + e.getMessage());
 			}
 		}
 
-		try {
-			walletDAO.insert(wallet);
-			showAlert(AlertType.INFORMATION, "Informazione", "Portafoglio inserito con successo.", "");
-		} catch (Exception e) {
-			showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
-			System.err.println("Errore: " + e.getMessage());
-		}
 
 	}
 

@@ -12,7 +12,7 @@ public interface TransactionDAO {
 
     List<Transaction> getByWalletCategory(String choosenWallet) throws SQLException;
 
-    List<Transaction> getByWalletName(String choosenWalletName) throws SQLException;
+    List<Transaction> getByWalletName(String choosenWalletName, String category) throws SQLException;
 
     int insert(Transaction transaction) throws SQLException;
 
