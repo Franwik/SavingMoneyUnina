@@ -21,9 +21,6 @@ public class NewWalletDialogController extends BaseDialog{
 	private TextField walletCategoryField;
 
 	@FXML
-	private ComboBox<String> walletNameChooser;
-
-	@FXML
 	private TextField walletNameField;
 
 	@FXML
@@ -36,20 +33,15 @@ public class NewWalletDialogController extends BaseDialog{
 	private void createWallet(){
 		//Fields from page
 		String walletCategory = "";
-		String walletName = "";
+		
 		
 		if (walletChooser.getValue().equals("Inserisci nuova categoria")) {
 			walletCategory = walletCategoryField.getText();
 		} else {
 			walletCategory = walletChooser.getSelectionModel().getSelectedItem();
 		}
-
-		if (walletNameChooser.getValue().equals("Inserisci nuovo nome")) {
-			walletName = walletNameField.getText();
-		} else {
-			walletName = walletNameChooser.getSelectionModel().getSelectedItem();
-		}
-
+	
+		String walletName = walletNameField.getText();
 		String totalAmount = totalAmountField.getText();
 		String email = emailChooser.getSelectionModel().getSelectedItem();
 		
@@ -73,19 +65,6 @@ public class NewWalletDialogController extends BaseDialog{
 		walletChooser.getItems().addAll(uniqueCategories);
 	}
 
-	private void loadWalletName(){
-
-		walletNameChooser.getItems().clear();
-		
-		List<String> walletsName = new ArrayList<>();
-
-        walletsName = TransactionControl.getWalletNameByCategory(walletChooser.getSelectionModel().getSelectedItem());
-
-        walletNameChooser.getItems().add("---");
-		walletNameChooser.getItems().add("Inserisci nuovo nome");
-        walletNameChooser.getItems().addAll(walletsName);
-	}
-
 	private void loadEmails(){
 
 		emailChooser.getItems().clear();
@@ -101,24 +80,12 @@ public class NewWalletDialogController extends BaseDialog{
 	@FXML
 	private void checkCategoryField(){
 
-		loadWalletName();
 		if(walletChooser.getValue().equals("Inserisci nuova categoria")){
 			walletCategoryField.setDisable(false);
 		}
 		else{
 			walletChooser.setDisable(false);
 			walletCategoryField.setDisable(true);
-		}
-	}
-
-	@FXML
-	private void checkNameField(){
-		if(walletNameChooser.getValue().equals("Inserisci nuovo nome")){
-			walletNameField.setDisable(false);
-		}
-		else{
-			walletNameChooser.setDisable(false);
-			walletNameField.setDisable(true);
 		}
 	}
 
@@ -129,8 +96,6 @@ public class NewWalletDialogController extends BaseDialog{
 		loadEmails();
 
 		loadWallet();
-
-		loadWalletName();
 
 	}
 

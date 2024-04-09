@@ -75,19 +75,14 @@
                   <Insets bottom="30.0" left="10.0" right="14.0" />
                </GridPane.margin>
             </ComboBox>
-            <ComboBox fx:id="walletNameChooser" onAction="#checkNameField" prefHeight="26.0" prefWidth="232.0" promptText="---" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
-               <GridPane.margin>
-                  <Insets bottom="30.0" left="10.0" right="14.0" />
-               </GridPane.margin>
-            </ComboBox>
             <TextField fx:id="walletCategoryField" disable="true" promptText="Scegli l'opzione per aggiungere" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <GridPane.margin>
                   <Insets left="10.0" right="14.0" top="30.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="walletNameField" disable="true" promptText="Scegli l'opzione per aggiungere" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+            <TextField fx:id="walletNameField" promptText="Nome Portafoglio" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                <GridPane.margin>
-                  <Insets left="10.0" right="14.0" top="30.0" />
+                  <Insets left="10.0" right="14.0" />
                </GridPane.margin>
             </TextField>
          </children>
