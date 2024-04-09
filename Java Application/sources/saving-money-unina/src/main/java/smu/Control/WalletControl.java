@@ -262,7 +262,7 @@ public class WalletControl extends BaseControl{
 		}
 		else{
 			try {
-				Optional<ButtonType> choice = showAlert(AlertType.CONFIRMATION, "Attenzione", "Sei sicuro di voler eliminare il portafoglio?", "Questa azione è irreversibile.");
+				Optional<ButtonType> choice = showAlert(AlertType.CONFIRMATION, "Attenzione", "Sei sicuro di voler eliminare il portafoglio?", "Sei sicuro di voler eliminare il portafoglio " + ID_Wallet.intValue() + "?");
 				if(choice.get() == ButtonType.OK){
 					walletDAO.delete(ID_Wallet);
 					showAlert(AlertType.INFORMATION, "Informazione", "Portafoglio eliminato con successo.", "");

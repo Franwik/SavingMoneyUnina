@@ -20,8 +20,6 @@ public class DeleteWalletDialogController extends BaseDialog{
 	@FXML
 	private ComboBox<Integer> walletChooser;
 
-
-
 	@FXML
 	private void deleteWallet() throws IOException{
 		Integer walletID = walletChooser.getSelectionModel().getSelectedIndex();
@@ -30,7 +28,9 @@ public class DeleteWalletDialogController extends BaseDialog{
 
 		reload();
 		loadWallets();
+		
 	}
+
 
 	private void reload(){
 		FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("DeleteWalletDialog.fxml"));
@@ -58,7 +58,9 @@ public class DeleteWalletDialogController extends BaseDialog{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+
 		loadWallets();
+
 	}
 	
 }

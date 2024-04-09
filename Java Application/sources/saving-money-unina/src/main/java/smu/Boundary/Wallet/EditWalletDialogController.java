@@ -51,6 +51,7 @@ public class EditWalletDialogController extends BaseDialog{
 		walletChooser.getItems().addAll(wallets);
 	}
 
+	@FXML
 	private void loadWalletInfo(){
 		Wallet wallet = null;
 
@@ -63,6 +64,7 @@ public class EditWalletDialogController extends BaseDialog{
 
 	}
 
+	@FXML
 	private void loadOwnerEmails(){
 		List<String> emails = new ArrayList<>();
 
@@ -75,8 +77,7 @@ public class EditWalletDialogController extends BaseDialog{
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		loadWallets();
-		loadOwnerEmails();
-		loadWalletInfo();
+
 	}
 
 }

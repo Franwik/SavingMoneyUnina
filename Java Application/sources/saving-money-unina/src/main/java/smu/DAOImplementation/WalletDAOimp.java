@@ -122,7 +122,7 @@ public class WalletDAOimp implements WalletDAO {
     public int delete(int id) throws SQLException {
         Connection con = Database.getConnection();
 
-        String sql = "DELETE FROM smu.wallet WHERE id_wallet = ?";
+        String sql = "DELETE FROM smu.wallet WHERE ID_Wallet = ?";
 
         PreparedStatement ps = con.prepareStatement(sql);
 
