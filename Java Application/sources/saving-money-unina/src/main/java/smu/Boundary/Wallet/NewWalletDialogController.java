@@ -1,7 +1,6 @@
 package smu.Boundary.Wallet;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -42,19 +41,12 @@ public class NewWalletDialogController extends BaseDialog{
 
 	private void loadWallet(){
 		walletChooser.getItems().clear();
-		List<String> uniqueCategories = new ArrayList<>();
 
 		List<String> wallets = TransactionControl.getWalletCategory();
-		
-		for (String category : wallets) {
-			if (!uniqueCategories.contains(category)) {
-				uniqueCategories.add(category);
-			}
-		}
 
 		walletChooser.getItems().add("---");
 		walletChooser.getItems().add("Inserisci nuova categoria");
-		walletChooser.getItems().addAll(uniqueCategories);
+		walletChooser.getItems().addAll(wallets);
 	}
 
 	@FXML

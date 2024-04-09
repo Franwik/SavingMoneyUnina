@@ -263,15 +263,23 @@ public class WalletControl extends BaseControl{
 		else{
 
 			try {
+
 				wallet = new Wallet(walletName, walletCategory);
+
 				walletDAO.insert(wallet);
+				
 				showAlert(AlertType.INFORMATION, "Informazione", "Portafoglio inserito con successo.", "");
+			
 			} catch (SQLException e) {
+			
 				showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
 				System.err.println("Errore: " + e.getMessage());
+			
 			} catch (RuntimeException e){
+			
 				showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "La somma inserita non è valida.");
 				System.err.println("Errore: " + e.getMessage());
+			
 			}
 		}
 

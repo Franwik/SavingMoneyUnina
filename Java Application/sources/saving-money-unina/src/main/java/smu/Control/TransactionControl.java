@@ -93,7 +93,13 @@ public class TransactionControl extends BaseControl{
 			category = walletDAO.getAllByEmail(loggedUser.getEmail());
 
 			for(Wallet wallet : category){
-				result.add(wallet.getWalletCategory());
+				
+				String currentCategory = wallet.getWalletCategory();
+				
+				if (!result.contains(currentCategory)) {
+					result.add(currentCategory);
+				}
+
 			}
 		} catch (SQLException e) {
 			showAlert(AlertType.ERROR, "Errore", "Si è verificato un problema inaspettato.", "Problemi con il Database.");

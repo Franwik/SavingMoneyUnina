@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 16.2 (Postgres.app)
--- Dumped by pg_dump version 16.2 (Postgres.app)
+-- Dumped from database version 16.2 (Ubuntu 16.2-1.pgdg23.10+1)
+-- Dumped by pg_dump version 16.2 (Ubuntu 16.2-1.pgdg23.10+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -298,9 +298,9 @@ BEGIN
     FOR transaction_row IN
         SELECT *
         FROM smu.transaction AS T
-        WHERE T.category = NEW.walletcategory AND T.cardiban IN (SELECT iban FROM smu.card WHERE owneremail = NEW.owneremail
+        WHERE T.category = NEW.walletcategory AND T.cardnumber IN (SELECT cardnumber FROM smu.card WHERE owneremail = NEW.owneremail
                                                             UNION
-                                                            SELECT C.iban
+                                                            SELECT C.cardnumber
                                                             FROM smu.familiar AS F
                                                             JOIN smu.card AS C ON F.cf = C.ownercf
                                                             WHERE familiaremail = NEW.owneremail)
@@ -677,6 +677,8 @@ franwik_@outlook.com	Franwik	Ifs4ppic	Via Napoli 281	Francesco	Donnarumma	DNNFNC
 
 COPY smu.wallet (id_wallet, walletname, walletcategory, totalamount, owneremail) FROM stdin;
 1	Conad	Spesa	26	franwik_@outlook.com
+6		---	0	franwik_@outlook.com
+7	Game Stop	Giochi	0	franwik_@outlook.com
 \.
 
 
@@ -719,7 +721,7 @@ SELECT pg_catalog.setval('smu.transactionwallet_id_wallet_seq', 1, false);
 -- Name: wallet_id_wallet_seq; Type: SEQUENCE SET; Schema: smu; Owner: postgres
 --
 
-SELECT pg_catalog.setval('smu.wallet_id_wallet_seq', 5, true);
+SELECT pg_catalog.setval('smu.wallet_id_wallet_seq', 7, true);
 
 
 --

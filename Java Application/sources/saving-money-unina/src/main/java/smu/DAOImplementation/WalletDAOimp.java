@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.*;
 
 import smu.Database;
+import smu.LoggedUser;
 import smu.DAO.WalletDAO;
 import smu.DTO.Wallet;
 
@@ -25,7 +26,7 @@ public class WalletDAOimp implements WalletDAO {
         ResultSet rs = ps.executeQuery();
 		
         if (rs.next()){
-            wallet = new Wallet(rs.getInt("id_wallet"), rs.getString("walletCategory"), rs.getString("walletName"));            
+            wallet = new Wallet(rs.getInt("id_wallet"), rs.getString("walletname"), rs.getString("walletcategory"));            
         }
 
 		return wallet;
@@ -86,12 +87,15 @@ public class WalletDAOimp implements WalletDAO {
     public int insert(Wallet wallet) throws SQLException {
         Connection con = Database.getConnection();
 
-        String sql = "INSERT INTO smu.wallet (walletname, walletCategory) VALUES (?, ?)";
+        LoggedUser loggedUser = LoggedUser.getInstance();
+
+        String sql = "INSERT INTO smu.wallet (walletname, walletCategory, totalamount, owneremail) VALUES (?, ?, 0, ?)";
 
         PreparedStatement ps = con.prepareStatement(sql);
 
         ps.setString(1, wallet.getWalletName());
         ps.setString(2, wallet.getWalletCategory());
+        ps.setString(3, loggedUser.getEmail());
 
         int result = ps.executeUpdate();
 
@@ -108,7 +112,7 @@ public class WalletDAOimp implements WalletDAO {
 
         ps.setString(1, wallet.getWalletName());
         ps.setString(2, wallet.getWalletCategory());
-        ps.setInt(4, wallet.getId_wallet());
+        ps.setInt(3, wallet.getId_wallet());
 
         int result = ps.executeUpdate();
 

@@ -46,7 +46,7 @@ public class WalletPageController extends ApplicationPageController {
 
     @FXML
     private void showNewWalletDialog() throws IOException{
-        showDialog("NewWalletDialog", 370, 340, "Nuovo Portafoglio", "Wallet");
+        showDialog("NewWalletDialog", 370, 210, "Nuovo Portafoglio", "Wallet");
     }
 
     @FXML
@@ -56,7 +56,7 @@ public class WalletPageController extends ApplicationPageController {
 
     @FXML
     private void showEditWalletDialog() throws IOException{
-        showDialog("EditWalletDialog", 370, 370, "Modifica Portafoglio", "Wallet");
+        showDialog("EditWalletDialog", 370, 235, "Modifica Portafoglio", "Wallet");
     }
 
     @FXML
@@ -96,18 +96,11 @@ public class WalletPageController extends ApplicationPageController {
     private void loadWallets(){
 
         walletChooser.getItems().clear();
-        List<String> uniqueWalletCategories = new ArrayList<>();
     
         List<String> wallets = TransactionControl.getWalletCategory();
     
-        for (String category : wallets) {
-            if (!uniqueWalletCategories.contains(category)) {
-                uniqueWalletCategories.add(category);
-            }
-        }
-    
         walletChooser.getItems().add("---");
-        walletChooser.getItems().addAll(uniqueWalletCategories);
+        walletChooser.getItems().addAll(wallets);
     }
 
     @FXML

@@ -100,15 +100,8 @@ public class EditTransactionDialogController extends BaseDialog{
 		categoryChooser.getItems().clear();
 
 		List<String> categories = TransactionControl.getWalletCategory();
-		List<String> uniqueCategories = new ArrayList<>(); 
-	
-		for (String category : categories) {
-			if (!uniqueCategories.contains(category)) {
-				uniqueCategories.add(category);
-			}
-		}
 
-		categoryChooser.getItems().addAll(uniqueCategories);
+		categoryChooser.getItems().addAll(categories);
 	}
 
 	@FXML
