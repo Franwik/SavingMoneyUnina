@@ -36,7 +36,7 @@ public class NewWalletDialogController extends BaseDialog{
 	
 		String walletName = walletNameField.getText();
 		
-		WalletControl.insert(walletName, walletCategory);
+		WalletControl.insert(walletCategory, walletName);
 	}
 
 	private void loadWallet(){
@@ -64,7 +64,7 @@ public class NewWalletDialogController extends BaseDialog{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+
 		loadWallet();
 
 	}

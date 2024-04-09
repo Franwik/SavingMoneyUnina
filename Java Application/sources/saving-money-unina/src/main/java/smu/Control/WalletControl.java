@@ -204,7 +204,7 @@ public class WalletControl extends BaseControl{
 
 
 
-	public static void update(Integer ID_Wallet, String walletName, String walletCategory){
+	public static void update(Integer ID_Wallet, String walletCategory, String walletName){
 
 		WalletDAO walletDAO = new WalletDAOimp();
 
@@ -250,7 +250,7 @@ public class WalletControl extends BaseControl{
 		}
 	}
 
-	public static void insert(String walletName, String walletCategory){
+	public static void insert(String walletCategory, String walletName){
 
 		WalletDAO walletDAO = new WalletDAOimp();
 
@@ -264,7 +264,7 @@ public class WalletControl extends BaseControl{
 
 			try {
 
-				wallet = new Wallet(walletName, walletCategory);
+				wallet = new Wallet(walletCategory, walletName);
 
 				walletDAO.insert(wallet);
 				
