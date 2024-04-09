@@ -24,12 +24,6 @@ public class NewWalletDialogController extends BaseDialog{
 	private TextField walletNameField;
 
 	@FXML
-	private TextField totalAmountField;
-
-	@FXML
-	private ComboBox<String> emailChooser;
-
-	@FXML
 	private void createWallet(){
 		//Fields from page
 		String walletCategory = "";
@@ -42,10 +36,8 @@ public class NewWalletDialogController extends BaseDialog{
 		}
 	
 		String walletName = walletNameField.getText();
-		String totalAmount = totalAmountField.getText();
-		String email = emailChooser.getSelectionModel().getSelectedItem();
 		
-		WalletControl.insert(walletName, walletCategory, totalAmount, email);
+		WalletControl.insert(walletName, walletCategory);
 	}
 
 	private void loadWallet(){
@@ -65,18 +57,6 @@ public class NewWalletDialogController extends BaseDialog{
 		walletChooser.getItems().addAll(uniqueCategories);
 	}
 
-	private void loadEmails(){
-
-		emailChooser.getItems().clear();
-
-		List<String> emails = new ArrayList<>();
-
-		emails = WalletControl.getOwnerEmail();
-
-		emailChooser.getItems().add("---");
-		emailChooser.getItems().addAll(emails);
-	}
-
 	@FXML
 	private void checkCategoryField(){
 
@@ -92,9 +72,7 @@ public class NewWalletDialogController extends BaseDialog{
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-
-		loadEmails();
-
+		
 		loadWallet();
 
 	}

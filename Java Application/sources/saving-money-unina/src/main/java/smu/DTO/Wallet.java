@@ -14,21 +14,17 @@ public class Wallet {
 
 
 	//Constructor
-    public Wallet(int id_wallet, String walletName, String walletCategory, Float totalAmount, String ownerEmail) {
+    public Wallet(int id_wallet, String walletName, String walletCategory) {
         this.id_wallet = id_wallet;
         this.walletName = walletName;
         this.walletCategory = walletCategory;
-        this.totalAmount = totalAmount;
-        this.ownerEmail = ownerEmail;
     }
 
     //Overloaded constructor without ID
-    public Wallet(String walletName, String walletCategory, Float totalAmount, String ownerEmail) {
+    public Wallet(String walletName, String walletCategory) {
         this.id_wallet = 0;
         this.walletName = walletName;
         this.walletCategory = walletCategory;
-        this.totalAmount = totalAmount;
-        this.ownerEmail = ownerEmail;
     }
 
     //Getters and Setters

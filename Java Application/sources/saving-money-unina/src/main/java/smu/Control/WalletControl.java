@@ -202,45 +202,21 @@ public class WalletControl extends BaseControl{
 		return result;
 	}
 
-	public static List<String> getOwnerEmail() {
-		
-		List<String> result = new ArrayList<>();
-		List<Wallet> wallets = new ArrayList<>();
-		
-		WalletDAO walletDAO = new WalletDAOimp();
-		
-		LoggedUser loggedUser = LoggedUser.getInstance();
-		
-		try {
-			wallets.addAll(walletDAO.getAllByEmail(loggedUser.getEmail()));
 
-			for(Wallet wallet : wallets){
-				result.add(wallet.getOwnerEmail());
-			}
 
-		} catch (SQLException e) {
-			showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
-			System.err.println("Errore: " + e.getMessage());
-		}
-		
-		return result;
-	
-	}
-
-	public static void update(Integer ID_Wallet, String walletName, String walletCategory, String totalAmount, String ownerEmail){
+	public static void update(Integer ID_Wallet, String walletName, String walletCategory){
 
 		WalletDAO walletDAO = new WalletDAOimp();
 
 		Wallet wallet = null;
 
-		if(ID_Wallet == null || walletCategory == null || ownerEmail == null){
+		if(ID_Wallet == null || walletCategory == null){
 			showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Almeno uno dei campi è vuoto.");
 		}
 		else{
 			try {
-				Float convertedTotalAmount = Float.parseFloat(totalAmount);
 
-				wallet = new Wallet(ID_Wallet, walletName, walletCategory, convertedTotalAmount, ownerEmail);
+				wallet = new Wallet(ID_Wallet, walletName, walletCategory);
 				walletDAO.update(wallet);
 				showAlert(AlertType.INFORMATION, "Informazione", "Portafoglio aggiornato con successo.", "Il portafoglio è stato aggiornato con successo.");
 			} catch (SQLException e) {
@@ -274,23 +250,20 @@ public class WalletControl extends BaseControl{
 		}
 	}
 
-	public static void insert(String walletName, String walletCategory, String totalAmount, String ownerEmail){
+	public static void insert(String walletName, String walletCategory){
 
 		WalletDAO walletDAO = new WalletDAOimp();
 
 		Wallet wallet = null;
 
-		if(walletCategory == null || ownerEmail == null){
+		if(walletCategory == null){
 			showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Almeno uno dei campi è vuoto.");
 			return;
 		}
 		else{
 
 			try {
-
-				Float convertedTotalAmount = Float.parseFloat(totalAmount);
-
-				wallet = new Wallet(walletName, walletCategory, convertedTotalAmount, ownerEmail);
+				wallet = new Wallet(walletName, walletCategory);
 				walletDAO.insert(wallet);
 				showAlert(AlertType.INFORMATION, "Informazione", "Portafoglio inserito con successo.", "");
 			} catch (SQLException e) {

@@ -28,19 +28,14 @@ public class EditWalletDialogController extends BaseDialog{
 	private TextField totalAmountField;
 
 	@FXML
-	private ComboBox<String> emailChooser;
-
-	@FXML
 	private void updateWallet() throws IOException{
 		//Fields from page
 
 		Integer ID_Wallet = walletChooser.getSelectionModel().getSelectedItem();
 		String walletCategory = walletCategoryField.getText();
 		String walletName = walletNameField.getText();
-		String totalAmount = totalAmountField.getText();
-		String email = emailChooser.getSelectionModel().getSelectedItem();
 
-		WalletControl.update(ID_Wallet, walletCategory, walletName, totalAmount, email);
+		WalletControl.update(ID_Wallet, walletCategory, walletName);
 	}
 
 	private void loadWallets(){
@@ -59,18 +54,7 @@ public class EditWalletDialogController extends BaseDialog{
 
 		walletCategoryField.setText(wallet.getWalletCategory());
 		walletNameField.setText(wallet.getWalletName());
-		totalAmountField.setText(String.valueOf(wallet.getTotalAmount()));
-		emailChooser.setValue(wallet.getOwnerEmail());
 
-	}
-
-	@FXML
-	private void loadOwnerEmails(){
-		List<String> emails = new ArrayList<>();
-
-		emails = WalletControl.getOwnerEmail();
-
-		emailChooser.getItems().addAll(emails);
 	}
 	
 
