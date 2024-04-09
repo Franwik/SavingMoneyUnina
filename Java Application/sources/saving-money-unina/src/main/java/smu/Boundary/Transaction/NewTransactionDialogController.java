@@ -84,6 +84,8 @@ public class NewTransactionDialogController extends BaseDialog{
 
 		wallets = TransactionControl.getWalletNameByCategory(categoryChooser.getSelectionModel().getSelectedItem());
 
+		walletChooser.getItems().clear();
+
 		walletChooser.getItems().addAll(wallets);
 
 	}
