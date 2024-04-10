@@ -844,7 +844,7 @@ ALTER TABLE ONLY smu."user"
 -- Name: transaction connect_transaction_to_wallet_trigger; Type: TRIGGER; Schema: smu; Owner: postgres
 --
 
-CREATE TRIGGER connect_transaction_to_wallet_trigger AFTER INSERT OR UPDATE ON smu.transaction FOR EACH ROW EXECUTE FUNCTION smu.connect_transaction_to_wallet();
+CREATE TRIGGER connect_transaction_to_wallet_trigger AFTER INSERT OR DELETE OR UPDATE ON smu.transaction FOR EACH ROW EXECUTE FUNCTION smu.connect_transaction_to_wallet();
 
 
 --
