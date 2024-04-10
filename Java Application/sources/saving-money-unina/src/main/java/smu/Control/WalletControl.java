@@ -275,11 +275,6 @@ public class WalletControl extends BaseControl{
 				showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
 				System.err.println("Errore: " + e.getMessage());
 			
-			} catch (RuntimeException e){
-			
-				showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "La somma inserita non è valida.");
-				System.err.println("Errore: " + e.getMessage());
-			
 			}
 		}
 

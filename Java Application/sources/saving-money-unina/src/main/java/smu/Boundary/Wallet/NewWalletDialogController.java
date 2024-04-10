@@ -26,17 +26,19 @@ public class NewWalletDialogController extends BaseDialog{
 	private void createWallet(){
 		//Fields from page
 		String walletCategory = "";
-		
-		
-		if (walletChooser.getValue().equals("Inserisci nuova categoria")) {
-			walletCategory = walletCategoryField.getText();
-		} else {
-			walletCategory = walletChooser.getSelectionModel().getSelectedItem();
-		}
-	
 		String walletName = walletNameField.getText();
-		
-		WalletControl.insert(walletCategory, walletName);
+
+		if(walletChooser.getValue() != null && !walletChooser.getValue().equals("---")){
+			if (walletChooser.getValue().equals("Inserisci nuova categoria")) {
+				walletCategory = walletCategoryField.getText();
+			} else {
+				walletCategory = walletChooser.getSelectionModel().getSelectedItem();
+			}
+			WalletControl.insert(walletCategory, walletName);
+		}
+		else{
+			WalletControl.insert(null, null);
+		}
 	}
 
 	private void loadWallet(){
