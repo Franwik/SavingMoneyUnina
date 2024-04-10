@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 16.2 (Ubuntu 16.2-1.pgdg23.10+1)
--- Dumped by pg_dump version 16.2 (Ubuntu 16.2-1.pgdg23.10+1)
+-- Dumped from database version 16.2 (Postgres.app)
+-- Dumped by pg_dump version 16.2 (Postgres.app)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -245,6 +245,43 @@ BEGIN
 
     END IF;
 
+	IF TG_OP = 'DELETE' THEN
+        -- Recupero il conto corrente associato alla transazione cancellata
+        SELECT *
+        INTO card_row
+        FROM smu.card
+        WHERE cardnumber = OLD.cardnumber;
+
+        SELECT *
+        INTO ba_row
+        FROM smu.bankaccount
+        WHERE accountnumber = card_row.ba_number;
+
+        -- Aggiorno il saldo del conto corrente
+        UPDATE smu.bankaccount
+        SET balance = balance - OLD.amount
+        WHERE accountnumber = ba_row.accountnumber;
+
+        -- Seleziona tutti i portafogli a cui deve essere cancellata la transazione
+        FOR wallet_row IN
+            SELECT *
+            FROM smu.wallet
+            WHERE walletcategory = OLD.category AND owneremail = account_email
+        LOOP
+
+            -- Cancella la transazione al wallet trovato
+            DELETE FROM smu.transactioninwallet
+			WHERE id_transaction = OLD.id_transaction AND id_wallet = wallet_row.id_wallet;
+
+            -- Aggiorna il campo totalamount del wallet
+            UPDATE smu.wallet
+            SET totalamount = totalamount - OLD.amount
+            WHERE id_wallet = wallet_row.id_wallet;
+
+        END LOOP;
+
+    END IF;
+	
     RETURN NEW;
 END;
 $$;
@@ -677,8 +714,7 @@ franwik_@outlook.com	Franwik	Ifs4ppic	Via Napoli 281	Francesco	Donnarumma	DNNFNC
 
 COPY smu.wallet (id_wallet, walletname, walletcategory, totalamount, owneremail) FROM stdin;
 1	Conad	Spesa	26	franwik_@outlook.com
-6		---	0	franwik_@outlook.com
-7	Game Stop	Giochi	0	franwik_@outlook.com
+7	Game Stop	Giochi Belli	0	franwik_@outlook.com
 \.
 
 
@@ -721,7 +757,7 @@ SELECT pg_catalog.setval('smu.transactionwallet_id_wallet_seq', 1, false);
 -- Name: wallet_id_wallet_seq; Type: SEQUENCE SET; Schema: smu; Owner: postgres
 --
 
-SELECT pg_catalog.setval('smu.wallet_id_wallet_seq', 7, true);
+SELECT pg_catalog.setval('smu.wallet_id_wallet_seq', 11, true);
 
 
 --
