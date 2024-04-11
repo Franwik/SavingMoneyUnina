@@ -49,7 +49,7 @@ public class WalletDAOimp implements WalletDAO {
 
         while (rs.next()) {
 
-            Wallet wallet = new Wallet(rs.getInt("id_wallet"), rs.getString("walletName"), rs.getString("walletCategory"));
+            Wallet wallet = new Wallet(rs.getInt("id_wallet"), rs.getString("walletname"), rs.getString("walletcategory"));
             wallets.add(wallet);
 
         }
@@ -75,7 +75,7 @@ public class WalletDAOimp implements WalletDAO {
 
         while (rs.next()) {
 
-            Wallet wallet = new Wallet(rs.getInt("id_wallet"), rs.getString("walletName"), rs.getString("walletCategory"));
+            Wallet wallet = new Wallet(rs.getInt("id_wallet"), rs.getString("walletname"), rs.getString("walletcategory"));
             wallets.add(wallet);
 
         }
@@ -89,7 +89,7 @@ public class WalletDAOimp implements WalletDAO {
 
         LoggedUser loggedUser = LoggedUser.getInstance();
 
-        String sql = "INSERT INTO smu.wallet (walletname, walletCategory, totalamount, owneremail) VALUES (?, ?, 0, ?)";
+        String sql = "INSERT INTO smu.wallet (walletname, walletcategory, totalamount, owneremail) VALUES (?, ?, 0, ?)";
 
         PreparedStatement ps = con.prepareStatement(sql);
 
@@ -106,7 +106,7 @@ public class WalletDAOimp implements WalletDAO {
     public int update(Wallet wallet) throws SQLException {
         Connection con = Database.getConnection();
 
-        String sql = "UPDATE smu.wallet SET walletname = ?, walletCategory = ? WHERE id_wallet = ?";
+        String sql = "UPDATE smu.wallet SET walletname = ?, walletcategory = ? WHERE id_wallet = ?";
 
         PreparedStatement ps = con.prepareStatement(sql);
 

@@ -35,7 +35,7 @@ public class EditWalletDialogController extends BaseDialog{
 		String walletCategory = walletCategoryField.getText();
 		String walletName = walletNameField.getText();
 
-		WalletControl.update(ID_Wallet, walletCategory, walletName);
+		WalletControl.update(ID_Wallet, walletName, walletCategory);
 	}
 
 	private void loadWallets(){

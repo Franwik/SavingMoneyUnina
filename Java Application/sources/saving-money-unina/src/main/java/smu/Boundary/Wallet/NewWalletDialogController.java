@@ -30,13 +30,16 @@ public class NewWalletDialogController extends BaseDialog{
 
 		if(walletChooser.getValue() != null){
 			if (walletChooser.getValue().equals("Inserisci nuova categoria")) {
-				walletCategory = walletCategoryField.getText();
+				if (!walletCategoryField.getText().isEmpty()){
+					walletCategory = walletCategoryField.getText();
+				}
 			} else {
+				
 				walletCategory = walletChooser.getSelectionModel().getSelectedItem();
 			}
 			
 		}
-		WalletControl.insert(walletCategory, walletName);
+		WalletControl.insert(walletName, walletCategory);
 	}
 
 	private void loadWallet(){
@@ -58,6 +61,7 @@ public class NewWalletDialogController extends BaseDialog{
 		else{
 			walletChooser.setDisable(false);
 			walletCategoryField.setDisable(true);
+			walletCategoryField.clear();
 		}
 	}
 

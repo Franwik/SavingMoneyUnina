@@ -204,7 +204,7 @@ public class WalletControl extends BaseControl{
 
 
 
-	public static void update(Integer ID_Wallet, String walletCategory, String walletName){
+	public static void update(Integer ID_Wallet, String walletName, String walletCategory){
 
 		WalletDAO walletDAO = new WalletDAOimp();
 
@@ -250,24 +250,25 @@ public class WalletControl extends BaseControl{
 		}
 	}
 
-	public static void insert(String walletCategory, String walletName){
+	public static void insert(String walletName, String walletCategory){
 
 		WalletDAO walletDAO = new WalletDAOimp();
 
 		Wallet wallet = null;
 
-		if(walletCategory == null){
+		if(walletCategory == null || walletCategory.isEmpty() || walletCategory.equals("---")){
 			showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Almeno uno dei campi è vuoto.");
 			return;
 		}
+		else if(!walletCategory.isEmpty() && walletName.isEmpty()){
+			showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "Scegli il nome del nuovo portafoglio.");
+			return;
+		}
 		else{
-
 			try {
 
-				wallet = new Wallet(walletCategory, walletName);
-
+				wallet = new Wallet(walletName, walletCategory);
 				walletDAO.insert(wallet);
-				
 				showAlert(AlertType.INFORMATION, "Informazione", "Portafoglio inserito con successo.", "");
 			
 			} catch (SQLException e) {
