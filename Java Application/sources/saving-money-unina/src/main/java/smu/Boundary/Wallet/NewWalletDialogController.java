@@ -25,20 +25,18 @@ public class NewWalletDialogController extends BaseDialog{
 	@FXML
 	private void createWallet(){
 		//Fields from page
-		String walletCategory = "";
+		String walletCategory = null;
 		String walletName = walletNameField.getText();
 
-		if(walletChooser.getValue() != null && !walletChooser.getValue().equals("---")){
+		if(walletChooser.getValue() != null){
 			if (walletChooser.getValue().equals("Inserisci nuova categoria")) {
 				walletCategory = walletCategoryField.getText();
 			} else {
 				walletCategory = walletChooser.getSelectionModel().getSelectedItem();
 			}
-			WalletControl.insert(walletCategory, walletName);
+			
 		}
-		else{
-			WalletControl.insert(null, null);
-		}
+		WalletControl.insert(walletCategory, walletName);
 	}
 
 	private void loadWallet(){
