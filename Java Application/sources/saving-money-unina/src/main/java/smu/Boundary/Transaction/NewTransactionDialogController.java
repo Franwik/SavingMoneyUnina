@@ -92,6 +92,8 @@ public class NewTransactionDialogController extends BaseDialog{
 
 		loadCategory();
 
+		dateField.setValue(LocalDate.now());
+
 	}
 	
 }
