@@ -180,6 +180,11 @@
                   </TableView>
                </children>
             </HBox>
+            <Text fill="#009900" layoutX="543.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gestione Familiari" textAlignment="RIGHT" AnchorPane.rightAnchor="83.0" AnchorPane.topAnchor="47.0">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </center>

@@ -89,7 +89,7 @@ public class TransactionDAOimp implements TransactionDAO {
 		
 		ResultSet rs = ps.executeQuery();
 
-		if (rs.next()) {
+		while (rs.next()) {
 		   Transaction transactions = new Transaction(rs.getInt("ID_Transaction"), rs.getFloat("amount"), rs.getDate("Date").toLocalDate(), rs.getString("category"), rs.getString("walletName"), rs.getString("cardNumber"));
 		   result.add(transactions);
 		}

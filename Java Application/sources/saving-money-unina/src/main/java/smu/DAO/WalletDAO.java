@@ -8,6 +8,10 @@ public interface WalletDAO {
 
     Wallet getById(int id) throws SQLException;
 
+    Wallet getByName(String walletName) throws SQLException;
+
+    float getTotalAmountById(int id) throws SQLException;
+
     List<Wallet> getAllByEmail(String email) throws SQLException;
 
     List<Wallet> getAllByEmailAndCategory(String email, String category) throws SQLException;

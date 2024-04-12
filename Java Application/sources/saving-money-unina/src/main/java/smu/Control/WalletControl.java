@@ -70,6 +70,24 @@ public class WalletControl extends BaseControl{
 		return wallet;
 	}
 
+	public static Wallet getWalletInfoByName(String walletName) {
+		WalletDAO walletDAO = new WalletDAOimp();
+		Wallet wallet = null;
+		try {
+			wallet = walletDAO.getByName(walletName);
+			// Recupera anche il saldo del portafoglio
+			if (wallet != null) {
+				float totalAmount = walletDAO.getTotalAmountById(wallet.getId_wallet());
+				wallet.setTotalAmount(totalAmount);
+			}
+		} catch (SQLException e) {
+			showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
+			System.err.println("Errore: " + e.getMessage());
+		}
+		return wallet;
+	}
+	
+
 	public static List<String> getWalletName() {
 		
 		List<String> result = new ArrayList<>();
@@ -146,35 +164,40 @@ public class WalletControl extends BaseControl{
 		return transaction;
 	}
 	
-	public static List<Integer> getAllTransaction(){
-		
+	public static List<Integer> getAllTransaction() {
+
 		List<Integer> result = new ArrayList<>();
 		List<Transaction> transactions = new ArrayList<>();
 		List<Wallet> wallets = new ArrayList<>();
-		
+	
 		WalletDAO walletDAO = new WalletDAOimp();
-
+	
 		LoggedUser loggedUser = LoggedUser.getInstance();
-		
+	
 		try {
-
-
-			
-			for(Wallet wallet : wallets){
-				wallets.addAll(walletDAO.getAllByEmailAndCategory(loggedUser.getEmail(), wallet.getWalletCategory()));
+	
+			// Recupera tutti i portafogli dell'utente loggato
+			wallets.addAll(walletDAO.getAllByEmail(loggedUser.getEmail()));
+	
+			// Itera sui portafogli e recupera le transazioni per ciascun portafoglio
+			for (Wallet wallet : wallets) {
+				// Recupera le transazioni per il portafoglio corrente
+				transactions.addAll(TransactionControl.getTransactions(wallet.getWalletCategory()));
 			}
-			
-			for(Transaction transaction : transactions){
+	
+			// Aggiungi gli ID delle transazioni alla lista dei risultati
+			for (Transaction transaction : transactions) {
 				result.add(transaction.getID_Transaction());
-			}			
-			
+			}
+	
 		} catch (SQLException e) {
 			showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
 			System.err.println("Errore: " + e.getMessage());
 		}
-		
+	
 		return result;
 	}
+	
 
 	public static List<Integer> getAllWallets() {
 		

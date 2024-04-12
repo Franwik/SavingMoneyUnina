@@ -33,6 +33,48 @@ public class WalletDAOimp implements WalletDAO {
 	}
 
     @Override
+    public Wallet getByName(String walletName) throws SQLException{
+        Connection con = Database.getConnection();
+
+        Wallet wallet = null;
+
+        String sql = "SELECT * FROM smu.wallet WHERE walletname = ?";
+
+        
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setString(1, walletName);
+
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            wallet = new Wallet(rs.getInt("id_wallet"), rs.getString("walletname"), rs.getString("walletcategory"));
+        }
+
+        return wallet;
+    }
+
+    @Override
+    public float getTotalAmountById(int id) throws SQLException {
+        Connection con = Database.getConnection();
+
+        float totalAmount = 0;
+
+        String sql = "SELECT totalamount FROM smu.wallet WHERE id_wallet = ?";
+
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setInt(1, id);
+
+        ResultSet rs = ps.executeQuery();
+
+        if (rs.next()) {
+            totalAmount = rs.getFloat("totalamount");
+        }
+
+        return totalAmount;
+    }
+
+
+    @Override
     public List<Wallet> getAllByEmail(String email) throws SQLException {
 
         Connection con = Database.getConnection();

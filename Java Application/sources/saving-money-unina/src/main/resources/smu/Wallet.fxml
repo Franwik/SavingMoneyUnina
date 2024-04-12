@@ -149,6 +149,11 @@
                </font>
             </Text>
             <ComboBox fx:id="walletNameChooser" layoutX="206.0" layoutY="60.0" onAction="#loadTransactionsWallet" prefHeight="27.0" prefWidth="135.0" promptText="---" />
+            <Text fx:id="nameDisplay" fill="#009900" layoutX="61.0" layoutY="111.0" strokeType="OUTSIDE" strokeWidth="0.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="95.0">
+               <font>
+                  <Font name="Arial Bold" size="20.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </center>

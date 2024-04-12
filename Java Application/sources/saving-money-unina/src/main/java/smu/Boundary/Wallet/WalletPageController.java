@@ -17,6 +17,7 @@ import smu.Boundary.ApplicationPageController;
 import smu.Control.TransactionControl;
 import smu.Control.WalletControl;
 import smu.DTO.Transaction;
+import smu.DTO.Wallet;
 
 public class WalletPageController extends ApplicationPageController {
 
@@ -74,24 +75,27 @@ public class WalletPageController extends ApplicationPageController {
     }
 
     @FXML
-    private void loadTransactionsWallet(){
+    private void loadTransactionsWallet() {
         List<Transaction> transactions = new ArrayList<>();
         String choosenWalletName = walletNameChooser.getSelectionModel().getSelectedItem();
+        nameDisplay.setText("");
 
-        if(choosenWalletName != null){
+        if (choosenWalletName != null) {
 
             transactionList.getItems().clear();
-            
-            if(choosenWalletName.equals("---")){
+
+            if (choosenWalletName.equals("---")) {
                 transactions = WalletControl.getTransaction(walletChooser.getSelectionModel().getSelectedItem());
                 transactionList.getItems().addAll(transactions);
-            }
-            else{
+            } else {
                 transactions = WalletControl.getTransactionWallet(choosenWalletName, walletChooser.getSelectionModel().getSelectedItem());
                 transactionList.getItems().addAll(transactions);
+                Wallet wallet = WalletControl.getWalletInfoByName(choosenWalletName);
+                nameDisplay.setText("ID: " + wallet.getId_wallet() + " - Saldo portafoglio: " + wallet.getTotalAmount() + "€");
             }
         }
     }
+
 
     private void loadWallets(){
 
