@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 16.2 (Postgres.app)
--- Dumped by pg_dump version 16.2 (Postgres.app)
+-- Dumped from database version 16.2 (Ubuntu 16.2-1.pgdg23.10+1)
+-- Dumped by pg_dump version 16.2 (Ubuntu 16.2-1.pgdg23.10+1)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -87,6 +87,7 @@ CREATE FUNCTION smu.connect_transaction_to_wallet() RETURNS trigger
     AS $$
 DECLARE
     wallet_row smu.wallet%ROWTYPE;
+    wallet_id smu.wallet.id_wallet%TYPE;
     card_row smu.card%ROWTYPE;
     old_card_row smu.card%ROWTYPE;
     account_email smu.user.email%TYPE;
@@ -179,8 +180,6 @@ BEGIN
 			SET balance = balance + NEW.amount
 			WHERE accountnumber = ba_row.accountnumber;
 		END IF;
-		
-		RETURN NEW;
 
     END IF;
 
@@ -238,56 +237,17 @@ BEGIN
 
         -- Aggiorno il saldo del vecchio conto corrente
         UPDATE smu.bankaccount
-        SET balance = balance + OLD.amount
+        SET balance = balance - OLD.amount
         WHERE accountnumber = old_ba_row.accountnumber;
 
         -- Aggiorno il saldo del nuovo conto corrente
         UPDATE smu.bankaccount
-        SET balance = balance - NEW.amount
+        SET balance = balance + NEW.amount
         WHERE accountnumber = ba_row.accountnumber;
-
-		RETURN NEW;
 
     END IF;
 
-	IF TG_OP = 'DELETE' THEN
-        -- Recupero il conto corrente associato alla transazione cancellata
-        SELECT *
-        INTO card_row
-        FROM smu.card
-        WHERE cardnumber = OLD.cardnumber;
-
-        SELECT *
-        INTO ba_row
-        FROM smu.bankaccount
-        WHERE accountnumber = card_row.ba_number;
-
-        -- Aggiorno il saldo del conto corrente
-        UPDATE smu.bankaccount
-        SET balance = balance - OLD.amount
-        WHERE accountnumber = ba_row.accountnumber;
-
-        -- Seleziona tutti i portafogli a cui deve essere cancellata la transazione
-        FOR wallet_row IN
-			SELECT *
-			FROM smu.wallet AS W
-			JOIN smu.transactioninwallet AS TIW 
-			ON W.id_wallet = TIW.id_wallet
-			WHERE TIW.id_transaction = OLD.id_transaction
-		LOOP
-			-- Aggiorna il campo totalamount del wallet
-			UPDATE smu.wallet
-			SET totalamount = totalamount - OLD.amount
-			WHERE id_wallet = wallet_row.id_wallet;
-
-			-- Cancella la transazione dal wallet trovato
-			DELETE FROM smu.transactioninwallet
-			WHERE id_transaction = OLD.id_transaction AND id_wallet = wallet_row.id_wallet;
-		END LOOP;
-
-		RETURN OLD;
-
-    END IF;
+    RETURN NEW;
 	
 END;
 $$;
@@ -318,6 +278,57 @@ $$;
 
 
 ALTER FUNCTION smu.expired_card(card_expire_date date, transaction_date date) OWNER TO postgres;
+
+--
+-- Name: remove_transaction(); Type: FUNCTION; Schema: smu; Owner: postgres
+--
+
+CREATE FUNCTION smu.remove_transaction() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    wallet_id smu.wallet.id_wallet%TYPE;
+    card_row smu.card%ROWTYPE;
+    ba_row smu.bankaccount%ROWTYPE;
+BEGIN
+
+    -- Recupero il conto corrente associato alla transazione cancellata
+    SELECT *
+    INTO card_row
+    FROM smu.card
+    WHERE cardnumber = OLD.cardnumber;
+
+    SELECT *
+    INTO ba_row
+    FROM smu.bankaccount
+    WHERE accountnumber = card_row.ba_number;
+
+    -- Aggiorno il saldo del conto corrente
+    UPDATE smu.bankaccount
+    SET balance = balance - OLD.amount
+    WHERE accountnumber = ba_row.accountnumber;
+
+    -- Seleziona tutti i portafogli a cui deve essere cancellata la transazione
+    FOR wallet_id IN
+        SELECT W.id_wallet
+        FROM smu.wallet AS W
+        NATURAL JOIN smu.transactioninwallet AS TIW 
+        WHERE TIW.id_transaction = OLD.id_transaction
+    LOOP
+        -- Aggiorna il campo totalamount del wallet
+        UPDATE smu.wallet
+        SET totalamount = totalamount - OLD.amount
+        WHERE id_wallet = wallet_id;
+
+    END LOOP;
+
+    RETURN OLD;
+	
+END;
+$$;
+
+
+ALTER FUNCTION smu.remove_transaction() OWNER TO postgres;
 
 --
 -- Name: update_wallet_category(); Type: FUNCTION; Schema: smu; Owner: postgres
@@ -666,7 +677,7 @@ ALTER TABLE ONLY smu.wallet ALTER COLUMN id_wallet SET DEFAULT nextval('smu.wall
 --
 
 COPY smu.bankaccount (balance, accountnumber, bank, ownercf, owneremail) FROM stdin;
-100310	2	Poste Italiane	\N	franwik_@outlook.com
+100270	2	Poste Italiane	\N	franwik_@outlook.com
 \.
 
 
@@ -693,6 +704,7 @@ Michele	Michele	1234567890123456	2000-04-01	franwik_@outlook.com
 --
 
 COPY smu.transaction (id_transaction, amount, date, category, cardnumber, walletname) FROM stdin;
+49	20	2024-04-12	giochi	1234567890123456	gamestop
 \.
 
 
@@ -701,6 +713,7 @@ COPY smu.transaction (id_transaction, amount, date, category, cardnumber, wallet
 --
 
 COPY smu.transactioninwallet (id_transaction, id_wallet) FROM stdin;
+49	35
 \.
 
 
@@ -719,7 +732,7 @@ mario.penna00@gmail.com	bickpenna	1234	Via N. Nicolini 60	Mario	Penna	PNNMRA00P2
 --
 
 COPY smu.wallet (id_wallet, walletname, walletcategory, totalamount, owneremail) FROM stdin;
-35	gamestop	giochi	-20	franwik_@outlook.com
+35	gamestop	giochi	20	franwik_@outlook.com
 \.
 
 
@@ -741,7 +754,7 @@ SELECT pg_catalog.setval('smu.card_ba_number_seq', 1, false);
 -- Name: transaction_id_transaction_seq; Type: SEQUENCE SET; Schema: smu; Owner: postgres
 --
 
-SELECT pg_catalog.setval('smu.transaction_id_transaction_seq', 42, true);
+SELECT pg_catalog.setval('smu.transaction_id_transaction_seq', 49, true);
 
 
 --
@@ -850,6 +863,13 @@ ALTER TABLE ONLY smu."user"
 --
 
 CREATE TRIGGER connect_transaction_to_wallet_trigger AFTER INSERT OR DELETE OR UPDATE ON smu.transaction FOR EACH ROW EXECUTE FUNCTION smu.connect_transaction_to_wallet();
+
+
+--
+-- Name: transaction remove_transaction_trigger; Type: TRIGGER; Schema: smu; Owner: postgres
+--
+
+CREATE TRIGGER remove_transaction_trigger BEFORE DELETE ON smu.transaction FOR EACH ROW EXECUTE FUNCTION smu.remove_transaction();
 
 
 --
