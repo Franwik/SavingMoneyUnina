@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 16.2 (Ubuntu 16.2-1.pgdg23.10+1)
--- Dumped by pg_dump version 16.2 (Ubuntu 16.2-1.pgdg23.10+1)
+-- Dumped from database version 16.2 (Postgres.app)
+-- Dumped by pg_dump version 16.2 (Postgres.app)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -862,7 +862,7 @@ ALTER TABLE ONLY smu."user"
 -- Name: transaction connect_transaction_to_wallet_trigger; Type: TRIGGER; Schema: smu; Owner: postgres
 --
 
-CREATE TRIGGER connect_transaction_to_wallet_trigger AFTER INSERT OR DELETE OR UPDATE ON smu.transaction FOR EACH ROW EXECUTE FUNCTION smu.connect_transaction_to_wallet();
+CREATE TRIGGER connect_transaction_to_wallet_trigger AFTER INSERT OR UPDATE ON smu.transaction FOR EACH ROW EXECUTE FUNCTION smu.connect_transaction_to_wallet();
 
 
 --

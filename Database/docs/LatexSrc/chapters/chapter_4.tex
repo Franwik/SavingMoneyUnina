@@ -167,11 +167,12 @@ $$;
 \end{lstlisting}
 
 \begin{lstlisting}
-    CREATE OR REPLACE FUNCTION smu.connect_transaction_to_wallet() RETURNS trigger
+    CREATE FUNCTION smu.connect_transaction_to_wallet() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 DECLARE
     wallet_row smu.wallet%ROWTYPE;
+    wallet_id smu.wallet.id_wallet%TYPE;
     card_row smu.card%ROWTYPE;
     old_card_row smu.card%ROWTYPE;
     account_email smu.user.email%TYPE;
@@ -179,24 +180,24 @@ DECLARE
     old_ba_row smu.bankaccount%ROWTYPE;
 BEGIN
 
-    -- Seleziono la carta con la quale e' stata effettuata la transazione
+    -- Seleziono la carta con la quale è stata effettuata la transazione
     SELECT *
     INTO card_row
     FROM smu.card
     WHERE cardnumber = NEW.cardnumber;
 
-    -- Controlla se la carta e' scaduta o meno al momento della transazione
+    -- Controlla se la carta è scaduta o meno al momento della transazione
     IF smu.expired_card(card_row.expiredata, NEW.date) THEN
         RAISE EXCEPTION 'La carta risultava scaduta al momento della transazione';
     END IF;
 
-    -- Recupero il conto corrente al quale e' associato la carta
+    -- Recupero il conto corrente al quale è associato la carta
     SELECT *
     INTO ba_row
     FROM smu.bankaccount
     WHERE accountnumber = card_row.ba_number;
     
-    -- Controllo se la transazione puo' essere effettuata o meno
+    -- Controllo se la transazione può essere effettuata o meno
     IF TG_OP = 'INSERT' AND ba_row.balance < NEW.amount THEN
         RAISE EXCEPTION 'Saldo sul conto corrente insufficiente';
     ELSIF TG_OP = 'UPDATE' AND (ba_row.balance + OLD.amount) < NEW.amount THEN
@@ -209,7 +210,7 @@ BEGIN
         account_email := card_row.owneremail;
     ELSE
         -- Altrimenti, appartiene sicuramente ad un familiare e vado a
-        -- recuperare l'email dell'utente al quale e' associato
+        -- recuperare l'email dell'utente al quale è associato
         SELECT familiaremail
         INTO account_email
         FROM smu.familiar
@@ -239,7 +240,7 @@ BEGIN
 
 			-- Aggiorna il saldo del conto corrente
 			UPDATE smu.bankaccount
-			SET balance = balance - NEW.amount
+			SET balance = balance + NEW.amount
 			WHERE accountnumber = ba_row.accountnumber;
 		ELSE
 			FOR wallet_row IN
@@ -261,14 +262,15 @@ BEGIN
 
 			-- Aggiorna il saldo del conto corrente
 			UPDATE smu.bankaccount
-			SET balance = balance - NEW.amount
+			SET balance = balance + NEW.amount
 			WHERE accountnumber = ba_row.accountnumber;
 		END IF;
+
     END IF;
 
     IF TG_OP = 'UPDATE' THEN
 
-        -- Se e' stata modificata la categoria, la transazione viene collegata ai nuovi portafogli
+        -- Se è stata modificata la categoria, la transazione viene collegata ai nuovi portafogli
         -- altrimenti viene ricollegata agli stessi
 
         -- Scollego la transazione da tutti i portafogli
@@ -306,13 +308,13 @@ BEGIN
 
         END LOOP;        
 
-        -- Seleziono la carta con la quale e' stata effettuata inizialmente la transazione
+        -- Seleziono la carta con la quale è stata effettuata inizialmente la transazione
         SELECT *
         INTO old_card_row
         FROM smu.card
-        WHERE iban = OLD.cardiban;
+        WHERE cardnumber = OLD.cardnumber;
 
-        -- Recupero il conto corrente al quale e' associato la vecchia carta
+        -- Recupero il conto corrente al quale è associato la vecchia carta
         SELECT *
         INTO old_ba_row
         FROM smu.bankaccount
@@ -320,17 +322,18 @@ BEGIN
 
         -- Aggiorno il saldo del vecchio conto corrente
         UPDATE smu.bankaccount
-        SET balance = balance + OLD.amount
+        SET balance = balance - OLD.amount
         WHERE accountnumber = old_ba_row.accountnumber;
 
         -- Aggiorno il saldo del nuovo conto corrente
         UPDATE smu.bankaccount
-        SET balance = balance - NEW.amount
+        SET balance = balance + NEW.amount
         WHERE accountnumber = ba_row.accountnumber;
 
     END IF;
 
     RETURN NEW;
+	
 END;
 $$;
 \end{lstlisting}
@@ -347,7 +350,7 @@ $$;
 \end{lstlisting}
 
 \begin{lstlisting}
-CREATE FUNCTION smu.update_wallet_category() RETURNS trigger
+    CREATE FUNCTION smu.update_wallet_category() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
 DECLARE
@@ -365,9 +368,9 @@ BEGIN
     FOR transaction_row IN
         SELECT *
         FROM smu.transaction AS T
-        WHERE T.category = NEW.walletcategory AND T.cardiban IN 
-        (SELECT iban FROM smu.card WHERE owneremail = NEW.owneremail
-        UNION SELECT C.iban
+        WHERE T.category = NEW.walletcategory AND T.cardnumber IN 
+        (SELECT cardnumber FROM smu.card WHERE owneremail = NEW.owneremail
+        UNION SELECT C.cardnumber
         FROM smu.familiar AS F
         JOIN smu.card AS C ON F.cf = C.ownercf
         WHERE familiaremail = NEW.owneremail)
@@ -388,6 +391,63 @@ BEGIN
     
 END;
 $$;
+
+\end{lstlisting}
+
+\subsection{remove\_transaction\_trigger}
+
+\begin{lstlisting}
+    CREATE TRIGGER remove_transaction_trigger 
+    BEFORE DELETE ON smu.transaction 
+    FOR EACH ROW 
+    EXECUTE FUNCTION smu.remove_transaction();
+\end{lstlisting}
+
+\begin{lstlisting}
+    CREATE FUNCTION smu.remove_transaction() RETURNS trigger
+    LANGUAGE plpgsql
+    AS $$
+DECLARE
+    wallet_id smu.wallet.id_wallet%TYPE;
+    card_row smu.card%ROWTYPE;
+    ba_row smu.bankaccount%ROWTYPE;
+BEGIN
+
+    -- Recupero il conto corrente associato alla transazione cancellata
+    SELECT *
+    INTO card_row
+    FROM smu.card
+    WHERE cardnumber = OLD.cardnumber;
+
+    SELECT *
+    INTO ba_row
+    FROM smu.bankaccount
+    WHERE accountnumber = card_row.ba_number;
+
+    -- Aggiorno il saldo del conto corrente
+    UPDATE smu.bankaccount
+    SET balance = balance - OLD.amount
+    WHERE accountnumber = ba_row.accountnumber;
+
+    -- Seleziona tutti i portafogli a cui deve essere cancellata la transazione
+    FOR wallet_id IN
+        SELECT W.id_wallet
+        FROM smu.wallet AS W
+        NATURAL JOIN smu.transactioninwallet AS TIW 
+        WHERE TIW.id_transaction = OLD.id_transaction
+    LOOP
+        -- Aggiorna il campo totalamount del wallet
+        UPDATE smu.wallet
+        SET totalamount = totalamount - OLD.amount
+        WHERE id_wallet = wallet_id;
+
+    END LOOP;
+
+    RETURN OLD;
+	
+END;
+$$;
+
 \end{lstlisting}
 
 \section{Definizoni SQL delle funzioni}
