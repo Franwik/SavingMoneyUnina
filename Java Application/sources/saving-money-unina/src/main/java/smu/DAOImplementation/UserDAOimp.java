@@ -36,6 +36,12 @@ public class UserDAOimp implements UserDAO {
             user = new User(name, surname, CF, dateOfBirth, Aemail, username, password, address);
         }
 
+        rs.close();
+
+        ps.close();
+
+        con.close();
+
         return user;
     }
 
@@ -66,6 +72,12 @@ public class UserDAOimp implements UserDAO {
             user = new User(name, surname, CF, dateOfBirth, Aemail, username, password, address);
         }
 
+        rs.close();
+
+        ps.close();
+
+        con.close();
+
         return user;
     }
 
@@ -88,6 +100,10 @@ public class UserDAOimp implements UserDAO {
 
         int result = ps.executeUpdate();
 
+        ps.close();
+
+        con.close();
+
         return result;
     }
 
@@ -108,6 +124,12 @@ public class UserDAOimp implements UserDAO {
         if(rs.next()){
             user = new User(rs.getString("name"), rs.getString("surname"), rs.getString("cf"), rs.getDate("dateofbirth").toLocalDate(), rs.getString("email"), rs.getString("username"), rs.getString("password"), rs.getString("address"));
         }
+
+        rs.close();
+
+        ps.close();
+
+        con.close();
 
         return user;
     }
@@ -131,6 +153,10 @@ public class UserDAOimp implements UserDAO {
 
         int result = ps.executeUpdate();
 
+        ps.close();
+
+        con.close();
+
         return result;
     }
 
@@ -145,6 +171,10 @@ public class UserDAOimp implements UserDAO {
         ps.setString(1, email);
 
         int result = ps.executeUpdate();
+
+        ps.close();
+
+        con.close();
 
         return result;
     }

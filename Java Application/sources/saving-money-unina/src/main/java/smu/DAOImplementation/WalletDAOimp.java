@@ -29,6 +29,12 @@ public class WalletDAOimp implements WalletDAO {
             wallet = new Wallet(rs.getInt("id_wallet"), rs.getString("walletname"), rs.getString("walletcategory"));            
         }
 
+        rs.close();
+
+        ps.close();
+
+        con.close();
+
 		return wallet;
 	}
 
@@ -50,6 +56,12 @@ public class WalletDAOimp implements WalletDAO {
             wallet = new Wallet(rs.getInt("id_wallet"), rs.getString("walletname"), rs.getString("walletcategory"));
         }
 
+        rs.close();
+
+        ps.close();
+
+        con.close();
+
         return wallet;
     }
 
@@ -69,6 +81,12 @@ public class WalletDAOimp implements WalletDAO {
         if (rs.next()) {
             totalAmount = rs.getFloat("totalamount");
         }
+
+        rs.close();
+
+        ps.close();
+
+        con.close();
 
         return totalAmount;
     }
@@ -90,11 +108,15 @@ public class WalletDAOimp implements WalletDAO {
 		ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
-
             Wallet wallet = new Wallet(rs.getInt("id_wallet"), rs.getString("walletname"), rs.getString("walletcategory"));
             wallets.add(wallet);
-
         }
+
+        rs.close();
+
+        ps.close();
+
+        con.close();
 
 		return wallets;
     }
@@ -116,11 +138,15 @@ public class WalletDAOimp implements WalletDAO {
 		ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
-
             Wallet wallet = new Wallet(rs.getInt("id_wallet"), rs.getString("walletname"), rs.getString("walletcategory"));
             wallets.add(wallet);
-
         }
+
+        rs.close();
+
+        ps.close();
+
+        con.close();
 
 		return wallets;
     }
@@ -141,6 +167,10 @@ public class WalletDAOimp implements WalletDAO {
 
         int result = ps.executeUpdate();
 
+        ps.close();
+
+        con.close();
+
         return result;
     }
 
@@ -158,6 +188,10 @@ public class WalletDAOimp implements WalletDAO {
 
         int result = ps.executeUpdate();
 
+        ps.close();
+
+        con.close();
+
         return result;
     }
 
@@ -172,6 +206,10 @@ public class WalletDAOimp implements WalletDAO {
         ps.setInt(1, id);
 
         int result = ps.executeUpdate();
+
+        ps.close();
+
+        con.close();
 
         return result;
     }

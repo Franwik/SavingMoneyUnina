@@ -27,6 +27,13 @@ public class BankAccountDAOimp implements BankAccountDAO{
             bankAccount = new BankAccount(rs.getInt("balance"), rs.getInt("accountnumber"), rs.getString("bank"), rs.getString("owneremail"), rs.getString("ownercf"));
         }
 
+        rs.close();
+
+        ps.close();
+
+        con.close();
+
+
         return bankAccount;
     }
 
@@ -49,6 +56,12 @@ public class BankAccountDAOimp implements BankAccountDAO{
             result.add(bankAccount);
         }
 
+        rs.close();
+
+        ps.close();
+
+        con.close();
+
         return result;
     }
 
@@ -70,6 +83,12 @@ public class BankAccountDAOimp implements BankAccountDAO{
             result.add(bankAccount);
         }
 
+        rs.close();
+
+        ps.close();
+
+        con.close();
+
         return result;
     }
 
@@ -87,6 +106,10 @@ public class BankAccountDAOimp implements BankAccountDAO{
         ps.setString(4, bankAccount.getOwnerEmail());
 
         int result = ps.executeUpdate();
+
+        ps.close();
+
+        con.close();
 
         return result;
     }
@@ -107,6 +130,10 @@ public class BankAccountDAOimp implements BankAccountDAO{
 
         int result = ps.executeUpdate();
 
+        ps.close();
+
+        con.close();
+
         return result;
     }
 
@@ -121,6 +148,10 @@ public class BankAccountDAOimp implements BankAccountDAO{
         ps.setInt(1, accountNumber);
 
         int result = ps.executeUpdate();
+
+        ps.close();
+
+        con.close();
 
         return result;
     }

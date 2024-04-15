@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 16.2 (Postgres.app)
--- Dumped by pg_dump version 16.2 (Postgres.app)
+-- Dumped from database version 16.2
+-- Dumped by pg_dump version 16.2
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -677,7 +677,26 @@ ALTER TABLE ONLY smu.wallet ALTER COLUMN id_wallet SET DEFAULT nextval('smu.wall
 --
 
 COPY smu.bankaccount (balance, accountnumber, bank, ownercf, owneremail) FROM stdin;
-100270	2	Poste Italiane	\N	franwik_@outlook.com
+12500	3	Banca Popolare	\N	lucabianchi88@example.com
+8200	4	UniCredit	\N	lucabianchi88@example.com
+9400	9	Banca Nazionale del Lavoro	BNCMLU85T20Z123U	\N
+15795	5	Sanpaolo	BNCMLU78T10Z123S	\N
+13035	12	Banca Sella	BNCMLU90T15Z123V	\N
+6825	11	Banca Carige	BNCMLU90T15Z123V	\N
+7670	8	Banco di Sicilia	BNCMLU80T05Z123T	\N
+11295	10	Credito Emiliano	BNCMLU85T20Z123U	\N
+10335	7	Banco di Napoli	BNCMLU80T05Z123T	\N
+6065	6	Monte dei Paschi di Siena	BNCMLU78T10Z123S	\N
+12500	15	Banca Popolare	\N	sofiarossi95@example.com
+8200	16	UniCredit	\N	sofiarossi95@example.com
+7670	21	Banco di Sicilia	RNCMLU80T05Z123T	\N
+9495	17	Banca Nazionale del Lavoro	RNCMLU85T20Z123U	\N
+6100	24	Monte dei Paschi di Siena	RNCMLU78T10Z123S	\N
+10360	23	Banco di Napoli	RNCMLU80T05Z123T	\N
+6895	20	Banca Carige	RNCMLU90T15Z123V	\N
+11390	22	Credito Emiliano	RNCMLU85T20Z123U	\N
+13070	19	Banca Sella	RNCMLU90T15Z123V	\N
+15960	18	Sanpaolo	RNCMLU78T10Z123S	\N
 \.
 
 
@@ -686,7 +705,26 @@ COPY smu.bankaccount (balance, accountnumber, bank, ownercf, owneremail) FROM st
 --
 
 COPY smu.card (cardnumber, iban, cvv, expiredata, cardtype, ba_number, ownercf, owneremail) FROM stdin;
-1234567890123456	PI0123456789012345678901234	123	2025-10-13	Prepagata	2	\N	franwik_@outlook.com
+4532957216031773	CE4532957216031773456392716	856	2026-09-30	Prepagata	10	BNCMLU85T20Z123U	\N
+5480701378439248	BN5480701378439248548070137	712	2025-11-30	Debito	7	BNCMLU90T15Z123V	\N
+4024007128253241	SA4024007128253241402400712	593	2024-07-31	Credito	5	BNCMLU78T10Z123S	\N
+4916480174807685	BS4916480174807685491648017	402	2023-05-31	Prepagata	8	\N	lucabianchi88@example.com
+4716830916578062	MP4716830916578062471683091	148	2028-03-28	Debito	6	BNCMLU85T20Z123U	\N
+5363478001927136	SA5363478001927136536347800	637	2027-08-31	Credito	5	\N	lucabianchi88@example.com
+4556620100361261	BS4556620100361261455662010	980	2025-06-30	Prepagata	12	BNCMLU78T10Z123S	\N
+4024007158297436	MP4024007158297436402400715	259	2026-12-31	Debito	6	BNCMLU90T15Z123V	\N
+5250772138246597	CE5250772138246597525077213	716	2027-10-31	Credito	10	BNCMLU80T05Z123T	\N
+4916740256859631	BC4916740256859631491674025	409	2024-02-28	Prepagata	11	BNCMLU80T05Z123T	\N
+4916480174807686	BS4916480174807685491648018	403	2023-05-31	Prepagata	20	\N	sofiarossi95@example.com
+5363478001927137	SA5363478001927136536347801	638	2027-08-31	Credito	17	\N	sofiarossi95@example.com
+4532957216031774	CE4532957216031773456392717	857	2026-09-30	Prepagata	22	RNCMLU85T20Z123U	\N
+5480701378439249	BN5480701378439248548070138	713	2025-11-30	Debito	19	RNCMLU90T15Z123V	\N
+4024007128253242	SA4024007128253241402400713	594	2024-07-31	Credito	17	RNCMLU78T10Z123S	\N
+4716830916578063	MP4716830916578062471683092	149	2028-03-28	Debito	18	RNCMLU85T20Z123U	\N
+4556620100361262	BS4556620100361261455662011	981	2025-06-30	Prepagata	24	RNCMLU78T10Z123S	\N
+4024007158297437	MP4024007158297436402400716	260	2026-12-31	Debito	18	RNCMLU90T15Z123V	\N
+5250772138246598	CE5250772138246597525077214	717	2027-10-31	Credito	22	RNCMLU80T05Z123T	\N
+4916740256859632	BC4916740256859631491674026	410	2024-02-28	Prepagata	23	RNCMLU80T05Z123T	\N
 \.
 
 
@@ -695,7 +733,14 @@ COPY smu.card (cardnumber, iban, cvv, expiredata, cardtype, ba_number, ownercf, 
 --
 
 COPY smu.familiar (name, surname, cf, dateofbirth, familiaremail) FROM stdin;
-Michele	Michele	1234567890123456	2000-04-01	franwik_@outlook.com
+Marta	Bianchi	BNCMLU78T10Z123S	1978-03-10	lucabianchi88@example.com
+Paolo	Bianchi	BNCMLU80T05Z123T	1980-11-05	lucabianchi88@example.com
+Elena	Bianchi	BNCMLU85T20Z123U	1985-08-20	lucabianchi88@example.com
+Andrea	Bianchi	BNCMLU90T15Z123V	1990-06-15	lucabianchi88@example.com
+Marta	Rossi	RNCMLU78T10Z123S	1978-03-10	sofiarossi95@example.com
+Paolo	Rossi	RNCMLU80T05Z123T	1980-11-05	sofiarossi95@example.com
+Elena	Rossi	RNCMLU85T20Z123U	1985-08-20	sofiarossi95@example.com
+Andrea	Rossi	RNCMLU90T15Z123V	1990-06-15	sofiarossi95@example.com
 \.
 
 
@@ -704,7 +749,46 @@ Michele	Michele	1234567890123456	2000-04-01	franwik_@outlook.com
 --
 
 COPY smu.transaction (id_transaction, amount, date, category, cardnumber, walletname) FROM stdin;
-49	20	2024-04-12	giochi	1234567890123456	gamestop
+52	-20	2022-04-15	Risparmi	4916480174807685	Fondi di Emergenza
+53	100	2024-01-03	Risparmi	5363478001927136	Fondi di Emergenza
+55	-35	2023-06-04	Risparmi	5363478001927136	Fondi di Emergenza
+57	75	2023-05-05	Risparmi	4024007128253241	Fondi di Emergenza
+58	-45	2024-03-06	Risparmi	4024007128253241	Fondi di Emergenza
+60	60	2023-11-07	Investimenti	4556620100361261	Azioni Tecnologiche
+62	-25	2023-12-08	Spese Mensili	4556620100361261	Affitto e Bollette
+64	80	2023-09-09	Intrattenimento	5250772138246597	Intrattenimento
+66	-15	2023-08-10	Viaggi	5250772138246597	Viaggio Estivo
+67	55	2023-06-11	Risparmi	4916740256859631	Fondi di Emergenza
+68	-30	2023-10-12	Investimenti	4916740256859631	Azioni Tecnologiche
+71	90	2023-05-13	Spese Mensili	4916480174807685	Affitto e Bollette
+72	-40	2023-08-14	Intrattenimento	4532957216031773	Intrattenimento
+73	70	2024-04-15	Viaggi	4532957216031773	Viaggio Estivo
+75	-10	2023-04-16	Investimenti	4716830916578062	Azioni Tecnologiche
+76	85	2024-03-17	Spese Mensili	4716830916578062	Affitto e Bollette
+77	85	2024-03-17	Intrattenimento	5480701378439248	Intrattenimento
+78	-50	2024-02-18	Spese Mensili	5480701378439248	Affitto e Bollette
+79	110	2024-01-19	Risparmi	4024007158297436	Fondi di Emergenza
+81	-20	2023-07-20	Viaggi	4024007158297436	Viaggio Estivo
+82	-20	2022-04-15	Risparmi	4916480174807686	Fondi di Emergenza
+83	100	2024-01-03	Risparmi	5363478001927137	Fondi di Emergenza
+84	-35	2023-06-04	Risparmi	5363478001927137	Fondi di Emergenza
+85	75	2023-05-05	Risparmi	4024007128253242	Fondi di Emergenza
+86	-45	2024-03-06	Risparmi	4024007128253242	Fondi di Emergenza
+87	60	2023-11-07	Investimenti	4556620100361262	Azioni Tecnologiche
+88	-25	2023-12-08	Spese Mensili	4556620100361262	Affitto e Bollette
+89	80	2023-09-09	Intrattenimento	5250772138246598	Intrattenimento
+90	-15	2023-08-10	Viaggi	5250772138246598	Viaggio Estivo
+91	55	2023-06-11	Risparmi	4916740256859632	Fondi di Emergenza
+92	-30	2023-10-12	Investimenti	4916740256859632	Azioni Tecnologiche
+93	90	2023-05-13	Spese Mensili	4916480174807686	Affitto e Bollette
+94	-40	2023-08-14	Intrattenimento	4532957216031774	Intrattenimento
+95	70	2024-04-15	Viaggi	4532957216031774	Viaggio Estivo
+96	-10	2023-04-16	Investimenti	4716830916578063	Azioni Tecnologiche
+97	85	2024-03-17	Spese Mensili	4716830916578063	Affitto e Bollette
+98	85	2024-03-17	Intrattenimento	5480701378439249	Intrattenimento
+99	-50	2024-02-18	Spese Mensili	5480701378439249	Affitto e Bollette
+100	110	2024-01-19	Risparmi	4024007158297437	Fondi di Emergenza
+101	-20	2023-07-20	Viaggi	4024007158297437	Viaggio Estivo
 \.
 
 
@@ -713,7 +797,46 @@ COPY smu.transaction (id_transaction, amount, date, category, cardnumber, wallet
 --
 
 COPY smu.transactioninwallet (id_transaction, id_wallet) FROM stdin;
-49	35
+52	37
+53	37
+55	37
+57	37
+58	37
+60	38
+62	39
+64	40
+66	36
+67	37
+68	38
+71	39
+72	40
+73	36
+75	38
+76	39
+77	40
+78	39
+79	37
+81	36
+82	45
+83	45
+84	45
+85	45
+86	45
+87	42
+88	44
+89	43
+90	46
+91	45
+92	42
+93	44
+94	43
+95	46
+96	42
+97	44
+98	43
+99	44
+100	45
+101	46
 \.
 
 
@@ -722,8 +845,8 @@ COPY smu.transactioninwallet (id_transaction, id_wallet) FROM stdin;
 --
 
 COPY smu."user" (email, username, password, address, name, surname, cf, dateofbirth) FROM stdin;
-franwik_@outlook.com	Franwik	Ifs4ppic	Via Napoli 281	Francesco	Donnarumma	DNNFNC03A22C129A	2003-01-22
-mario.penna00@gmail.com	bickpenna	1234	Via N. Nicolini 60	Mario	Penna	PNNMRA00P22F8L	2000-09-22
+lucabianchi88@example.com	lucabianchi88	P@ssw0rd123	Via Roma, 123	Luca	Bianchi	BNCLCU88E10H501J	1988-05-10
+sofiarossi95@example.com	sofiarossi95	SecurePass123	Via Milano, 456	Sofia	Rossi	RSSSFI95P55F839F	1995-09-15
 \.
 
 
@@ -732,7 +855,16 @@ mario.penna00@gmail.com	bickpenna	1234	Via N. Nicolini 60	Mario	Penna	PNNMRA00P2
 --
 
 COPY smu.wallet (id_wallet, walletname, walletcategory, totalamount, owneremail) FROM stdin;
-35	gamestop	giochi	20	franwik_@outlook.com
+38	Azioni Tecnologiche	Investimenti	20	lucabianchi88@example.com
+40	Intrattenimento	Intrattenimento	125	lucabianchi88@example.com
+39	Affitto e Bollette	Spese Mensili	100	lucabianchi88@example.com
+37	Fondi di Emergenza	Risparmi	240	lucabianchi88@example.com
+36	Viaggio Estivo	Viaggi	35	lucabianchi88@example.com
+42	Azioni Tecnologiche	Investimenti	20	sofiarossi95@example.com
+43	Intrattenimento	Intrattenimento	125	sofiarossi95@example.com
+44	Affitto e Bollette	Spese Mensili	100	sofiarossi95@example.com
+45	Fondi di Emergenza	Risparmi	240	sofiarossi95@example.com
+46	Viaggio Estivo	Viaggi	35	sofiarossi95@example.com
 \.
 
 
@@ -740,7 +872,7 @@ COPY smu.wallet (id_wallet, walletname, walletcategory, totalamount, owneremail)
 -- Name: bankaccount_accountnumber_seq; Type: SEQUENCE SET; Schema: smu; Owner: postgres
 --
 
-SELECT pg_catalog.setval('smu.bankaccount_accountnumber_seq', 2, true);
+SELECT pg_catalog.setval('smu.bankaccount_accountnumber_seq', 24, true);
 
 
 --
@@ -754,7 +886,7 @@ SELECT pg_catalog.setval('smu.card_ba_number_seq', 1, false);
 -- Name: transaction_id_transaction_seq; Type: SEQUENCE SET; Schema: smu; Owner: postgres
 --
 
-SELECT pg_catalog.setval('smu.transaction_id_transaction_seq', 49, true);
+SELECT pg_catalog.setval('smu.transaction_id_transaction_seq', 101, true);
 
 
 --
@@ -775,7 +907,7 @@ SELECT pg_catalog.setval('smu.transactionwallet_id_wallet_seq', 1, false);
 -- Name: wallet_id_wallet_seq; Type: SEQUENCE SET; Schema: smu; Owner: postgres
 --
 
-SELECT pg_catalog.setval('smu.wallet_id_wallet_seq', 35, true);
+SELECT pg_catalog.setval('smu.wallet_id_wallet_seq', 46, true);
 
 
 --

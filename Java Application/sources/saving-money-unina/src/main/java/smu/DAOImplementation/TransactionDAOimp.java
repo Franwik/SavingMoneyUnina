@@ -24,9 +24,15 @@ public class TransactionDAOimp implements TransactionDAO {
         
 		ResultSet rs = ps.executeQuery();
 		
-		if (rs.next())
+		if (rs.next()){
             transaction = new Transaction(rs.getInt("ID_Transaction"), rs.getFloat("amount"), rs.getDate("Date").toLocalDate(), rs.getString("category"), rs.getString("walletName"), rs.getString("cardNumber"));
-        
+        }
+
+		rs.close();
+
+		ps.close();
+
+		con.close();
 
         return transaction;
     }
@@ -48,6 +54,12 @@ public class TransactionDAOimp implements TransactionDAO {
            Transaction transactions = new Transaction(rs.getInt("ID_Transaction"), rs.getFloat("amount"), rs.getDate("Date").toLocalDate(), rs.getString("category"), rs.getString("walletName"), rs.getString("cardNumber"));
 		   result.add(transactions);
 		}
+
+		rs.close();
+
+        ps.close();
+
+        con.close();
         
 		return result;
 
@@ -70,6 +82,12 @@ public class TransactionDAOimp implements TransactionDAO {
 		   Transaction transactions = new Transaction(rs.getInt("ID_Transaction"), rs.getFloat("amount"), rs.getDate("Date").toLocalDate(), rs.getString("category"), rs.getString("walletName"), rs.getString("cardNumber"));
 		   result.add(transactions);
 		}
+
+		rs.close();
+
+        ps.close();
+
+        con.close();
 
 		return result;
 		
@@ -94,6 +112,12 @@ public class TransactionDAOimp implements TransactionDAO {
 		   result.add(transactions);
 		}
 
+		rs.close();
+
+        ps.close();
+
+        con.close();
+
 		return result;
 	}
 
@@ -111,6 +135,10 @@ public class TransactionDAOimp implements TransactionDAO {
 		ps.setString(5, transaction.getCardNumber());
 
 		int result = ps.executeUpdate();
+
+        ps.close();
+
+        con.close();
 
 		return result;
 	}
@@ -132,6 +160,10 @@ public class TransactionDAOimp implements TransactionDAO {
 
 		int result = ps.executeUpdate();
 
+        ps.close();
+
+        con.close();
+
 		return result;
 	}
 
@@ -147,11 +179,11 @@ public class TransactionDAOimp implements TransactionDAO {
 
 		int result = ps.executeUpdate();
 
+        ps.close();
+
+        con.close();
+
 		return result;
 	}
-
-	
-
-	
 
 }

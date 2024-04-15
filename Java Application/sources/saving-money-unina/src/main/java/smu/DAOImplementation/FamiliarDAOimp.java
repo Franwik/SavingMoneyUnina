@@ -30,6 +30,12 @@ public class FamiliarDAOimp implements FamiliarDAO{
             result = new Familiar(rs.getString("name"), rs.getString("surname"), rs.getString("cf"), rs.getDate("dateofbirth").toLocalDate(), rs.getString("familiaremail"));
         }
 
+        rs.close();
+
+        ps.close();
+
+        con.close();
+
         return result;
     }
     
@@ -51,6 +57,12 @@ public class FamiliarDAOimp implements FamiliarDAO{
             result.add(familiar);
         }
 
+        rs.close();
+
+        ps.close();
+
+        con.close();
+
         return result;
     }
 
@@ -70,6 +82,10 @@ public class FamiliarDAOimp implements FamiliarDAO{
 
         int result = ps.executeUpdate();
 
+        ps.close();
+
+        con.close();
+
         return result;
     }
 
@@ -84,6 +100,10 @@ public class FamiliarDAOimp implements FamiliarDAO{
         ps.setString(1, CF);
 
         int result = ps.executeUpdate();
+
+        ps.close();
+
+        con.close();
 
         return result;
     }
@@ -103,6 +123,10 @@ public class FamiliarDAOimp implements FamiliarDAO{
         ps.setString(5, familiar.getCF());
 
         int result = ps.executeUpdate();
+
+        ps.close();
+
+        con.close();
 
         return result;
     }

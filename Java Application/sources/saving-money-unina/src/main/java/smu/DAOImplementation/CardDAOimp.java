@@ -57,6 +57,12 @@ public class CardDAOimp implements CardDAO{
             result.add(card);
         }
 
+        rs.close();
+
+        ps.close();
+
+        con.close();
+
         return result;
     }
 
@@ -78,6 +84,10 @@ public class CardDAOimp implements CardDAO{
         ps.setString(8, card.getOwnerEmail());
 
         int result = ps.executeUpdate();
+
+        ps.close();
+
+        con.close();
 
         return result;
     }
@@ -102,6 +112,10 @@ public class CardDAOimp implements CardDAO{
 
         int result = ps.executeUpdate();
 
+        ps.close();
+
+        con.close();
+
         return result;
     }
 
@@ -116,6 +130,10 @@ public class CardDAOimp implements CardDAO{
         ps.setString(1, cardNumber);
 
         int result = ps.executeUpdate();
+
+        ps.close();
+
+        con.close();
 
         return result;
     }
@@ -136,6 +154,12 @@ public class CardDAOimp implements CardDAO{
         if (rs.next()) {
             card = new Card(rs.getString("cardnumber"), rs.getString("iban"), rs.getString("cvv"), rs.getDate("expiredata").toLocalDate(), rs.getString("cardtype"), rs.getInt("ba_number"), rs.getString("ownercf"), rs.getString("owneremail"));
         }
+
+        rs.close();
+
+        ps.close();
+
+        con.close();
 
         return card;
     }
@@ -162,6 +186,12 @@ public class CardDAOimp implements CardDAO{
             ReportCard reportCard = new ReportCard(rs.getString("cardnumber"), null, null, null, null, 0, rs.getString("cf"), null, rs.getFloat("minIN"), rs.getFloat("maxIN"), rs.getFloat("minOUT"), rs.getFloat("maxOUT"));
             result.add(reportCard);
         }
+
+        rs.close();
+
+        ps.close();
+
+        con.close();
 
         return result;
     }
