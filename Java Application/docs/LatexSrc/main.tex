@@ -1,0 +1,62 @@
+\documentclass[12pt]{report}
+\usepackage{listings}
+\usepackage[table]{xcolor}
+\usepackage{tabularx}
+\usepackage{ltablex}
+\usepackage{soul}
+\sethlcolor{black!10}
+\usepackage{ulem}
+\usepackage{pdfpages}
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage[italian]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\graphicspath{{images/}}
+\usepackage[a4paper,width=150mm,top=15mm,bottom=15mm]{geometry}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead{}
+\fancyhead[L]{SavingMoneyUnina}
+\fancyfoot{}
+\fancyfoot[L]{pag. \thepage}
+\fancyfoot[R]{\nouppercase{\leftmark}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\hypersetup{colorlinks=true, linkcolor=black}
+
+\lstset{
+    language=SQL,
+    basicstyle=\ttfamily,
+    keywordstyle=\color{blue}\ttfamily,
+    stringstyle=\color{red}\ttfamily,
+    commentstyle=\color{green}\ttfamily,
+    morecomment=[l][\color{magenta}]{\#},
+    breaklines=true,
+    postbreak=\mbox{\space},
+    linewidth=\textwidth,
+    escapeinside={(*@}{@*)}
+}
+
+\fancypagestyle{plain}{
+    \fancyhf{}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \fancyfoot[L]{pag. \thepage}
+    \fancyfoot[R]{\nouppercase{\leftmark}}
+    \renewcommand{\headrulewidth}{0mm}
+}
+
+\begin{document}
+
+%Titlepage
+\input{chapters/titlepage.tex}
+
+\tableofcontents
+
+%Chapter 1: Introduzione
+\input{chapters/chapter_1.tex}
+
+%Chapter n: Conclusione
+\input{chapters/chapter_n.tex}
+
+\end{document}
