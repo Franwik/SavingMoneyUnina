@@ -1,0 +1,8 @@
+\babel@toc {italian}{}\relax 
+\babel@toc {italian}{}\relax 
+\contentsline {chapter}{\numberline {1}Introduzione}{2}{chapter.1}%
+\contentsline {chapter}{\numberline {2}Class Diagram}{3}{chapter.2}%
+\contentsline {chapter}{\numberline {3}Sequence Diagrams}{8}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Funzionalità di Login}{8}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Funzionalità di Inserimento Transazione}{8}{section.3.2}%
+\contentsline {chapter}{\numberline {4}Conclusione}{9}{chapter.4}%
