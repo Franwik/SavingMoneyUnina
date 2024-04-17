@@ -815,12 +815,12 @@ INPUT pdfs\Login Sequence.pdf
 INPUT .\pdfs\Login Sequence.pdf
 INPUT .\pdfs\Login Sequence.pdf
 INPUT .\pdfs\Login Sequence.pdf
-INPUT .\pdfs\New Transaction Sequence.pdf
-INPUT .\pdfs\New Transaction Sequence.pdf
-INPUT pdfs\New Transaction Sequence.pdf
-INPUT .\pdfs\New Transaction Sequence.pdf
-INPUT .\pdfs\New Transaction Sequence.pdf
-INPUT .\pdfs\New Transaction Sequence.pdf
+INPUT .\pdfs\New Card Sequence.pdf
+INPUT .\pdfs\New Card Sequence.pdf
+INPUT pdfs\New Card Sequence.pdf
+INPUT .\pdfs\New Card Sequence.pdf
+INPUT .\pdfs\New Card Sequence.pdf
+INPUT .\pdfs\New Card Sequence.pdf
 INPUT .\chapters\chapter_4.tex
 INPUT chapters\chapter_4.tex
 INPUT .\chapters\chapter_4.tex

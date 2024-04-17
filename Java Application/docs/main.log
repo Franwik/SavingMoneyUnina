@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2024.2.29)  16 APR 2024 22:48
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 23.4) (preloaded format=pdflatex 2024.2.29)  17 APR 2024 19:22
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -609,22 +609,28 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [7 <./pdfs/Control.pdf>]
 Capitolo 3.
-<pdfs/Login Sequence.pdf, id=5900, 794.2172pt x 378.66469pt>
+<pdfs/Login Sequence.pdf, id=5900, 1045.65656pt x 856.70062pt>
 File: pdfs/Login Sequence.pdf Graphic file (type pdf)
 <use pdfs/Login Sequence.pdf>
 Package pdftex.def Info: pdfs/Login Sequence.pdf  used on input line 7.
-(pdftex.def)             Requested size: 397.10762pt x 189.33188pt.
-<pdfs/New Transaction Sequence.pdf, id=5901, 758.835pt x 394.47375pt>
-File: pdfs/New Transaction Sequence.pdf Graphic file (type pdf)
-<use pdfs/New Transaction Sequence.pdf>
-Package pdftex.def Info: pdfs/New Transaction Sequence.pdf  used on input line 15.
-(pdftex.def)             Requested size: 379.41658pt x 197.23639pt.
-) (chapters/chapter_4.tex [8
+(pdftex.def)             Requested size: 418.25522pt x 342.67418pt.
+[8
 
- <./pdfs/Login Sequence.pdf> <./pdfs/New Transaction Sequence.pdf
+ <./pdfs/Login Sequence.pdf>]
+<pdfs/New Card Sequence.pdf, id=6340, 1013.28563pt x 709.14937pt>
+File: pdfs/New Card Sequence.pdf Graphic file (type pdf)
+<use pdfs/New Card Sequence.pdf>
+Package pdftex.def Info: pdfs/New Card Sequence.pdf  used on input line 17.
+(pdftex.def)             Requested size: 405.30708pt x 283.65472pt.
+) (chapters/chapter_4.tex
 
-pdfTeX warning: pdflatex (file ./pdfs/New Transaction Sequence.pdf): PDF inclusion: multiple pdfs with page group included in a single page
->]
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[9 <./pdfs/New Card Sequence.pdf>]
 Capitolo 4.
 
 Underfull \hbox (badness 10000) in paragraph at lines 3--7
@@ -646,24 +652,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 18--22
 
  []
 
-) [9
+) [10
 
 ] (main.aux)
 Package rerunfilecheck Info: File `main.out' has not changed.
 (rerunfilecheck)             Checksum: ABE3D3DD2942A359D17FE7910B315525;872.
  ) 
 Here is how much of TeX's memory you used:
- 13726 strings out of 476331
- 217659 string characters out of 5797580
+ 13725 strings out of 476331
+ 217551 string characters out of 5797580
  1857660 words of memory out of 5000000
- 33918 multiletter control sequences out of 15000+600000
+ 33916 multiletter control sequences out of 15000+600000
  517566 words of font info for 50 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  75i,11n,76p,444b,498s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmbx12.pfb><C:/Program Files/MiKTeX/fonts/type1/public/amsfonts/cm/cmr12.pfb>
-Output written on main.pdf (10 pages, 1449136 bytes).
+Output written on main.pdf (11 pages, 1509879 bytes).
 PDF statistics:
- 6394 PDF objects out of 7423 (max. 8388607)
- 24 named destinations out of 1000 (max. 500000)
+ 6787 PDF objects out of 7423 (max. 8388607)
+ 25 named destinations out of 1000 (max. 500000)
  89 words of extra memory for PDF output out of 10000 (max. 10000000)
 
