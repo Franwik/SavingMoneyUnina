@@ -242,8 +242,15 @@ public class TransactionControl extends BaseControl{
 				}
 
 			} catch (SQLException e) {
-				showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
-                System.err.println("Errore: " + e.getMessage());
+				String state = e.getSQLState();
+
+				if (state.equals("P0001")) {
+					showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "La carta selezionata risuta scaduta al momento della transazione.");
+				} else {
+					showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
+				}
+				System.err.println("Errore: " + e.getMessage());
+				
 			} catch(RuntimeException e){
 				showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "La somma inserita non è valida.");
 				System.err.println("Errore: " + e.getMessage());
@@ -316,8 +323,15 @@ public class TransactionControl extends BaseControl{
 				}
 
 			} catch (SQLException e) {
-				showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
-                System.err.println("Errore: " + e.getMessage());
+				String state = e.getSQLState();
+
+				if (state.equals("P0001")) {
+					showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "La carta selezionata risuta scaduta al momento della transazione.");
+				} else {
+					showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore inaspettato.", "Problemi con il database.");
+				}
+				System.err.println("Errore: " + e.getMessage());
+
 			} catch(RuntimeException e){
 				showAlert(AlertType.ERROR, "Errore", "Si è verificato un errore.", "La somma inserita non è valida.");
 				System.err.println("Errore: " + e.getMessage());
