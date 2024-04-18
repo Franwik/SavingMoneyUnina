@@ -31,7 +31,7 @@ public class BankAccountDAOimp implements BankAccountDAO{
 
         ps.close();
 
-        con.close();
+        
 
 
         return bankAccount;
@@ -60,7 +60,7 @@ public class BankAccountDAOimp implements BankAccountDAO{
 
         ps.close();
 
-        con.close();
+        
 
         return result;
     }
@@ -87,7 +87,7 @@ public class BankAccountDAOimp implements BankAccountDAO{
 
         ps.close();
 
-        con.close();
+        
 
         return result;
     }
@@ -109,7 +109,7 @@ public class BankAccountDAOimp implements BankAccountDAO{
 
         ps.close();
 
-        con.close();
+        
 
         return result;
     }
@@ -132,7 +132,7 @@ public class BankAccountDAOimp implements BankAccountDAO{
 
         ps.close();
 
-        con.close();
+        
 
         return result;
     }
@@ -151,7 +151,7 @@ public class BankAccountDAOimp implements BankAccountDAO{
 
         ps.close();
 
-        con.close();
+        
 
         return result;
     }

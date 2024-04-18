@@ -23,4 +23,13 @@ public class Database {
         return instance;
     }
 
+    public static void cleanConnection(){
+        try {
+            instance.close();
+            instance = null;
+        } catch (SQLException e) {
+            System.out.println("Errore: " + e.getMessage());
+        }
+    }
+
 }

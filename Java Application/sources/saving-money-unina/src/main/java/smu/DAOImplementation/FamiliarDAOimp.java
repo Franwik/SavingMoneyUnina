@@ -34,7 +34,7 @@ public class FamiliarDAOimp implements FamiliarDAO{
 
         ps.close();
 
-        con.close();
+        
 
         return result;
     }
@@ -61,7 +61,7 @@ public class FamiliarDAOimp implements FamiliarDAO{
 
         ps.close();
 
-        con.close();
+        
 
         return result;
     }
@@ -84,7 +84,7 @@ public class FamiliarDAOimp implements FamiliarDAO{
 
         ps.close();
 
-        con.close();
+        
 
         return result;
     }
@@ -103,7 +103,7 @@ public class FamiliarDAOimp implements FamiliarDAO{
 
         ps.close();
 
-        con.close();
+        
 
         return result;
     }
@@ -126,7 +126,7 @@ public class FamiliarDAOimp implements FamiliarDAO{
 
         ps.close();
 
-        con.close();
+        
 
         return result;
     }

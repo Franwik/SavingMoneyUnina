@@ -8,6 +8,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import smu.App;
+import smu.Database;
 import smu.LoggedUser;
 
 public abstract class ApplicationPageController implements Initializable {
@@ -18,6 +19,7 @@ public abstract class ApplicationPageController implements Initializable {
     @FXML
     private void logout() throws IOException {
         LoggedUser.cleanUserSession();
+        Database.cleanConnection();
         App.setRoot("Login");
     }
 

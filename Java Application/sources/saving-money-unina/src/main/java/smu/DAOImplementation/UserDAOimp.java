@@ -40,7 +40,7 @@ public class UserDAOimp implements UserDAO {
 
         ps.close();
 
-        con.close();
+        
 
         return user;
     }
@@ -76,7 +76,7 @@ public class UserDAOimp implements UserDAO {
 
         ps.close();
 
-        con.close();
+        
 
         return user;
     }
@@ -102,7 +102,7 @@ public class UserDAOimp implements UserDAO {
 
         ps.close();
 
-        con.close();
+        
 
         return result;
     }
@@ -129,7 +129,7 @@ public class UserDAOimp implements UserDAO {
 
         ps.close();
 
-        con.close();
+        
 
         return user;
     }
@@ -155,7 +155,7 @@ public class UserDAOimp implements UserDAO {
 
         ps.close();
 
-        con.close();
+        
 
         return result;
     }
@@ -174,7 +174,7 @@ public class UserDAOimp implements UserDAO {
 
         ps.close();
 
-        con.close();
+        
 
         return result;
     }

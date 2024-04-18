@@ -33,7 +33,7 @@ public class WalletDAOimp implements WalletDAO {
 
         ps.close();
 
-        con.close();
+        
 
 		return wallet;
 	}
@@ -60,7 +60,7 @@ public class WalletDAOimp implements WalletDAO {
 
         ps.close();
 
-        con.close();
+        
 
         return wallet;
     }
@@ -86,7 +86,7 @@ public class WalletDAOimp implements WalletDAO {
 
         ps.close();
 
-        con.close();
+        
 
         return totalAmount;
     }
@@ -116,7 +116,7 @@ public class WalletDAOimp implements WalletDAO {
 
         ps.close();
 
-        con.close();
+        
 
 		return wallets;
     }
@@ -146,7 +146,7 @@ public class WalletDAOimp implements WalletDAO {
 
         ps.close();
 
-        con.close();
+        
 
 		return wallets;
     }
@@ -169,7 +169,7 @@ public class WalletDAOimp implements WalletDAO {
 
         ps.close();
 
-        con.close();
+        
 
         return result;
     }
@@ -190,7 +190,7 @@ public class WalletDAOimp implements WalletDAO {
 
         ps.close();
 
-        con.close();
+        
 
         return result;
     }
@@ -209,7 +209,7 @@ public class WalletDAOimp implements WalletDAO {
 
         ps.close();
 
-        con.close();
+        
 
         return result;
     }

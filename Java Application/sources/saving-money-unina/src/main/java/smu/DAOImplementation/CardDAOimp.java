@@ -34,7 +34,7 @@ public class CardDAOimp implements CardDAO{
 
         ps.close();
 
-        con.close();
+        
 
         return result;
     }
@@ -61,7 +61,7 @@ public class CardDAOimp implements CardDAO{
 
         ps.close();
 
-        con.close();
+        
 
         return result;
     }
@@ -87,7 +87,7 @@ public class CardDAOimp implements CardDAO{
 
         ps.close();
 
-        con.close();
+        
 
         return result;
     }
@@ -114,7 +114,7 @@ public class CardDAOimp implements CardDAO{
 
         ps.close();
 
-        con.close();
+        
 
         return result;
     }
@@ -133,7 +133,7 @@ public class CardDAOimp implements CardDAO{
 
         ps.close();
 
-        con.close();
+        
 
         return result;
     }
@@ -159,7 +159,7 @@ public class CardDAOimp implements CardDAO{
 
         ps.close();
 
-        con.close();
+        
 
         return card;
     }
@@ -191,7 +191,7 @@ public class CardDAOimp implements CardDAO{
 
         ps.close();
 
-        con.close();
+        
 
         return result;
     }

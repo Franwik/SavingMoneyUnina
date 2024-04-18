@@ -32,7 +32,7 @@ public class TransactionDAOimp implements TransactionDAO {
 
 		ps.close();
 
-		con.close();
+		
 
         return transaction;
     }
@@ -59,7 +59,7 @@ public class TransactionDAOimp implements TransactionDAO {
 
         ps.close();
 
-        con.close();
+        
         
 		return result;
 
@@ -87,7 +87,7 @@ public class TransactionDAOimp implements TransactionDAO {
 
         ps.close();
 
-        con.close();
+        
 
 		return result;
 		
@@ -116,7 +116,7 @@ public class TransactionDAOimp implements TransactionDAO {
 
         ps.close();
 
-        con.close();
+        
 
 		return result;
 	}
@@ -138,7 +138,7 @@ public class TransactionDAOimp implements TransactionDAO {
 
         ps.close();
 
-        con.close();
+        
 
 		return result;
 	}
@@ -162,7 +162,7 @@ public class TransactionDAOimp implements TransactionDAO {
 
         ps.close();
 
-        con.close();
+        
 
 		return result;
 	}
@@ -181,7 +181,7 @@ public class TransactionDAOimp implements TransactionDAO {
 
         ps.close();
 
-        con.close();
+        
 
 		return result;
 	}
